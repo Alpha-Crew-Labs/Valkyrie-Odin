@@ -50,6 +50,9 @@ jobs:
           node --check prototype/valkyrie-v3/data-core.js
           node --check prototype/valkyrie-v3/view.js
           node --check prototype/valkyrie-v3/interaction.js
+          node --check prototype/valkyrie-v3/quant-hk.js
+          node --check prototype/valkyrie-v3/equity-yc.js
+          node --check prototype/valkyrie-v3/live-equity.js
 
       - name: Validate v2 reference invariants
         run: node scripts/validate_prototype.mjs
