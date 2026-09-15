@@ -4,204 +4,166 @@ _Last updated: 2026-09-15_
 
 ## Current state
 
-VALKYRIE now has a documented product/engineering operating system, a preserved **v2 reference implementation**, and a new **v2.5 release candidate** based on the team's latest Hydro Flow HUD prototype.
-
-### Current release candidate
-
-The current UI source of truth is:
+VALKYRIE now has three deliberately separated prototype lines:
 
 ```text
-prototype/valkyrie-v2.5/
+prototype/valkyrie-v2/      regression / behavior reference
+prototype/valkyrie-v2.5/    stable GitHub Pages fallback at /
+prototype/valkyrie-v3/      active development baseline at /v3/
 ```
 
-File roles:
+The **active v3 source of truth has been rebased on the user-approved `VALKYRIE v2.6 — Research Intelligence System` prototype.** The previous v3.2 ontology-command-center experiment is retired and its runtime files have been removed.
+
+## Active v3 baseline
 
 ```text
-index.html       application shell
-styles.css       visual / motion system + restrained OSIRIS-lite HUD polish
-data.js          ontology / snapshots / evidence / decision-log demo data
-core.js          graph construction + Hydro Flow + Canvas field + propagation
-view.js          Inspector + domain workspaces
-interaction.js   Replay + Command + RUN SIGNATURE + boot / event runtime
+prototype/valkyrie-v3/
+├── index.html
+├── styles.css
+├── data-core.js
+├── view.js
+├── interaction.js
+└── README.md
 ```
 
-v2.5 preserves the latest prototype behavior while removing the unused embedded Chart.js/date-adapter payload and keeping the GitHub Pages build local/self-contained.
+The uploaded v2.6 prototype originally bundled large Chart.js/date-adapter payloads that were not used by the actual interface. Those unused libraries were removed during the rebase; the visible research OS and custom interactions were preserved and split into local files for maintainability and Pages reliability.
 
-Implemented v2.5 behavior includes:
+### Core v3 invariants
 
-- Hydro Flow HUD
-- boot / system-initialization sequence
-- 16-object Intelligence Chain
-- 22 explicit causal relations
-- 3 terminal signals
+- 16 research objects
+- 22 predefined causal relations
+- 5 deterministic temporal snapshots
+- 3 terminal signals: Macro / Rates / Equity
+- Hydro-flow causal edges
 - Shared Duration Logic
-- ambient Canvas data field and scanning layer
-- cursor telemetry / object acquisition brackets
-- causal propagation and signal lock states
-- rolling market values
-- Evidence / Confidence Inspector
-- MACRO / RATES / EQUITY workspaces
-- deterministic command routing
+- Evidence / Confidence / Data Vintage inspector
+- deterministic Stress presets
 - cinematic RUN SIGNATURE
-- 5-snapshot temporal Replay
-- Decision Log / benchmark-relative outcomes
-- restrained OSIRIS-inspired scanline / vignette / mono-HUD treatment without changing VALKYRIE's information architecture
+- temporal REPLAY
+- Decision Log with benchmark-relative framing
+- IPO MARKET REPORT
+- CB ZERO FINDER
+- local/static demo path with no required external API call
 
-### Preserved reference build
+## Team-domain mapping
 
-The earlier modular reference remains under:
+| Domain | Owner | Active research assets |
+|---|---|---|
+| MACRO | 정희강 | GDP Nowcast, CPI model, Fed/BOK path, Taylor Rule, Financial Stress, Stress Test & VaR |
+| RATES | 정훈 | UST/KTB, curve, credit spread, duration signal, Decision Log, ontology/rule validation |
+| EQUITY | 김유찬 | KOSDAQ discount-rate sensitivity, IPO demand, IPO score, CB refinancing/put risk, integration/demo |
+
+The product story remains:
 
 ```text
-prototype/valkyrie-v2/
+MACRO SHOCK
+→ RATES / CREDIT TRANSMISSION
+→ SHARED DURATION / FUNDING LOGIC
+→ EQUITY / IPO / CB DECISION
+→ DECISION LOG / REPLAY
 ```
-
-Keep v2 as a regression/reference baseline until v2.5 has passed the full demo QA gate. Do not delete it simply because v2.5 is newer.
 
 ## Validation
 
-GitHub Actions now validates both builds.
+GitHub Actions validates v2, v2.5, and the rebased v3.
 
-v2 reference checks:
+v3 validation covers:
 
+- required files
 - JavaScript syntax
-- exactly 16 objects
-- exactly 22 relations
+- local-only asset/CSP contract
+- exactly 16 unique objects
+- exactly 22 causal relations
 - exactly 5 snapshots
-- edge endpoint integrity
-
-v2.5 release checks additionally cover:
-
-- required release files
-- local asset references
-- no external HTTP runtime dependency from `index.html`
-- self-only script CSP
-- unique object IDs
-- metadata coverage
-- snapshot state completeness
-- terminal-signal confidence range
-- bundled demo date consistency
+- team-owner coverage
+- `rat_credit → eq_cb` cross-domain funding relation
+- Shared Duration concept link
+- Hydro Flow animation contract
+- deterministic Stress presets
+- Signature / Replay / Command interactions
+- Decision Log / IPO / CB / Data Vintage / PIT surfaces
+- static DOM/runtime ID integrity
 
 Validation entry points:
 
 ```text
 scripts/validate_prototype.mjs
 scripts/validate_v25.mjs
+scripts/validate_v3.mjs
 .github/workflows/prototype-validation.yml
 ```
 
 ## GitHub Pages
 
-A Pages deployment workflow is committed at:
+Pages is active and deployed through:
 
 ```text
 .github/workflows/pages.yml
 ```
 
-It publishes only:
+Routes:
 
 ```text
-prototype/valkyrie-v2.5/
+/       → prototype/valkyrie-v2.5/
+/v3/    → prototype/valkyrie-v3/
 ```
 
-Expected project URL after repository-level Pages activation:
+Public URLs:
 
 ```text
 https://alpha-crew-labs.github.io/Valkyrie-Odin/
+https://alpha-crew-labs.github.io/Valkyrie-Odin/v3/
 ```
 
-### Current blocker
+The root v2.5 route remains the safe fallback. All new product/UI work should target `/v3/` and preserve the v2.6 baseline unless a deliberate replacement decision is made.
 
-The repository has not yet completed its one-time GitHub Pages activation. The deployment workflow reached `actions/configure-pages` but GitHub returned 404 because Pages is not enabled for the repository yet.
+## Research integrity
 
-One repository-admin action is required:
+- Ontology relations are predefined research relationships; do not describe them as AI-discovered causality.
+- Node values, states, signals, scenarios, and model outputs may be data/model driven.
+- Quant calculations and LLM synthesis must remain distinguishable.
+- Replay must disclose revision/PIT limitations.
+- Do not use `적중률` as a headline metric. Use **Decision Log** and benchmark-relative outcomes.
+- Public repository data must remain synthetic, public, or explicitly safe to publish.
 
-```text
-Settings → Pages → Build and deployment → Source → GitHub Actions
-```
-
-After that one-time setting is enabled, the committed workflow can deploy v2.5 and future updates to the same Pages URL automatically.
-
-## Completed foundation
-
-- public organization repository
-- product README
-- contribution workflow
-- PR template / issue templates
-- data/security policy
-- architecture / product specification
-- AI coding guide (`CLAUDE.md`)
-- motion system guide
-- Quant Engine integration contract
-- canonical state / interaction contract
-- demo playbook + demo QA gate
-- roadmap / decisions / workstreams documentation
-- `apps/valkyrie-web` scaffold
-- `quant-core` scaffold
-- safe `data/sample` boundary
-- public-repository guard workflow
-- v2 reference prototype
-- v2.5 release candidate
-- dual prototype validation
-- GitHub Pages deployment workflow
-
-## Collaboration branches
-
-Initial domain branches remain:
-
-```text
-feat/macro
-feat/rates
-feat/equity
-feat/platform
-feat/quant-integration
-```
-
-Before starting new domain work, sync the branch from current `main`; main may have advanced since the original branch baseline.
-
-## Next S0 actions
-
-1. Enable GitHub Pages once and verify the public v2.5 URL.
-2. Run `docs/DEMO_QA.md` against v2.5 at 1920×1080, 1440×900, and 1366×768.
-3. Continue Motion System refinement without breaking causal readability.
-4. Integrate Quant Stress as the first object action.
-5. Synchronize Macro Clock and Replay semantics.
-6. Harden Decision Log / post-performance data semantics.
-7. Preserve a deterministic offline fallback for the final hackathon demo.
-
-## Open product decisions
-
-### Ontology count
-
-The current validated implementation is **16 objects / 22 relations**. An earlier planning version referenced 23 relations.
-
-Do not manufacture an extra edge for consistency. Confirm the intended financial relationship with the domain owners, then update ontology, docs, tests, and boot telemetry together if necessary.
-
-### Quant boundary
+## Quant boundary
 
 Preferred architecture:
 
 ```text
-Python Quant Logic
+정희강 Quant Engine / Python
 → normalized state / JSON
-→ VALKYRIE canonical state
-→ Ontology / Evidence / Signal / Workspace
+→ VALKYRIE state
+→ Ontology / Evidence / Stress / Replay
+→ Cross-Asset Signal
+→ Decision / Decision Log
 ```
 
-Do not make Streamlit iframe embedding the final product experience.
+Do not make Streamlit iframe embedding the final product experience. Integrate calculations and normalized outputs into VALKYRIE.
+
+## Next improvements
+
+Build incrementally on the rebased v2.6 baseline:
+
+1. preserve and refine the Hydro Flow / causal readability
+2. connect 정희강 Quant Stress calculations to the existing Stress interaction
+3. merge Macro Clock semantics into temporal Replay
+4. deepen 정훈 Decision Log with verified signal rules and benchmark data
+5. connect 김유찬 IPO/CB data contracts without turning them into isolated dashboards
+6. upgrade Command into a UI-operating agent only after deterministic demo actions are stable
+7. run final 1920×1080 / 1440×900 / 1366×768 browser QA
 
 ## Repository / product risk
 
-The repository is public. Never upload confidential internal data, unpublished internal research, credentials, or restricted datasets.
-
-The largest product risk remains feature accumulation without system integration. New functionality should normally enter through:
+The largest product risk remains feature accumulation without integration. New functionality should normally enter through:
 
 ```text
-OBJECT / SYSTEM ACTION
-→ STATE CHANGE
-→ ONTOLOGY
+OBJECT / EVENT
+→ RELATION / TRANSMISSION
 → EVIDENCE
 → SIGNAL
-→ ACTION / REPLAY
+→ DECISION
+→ REPLAY / OUTCOME
 ```
 
 rather than another isolated dashboard tab.
