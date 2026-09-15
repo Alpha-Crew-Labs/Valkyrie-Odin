@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'" />
+  <meta name="color-scheme" content="dark" />
+  <title>VALKYRIE v3 — Market Ontology Command Center</title>
+  <link rel="stylesheet" href="./styles.css?v=3001" />
+</head>
+<body>
+  <div id="boot" aria-hidden="true">
+    <div class="boot-mark">RAVENS</div>
+    <div class="boot-title">VALKYRIE · MARKET ONTOLOGY</div>
+    <div class="boot-line"><span>OBJECT REGISTRY</span><b>23</b></div>
+    <div class="boot-line"><span>RELATION GRAPH</span><b>29</b></div>
+    <div class="boot-line"><span>MODEL OBJECTS</span><b>READY</b></div>
+    <div class="boot-line"><span>TEMPORAL LAYER</span><b>READY</b></div>
+    <div class="boot-state">RESOLVING MARKET STATE</div>
+  </div>
+
+  <main id="app" class="app-shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <div class="brand">VAL<span>KYRIE</span></div>
+        <div class="version">v3.0 · ONTOLOGY COMMAND CENTER</div>
+      </div>
+      <div class="top-sep"></div>
+      <div class="status-item"><span class="status-dot live-dot"></span><b>LIVE</b></div>
+      <div class="status-item muted">RISK</div>
+      <div class="risk-badge" id="riskBadge">CAUTION</div>
+      <div class="status-item muted">AS OF</div>
+      <div class="mono" id="asOf">—</div>
+      <div class="top-spacer"></div>
+      <div class="system-health"><span class="status-dot"></span><span id="healthText">ONTOLOGY SYNCED</span></div>
+      <button class="command-trigger" id="askBtn" type="button"><kbd>⌘</kbd> ASK VALKYRIE</button>
+    </header>
+
+    <div class="main-grid">
+      <aside class="control-rail" aria-label="Ontology controls">
+        <section class="rail-section search-section">
+          <div class="eyebrow">OBJECT SEARCH</div>
+          <div class="search-wrap">
+            <span>⌕</span>
+            <input id="objectSearch" type="search" placeholder="FIND OBJECT" autocomplete="off" />
+          </div>
+          <div id="searchResults" class="search-results" hidden></div>
+        </section>
+
+        <section class="rail-section">
+          <div class="eyebrow">DATA LAYERS</div>
+          <label class="layer-row"><input type="checkbox" data-layer="MACRO" checked /><span class="layer-dot macro"></span><span>Macro</span><b id="countMacro">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="RATES" checked /><span class="layer-dot rates"></span><span>Rates</span><b id="countRates">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="CREDIT" checked /><span class="layer-dot credit"></span><span>Credit</span><b id="countCredit">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="EQUITY" checked /><span class="layer-dot equity"></span><span>Equity</span><b id="countEquity">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="IPO_CB" checked /><span class="layer-dot ipo"></span><span>IPO / CB</span><b id="countIpo">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="DECISIONS" checked /><span class="layer-dot decision"></span><span>Decisions</span><b id="countDecisions">0</b></label>
+        </section>
+
+        <section class="rail-section">
+          <div class="eyebrow">SCENARIO</div>
+          <button class="scenario-row active" data-scenario="BASE" type="button"><span class="scenario-radio"></span><span>Base</span><b>LIVE</b></button>
+          <button class="scenario-row" data-scenario="HAWKISH" type="button"><span class="scenario-radio"></span><span>Hawkish</span><b>STRESS</b></button>
+          <button class="scenario-row" data-scenario="DOVISH" type="button"><span class="scenario-radio"></span><span>Dovish</span><b>STRESS</b></button>
+          <button class="scenario-row" data-scenario="RISK_OFF" type="button"><span class="scenario-radio"></span><span>Risk-Off</span><b>STRESS</b></button>
+        </section>
+
+        <section class="rail-section">
+          <div class="eyebrow">VIEW</div>
+          <div class="mode-grid">
+            <button class="mode-btn active" data-mode="LIVE" type="button">LIVE</button>
+            <button class="mode-btn" data-mode="TRACE" type="button">TRACE</button>
+            <button class="mode-btn" data-mode="STRESS" type="button">STRESS</button>
+            <button class="mode-btn" data-mode="TEMPORAL" type="button">TEMPORAL</button>
+          </div>
+        </section>
+
+        <section class="rail-section legend-section">
+          <div class="eyebrow">ONTOLOGY TYPES</div>
+          <div class="legend-row"><span class="type-mark observation"></span>OBSERVATION</div>
+          <div class="legend-row"><span class="type-mark model"></span>MODEL</div>
+          <div class="legend-row"><span class="type-mark market"></span>MARKET</div>
+          <div class="legend-row"><span class="type-mark concept"></span>CONCEPT</div>
+          <div class="legend-row"><span class="type-mark signal"></span>SIGNAL</div>
+          <div class="legend-row"><span class="type-mark decision"></span>DECISION / OUTCOME</div>
+        </section>
+      </aside>
+
+      <section class="ontology-panel">
+        <div class="ontology-head">
+          <div>
+            <div class="eyebrow">MARKET ONTOLOGY</div>
+            <div class="ontology-title" id="graphTitle">CROSS-ASSET DECISION GRAPH</div>
+          </div>
+          <div class="ontology-meta"><span id="objectCount">23 OBJECTS</span><span>·</span><span id="relationCount">29 RELATIONS</span><span>·</span><span id="scenarioLabel">BASE</span></div>
+          <div class="graph-tools">
+            <button id="fitBtn" type="button" title="Reset view">FIT</button>
+            <button id="zoomOutBtn" type="button" title="Zoom out">−</button>
+            <span id="zoomLabel">100%</span>
+            <button id="zoomInBtn" type="button" title="Zoom in">+</button>
+          </div>
+        </div>
+
+        <div class="graph-viewport" id="graphViewport">
+          <div class="grid-field"></div>
+          <div class="scan-line"></div>
+          <svg id="ontologySvg" viewBox="0 0 1200 720" role="img" aria-label="VALKYRIE market ontology graph">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="currentColor" /></marker>
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <g id="world">
+              <g id="edgeLayer"></g>
+              <g id="edgeLabelLayer"></g>
+              <g id="nodeLayer"></g>
+            </g>
+          </svg>
+
+          <div class="domain-label macro-label">MACRO</div>
+          <div class="domain-label rates-label">RATES / CREDIT</div>
+          <div class="domain-label equity-label">EQUITY / CAPITAL MARKETS</div>
+
+          <div class="graph-banner" id="graphBanner" hidden></div>
+          <div class="trace-controls" id="traceControls" hidden>
+            <span>TRACE</span>
+            <button class="active" data-trace="DOWNSTREAM" type="button">DOWNSTREAM</button>
+            <button data-trace="UPSTREAM" type="button">UPSTREAM</button>
+            <button data-trace="ONE_HOP" type="button">1-HOP</button>
+          </div>
+          <div class="cursor-hud" id="cursorHud">CURSOR — · —</div>
+        </div>
+      </section>
+
+      <aside class="dossier" aria-label="Selected object dossier">
+        <div class="dossier-head">
+          <div class="eyebrow">OBJECT DOSSIER</div>
+          <div class="object-id mono" id="dossierId">—</div>
+        </div>
+
+        <div class="type-line"><span class="type-pill" id="dossierType">OBJECT</span><span class="owner-chip" id="dossierOwner">RAVENS</span></div>
+        <h1 id="dossierName">Select an object</h1>
+        <div class="object-value"><span id="dossierValue">—</span><small id="dossierDelta">—</small></div>
+        <div class="state-row"><span>STATE</span><b id="dossierState">—</b></div>
+
+        <section class="dossier-section">
+          <div class="section-head"><span>EVIDENCE</span><b id="evidenceCount">00</b></div>
+          <div id="evidenceList" class="evidence-list"></div>
+        </section>
+
+        <section class="dossier-section">
+          <div class="section-head"><span>RELATIONS</span><b id="relationSummary">↑0 · ↓0</b></div>
+          <div id="relationList" class="relation-list"></div>
+        </section>
+
+        <section class="dossier-section model-section">
+          <div class="section-head"><span>PROVENANCE</span><b id="modelConfidence">—</b></div>
+          <div class="provenance-grid">
+            <span>OWNER</span><b id="provOwner">—</b>
+            <span>MODEL</span><b id="provModel">—</b>
+            <span>VINTAGE</span><b id="provVintage">—</b>
+          </div>
+        </section>
+
+        <section class="dossier-actions">
+          <button data-action="TRACE" type="button"><span>⌁</span>TRACE</button>
+          <button data-action="STRESS" type="button"><span>↯</span>STRESS</button>
+          <button data-action="COMPARE" type="button"><span>◫</span>COMPARE</button>
+          <button data-action="REPLAY" type="button"><span>◴</span>REPLAY</button>
+          <button data-action="ASK" type="button"><span>⌘</span>ASK</button>
+          <button data-action="WORKSPACE" type="button"><span>⌄</span>WORKSPACE</button>
+        </section>
+
+        <div class="compare-card" id="compareCard" hidden></div>
+      </aside>
+    </div>
+
+    <footer class="temporal-bar">
+      <div class="timeline-zone">
+        <div class="timeline-label"><span class="eyebrow">TEMPORAL LAYER</span><b id="snapshotLabel">LIVE</b></div>
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <div class="activity-zone">
+        <div class="activity-head"><span class="eyebrow">ACTIVITY STREAM</span><b id="activityPulse">●</b></div>
+        <div class="activity-feed" id="activityFeed"></div>
+      </div>
+    </footer>
+  </main>
+
+  <section class="workspace-drawer" id="workspaceDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div><span class="eyebrow">DOMAIN WORKSPACE</span><h2 id="drawerTitle">—</h2></div>
+      <button id="drawerClose" type="button">CLOSE ×</button>
+    </div>
+    <div id="drawerBody" class="drawer-body"></div>
+  </section>
+
+  <div class="command-modal" id="commandModal" hidden>
+    <div class="command-box" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
+      <div class="command-head"><div><span class="eyebrow">GRAPH OPERATOR</span><h2 id="commandTitle">ASK VALKYRIE</h2></div><button id="commandClose" type="button">ESC</button></div>
+      <div class="command-input-wrap"><span>&gt;</span><input id="commandInput" autocomplete="off" placeholder="예: 물가가 0.4%p 다시 오르면 IPO 시장은?" /></div>
+      <div class="command-chips">
+        <button data-command="왜 지금 장기채를 줄여야 하지?" type="button">WHY SHORT DURATION?</button>
+        <button data-command="물가가 0.4%p 오르면 IPO는?" type="button">CPI +0.4%p → IPO</button>
+        <button data-command="CB 리픽싱 리스크 보여줘" type="button">CB RISK</button>
+      </div>
+      <div class="operator-output" id="operatorOutput">
+        <div class="operator-note">DEMO GRAPH OPERATOR · deterministic routing. LLM tool-calling is the next integration layer.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./ontology.js?v=3001"></script>
+  <script src="./app.js?v=3001"></script>
+</body>
+</html>
