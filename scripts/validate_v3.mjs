@@ -45,7 +45,9 @@ assert(css.includes('stroke-dashoffset'),'hydro flow uses directional stroke mot
 assert(css.includes('.eg.hot'),'active causal paths have accelerated hot state');
 
 for(const fn of ['signature','replay','shock','command'])assert(new RegExp(`function ${fn}\\(`).test(interaction),`interaction exists: ${fn}()`);
-assert(interaction.includes("UST +50bp")&&interaction.includes("CREDIT +40bp")&&interaction.includes("BOK +25bp"),'deterministic stress presets are wired');
+const stressUi=['data-s="ust">UST +50bp','data-s="cr">CREDIT +40bp','data-s="bok">BOK +25bp','data-s="all">복합 스트레스'];
+for(const preset of stressUi)assert(html.includes(preset),`stress preset UI is wired: ${preset.split('>')[1]}`);
+assert(interaction.includes("if(k==='ust')SH.ust+=50")&&interaction.includes("if(k==='cr')SH.cr+=40")&&interaction.includes("if(k==='bok')SH.bok+=25"),'stress preset engine applies deterministic shock magnitudes');
 assert(interaction.includes('TEMPORAL ACCESS')&&interaction.includes('TIMELINE RESTORED'),'temporal replay sequence is preserved');
 
 for(const text of ['DECISION LOG','IPO MARKET REPORT','CB ZERO FINDER','DATA VINTAGE','PIT'])assert(view.includes(text),`research surface preserved: ${text}`);
@@ -57,7 +59,7 @@ const htmlIds=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
 const runtime=data+'\n'+view+'\n'+interaction;
 for(const m of runtime.matchAll(/\$\(['"]([^'"]+)['"]\)/g)){
   const id=m[1];
-  if(['cd_sc','cd_cr','cd_ipo','cd_cb','dlb'].includes(id))continue; // dynamically rendered workspace IDs
+  if(['cd_sc','cd_cr','cd_ipo','cd_cb','dlb'].includes(id))continue;
   assert(htmlIds.has(id),`static runtime DOM id exists: #${id}`);
 }
 
