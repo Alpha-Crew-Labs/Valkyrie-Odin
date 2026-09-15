@@ -1,0 +1,220 @@
+/* VALKYRIE v3 — mobile-only responsive layer
+   Desktop baseline stays untouched. */
+
+@media (max-width: 720px){
+  html,body{min-height:100%;overflow-x:hidden}
+  body{padding:6px;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+
+  .app{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    height:auto;
+    min-height:100vh;
+    max-width:none;
+    margin:0;
+  }
+
+  /* Header: keep only the information that matters on a phone. */
+  .hd{
+    display:grid;
+    grid-template-columns:minmax(0,1.25fr) minmax(112px,.9fr) auto;
+    min-height:58px;
+    height:58px;
+    overflow:hidden;
+  }
+  .hd .br{padding:0 10px;min-width:0}
+  .lg{font-size:13px;letter-spacing:.23em;white-space:nowrap}
+  .hd .br>div:last-child{font-size:6.3px!important;letter-spacing:.18em!important;white-space:nowrap}
+  .hd>.hcell:nth-child(3),
+  .hd>.hcell:nth-child(4),
+  .hd>.hcell:nth-child(5){display:none}
+  .hd>.hcell:nth-child(2){padding:0 9px;min-width:0}
+  .hd .hcell.gr1{padding:0 8px;min-width:0;justify-content:center}
+  .hd .ml{font-size:7.6px;letter-spacing:.1em}
+  .hd .stx{font-size:10.5px;gap:4px;letter-spacing:.025em;white-space:nowrap}
+  .hd .ml2{font-size:8px}
+  .conf{display:none}
+  .live{font-size:8.6px;letter-spacing:.1em;padding:3px 6px;white-space:nowrap}
+
+  /* Decision brief becomes a readable 3-step stack instead of squeezed columns. */
+  .bf{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    min-height:0;
+    height:auto;
+    padding:4px 8px;
+    gap:0;
+    overflow:hidden;
+  }
+  .bf>div:empty,.bf>.arw{display:none}
+  .bf .seg{
+    width:100%;
+    padding:7px 3px;
+    gap:3px;
+    border-bottom:1px solid #141B24;
+  }
+  .bf .seg.s3{border-bottom:0}
+  .bf .tag{font-size:7.8px;letter-spacing:.12em}
+  .bf .txt{
+    font-size:11.8px;
+    line-height:1.35;
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+  }
+  .bsweep{width:38%;opacity:.65}
+
+  /* The ontology should stay legible. On phones it becomes a horizontal canvas. */
+  .cw{
+    height:316px;
+    min-height:316px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    touch-action:pan-x pan-y;
+  }
+  .cw::-webkit-scrollbar{display:none}
+  #chain{
+    position:relative;
+    inset:auto;
+    display:block;
+    width:790px;
+    max-width:none;
+    height:310px;
+    z-index:2;
+  }
+  #df{width:100%;height:100%;opacity:.7}
+  .ovl{top:8px;left:9px}
+  .ovl .ml{font-size:8px}
+  .ovl .ml2{display:none}
+  .ovr,.ovb{display:none}
+  .cw:after{
+    content:'SWIPE  ↔';
+    position:sticky;
+    left:calc(100% - 67px);
+    bottom:8px;
+    z-index:8;
+    display:inline-block;
+    width:58px;
+    padding:3px 5px;
+    border:1px solid #22303C;
+    background:rgba(8,12,18,.82);
+    color:#526171;
+    font-size:7px;
+    letter-spacing:.12em;
+    text-align:center;
+    pointer-events:none;
+  }
+  .ban .b1{font-size:13px;letter-spacing:.16em}
+  .ban .b2{font-size:7.5px;letter-spacing:.1em}
+
+  /* Command line stays compact; chip groups become swipeable rows. */
+  .cmd{
+    display:grid;
+    grid-template-columns:28px minmax(0,1fr);
+    align-items:center;
+    height:auto;
+    overflow:visible;
+  }
+  .cmd .pr{grid-column:1;grid-row:1;padding:0 7px 0 10px;font-size:15px}
+  #cin{
+    grid-column:2;
+    grid-row:1;
+    width:100%;
+    min-width:0;
+    height:38px;
+    font-size:11px;
+    padding-right:8px;
+  }
+  .cps{
+    grid-column:1/-1;
+    width:100%;
+    height:auto;
+    min-height:44px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    flex-wrap:nowrap;
+    padding:5px 7px;
+    gap:6px;
+    border-left:0;
+    border-top:1px solid var(--bd);
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .cps::-webkit-scrollbar{display:none}
+  .cps .cp,.cps .btn,.cps .ml{flex:0 0 auto}
+  .cp{font-size:9.6px;padding:7px 10px;min-height:32px;display:flex;align-items:center}
+  .cps.sk .ml{display:flex;align-items:center;font-size:7.6px}
+  .btn{min-height:32px;padding:7px 11px;font-size:9px;white-space:nowrap}
+
+  /* Domain modules are cards on mobile, not five squeezed desktop columns. */
+  .mw{
+    display:grid;
+    grid-template-rows:40px auto;
+    height:auto;
+    min-height:0;
+    overflow:visible;
+  }
+  .tabs{
+    height:40px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    flex-wrap:nowrap;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;height:40px;padding:0 17px;gap:0}
+  .tab .tn{font-size:10px;letter-spacing:.14em}
+  .tab .to,.tabsp{display:none}
+  .pane{padding:7px;overflow:visible}
+  .g4{
+    grid-template-columns:1fr!important;
+    grid-auto-rows:auto;
+    height:auto;
+    gap:7px;
+  }
+  .cd{min-height:0;overflow:visible;padding:10px}
+  .cdh{margin-bottom:8px}
+  .cdt{font-size:9.2px}
+  .cdo{font-size:8px}
+  .tb{font-size:9.2px}
+  .tb th{font-size:7.8px;padding:4px}
+  .tb td{padding:4.5px 4px}
+  .kv{font-size:9.8px;padding:4.5px 0}
+  .kv b{font-size:11.5px}
+  .note{font-size:8.8px;line-height:1.55}
+  .sc{grid-template-columns:58px 1fr auto 14px;font-size:9.2px}
+  .evr{font-size:9.2px}
+
+  /* Timeline is useful on desktop but too dense on a narrow viewport. */
+  .ft{min-height:48px;height:48px;justify-content:space-between}
+  .ft .tl{display:none}
+  .ft .fc{padding:0 10px;border-right:0}
+  .ft .fc:last-child{margin-left:auto;border-left:1px solid var(--bd)}
+  .ft .fc .ml{font-size:7.4px}
+  #snl{font-size:10.5px!important}
+
+  .boot>div:nth-child(2){font-size:25px!important;letter-spacing:.22em!important}
+  .boot>div:nth-child(3){font-size:7.5px!important;letter-spacing:.2em!important}
+  .boot>div:nth-child(4){width:min(290px,82vw)!important}
+}
+
+@media (max-width: 390px){
+  .hd{grid-template-columns:minmax(0,1.15fr) minmax(104px,.9fr) auto}
+  .lg{font-size:12px;letter-spacing:.2em}
+  .hd>.hcell:nth-child(2){padding:0 7px}
+  .hd .stx{font-size:9.8px}
+  .live{font-size:8px;padding:3px 5px}
+  .cw{height:302px;min-height:302px}
+  #chain{width:760px;height:298px}
+  .bf .txt{font-size:11.3px}
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width:720px){
+  .bsweep,.live i.bt,.efA,.efB{animation:none!important}
+}
