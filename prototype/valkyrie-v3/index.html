@@ -1,220 +1,111 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'" />
-  <meta name="color-scheme" content="dark" />
-  <title>VALKYRIE v3.2 — 살아있는 마켓 온톨로지</title>
-  <link rel="stylesheet" href="./styles.css?v=3200" />
-  <link rel="stylesheet" href="./motion-v31.css?v=3200" />
-  <link rel="stylesheet" href="./polish-v32.css?v=3200" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>VALKYRIE v3 — Research Intelligence System · v2.6 Baseline</title>
+<link rel="stylesheet" href="./styles.css?v=2601">
 </head>
 <body>
-  <div id="boot" aria-hidden="true">
-    <div class="boot-mark">RAVENS</div>
-    <div class="boot-title">VALKYRIE · 마켓 온톨로지</div>
-    <div class="boot-line"><span>객체 레지스트리</span><b>23</b></div>
-    <div class="boot-line"><span>관계 그래프</span><b>29</b></div>
-    <div class="boot-line"><span>시맨틱 모션 버스</span><b>온라인</b></div>
-    <div class="boot-line"><span>시간축 레이어</span><b>준비</b></div>
-    <div class="boot-state">시장 상태를 해석하는 중</div>
+<div class="boot" id="boot">
+  <div style="font-size:10px;letter-spacing:.44em;color:#3E4654;font-weight:700">R A V E N S</div>
+  <div style="font-size:31px;font-weight:800;letter-spacing:.3em;margin-top:9px">VAL<span style="color:#3FD9E6">KYRIE</span></div>
+  <div style="font-size:9px;letter-spacing:.32em;color:#4F5866;margin-top:7px">RESEARCH INTELLIGENCE SYSTEM</div>
+  <div style="margin-top:26px;text-align:left;width:290px">
+    <div class="bl" id="b0">INITIALIZING ONTOLOGY <b style="float:right">OK</b></div>
+    <div class="bl" id="b1">LOADING OBJECTS <b style="float:right">16 / 16</b></div>
+    <div class="bl" id="b2">LINKING RELATIONS <b style="float:right">22 / 22</b></div>
+    <div class="bl" id="b3">MOUNTING SNAPSHOTS <b style="float:right">5 / 5</b></div>
+    <div class="bl" id="b4" style="margin-top:9px;color:#3FD9E6;letter-spacing:.3em">SYSTEM READY</div>
   </div>
+</div>
 
-  <main id="app" class="app-shell">
-    <header class="topbar">
-      <div class="brand-block">
-        <div class="brand">VAL<span>KYRIE</span></div>
-        <div class="version">v3.2 · LIVING MARKET ONTOLOGY</div>
-      </div>
-      <div class="top-sep"></div>
-      <div class="status-item"><span class="status-dot live-dot"></span><b>실시간</b></div>
-      <div class="status-item muted">리스크</div>
-      <div class="risk-badge" id="riskBadge">주의</div>
-      <div class="status-item muted">기준시각</div>
-      <div class="mono" id="asOf">—</div>
-      <div class="top-spacer"></div>
-      <div class="system-health"><span class="status-dot"></span><span id="healthText">온톨로지 동기화</span></div>
-      <button class="command-trigger" id="askBtn" type="button"><kbd>⌘</kbd> VALKYRIE 질의</button>
-    </header>
+<div class="app">
 
-    <div class="main-grid">
-      <aside class="control-rail" aria-label="온톨로지 제어">
-        <section class="rail-section search-section">
-          <div class="eyebrow">객체 검색</div>
-          <div class="search-wrap">
-            <span>⌕</span>
-            <input id="objectSearch" type="search" placeholder="지표 · 모델 · 시그널 검색" autocomplete="off" />
-          </div>
-          <div id="searchResults" class="search-results" hidden></div>
-        </section>
-
-        <section class="rail-section">
-          <div class="eyebrow">데이터 레이어</div>
-          <label class="layer-row"><input type="checkbox" data-layer="MACRO" checked /><span class="layer-dot macro"></span><span>매크로</span><b id="countMacro">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="RATES" checked /><span class="layer-dot rates"></span><span>금리</span><b id="countRates">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="CREDIT" checked /><span class="layer-dot credit"></span><span>크레딧</span><b id="countCredit">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="EQUITY" checked /><span class="layer-dot equity"></span><span>주식</span><b id="countEquity">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="IPO_CB" checked /><span class="layer-dot ipo"></span><span>IPO / CB</span><b id="countIpo">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="DECISIONS" checked /><span class="layer-dot decision"></span><span>판단 / 성과</span><b id="countDecisions">0</b></label>
-        </section>
-
-        <section class="rail-section">
-          <div class="eyebrow">시나리오</div>
-          <button class="scenario-row active" data-scenario="BASE" type="button"><span class="scenario-radio"></span><span>기본</span><b>실시간</b></button>
-          <button class="scenario-row" data-scenario="HAWKISH" type="button"><span class="scenario-radio"></span><span>매파</span><b>스트레스</b></button>
-          <button class="scenario-row" data-scenario="DOVISH" type="button"><span class="scenario-radio"></span><span>비둘기</span><b>스트레스</b></button>
-          <button class="scenario-row" data-scenario="RISK_OFF" type="button"><span class="scenario-radio"></span><span>위험회피</span><b>스트레스</b></button>
-        </section>
-
-        <section class="rail-section">
-          <div class="eyebrow">탐색 모드</div>
-          <div class="mode-grid">
-            <button class="mode-btn active" data-mode="LIVE" type="button">실시간</button>
-            <button class="mode-btn" data-mode="TRACE" type="button">경로추적</button>
-            <button class="mode-btn" data-mode="STRESS" type="button">스트레스</button>
-            <button class="mode-btn" data-mode="TEMPORAL" type="button">시간재생</button>
-          </div>
-        </section>
-
-        <section class="rail-section legend-section">
-          <div class="eyebrow">온톨로지 객체 유형</div>
-          <div class="legend-row"><span class="type-mark observation"></span>관측값</div>
-          <div class="legend-row"><span class="type-mark model"></span>모델</div>
-          <div class="legend-row"><span class="type-mark market"></span>시장</div>
-          <div class="legend-row"><span class="type-mark concept"></span>개념</div>
-          <div class="legend-row"><span class="type-mark signal"></span>시그널</div>
-          <div class="legend-row"><span class="type-mark decision"></span>판단 / 성과</div>
-        </section>
-      </aside>
-
-      <section class="ontology-panel">
-        <div class="ontology-head">
-          <div>
-            <div class="eyebrow">마켓 온톨로지</div>
-            <div class="ontology-title" id="graphTitle">크로스에셋 의사결정 그래프</div>
-          </div>
-          <div class="ontology-meta"><span id="objectCount">23 객체</span><span>·</span><span id="relationCount">29 관계</span><span>·</span><span id="scenarioLabel">기본</span></div>
-          <div class="graph-tools">
-            <button id="fitBtn" type="button" title="전체 보기">전체</button>
-            <button id="zoomOutBtn" type="button" title="축소">−</button>
-            <span id="zoomLabel">100%</span>
-            <button id="zoomInBtn" type="button" title="확대">+</button>
-          </div>
-        </div>
-
-        <div class="graph-viewport" id="graphViewport">
-          <div class="grid-field"></div>
-          <div class="scan-line"></div>
-          <svg id="ontologySvg" viewBox="0 0 1200 720" role="img" aria-label="VALKYRIE 마켓 온톨로지 그래프">
-            <defs>
-              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="currentColor" /></marker>
-              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
-            <g id="world">
-              <g id="edgeLayer"></g>
-              <g id="edgeLabelLayer"></g>
-              <g id="nodeLayer"></g>
-            </g>
-          </svg>
-
-          <div class="domain-label macro-label">매크로</div>
-          <div class="domain-label rates-label">금리 / 크레딧</div>
-          <div class="domain-label equity-label">주식 / 자본시장</div>
-
-          <div class="graph-banner" id="graphBanner" hidden></div>
-          <div class="trace-controls" id="traceControls" hidden>
-            <span>경로 추적</span>
-            <button class="active" data-trace="DOWNSTREAM" type="button">하류</button>
-            <button data-trace="UPSTREAM" type="button">상류</button>
-            <button data-trace="ONE_HOP" type="button">1단계</button>
-          </div>
-          <div class="cursor-hud" id="cursorHud">커서 — · —</div>
-        </div>
-      </section>
-
-      <aside class="dossier" aria-label="선택 객체 분석 패널">
-        <div class="dossier-head">
-          <div class="eyebrow">객체 분석 패널</div>
-          <div class="object-id mono" id="dossierId">—</div>
-        </div>
-
-        <div class="type-line"><span class="type-pill" id="dossierType">객체</span><span class="owner-chip" id="dossierOwner">RAVENS</span></div>
-        <h1 id="dossierName">객체를 선택하세요</h1>
-        <div class="object-value"><span id="dossierValue">—</span><small id="dossierDelta">—</small></div>
-        <div class="state-row"><span>상태</span><b id="dossierState">—</b></div>
-
-        <section class="dossier-section">
-          <div class="section-head"><span>근거</span><b id="evidenceCount">00</b></div>
-          <div id="evidenceList" class="evidence-list"></div>
-        </section>
-
-        <section class="dossier-section">
-          <div class="section-head"><span>연결 관계</span><b id="relationSummary">↑0 · ↓0</b></div>
-          <div id="relationList" class="relation-list"></div>
-        </section>
-
-        <section class="dossier-section model-section">
-          <div class="section-head"><span>출처 / 모델</span><b id="modelConfidence">—</b></div>
-          <div class="provenance-grid">
-            <span>담당</span><b id="provOwner">—</b>
-            <span>모델</span><b id="provModel">—</b>
-            <span>기준시점</span><b id="provVintage">—</b>
-          </div>
-        </section>
-
-        <section class="dossier-actions">
-          <button data-action="TRACE" type="button"><span>⌁</span>경로 추적</button>
-          <button data-action="STRESS" type="button"><span>↯</span>충격 적용</button>
-          <button data-action="COMPARE" type="button"><span>◫</span>비교</button>
-          <button data-action="REPLAY" type="button"><span>◴</span>시간 재생</button>
-          <button data-action="ASK" type="button"><span>⌘</span>질의</button>
-          <button data-action="WORKSPACE" type="button"><span>⌄</span>상세 분석</button>
-        </section>
-
-        <div class="compare-card" id="compareCard" hidden></div>
-      </aside>
-    </div>
-
-    <footer class="temporal-bar">
-      <div class="timeline-zone">
-        <div class="timeline-label"><span class="eyebrow">시장 시간축</span><b id="snapshotLabel">실시간</b></div>
-        <div class="timeline" id="timeline"></div>
-      </div>
-      <div class="activity-zone">
-        <div class="activity-head"><span class="eyebrow">시스템 활동</span><b id="activityPulse">●</b></div>
-        <div class="activity-feed" id="activityFeed"></div>
-      </div>
-    </footer>
-  </main>
-
-  <section class="workspace-drawer" id="workspaceDrawer" aria-hidden="true">
-    <div class="drawer-head">
-      <div><span class="eyebrow">도메인 상세 분석</span><h2 id="drawerTitle">—</h2></div>
-      <button id="drawerClose" type="button">닫기 ×</button>
-    </div>
-    <div id="drawerBody" class="drawer-body"></div>
-  </section>
-
-  <div class="command-modal" id="commandModal" hidden>
-    <div class="command-box" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
-      <div class="command-head"><div><span class="eyebrow">온톨로지 오퍼레이터</span><h2 id="commandTitle">VALKYRIE에게 질의</h2></div><button id="commandClose" type="button">닫기</button></div>
-      <div class="command-input-wrap"><span>&gt;</span><input id="commandInput" autocomplete="off" placeholder="예: 물가가 0.4%p 다시 오르면 IPO 시장은?" /></div>
-      <div class="command-chips">
-        <button data-command="왜 지금 장기채를 줄여야 하지?" type="button">왜 듀레이션 축소?</button>
-        <button data-command="물가가 0.4%p 오르면 IPO는?" type="button">CPI +0.4%p → IPO</button>
-        <button data-command="CB 리픽싱 리스크 보여줘" type="button">CB 리픽싱 리스크</button>
-      </div>
-      <div class="operator-output" id="operatorOutput">
-        <div class="operator-note">데모 그래프 오퍼레이터 · 현재는 결정론적 라우팅. 이후 LLM Tool Calling으로 확장.</div>
-      </div>
+  <div class="hd">
+    <div class="br"><div class="lg">VAL<span>KYRIE</span></div><div style="font-size:7px;letter-spacing:.26em;color:#39424E;margin-top:2px">RAVENS · RESEARCH OS</div></div>
+    <div class="hcell"><div class="ml">Market Status</div><div class="stx" id="mst"><i class="dot"></i><span>CAUTION</span><span class="ml2 num" id="mstn" style="color:#49525F">3 ALERT</span></div></div>
+    <div class="hcell"><div class="ml">As Of</div><div class="stx num" id="asof">2026-09-30 15:42:08</div></div>
+    <div class="hcell"><div class="ml">Ontology</div><div class="stx num">16 OBJ · 22 REL</div></div>
+    <div class="hcell"><div class="ml">Engine</div><div class="stx" style="font-size:11px">QUANT · ONTOLOGY · LLM</div></div>
+    <div class="hcell gr1" style="flex-direction:row;gap:8px;align-items:center">
+      <div class="conf" id="cfb">CONFLICT DETECTED</div>
+      <div class="live" id="lv"><i class="bt"></i><span id="lvt">LIVE</span></div>
     </div>
   </div>
 
-  <script src="./ontology.js?v=3200"></script>
-  <script src="./localize-v32.js?v=3200"></script>
-  <script src="./app.js?v=3200"></script>
-  <script src="./motion-v31.js?v=3200"></script>
-  <script src="./motion-v32.js?v=3200"></script>
+  <div class="bf">
+    <div class="bsweep"></div>
+    <div class="seg s1"><div class="tag">SHOCK · 무엇이 발생했는가</div><div class="txt" id="bf1">US CPI 2.8% · 둔화 확인</div></div>
+    <div></div><div class="arw">▶</div>
+    <div class="seg s2"><div class="tag">TRANSMISSION · 어디로 전파되는가</div><div class="txt" id="bf2">UST 4.18% → 국고 2.94% · 커브 +38bp 스티프닝</div></div>
+    <div class="arw">▶</div>
+    <div class="seg s3"><div class="tag">DECISION · 그래서 무엇을 하는가</div><div class="txt" id="bf3">채권 단기 확대 · IPO 선별 청약</div></div>
+  </div>
+
+  <div class="cw" id="cw">
+    <canvas id="df"></canvas>
+    <div class="ovl">
+      <div class="ml" style="color:#4E5A6B">INTELLIGENCE CHAIN</div>
+      <div class="ml2" style="margin-top:2px;color:#39424E">관계 = 사전 정의 온톨로지(고정) · 노드 값 = 데이터 기반 · SAMPLE</div>
+    </div>
+    <div class="ovr">
+      <div class="ml2 num" id="hud" style="color:#39424E">CURSOR — · —</div>
+      <div class="ml2 num" id="hud2" style="color:#39424E;margin-top:1px">NO OBJECT ACQUIRED</div>
+    </div>
+    <div class="ovb">
+      <div><span class="ml" style="color:#39424E">FLOW</span> <span class="ml2 num" id="fl1" style="color:#4E5A6B">22 CHANNELS OPEN</span></div>
+      <div><span class="ml" style="color:#39424E">FEED</span> <span class="ml2 num" id="fd" style="color:#4E5A6B">12:43:08 ECOS SYNC OK · SIMULATED</span></div>
+    </div>
+    <div class="ban" id="ban"><div class="b1" id="ban1"></div><div class="b2" id="ban2"></div></div>
+    <svg id="chain" viewBox="0 0 1020 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VALKYRIE 인과 체인"></svg>
+  </div>
+
+  <div class="cmd">
+    <div class="pr">&gt;</div>
+    <input id="cin" placeholder="객체를 클릭하거나 명령을 입력하세요  —  예: 미국 10년물이 50bp 오르면 어떻게 돼?">
+    <div class="cps">
+      <div class="cp" data-q="지금 채권 포지션 어떻게 가져가야 해?">채권 포지션</div>
+      <div class="cp" data-q="지금 IPO 청약에 들어가도 돼?">IPO 청약</div>
+      <div class="cp" data-q="CB 리픽싱 위험 종목 보여줘">CB 리스크</div>
+    </div>
+    <div class="cps sk">
+      <span class="ml" style="color:#5A4522">SHOCK</span>
+      <div class="cp" data-s="ust">UST +50bp</div>
+      <div class="cp" data-s="cr">CREDIT +40bp</div>
+      <div class="cp" data-s="bok">BOK +25bp</div>
+      <div class="cp" data-s="all">복합 스트레스</div>
+    </div>
+    <div class="cps" style="border-left:1px solid #19212C">
+      <button class="btn" id="sig">▶ RUN SIGNATURE</button>
+      <button class="btn g" id="rst">RESET</button>
+    </div>
+  </div>
+
+  <div class="mw">
+    <div class="tabs">
+      <div class="tab" data-t="MACRO"><div class="tn">MACRO</div><div class="to">정희강 · Quant Engine</div></div>
+      <div class="tab act" data-t="RATES"><div class="tn">RATES</div><div class="to">정훈 · Fixed Income</div></div>
+      <div class="tab" data-t="EQUITY"><div class="tn">EQUITY</div><div class="to">김유찬 · IPO / CB</div></div>
+      <div class="tabsp"><span class="ml2" style="color:#39424E">상단 객체 클릭 시 담당 도메인으로 자동 전환</span></div>
+    </div>
+    <div class="pane" id="pane"></div>
+  </div>
+
+  <div class="ft">
+    <div class="fc"><button class="btn g" id="rp">◀ REPLAY</button><span class="ml" style="color:#39424E">시간 재생</span></div>
+    <div class="tl"><div class="ax"></div><div id="tks"></div></div>
+    <div class="fc" style="border-right:0;border-left:1px solid #19212C;flex-direction:column;align-items:flex-end;gap:1px">
+      <div class="ml">SNAPSHOT</div><div class="num" id="snl" style="font-size:11.5px;font-weight:700">2026-09-30</div>
+    </div>
+  </div>
+</div>
+
+<div class="sr"><table><caption>스냅샷별 주요 지표</caption><thead><tr><th>일자</th><th>UST 10Y</th><th>국고 3Y</th><th>2s10s</th><th>크레딧 AA- 3Y</th><th>IPO 경쟁률</th></tr></thead><tbody><tr><td>2026-05-04</td><td>4.62%</td><td>3.31%</td><td>-6bp</td><td>71bp</td><td>402:1</td></tr><tr><td>2026-06-15</td><td>4.44%</td><td>3.18%</td><td>9bp</td><td>66bp</td><td>448:1</td></tr><tr><td>2026-07-27</td><td>4.29%</td><td>3.06%</td><td>22bp</td><td>60bp</td><td>503:1</td></tr><tr><td>2026-08-17</td><td>4.34%</td><td>3.11%</td><td>17bp</td><td>64bp</td><td>488:1</td></tr><tr><td>2026-09-30</td><td>4.18%</td><td>2.94%</td><td>38bp</td><td>52bp</td><td>566:1</td></tr></tbody></table></div>
+
+<script src="./data-core.js?v=2601"></script>
+<script src="./view.js?v=2601"></script>
+<script src="./interaction.js?v=2601"></script>
 </body>
 </html>
