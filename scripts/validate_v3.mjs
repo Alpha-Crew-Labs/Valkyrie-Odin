@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const root=process.cwd();
 const dir=path.join(root,'prototype','valkyrie-v3');
-const required=['index.html','styles.css','mobile.css','data-core.js','view.js','interaction.js','quant-hk.js','quant-hk.css','equity-yc.js','equity-yc.css','live-equity.js','live-equity.css','live-equity-extra.css','README.md'];
+const required=['index.html','styles.css','mobile.css','data-core.js','view.js','interaction.js','quant-hk.js','quant-hk.css','equity-yc.js','equity-yc.css','live-equity.js','live-equity.css','live-equity-extra.css','data/equity-pulse.json','README.md'];
 let failed=false;
 const assert=(cond,msg)=>{if(cond)console.log(`✓ ${msg}`);else{console.error(`✗ ${msg}`);failed=true;}};
 
@@ -18,24 +18,30 @@ const interaction=fs.readFileSync(path.join(dir,'interaction.js'),'utf8');
 const hkQuant=fs.readFileSync(path.join(dir,'quant-hk.js'),'utf8');
 const ycEquity=fs.readFileSync(path.join(dir,'equity-yc.js'),'utf8');
 const liveEquity=fs.readFileSync(path.join(dir,'live-equity.js'),'utf8');
+const equityCollector=fs.readFileSync(path.join(root,'scripts','update_equity_snapshot.mjs'),'utf8');
 
-const approvedLiveOrigin='https://ipo-market-report.vercel.app';
-const htmlWithoutApprovedOrigin=html.split(approvedLiveOrigin).join('');
 assert(html.includes('VALKYRIE v3 — Research Intelligence System · v2.6 Baseline'),'approved v2.6 baseline title is present');
 assert(html.includes("script-src 'self'"),'CSP restricts scripts to local assets');
 assert(html.includes("style-src 'self'"),'CSP restricts styles to local assets');
-assert(html.includes(`connect-src ${approvedLiveOrigin}`),'CSP allows the approved equity API origin');
-assert(!/https?:\/\//i.test(htmlWithoutApprovedOrigin),'v3 shell has no unapproved external HTTP runtime dependency');
+assert(html.includes("connect-src 'self'"),'runtime network access is same-origin only');
+assert(!/ipo-market-report\.vercel\.app/i.test(html+liveEquity),'VALKYRIE runtime has no Vercel dependency');
+assert(!/https?:\/\//i.test(liveEquity),'live Equity browser runtime has no direct external API dependency');
+assert(liveEquity.includes("ENDPOINT='./data/equity-pulse.json'"),'live Equity reads the local generated snapshot');
+assert(liveEquity.includes('GITHUB_ACTIONS_SNAPSHOT'),'live Equity identifies GitHub-native snapshot mode');
+assert(liveEquity.includes('POLL_MS=300000'),'browser refresh cadence matches the five-minute snapshot design');
 assert(html.includes('./styles.css?v=2601'),'baseline stylesheet is versioned');
 for(const asset of ['data-core.js','view.js'])assert(html.includes(`./${asset}?v=2601`),`${asset} is wired and versioned`);
 assert(html.includes('./interaction.js?v=2606'),'interaction.js current integration build is wired');
 assert(html.includes('./quant-hk.js?v=2603')&&html.includes('./quant-hk.css?v=2603'),'HK Quant integration is wired');
 assert(html.includes('./equity-yc.js?v=2606')&&html.includes('./equity-yc.css?v=2606'),'YC structural Equity integration is wired');
-assert(html.includes('./live-equity.js?v=2607')&&html.includes('./live-equity.css?v=2606')&&html.includes('./live-equity-extra.css?v=2607'),'expanded live Korean Equity integration is wired');
-const allowedRuntimeEndpoints=[`${approvedLiveOrigin}/api/equity-pulse`,`${approvedLiveOrigin}/api/equity-company`];
-for(const endpoint of allowedRuntimeEndpoints)assert(liveEquity.includes(endpoint),`live Equity uses approved backend endpoint: ${endpoint.split('/').pop()}`);
-let liveWithoutAllowed=liveEquity;for(const endpoint of allowedRuntimeEndpoints)liveWithoutAllowed=liveWithoutAllowed.split(endpoint).join('');
-assert(!/https?:\/\//i.test(liveWithoutAllowed),'live Equity runtime has no unapproved external endpoint');
+assert(html.includes('./live-equity.js?v=2608')&&html.includes('./live-equity.css?v=2606')&&html.includes('./live-equity-extra.css?v=2607'),'GitHub-native live Korean Equity integration is wired');
+
+for(const upstream of ['polling.finance.naver.com','scanner.tradingview.com/korea/scan','query1.finance.yahoo.com','aikstockdata.com'])assert(equityCollector.includes(upstream),`GitHub collector integrates ${upstream}`);
+assert(equityCollector.includes("'data', 'equity-pulse.json'"),'collector writes the Pages same-origin data file');
+assert(equityCollector.includes('topTurnover')&&equityCollector.includes('topMomentum')&&equityCollector.includes('topRelativeVolume'),'collector builds market scanner rankings');
+assert(equityCollector.includes('enrichCompany'),'collector enriches top-turnover companies with stock/fundamental fields');
+assert(equityCollector.includes('normalizeIntraday'),'collector integrates intraday DART event data');
+
 assert(hkQuant.includes('Quant Macro Terminal Pro'),'HK Quant snapshot integration is preserved');
 assert(ycEquity.includes('IPO Market Report')&&ycEquity.includes('CB Zero Finder'),'YC IPO/CB structural integration is preserved');
 assert(ycEquity.includes('덕산넵코어스')&&ycEquity.includes('20260915000085'),'real current IPO DART focus is wired');
@@ -78,10 +84,10 @@ assert(liveEquity.includes('KOSDAQ - KOSPI')&&liveEquity.includes('rel.regime'),
 assert(liveEquity.includes('EQUITY FUNDAMENTAL PULSE')&&liveEquity.includes('DART EARNINGS BREADTH'),'real public fundamental research layer is rendered');
 assert(liveEquity.includes('TRADINGVIEW SCANNER')&&liveEquity.includes('TV SCANNER'),'TradingView market scanner evidence is rendered');
 assert(liveEquity.includes('DART EVENT PULSE'),'intraday DART event pulse is rendered');
+assert(liveEquity.includes('거래대금 상위 · 자동 기업 Snapshot'),'pre-enriched company snapshots are rendered');
 assert(liveEquity.includes('RISK-ON')&&liveEquity.includes('RISK-OFF')&&liveEquity.includes('NEUTRAL'),'live Equity pulse exposes market-regime states');
 assert(liveEquity.includes('외국인')&&liveEquity.includes('기관')&&liveEquity.includes('상승/하락'),'live Equity pulse exposes flow and breadth evidence');
-assert(liveEquity.includes("POLL_MS=70000"),'live Equity polling cadence is explicit');
-assert(liveEquity.includes('DEGRADED')&&liveEquity.includes('IPO · CB 구조적 시그널과 Snapshot은 유지'),'live Equity feed has a graceful structural-signal fallback');
+assert(liveEquity.includes('DEGRADED')&&liveEquity.includes('IPO · CB 구조적 시그널'),'live Equity feed has a graceful structural-signal fallback');
 assert(liveEquity.includes('r.stale')&&liveEquity.includes('Live 점수에는 반영하지 않습니다'),'stale research is disclosed and excluded from live scoring');
 
 const htmlIds=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
