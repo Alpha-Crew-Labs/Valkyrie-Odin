@@ -9,6 +9,7 @@ on:
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
       - 'scripts/validate_v3.mjs'
+      - 'scripts/update_equity_snapshot.mjs'
       - '.github/workflows/prototype-validation.yml'
   push:
     branches:
@@ -21,6 +22,7 @@ on:
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
       - 'scripts/validate_v3.mjs'
+      - 'scripts/update_equity_snapshot.mjs'
       - '.github/workflows/prototype-validation.yml'
 
 permissions:
@@ -53,6 +55,7 @@ jobs:
           node --check prototype/valkyrie-v3/quant-hk.js
           node --check prototype/valkyrie-v3/equity-yc.js
           node --check prototype/valkyrie-v3/live-equity.js
+          node --check scripts/update_equity_snapshot.mjs
 
       - name: Validate v2 reference invariants
         run: node scripts/validate_prototype.mjs
