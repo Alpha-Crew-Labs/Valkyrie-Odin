@@ -7,7 +7,11 @@ on:
     paths:
       - 'prototype/valkyrie-v2.5/**'
       - 'prototype/valkyrie-v3/**'
+      - 'scripts/update_equity_snapshot.mjs'
       - '.github/workflows/pages.yml'
+  schedule:
+    # 09:00~16:55 KST, weekdays. GitHub cron can be delayed; treat as near-live, not tick data.
+    - cron: '*/5 0-7 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -17,7 +21,7 @@ permissions:
 
 concurrency:
   group: github-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -28,6 +32,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Refresh Korean Equity snapshot
+        id: equity_snapshot
+        continue-on-error: true
+        run: node scripts/update_equity_snapshot.mjs
+
+      - name: Report Equity snapshot fallback
+        if: steps.equity_snapshot.outcome != 'success'
+        run: echo 'Equity upstream refresh failed. Deploying repository fallback while structural IPO/CB signals remain available.'
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
