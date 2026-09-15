@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "generatedAt": null,
+  "mode": "GITHUB_ACTIONS_SNAPSHOT",
+  "error": "awaiting_first_refresh",
+  "source": {
+    "runtimeProxy": false,
+    "note": "This repository fallback is replaced inside the GitHub Pages deployment artifact by scripts/update_equity_snapshot.mjs."
+  }
+}
