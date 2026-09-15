@@ -4,7 +4,8 @@
   const NS='http://www.w3.org/2000/svg';
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)], byId=id=>document.getElementById(id);
   const svgEl=(tag,attrs={})=>{const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,String(v)));return e;};
-  let streamLayer,beadLayer,beads=[],raf=0,last=0;
+  const setText=(el,text)=>{if(el&&el.textContent!==text)el.textContent=text;};
+  let streamLayer,beadLayer,beads=[],raf=0,last=0,observerQueued=false;
 
   function installStreams(){
     const world=byId('world'),labels=byId('edgeLabelLayer');if(!world||!labels||byId('v32StreamLayer'))return;
@@ -30,7 +31,7 @@
   function visiblePaths(){return D.relations.map(r=>({r,p:byId(`edge_${r.id}`)})).filter(x=>x.p&&x.p.style.display!=='none');}
   function pickPath(preferHot=true){const all=visiblePaths();if(!all.length)return null;const hot=preferHot?all.filter(x=>x.p.classList.contains('active')||x.p.classList.contains('stress')):[];const pool=hot.length?hot:all;return pool[Math.floor(Math.random()*pool.length)];}
   function seedBeads(){
-    beadLayer.innerHTML='';beads=[];const count=10;
+    if(!beadLayer)return;beadLayer.innerHTML='';beads=[];const count=10;
     for(let i=0;i<count;i++){
       const pick=pickPath(i<4);if(!pick)break;const c=svgEl('circle',{r:i<3?1.8:1.15,class:`v32-bead${pick.p.classList.contains('stress')?' stress':''}`});beadLayer.appendChild(c);
       beads.push({el:c,rel:pick.r.id,t:Math.random(),speed:.025+Math.random()*.035,life:4+Math.random()*6});
@@ -58,16 +59,20 @@
   ];
   function localText(s){let out=s;UI_REPL.forEach(([r,v])=>out=out.replace(r,v));out=out.replace(/^LIVE$/,'실시간').replace(/^BASE$/,'기본').replace(/^HAWKISH$/,'매파').replace(/^DOVISH$/,'비둘기').replace(/^RISK_OFF$/,'위험회피').replace(/^CAUTION$/,'주의').replace(/^HIGH$/,'높음').replace(/^NORMAL$/,'정상');return out;}
   function localizeRuntime(){
-    $$('.node-type').forEach(n=>{if(TYPE_KO[n.textContent])n.textContent=TYPE_KO[n.textContent];});
-    const pill=byId('dossierType');if(pill&&TYPE_KO[pill.textContent])pill.textContent=TYPE_KO[pill.textContent];
-    ['graphTitle','scenarioLabel','snapshotLabel','riskBadge','healthText'].forEach(id=>{const el=byId(id);if(el)el.textContent=localText(el.textContent);});
-    const banner=byId('graphBanner');if(banner&&!banner.hidden)banner.textContent=localText(banner.textContent);
-    $$('#activityFeed .activity-line').forEach(el=>el.textContent=localText(el.textContent));
-    $$('#evidenceList .evidence-item small').forEach(el=>{if(el.textContent==='HIGH')el.textContent='높음';else if(el.textContent==='MED')el.textContent='중간';else if(el.textContent==='LOW')el.textContent='낮음';});
+    $$('.node-type').forEach(n=>{if(TYPE_KO[n.textContent])setText(n,TYPE_KO[n.textContent]);});
+    const pill=byId('dossierType');if(pill&&TYPE_KO[pill.textContent])setText(pill,TYPE_KO[pill.textContent]);
+    ['graphTitle','scenarioLabel','snapshotLabel','riskBadge','healthText'].forEach(id=>{const el=byId(id);if(el)setText(el,localText(el.textContent));});
+    const banner=byId('graphBanner');if(banner&&!banner.hidden)setText(banner,localText(banner.textContent));
+    $$('#activityFeed .activity-line').forEach(el=>setText(el,localText(el.textContent)));
+    $$('#evidenceList .evidence-item small').forEach(el=>{if(el.textContent==='HIGH')setText(el,'높음');else if(el.textContent==='MED')setText(el,'중간');else if(el.textContent==='LOW')setText(el,'낮음');});
   }
 
+  function scheduleSync(){
+    if(observerQueued)return;observerQueued=true;
+    requestAnimationFrame(()=>{observerQueued=false;syncStreams();localizeRuntime();});
+  }
   function installObservers(){
-    const root=byId('app');if(root)new MutationObserver(()=>{syncStreams();localizeRuntime();}).observe(root,{subtree:true,childList:true,attributes:true,characterData:true,attributeFilter:['class','style','hidden']});
+    const root=byId('app');if(root)new MutationObserver(scheduleSync).observe(root,{subtree:true,childList:true,attributes:true,characterData:true,attributeFilter:['class','style','hidden']});
     localizeRuntime();
   }
 
