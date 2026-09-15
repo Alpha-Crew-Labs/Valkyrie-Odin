@@ -10,8 +10,8 @@ on:
       - 'scripts/update_equity_snapshot.mjs'
       - '.github/workflows/pages.yml'
   schedule:
-    # 09:00~16:55 KST, weekdays. GitHub cron can be delayed; treat as near-live, not tick data.
-    - cron: '*/5 0-7 * * 1-5'
+    # Near-live Korean market snapshot. 09:00~16:59 KST, weekdays; GitHub cron may be delayed.
+    - cron: '*/10 0-7 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -38,14 +38,14 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Refresh Korean Equity snapshot
+      - name: Refresh Naver KOSPI KOSDAQ snapshot
         id: equity_snapshot
         continue-on-error: true
         run: node scripts/update_equity_snapshot.mjs
 
       - name: Report Equity snapshot fallback
         if: steps.equity_snapshot.outcome != 'success'
-        run: echo 'Equity upstream refresh failed. Deploying repository fallback while structural IPO/CB signals remain available.'
+        run: echo 'Naver market refresh failed. Deploying repository fallback; IPO/CB structural signals remain independent.'
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
