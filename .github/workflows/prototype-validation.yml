@@ -5,17 +5,22 @@ on:
     paths:
       - 'prototype/valkyrie-v2/**'
       - 'prototype/valkyrie-v2.5/**'
+      - 'prototype/valkyrie-v3/**'
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
+      - 'scripts/validate_v3.mjs'
       - '.github/workflows/prototype-validation.yml'
   push:
     branches:
       - main
+      - feat/v3-ontology-command-center
     paths:
       - 'prototype/valkyrie-v2/**'
       - 'prototype/valkyrie-v2.5/**'
+      - 'prototype/valkyrie-v3/**'
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
+      - 'scripts/validate_v3.mjs'
       - '.github/workflows/prototype-validation.yml'
 
 permissions:
@@ -42,9 +47,14 @@ jobs:
           node --check prototype/valkyrie-v2.5/core.js
           node --check prototype/valkyrie-v2.5/view.js
           node --check prototype/valkyrie-v2.5/interaction.js
+          node --check prototype/valkyrie-v3/ontology.js
+          node --check prototype/valkyrie-v3/app.js
 
       - name: Validate v2 reference invariants
         run: node scripts/validate_prototype.mjs
 
       - name: Validate v2.5 release invariants
         run: node scripts/validate_v25.mjs
+
+      - name: Validate v3 ontology invariants
+        run: node scripts/validate_v3.mjs
