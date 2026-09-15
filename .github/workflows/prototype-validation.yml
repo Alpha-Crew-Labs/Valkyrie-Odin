@@ -1,0 +1,39 @@
+name: Prototype Validation
+
+on:
+  pull_request:
+    paths:
+      - 'prototype/valkyrie-v2/**'
+      - 'scripts/validate_prototype.mjs'
+      - '.github/workflows/prototype-validation.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'prototype/valkyrie-v2/**'
+      - 'scripts/validate_prototype.mjs'
+      - '.github/workflows/prototype-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: JavaScript syntax check
+        run: |
+          node --check prototype/valkyrie-v2/data.js
+          node --check prototype/valkyrie-v2/system.js
+          node --check prototype/valkyrie-v2/runtime.js
+
+      - name: Validate ontology and snapshot invariants
+        run: node scripts/validate_prototype.mjs
