@@ -1,15 +1,15 @@
 /* VALKYRIE · YC Equity integration layer
  * Keeps the v2.6 shell untouched and enriches only the EQUITY workspace.
- * IPO source: IPO Market Report (latest issue 2026-09-05, data cutoff 2026-09-03).
- * CB source: CB Zero Finder live public view inspected 2026-09-15.
- * These are displayed source snapshots, not cross-origin live API syncs.
+ * IPO market source: IPO Market Report (latest issue 2026-09-05, data cutoff 2026-09-03).
+ * Current IPO focus source: DART [발행조건확정] 증권신고서(지분증권), 덕산넵코어스, 2026-09-15.
+ * CB source: CB Zero Finder public view inspected 2026-09-15.
  */
 (function(){
   'use strict';
 
   var YC_EQUITY = {
     source: '김유찬 · IPO Market Report / CB Zero Finder',
-    observed: '2026-09-15',
+    observed: '2026-09-16',
     ipo: {
       url: 'https://ipo-market-report.vercel.app/',
       reportDate: '2026.09.05',
@@ -23,6 +23,26 @@
       belowBandShare: 4,
       belowBandReturn: 62,
       signal: 'SELECTIVE · 할인 요구'
+    },
+    ipoFocus: {
+      name: '덕산넵코어스',
+      filingDate: '2026.09.15',
+      dartUrl: 'https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260915000085',
+      offerPrice: 14600,
+      assessedValue: 19544,
+      valuationDiscount: 25.3,
+      h1RevenueEok: 237.69,
+      h1GrossProfitEok: 25.27,
+      h1OperatingProfitEok: 7.50,
+      h1Gpm: 10.63,
+      h1Opm: 3.16,
+      preShares: 15795396,
+      postShares: 18893889,
+      fullyDilutedShares: 19600789,
+      offerDilution: 19.62,
+      fullyDilutedDilution: 24.09,
+      publicFloat: 15.88,
+      netProceedsEok: 429.94
     },
     cb: {
       url: 'https://cb-zero-finder.vercel.app/',
@@ -57,36 +77,47 @@
     return '<div class="ycq-mini"><span>'+label+'</span><b'+(cls?' class="'+cls+'"':'')+'>'+value+'</b></div>';
   }
 
+  function fmtWon(v){return Number(v).toLocaleString('ko-KR')+'원';}
+
   function enhanceEquity(){
     if(typeof curTab==='undefined' || curTab!=='EQUITY') return;
-    var q=YC_EQUITY;
+    var q=YC_EQUITY, f=q.ipoFocus;
 
     var ipo=cardByTitle('IPO MARKET REPORT');
     if(ipo){
       ipo.classList.add('ycq');
       ipo.innerHTML=
-        '<div class="cdh"><span class="cdt">IPO MARKET REPORT</span><span class="cdo">김유찬 · REPORT SNAPSHOT</span></div>'+
-        '<div class="ycq-signal"><span class="lbl">IPO MARKET SIGNAL</span><strong>'+q.ipo.signal+'</strong></div>'+
+        '<div class="cdh"><span class="cdt">IPO MARKET REPORT</span><span class="cdo">김유찬 · STRUCTURAL</span></div>'+
+        '<div class="ycq-signal"><span class="lbl">KOSDAQ IPO SIGNAL</span><strong>'+q.ipo.signal+'</strong></div>'+
         '<div class="ycq-grid">'+
-          mini('분석 기업',q.ipo.companies+'개','')+
+          mini('최근 분석',q.ipo.companies+'개','')+
           mini('공모가 대비 평균',q.ipo.avgReturn.toFixed(1)+'%','rd')+
           mini('수익률 중앙값',q.ipo.medianReturn.toFixed(0)+'%','rd')+
-          mini('밴드 내 확정 비중',q.ipo.inBandShare.toFixed(0)+'%','am')+
+          mini('밴드 내 평균',q.ipo.inBandReturn.toFixed(0)+'%','rd')+
         '</div>'+
-        kv('밴드 내 확정 평균수익률',q.ipo.inBandReturn.toFixed(0)+'%','rd')+
-        kv('밴드 하회 확정 비중',q.ipo.belowBandShare.toFixed(0)+'%','')+
-        kv('밴드 하회 평균수익률','+'+q.ipo.belowBandReturn.toFixed(0)+'%','gr')+
-        '<div class="note ycq-note">밴드 안에서 가격을 받아도 평균 <b>-21%</b> → 신규 IPO는 가격보다 <b>할인폭과 종목 선별</b>이 중요. 수요예측 경쟁률·확약률은 현 리포트에 없으므로 임의 표시하지 않음.</div>'+
-        '<a class="btn g ycq-link" href="'+q.ipo.url+'" target="_blank" rel="noopener noreferrer" aria-label="김유찬 IPO Market Report 새 창에서 열기">IPO Market Report 전체 보기 ↗</a>'+
-        '<div class="note ycq-note">발행 '+q.ipo.reportDate+' · 데이터 기준 '+q.ipo.dataDate+' · '+q.ipo.period+'</div>';
+        '<div class="ycq-focusbox">'+
+          '<div class="ycq-focushead"><span>CURRENT IPO · DART '+f.filingDate.slice(5)+'</span><b>'+f.name+'</b></div>'+
+          '<div class="ycq-grid">'+
+            mini('확정 공모가',fmtWon(f.offerPrice),'')+
+            mini('평가가 대비 할인',f.valuationDiscount.toFixed(1)+'%','gr')+
+            mini('26H1 영업이익',f.h1OperatingProfitEok.toFixed(1)+'억','')+
+            mini('공모 후 희석',f.offerDilution.toFixed(1)+'%','am')+
+          '</div>'+
+          kv('26H1 GPM / OPM',f.h1Gpm.toFixed(1)+'% / '+f.h1Opm.toFixed(1)+'%','')+
+          kv('신주인수권 포함 Fully Diluted',f.fullyDilutedDilution.toFixed(1)+'%','rd')+
+          kv('공모 후 일반 공모주주 비중',f.publicFloat.toFixed(2)+'%','')+
+        '</div>'+
+        '<div class="note ycq-note">시장 전체는 최근 IPO 50개 기준 약세. 현재 청약 종목은 <b>DART 실제 발행조건</b>으로 별도 확인합니다. 표시하지 못하는 ACC·RUNWAY 등은 임의 추정하지 않습니다.</div>'+
+        '<div class="ycq-links"><a class="btn g ycq-link" href="'+q.ipo.url+'" target="_blank" rel="noopener noreferrer">IPO Market Report ↗</a><a class="btn g ycq-link" href="'+f.dartUrl+'" target="_blank" rel="noopener noreferrer">DART 원문 ↗</a></div>'+
+        '<div class="note ycq-note">리포트 '+q.ipo.reportDate+' · IPO Focus 신고서 '+f.filingDate+'</div>';
     }
 
     var cb=cardByTitle('CB ZERO FINDER');
     if(cb){
       cb.classList.add('ycq');
       cb.innerHTML=
-        '<div class="cdh"><span class="cdt">CB ZERO FINDER</span><span class="cdo">김유찬 · LIVE SNAPSHOT</span></div>'+
-        '<div class="ycq-signal warn"><span class="lbl">FUNDING / DILUTION SIGNAL</span><strong>'+q.cb.signal+'</strong></div>'+
+        '<div class="cdh"><span class="cdt">CB ZERO FINDER</span><span class="cdo">김유찬 · FUNDING</span></div>'+
+        '<div class="ycq-signal warn"><span class="lbl">KOSDAQ FUNDING SIGNAL</span><strong>'+q.cb.signal+'</strong></div>'+
         '<div class="ycq-grid">'+
           mini('YTD 발행',q.cb.ytdCount+'건','')+
           mini('YTD 발행액',q.cb.ytdAmountTrn.toFixed(1)+'조','')+
@@ -95,9 +126,9 @@
         '</div>'+
         kv('최근 90일 평균 희석률',q.cb.recentAvgDilution.toFixed(1)+'%','rd')+
         kv('최근 90일 · 희석 20% 이상',q.cb.highDilutionShare.toFixed(1)+'%','rd')+
-        '<div class="note ycq-note">YTD 평균 희석 <b>12.8%</b> 대비 최근 90일 <b>16.0%</b> → 조달시장 내 희석 부담이 상승. ZERO·ZERO 비중도 높아 <b>발행 구조와 리픽싱 조건 동시 확인</b> 필요.</div>'+
-        '<a class="btn g ycq-link" href="'+q.cb.url+'" target="_blank" rel="noopener noreferrer" aria-label="김유찬 CB Zero Finder 새 창에서 열기">CB Zero Finder 전체 보기 ↗</a>'+
-        '<div class="note ycq-note">공개 화면 기준 '+q.cb.dataDate+' · YTD와 최근 90일 지표는 서로 다른 기간 범위</div>';
+        '<div class="note ycq-note">YTD 평균 희석 <b>12.8%</b> 대비 최근 90일 <b>16.0%</b> → 조달시장 내 희석 부담 상승. Credit → Funding → Equity Risk 연결에 사용합니다.</div>'+
+        '<a class="btn g ycq-link" href="'+q.cb.url+'" target="_blank" rel="noopener noreferrer">CB Zero Finder 전체 보기 ↗</a>'+
+        '<div class="note ycq-note">공개 화면 기준 '+q.cb.dataDate+'</div>';
     }
   }
 
@@ -111,7 +142,7 @@
     var chip=document.createElement('div');
     chip.className='cp ycq-chip';
     chip.textContent='유찬 Equity';
-    chip.title='IPO Market Report · CB Zero Finder 시그널 보기';
+    chip.title='KOSPI · KOSDAQ · IPO · CB Equity intelligence';
     chip.addEventListener('click',function(){
       if(typeof tab==='function') tab('EQUITY');
       setTimeout(function(){
