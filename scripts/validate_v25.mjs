@@ -4,7 +4,7 @@ import vm from 'node:vm';
 
 const root = process.cwd();
 const proto = path.join(root, 'prototype', 'valkyrie-v2.5');
-const required = ['index.html', 'styles.css', 'data.js', 'core.js', 'view.js', 'interaction.js'];
+const required = ['index.html', 'styles.css', 'bootstrap.js', 'data.js', 'core.js', 'view.js', 'interaction.js'];
 
 function assert(condition, message) {
   if (!condition) {
@@ -15,13 +15,11 @@ function assert(condition, message) {
   }
 }
 
-for (const file of required) {
-  assert(fs.existsSync(path.join(proto, file)), `v2.5 file exists: ${file}`);
-}
+for (const file of required) assert(fs.existsSync(path.join(proto, file)), `v2.5 file exists: ${file}`);
 if (process.exitCode) process.exit(process.exitCode);
 
 const index = fs.readFileSync(path.join(proto, 'index.html'), 'utf8');
-for (const ref of ['./styles.css', './data.js', './core.js', './view.js', './interaction.js']) {
+for (const ref of ['./styles.css', './bootstrap.js', './data.js', './core.js', './view.js', './interaction.js']) {
   assert(index.includes(ref), `v2.5 index references ${ref}`);
 }
 assert(!/https?:\/\//i.test(index), 'v2.5 index has no external HTTP runtime dependency');
@@ -34,18 +32,15 @@ const runtimeFiles = ['core.js', 'view.js', 'interaction.js'];
 const runtimeStaticIds = new Set();
 for (const file of runtimeFiles) {
   const src = fs.readFileSync(path.join(proto, file), 'utf8');
-  for (const m of src.matchAll(/getElementById\(["']([^"']+)["']\)/g)) {
-    runtimeStaticIds.add(m[1]);
-  }
+  for (const m of src.matchAll(/getElementById\(["']([^"']+)["']\)/g)) runtimeStaticIds.add(m[1]);
 }
+const generatedAtRuntime = new Set(['n_sig_rates','sdl1','sdl2','sdt']);
 for (const id of [...runtimeStaticIds].sort()) {
-  assert(htmlIds.has(id), `runtime DOM id exists in HTML: #${id}`);
+  assert(htmlIds.has(id) || generatedAtRuntime.has(id), `runtime DOM id is available: #${id}`);
 }
 
-assert(/class="[^"]*chip[^"]*"[^>]*data-q="[^"]+"[^>]*data-n="[^"]+"/.test(index),
-  'command chips expose data-q and data-n');
-assert((index.match(/class="[^"]*tab[^"]*"[^>]*data-t="(?:MACRO|RATES|EQUITY)"/g) || []).length === 3,
-  'three domain tabs expose data-t');
+assert(/class="[^"]*chip[^"]*"[^>]*data-q="[^"]+"[^>]*data-n="[^"]+"/.test(index), 'command chips expose data-q and data-n');
+assert((index.match(/class="[^"]*tab[^"]*"[^>]*data-t="(?:MACRO|RATES|EQUITY)"/g) || []).length === 3, 'three domain tabs expose data-t');
 
 const source = fs.readFileSync(path.join(proto, 'data.js'), 'utf8');
 const sandbox = { console };
@@ -73,23 +68,16 @@ for (const [edgeId, from, to, sign] of EDGES) {
 
 const terminals = NODES.filter((n) => n.T);
 assert(terminals.length === 3, 'v2.5 has three terminal signals');
-for (const node of NODES.filter((n) => !n.T)) {
-  assert(Boolean(META[node.id]), `metadata exists for ${node.id}`);
-}
-
+for (const node of NODES.filter((n) => !n.T)) assert(Boolean(META[node.id]), `metadata exists for ${node.id}`);
 for (const snap of SNAPS) {
   assert(Boolean(snap.d), 'snapshot has date');
-  for (const node of NODES.filter((n) => !n.T)) {
-    assert(Boolean(snap.v?.[node.id]), `${snap.d} has state for ${node.id}`);
-  }
+  for (const node of NODES.filter((n) => !n.T)) assert(Boolean(snap.v?.[node.id]), `${snap.d} has state for ${node.id}`);
   for (const node of terminals) {
     const signal = snap.sig?.[node.id];
     assert(Boolean(signal), `${snap.d} has signal ${node.id}`);
-    assert(Number.isFinite(signal?.c) && signal.c >= 0 && signal.c <= 100,
-      `${snap.d} ${node.id} confidence is 0–100`);
+    assert(Number.isFinite(signal?.c) && signal.c >= 0 && signal.c <= 100, `${snap.d} ${node.id} confidence is 0–100`);
   }
 }
-
 assert(SNAPS.at(-1)?.d === '2026-09-30', 'latest bundled demo snapshot is 2026-09-30');
 
 if (process.exitCode) {
