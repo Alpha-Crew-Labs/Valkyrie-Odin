@@ -26,7 +26,24 @@ for (const ref of ['./styles.css', './data.js', './core.js', './view.js', './int
 }
 assert(!/https?:\/\//i.test(index), 'v2.5 index has no external HTTP runtime dependency');
 assert(index.includes("script-src 'self'"), "v2.5 CSP restricts scripts to 'self'");
+assert(index.includes("style-src 'self' 'unsafe-inline'"), "v2.5 CSP allows the local stylesheet");
 assert(index.includes('Motion System v2.5'), 'v2.5 title marker is present');
+
+// Static DOM contract. These IDs/classes are consumed directly by the split runtime.
+// This prevents a visually valid HTML refactor from silently breaking JS initialization.
+const requiredIds = [
+  'app','ms','msT','msN','cf','asof','mode','modeT','sig','rst',
+  'cw','df','sweep','phb','hud','hud2','afd','chain','gLane','gEdge','gNode','gHud',
+  'iv','ic1','io','is','iaux','iev','iview','icf','icfb','ivin','iact','ci','pane',
+  'rp','ticks','snapL','boot','bt1','bt2','bl0','bl1','bl2','bl3','bl4','bl5','bootbar','bbi','skip'
+];
+for (const id of requiredIds) {
+  assert(index.includes(`id="${id}"`), `DOM contract contains #${id}`);
+}
+assert(/class="[^"]*chip[^"]*"[^>]*data-q="[^"]+"[^>]*data-n="[^"]+"/.test(index),
+  'command chips expose data-q and data-n');
+assert((index.match(/class="[^"]*tab[^"]*"[^>]*data-t="(?:MACRO|RATES|EQUITY)"/g) || []).length === 3,
+  'three domain tabs expose data-t');
 
 const source = fs.readFileSync(path.join(proto, 'data.js'), 'utf8');
 const sandbox = { console };
