@@ -1,17 +1,14 @@
 /* VALKYRIE · Live Korean Equity Intelligence
- * Primary live: Naver/KRX-Koscom redistributed market data.
- * Fallback: Yahoo index continuity.
- * Scanner: TradingView Korea public scanner.
- * Research: aikstockdata public DART/FSC processed data.
+ * Runtime is same-origin only. GitHub Actions refreshes data/equity-pulse.json.
+ * Upstream collector: Naver/KRX-Koscom, TradingView Korea, Yahoo fallback, aikstockdata/DART.
  * Structural IPO/CB signals remain owned by equity-yc.js.
  */
 (function(){
   'use strict';
 
-  var ENDPOINT='https://ipo-market-report.vercel.app/api/equity-pulse';
-  var COMPANY_ENDPOINT='https://ipo-market-report.vercel.app/api/equity-company';
-  var POLL_MS=70000;
-  var LIVE={status:'idle',data:null,error:null,lastFetch:0,timer:null,companyEndpoint:COMPANY_ENDPOINT};
+  var ENDPOINT='./data/equity-pulse.json';
+  var POLL_MS=300000;
+  var LIVE={status:'idle',data:null,error:null,lastFetch:0,timer:null,mode:'GITHUB_ACTIONS_SNAPSHOT'};
   window.VALKYRIE_LIVE_EQUITY=LIVE;
 
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -24,6 +21,7 @@
   function tone(v){return Number(v)>0?'gr':Number(v)<0?'rd':'';}
   function pulseTone(regime){return regime==='RISK-ON'?'gr':regime==='RISK-OFF'?'rd':'am';}
   function market(d,code){return d&&d.markets&&d.markets[code]?d.markets[code]:null;}
+  function stamp(d){return d&&(d.generatedAt||d.fetchedAt)||null;}
 
   function cardByTitle(title){
     var cards=document.querySelectorAll('#pane .cd');
@@ -40,7 +38,7 @@
     var breadth=(br.advancers!=null&&br.decliners!=null)?Number(br.advancers).toLocaleString('ko-KR')+' / '+Number(br.decliners).toLocaleString('ko-KR'):'—';
     return '<div class="liveq-market">'+
       '<div class="liveq-markettop"><div><span class="liveq-marketname">'+code+'</span><strong>'+esc(idx.level==null?'—':Number(idx.level).toLocaleString('ko-KR',{minimumFractionDigits:2,maximumFractionDigits:2}))+'</strong></div><b class="'+tone(idx.changePct)+'">'+esc(signed(idx.changePct,2))+'%</b></div>'+
-      '<div class="liveq-marketpulse"><span class="'+pulseTone(p.regime)+'">'+esc(p.regime||'—')+' · '+esc(p.score==null?'—':p.score+'/100')+'</span><em>'+esc(idx.source||idx.marketStatus||'LIVE')+'</em></div>'+
+      '<div class="liveq-marketpulse"><span class="'+pulseTone(p.regime)+'">'+esc(p.regime||'—')+' · '+esc(p.score==null?'—':p.score+'/100')+'</span><em>'+esc(idx.source||idx.marketStatus||'SNAPSHOT')+'</em></div>'+
       '<div class="liveq-marketgrid"><span>외국인 <b class="'+tone(fl.foreign)+'">'+esc(flow(fl.foreign))+'</b></span><span>기관 <b class="'+tone(fl.institution)+'">'+esc(flow(fl.institution))+'</b></span><span>상승/하락 <b>'+esc(breadth)+'</b></span><span>거래대금 <b>'+esc(won(idx.tradedValue))+'</b></span></div>'+
     '</div>';
   }
@@ -58,21 +56,21 @@
   function liveCardHtml(){
     var d=LIVE.data;
     if(LIVE.status==='loading'&&!d){
-      return '<div class="cd liveq"><div class="cdh"><span class="cdt">LIVE MARKET · KOREA</span><span class="cdo">연결 중</span></div><div class="liveq-loading">KOSPI · KOSDAQ · 수급 · Scanner 데이터를 불러오는 중</div></div>';
+      return '<div class="cd liveq"><div class="cdh"><span class="cdt">LIVE MARKET · KOREA</span><span class="cdo">연결 중</span></div><div class="liveq-loading">GitHub Snapshot · KOSPI · KOSDAQ · 수급 · Scanner 로딩</div></div>';
     }
     if(!d||!d.ok){
-      return '<div class="cd liveq degraded"><div class="cdh"><span class="cdt">LIVE MARKET · KOREA</span><span class="cdo">DEGRADED</span></div><div class="liveq-signal"><span>LIVE FEED</span><strong class="am">일시 연결 실패</strong></div><div class="note">IPO · CB 구조적 시그널과 Snapshot은 유지됩니다. 다음 폴링에서 자동 재시도합니다.</div></div>';
+      return '<div class="cd liveq degraded"><div class="cdh"><span class="cdt">LIVE MARKET · KOREA</span><span class="cdo">DEGRADED</span></div><div class="liveq-signal"><span>MARKET SNAPSHOT</span><strong class="am">첫 데이터 갱신 대기</strong></div><div class="note">IPO · CB 구조적 시그널은 유지됩니다. GitHub Actions가 다음 Snapshot을 생성하면 자동 복구됩니다.</div></div>';
     }
     var kp=market(d,'KOSPI'),kd=market(d,'KOSDAQ'),p=d.pulse||{},rel=d.relative||{};
     var relText=rel.kosdaqMinusKospiPctPoint==null?'—':signed(rel.kosdaqMinusKospiPctPoint,2)+'%p';
     return '<div class="cd liveq" id="cd_live_equity">'+
-      '<div class="cdh"><span class="cdt">LIVE MARKET · KOREA</span><span class="cdo">'+esc(hhmm(d.fetchedAt))+' FETCH</span></div>'+
+      '<div class="cdh"><span class="cdt">LIVE MARKET · KOREA</span><span class="cdo">'+esc(hhmm(stamp(d)))+' SNAPSHOT</span></div>'+
       '<div class="liveq-signal"><span>COMPOSITE RISK APPETITE</span><strong class="'+pulseTone(p.regime)+'">'+esc(p.regime||'—')+' · '+esc(p.score==null?'—':p.score+'/100')+'</strong></div>'+
       '<div class="liveq-rel"><span>KOSDAQ - KOSPI</span><b class="'+tone(rel.kosdaqMinusKospiPctPoint)+'">'+esc(relText)+'</b><em>'+esc(rel.regime||'N/A')+'</em></div>'+
       '<div class="liveq-markets">'+marketRow('KOSPI',kp)+marketRow('KOSDAQ',kd)+'</div>'+
       scannerInline(d.scanner)+
       '<div class="note liveq-note">대형주(KOSPI)와 Risk Capital(KOSDAQ)을 분리하고 <b>상대강도·수급·Breadth·거래대금 Scanner</b>를 함께 봅니다.</div>'+
-      '<div class="liveq-source"><i></i><span>NAVER · TRADINGVIEW · YAHOO FALLBACK</span><em>~70s</em></div>'+
+      '<div class="liveq-source"><i></i><span>GITHUB ACTIONS · NAVER · TV · YAHOO</span><em>~5m</em></div>'+
     '</div>';
   }
 
@@ -81,6 +79,11 @@
     var op=item.operatingIncomeYoyPct;
     var opText=op==null?(item.status||'—'):signed(op,1)+'%';
     return '<div class="fundq-row"><span><b>'+esc(item.name||item.code||'—')+'</b><em>'+esc(item.code||'')+'</em></span><span>매출 '+esc(signed(item.revenueYoyPct,1))+'%</span><span>영익 '+esc(opText)+'</span><strong>'+esc(item.score==null?'—':num(item.score,1))+'</strong></div>';
+  }
+
+  function companyRow(item){
+    var d=item&&item.detail||{},name=d.name||item.name||item.code||'—';
+    return '<div class="fundq-row company"><span><b>'+esc(name)+'</b><em>'+esc(item.code||'')+'</em></span><span>PER '+esc(d.per==null?'—':num(d.per,1))+'</span><span>PBR '+esc(d.pbr==null?'—':num(d.pbr,2))+'</span><strong class="'+tone(item.changePct)+'">'+esc(signed(item.changePct,1))+'%</strong></div>';
   }
 
   function disclosureLine(r){
@@ -101,9 +104,9 @@
   }
 
   function fundamentalCardHtml(){
-    var d=LIVE.data||{},r=d.research,scanner=d.scanner;
+    var d=LIVE.data||{},r=d.research,scanner=d.scanner,companies=Array.isArray(d.companies)?d.companies:[];
     if(!r||!r.ok){
-      return '<div class="cd fundq degraded" id="cd_fundamental_live"><div class="cdh"><span class="cdt">EQUITY FUNDAMENTAL PULSE</span><span class="cdo">DATA PENDING</span></div><div class="note">공개 DART/FSC Research feed를 불러오지 못했습니다. Live 시장 시그널과 IPO/CB 데이터는 계속 동작합니다.</div>'+scannerStats(scanner)+'</div>';
+      return '<div class="cd fundq degraded" id="cd_fundamental_live"><div class="cdh"><span class="cdt">EQUITY FUNDAMENTAL PULSE</span><span class="cdo">DATA PENDING</span></div><div class="note">DART/FSC Research feed가 아직 없습니다. Live 시장 시그널과 IPO/CB 데이터는 계속 동작합니다.</div>'+scannerStats(scanner)+'</div>';
     }
     var e=r.earnings||{},hl=r.highsLows52w||{},mb=r.marketBreadth||{};
     var growth=Array.isArray(r.growthTop)?r.growthTop:[];
@@ -119,9 +122,10 @@
       '</div>'+
       disclosureLine(r)+
       scannerStats(scanner)+
+      (companies.length?'<div class="fundq-head">거래대금 상위 · 자동 기업 Snapshot</div><div class="fundq-list">'+companies.slice(0,3).map(companyRow).join('')+'</div>':'')+
       '<div class="fundq-head">실적 성장 상위 · 실제 DART 수치</div>'+
       '<div class="fundq-list">'+growth.slice(0,3).map(growthRow).join('')+'</div>'+
-      '<div class="note fundq-note">'+(r.stale?'<b>시세 기준일이 오래되어 Live 점수에는 반영하지 않습니다.</b> ':'')+'기업 상세는 백엔드 <b>/api/equity-company?code=6자리</b>에서 Naver·Daum·Yahoo·aikstockdata를 교차 조회합니다.</div>'+
+      '<div class="note fundq-note">'+(r.stale?'<b>Research 기준일이 오래되면 Live 점수에는 반영하지 않습니다.</b> ':'')+'Naver·TradingView·aikstockdata를 <b>GitHub Actions에서 사전 수집</b>하므로 브라우저는 외부 API를 직접 호출하지 않습니다.</div>'+
       '<div class="liveq-source"><i></i><span>AIKSTOCKDATA · DART/FSC + TV SCANNER</span><em>'+esc(shortDate(r.quoteAsOf))+'</em></div>'+
     '</div>';
   }
@@ -129,42 +133,22 @@
   function patchNodes(){
     var d=LIVE.data;if(!d||!d.ok||typeof NEL==='undefined')return;
     var kp=market(d,'KOSPI'),kd=market(d,'KOSDAQ'),p=d.pulse||{},rel=d.relative||{};
-    var kpb=kp&&kp.breadth||{},kdb=kd&&kd.breadth||{};
-    var kdf=kd&&kd.flow||{};
-    var avgBreadth=null;
-    var bs=[];
-    if(kpb.advanceDeclineRatio!=null)bs.push(Number(kpb.advanceDeclineRatio));
-    if(kdb.advanceDeclineRatio!=null)bs.push(Number(kdb.advanceDeclineRatio));
-    if(bs.length)avgBreadth=bs.reduce(function(a,b){return a+b;},0)/bs.length*100;
-
+    var kpb=kp&&kp.breadth||{},kdb=kd&&kd.breadth||{},kdf=kd&&kd.flow||{};
+    var bs=[];if(kpb.advanceDeclineRatio!=null)bs.push(Number(kpb.advanceDeclineRatio));if(kdb.advanceDeclineRatio!=null)bs.push(Number(kdb.advanceDeclineRatio));
+    var avgBreadth=bs.length?bs.reduce(function(a,b){return a+b;},0)/bs.length*100:null;
     if(typeof shocked==='function'&&!shocked()){
-      if(NEL.eq_fin){
-        if(NEL.eq_fin.v&&avgBreadth!=null)NEL.eq_fin.v.textContent=Math.round(avgBreadth)+'%';
-        if(NEL.eq_fin.s)NEL.eq_fin.s.textContent='KOSPI·KOSDAQ 상승비중';
-      }
-      if(NEL.eq_val){
-        if(NEL.eq_val.v&&rel.kosdaqMinusKospiPctPoint!=null)NEL.eq_val.v.textContent=signed(rel.kosdaqMinusKospiPctPoint,2)+'%p';
-        if(NEL.eq_val.s)NEL.eq_val.s.textContent='KOSDAQ vs KOSPI 상대강도';
-      }
+      if(NEL.eq_fin){if(NEL.eq_fin.v&&avgBreadth!=null)NEL.eq_fin.v.textContent=Math.round(avgBreadth)+'%';if(NEL.eq_fin.s)NEL.eq_fin.s.textContent='KOSPI·KOSDAQ 상승비중';}
+      if(NEL.eq_val){if(NEL.eq_val.v&&rel.kosdaqMinusKospiPctPoint!=null)NEL.eq_val.v.textContent=signed(rel.kosdaqMinusKospiPctPoint,2)+'%p';if(NEL.eq_val.s)NEL.eq_val.s.textContent='KOSDAQ vs KOSPI 상대강도';}
       if(NEL.eq_ipo&&NEL.eq_ipo.s)NEL.eq_ipo.s.textContent='외 '+flow(kdf.foreign)+' · 기관 '+flow(kdf.institution);
       if(typeof si!=='undefined'&&si===4&&NEL.sig_equity){
         NEL.sig_equity.v.textContent=p.regime||'NEUTRAL';
         var kr=kp&&kp.pulse?kp.pulse.regime:'—',qr=kd&&kd.pulse?kd.pulse.regime:'—';
-        NEL.sig_equity.s.textContent='KOSPI '+kr+' · KOSDAQ '+qr;
-        NEL.sig_equity.st.textContent='LIVE + STRUCT';
+        NEL.sig_equity.s.textContent='KOSPI '+kr+' · KOSDAQ '+qr;NEL.sig_equity.st.textContent='LIVE + STRUCT';
         if(NEL.sig_equity.bf&&p.score!=null)NEL.sig_equity.bf.setAttribute('width',(TW-20)*Number(p.score)/100);
-        var bf3=document.getElementById('bf3');
-        if(bf3){
-          var ipo=(window.VALKYRIE_YC_EQUITY&&window.VALKYRIE_YC_EQUITY.ipo&&window.VALKYRIE_YC_EQUITY.ipo.signal)||'SELECTIVE';
-          bf3.textContent='주식 '+(p.regime||'NEUTRAL')+' · '+(rel.regime||'BALANCED')+' · IPO '+ipo.split(' · ')[0];
-        }
+        var bf3=document.getElementById('bf3');if(bf3){var ipo=(window.VALKYRIE_YC_EQUITY&&window.VALKYRIE_YC_EQUITY.ipo&&window.VALKYRIE_YC_EQUITY.ipo.signal)||'SELECTIVE';bf3.textContent='주식 '+(p.regime||'NEUTRAL')+' · '+(rel.regime||'BALANCED')+' · IPO '+ipo.split(' · ')[0];}
       }
     }
-    var fd=document.getElementById('fd');
-    if(fd){
-      var src=d.sources||{},tv=src.tradingViewScanner?'TV':'TV×',aik=src.aikToday?'DART':'DART×';
-      fd.textContent=hhmm(d.fetchedAt)+' KOREA EQUITY FEED OK · NAVER/'+tv+'/'+aik;
-    }
+    var fd=document.getElementById('fd');if(fd){var src=d.sources||{},tv=src.tradingViewScanner?'TV':'TV×',aik=src.aikToday?'DART':'DART×';fd.textContent=hhmm(stamp(d))+' GITHUB SNAPSHOT · NAVER/'+tv+'/'+aik;}
   }
 
   function enhanceEquity(){
@@ -177,24 +161,19 @@
   }
 
   async function refresh(force){
-    if(!force&&Date.now()-LIVE.lastFetch<30000)return;
-    LIVE.status='loading';LIVE.error=null;
-    if(typeof curTab!=='undefined'&&curTab==='EQUITY')enhanceEquity();
+    if(!force&&Date.now()-LIVE.lastFetch<60000)return;
+    LIVE.status='loading';LIVE.error=null;if(typeof curTab!=='undefined'&&curTab==='EQUITY')enhanceEquity();
     try{
-      var response=await fetch(ENDPOINT,{cache:'no-store',headers:{accept:'application/json'}});
+      var response=await fetch(ENDPOINT+'?t='+Date.now(),{cache:'no-store',headers:{accept:'application/json'}});
       if(!response.ok)throw new Error('HTTP '+response.status);
-      var data=await response.json();
-      if(!data||!data.ok)throw new Error(data&&data.error?data.error:'invalid payload');
+      var data=await response.json();if(!data||!data.ok)throw new Error(data&&data.error?data.error:'invalid payload');
       LIVE.data=data;LIVE.status='ready';LIVE.lastFetch=Date.now();
     }catch(err){LIVE.status='error';LIVE.error=String(err&&err.message||err);LIVE.lastFetch=Date.now();}
     enhanceEquity();patchNodes();
   }
 
   var originalPaneRender=window.paneRender;
-  if(typeof originalPaneRender==='function'){
-    window.paneRender=function(){originalPaneRender.apply(this,arguments);enhanceEquity();};
-  }
-
+  if(typeof originalPaneRender==='function'){window.paneRender=function(){originalPaneRender.apply(this,arguments);enhanceEquity();};}
   document.addEventListener('visibilitychange',function(){if(!document.hidden)refresh(true);});
   window.addEventListener('focus',function(){refresh(false);});
   LIVE.timer=setInterval(function(){if(!document.hidden)refresh(false);},POLL_MS);
