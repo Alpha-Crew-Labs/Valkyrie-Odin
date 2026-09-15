@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<!-- VALKYRIE v2.5 Pages build · OSIRIS-lite HUD polish · no external runtime dependency -->
+<!-- VALKYRIE v2.5 Pages build · restored DOM contract · no external runtime dependency -->
 <div class="shell" id="app">
 
   <div class="hd">
@@ -78,33 +78,52 @@
   <div class="cmd">
     <span class="p">&gt;</span>
     <input id="ci" placeholder="VALKYRIE COMMAND — 시스템에 질의하십시오" autocomplete="off">
-    <div class="chips"><button data-q="채권 포지션">채권 포지션</button><button data-q="금리 경로">금리 경로</button><button data-q="IPO 청약">IPO 청약</button></div>
+    <span class="chip" data-q="지금 채권 포지션 어떻게 가져가야 해?" data-n="sig_rates">채권 포지션</span>
+    <span class="chip" data-q="금리 인하 경로는 어떻게 보고 있어?" data-n="sig_macro">금리 경로</span>
+    <span class="chip" data-q="이번 코스닥 IPO 청약 들어가도 돼?" data-n="sig_equity">IPO 청약</span>
   </div>
 
-  <div class="wk">
-    <div class="tabs">
-      <button class="tab on" data-tab="macro">MACRO <span>정희강</span></button>
-      <button class="tab" data-tab="rates">RATES <span>정훈</span></button>
-      <button class="tab" data-tab="equity">EQUITY <span>김유찬</span></button>
+  <div class="tabs">
+    <div class="tab" data-t="MACRO"><div class="n">MACRO</div><div class="o">정희강</div></div>
+    <div class="tab a" data-t="RATES"><div class="n">RATES</div><div class="o">정훈</div></div>
+    <div class="tab" data-t="EQUITY"><div class="n">EQUITY</div><div class="o">김유찬</div></div>
+    <div style="flex:1"></div>
+    <div style="padding:7px 11px" class="ml2">상단 노드 선택 시 해당 도메인 워크스페이스로 자동 전환</div>
+  </div>
+  <div id="pane" class="pane in"></div>
+
+  <div class="ft">
+    <button id="rp" class="pri">REPLAY ▶</button>
+    <div class="tl"><div class="ax"></div><div id="ticks"></div></div>
+    <div style="text-align:right">
+      <div class="ml2">SNAPSHOT</div>
+      <div class="num" id="snapL" style="font-size:12px">2026-09-30</div>
     </div>
-    <div class="pane" id="pane"></div>
   </div>
 
-  <div class="tl">
-    <button id="rew">◀ REPLAY</button>
-    <div class="track" id="trk"></div>
-    <div class="tlmeta"><span class="ml2" id="tld">LIVE</span><span class="num" id="tlv">CURRENT</span></div>
-  </div>
-</div>
-
-<div class="boot" id="boot">
-  <div class="bootInner">
-    <div class="bootBrand">RAVENS</div>
-    <div class="bootTitle">VALKYRIE · MARKET INTELLIGENCE SYSTEM</div>
-    <div class="bootRows" id="bootRows"></div>
+  <div id="boot">
+    <div class="bt" id="bt1">RAVENS</div>
+    <div class="bs" id="bt2">VALKYRIE · MARKET INTELLIGENCE SYSTEM</div>
+    <div style="margin-top:14px">
+      <div class="bl" id="bl0">INITIALIZING ONTOLOGY <b>OK</b></div>
+      <div class="bl" id="bl1">LOADING 16 OBJECTS <b>OK</b></div>
+      <div class="bl" id="bl2">LINKING 22 RELATIONS <b>OK</b></div>
+      <div class="bl" id="bl3">MOUNTING 5 SNAPSHOTS <b>OK</b></div>
+      <div class="bl" id="bl4">OPENING FLOW CHANNELS <b>OK</b></div>
+      <div class="bl" id="bl5">SYSTEM READY <b>▪</b></div>
+    </div>
+    <div id="bootbar"><i id="bbi"></i></div>
     <button id="skip">SKIP INTRO</button>
   </div>
 </div>
+
+<div class="sr"><table><caption>인과 체인 노드 값 (2026-09-30 스냅샷)</caption><tbody>
+<tr><td>KR GDP 나우캐스팅</td><td>2.18%</td></tr><tr><td>US CPI</td><td>2.6%</td></tr>
+<tr><td>BOK 기준금리</td><td>2.25%</td></tr><tr><td>국고 3Y</td><td>2.62%</td></tr>
+<tr><td>2s10s 커브</td><td>+33bp</td></tr><tr><td>크레딧 AA- 3Y</td><td>52bp</td></tr>
+<tr><td>KOSDAQ</td><td>905p</td></tr><tr><td>CB 리픽싱 하단 이탈</td><td>12사</td></tr>
+<tr><td>IPO 수요예측 경쟁률</td><td>968:1</td></tr>
+</tbody></table></div>
 
 <script src="./data.js"></script>
 <script src="./core.js"></script>
