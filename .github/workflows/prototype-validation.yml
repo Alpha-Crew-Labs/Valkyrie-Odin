@@ -47,11 +47,9 @@ jobs:
           node --check prototype/valkyrie-v2.5/core.js
           node --check prototype/valkyrie-v2.5/view.js
           node --check prototype/valkyrie-v2.5/interaction.js
-          node --check prototype/valkyrie-v3/ontology.js
-          node --check prototype/valkyrie-v3/localize-v32.js
-          node --check prototype/valkyrie-v3/app.js
-          node --check prototype/valkyrie-v3/motion-v31.js
-          node --check prototype/valkyrie-v3/motion-v32.js
+          node --check prototype/valkyrie-v3/data-core.js
+          node --check prototype/valkyrie-v3/view.js
+          node --check prototype/valkyrie-v3/interaction.js
 
       - name: Validate v2 reference invariants
         run: node scripts/validate_prototype.mjs
@@ -59,5 +57,5 @@ jobs:
       - name: Validate v2.5 release invariants
         run: node scripts/validate_v25.mjs
 
-      - name: Validate v3.2 ontology, localization, and motion invariants
+      - name: Validate v3 rebased v2.6 release invariants
         run: node scripts/validate_v3.mjs
