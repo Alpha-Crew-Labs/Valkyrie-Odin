@@ -27,21 +27,21 @@ function signature(){
     lit(['mac_gdp','mac_uscpi','mac_krcpi','mac_fed','mac_bok','sig_macro'],170);
   },1500);
   T(function(){
-    banner('RATES TRANSMISSION','UST → KTB → CURVE');
+    banner('RATES TRANSMISSION','UST → KTB → CURVE · CREDIT');
     tab('RATES');
     lit(['rat_ust','rat_ktb','rat_curve','rat_credit','sig_rates'],170);
   },3000);
   T(function(){
-    banner('CROSS-ASSET TRANSMISSION','CREDIT → CB FUNDING · PUT RISK');
+    banner('EQUITY MARKET TRANSMISSION','KOSPI · KOSDAQ → FUNDING · VALUATION');
     tab('EQUITY');
     lit(['eq_fin','eq_val','eq_cb'],170);
   },4600);
   T(function(){
-    banner('EQUITY DECISION','IPO DEMAND → SELECTIVITY');
+    banner('KOSDAQ RISK CAPITAL','IPO · CB → EQUITY SELECTIVITY');
     lit(['eq_ipo','sig_equity'],170);
   },5900);
   T(function(){
-    banner('SHARED DURATION LOGIC','장기채 = 적자 코스닥 · 동일 듀레이션 논리');
+    banner('SHARED DURATION LOGIC','장기채 = 성장주·IPO · 동일 할인율 논리');
     SHL.classList.add('on');SHT.classList.add('on');SHT2.classList.add('on');
   },7100);
   T(function(){
@@ -82,13 +82,15 @@ function shock(k){
 }
 var CQ={
  '채권':['rat_ust','rat_ktb','rat_curve','rat_credit','sig_rates'],
+ 'equity':['eq_fin','eq_val','eq_cb','eq_ipo','sig_equity'],
  'ipo':['eq_fin','eq_val','eq_ipo','sig_equity'],
  'cb':['rat_credit','eq_fin','eq_cb','sig_equity']
 };
 function command(q){
   if(busy)return;
   var ids,tb;
-  if(/ipo|청약/i.test(q)){ids=CQ.ipo;tb='EQUITY';}
+  if(/kospi|kosdaq|주식|시장|equity/i.test(q)){ids=CQ.equity;tb='EQUITY';}
+  else if(/ipo|청약/i.test(q)){ids=CQ.ipo;tb='EQUITY';}
   else if(/cb|리픽싱|전환/i.test(q)){ids=CQ.cb;tb='EQUITY';}
   else if(/50bp|10년물|ust/i.test(q)){shock('ust');$('cin').value='';return;}
   else{ids=CQ['채권'];tb='RATES';}
@@ -131,9 +133,10 @@ $('rp').addEventListener('click',replay);
 
 var FEED=['ECOS SYNC OK','FRED SYNC OK','TAYLOR MODEL UPDATED','DART FILING INGESTED','ONTOLOGY INTEGRITY 22/22','FLOW CHANNELS 22 OPEN','0 CRITICAL ALERTS'],fi=0;
 setInterval(function(){
+  if(window.VALKYRIE_LIVE_EQUITY&&window.VALKYRIE_LIVE_EQUITY.status==='ready')return;
   fi=(fi+1)%FEED.length;
   var t=new Date();
-  $('fd').textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+':'+String(t.getSeconds()).padStart(2,'0')+'  '+FEED[fi]+' · SIMULATED';
+  $('fd').textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+':'+String(t.getSeconds()).padStart(2,'0')+'  '+FEED[fi]+' · DEMO';
 },4300);
 setInterval(function(){
   if(si!==4)return;
