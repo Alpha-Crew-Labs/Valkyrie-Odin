@@ -4,9 +4,44 @@
 >
 > 시장 데이터를 연결해 판단으로 바꾸고, 그 판단의 결과까지 기억하는 **Market Intelligence Operating System**.
 
-VALKYRIE는 매크로·금리·채권·주식/IPO 리서치를 하나의 온톨로지와 의사결정 흐름으로 연결하는 해커톤 프로젝트입니다. 여러 대시보드를 모아 놓는 대신, **데이터 → 근거 → 시그널 → 액션 → 사후성과**가 하나의 시스템에서 이어지는 경험을 지향합니다.
+[![Public Repo Guard](https://github.com/Alpha-Crew-Labs/Valkyrie-Odin/actions/workflows/public-repo-guard.yml/badge.svg)](https://github.com/Alpha-Crew-Labs/Valkyrie-Odin/actions/workflows/public-repo-guard.yml)
+[![Prototype Validation](https://github.com/Alpha-Crew-Labs/Valkyrie-Odin/actions/workflows/prototype-validation.yml/badge.svg)](https://github.com/Alpha-Crew-Labs/Valkyrie-Odin/actions/workflows/prototype-validation.yml)
 
-## Product Loop
+VALKYRIE는 매크로·금리·채권·주식/IPO 리서치를 하나의 온톨로지와 의사결정 흐름으로 연결하는 해커톤 프로젝트입니다. 단순히 여러 대시보드를 모아 놓는 대신, **데이터 → 근거 → 시그널 → 액션 → 사후성과**가 한 화면에서 이어지는 경험을 지향합니다.
+
+## Current Build
+
+현재 v2 인터랙션 레퍼런스는 저장소 안에서 직접 실행할 수 있습니다.
+
+```bash
+git clone https://github.com/Alpha-Crew-Labs/Valkyrie-Odin.git
+cd Valkyrie-Odin/prototype/valkyrie-v2
+python -m http.server 8080
+```
+
+브라우저에서:
+
+```text
+http://localhost:8080
+```
+
+Reference build:
+
+- 16 Objects / 22 Relations
+- 5 deterministic Replay snapshots
+- Boot / Intelligence Chain / Inspector / 3 Domain Workspaces
+- RUN SIGNATURE / Command / Replay
+- Ambient Canvas field / causal propagation / target acquisition
+- Decision Log / benchmark-relative post-performance
+- local-only demo path with no required external data API
+
+자세한 실행/파일 책임은 [`prototype/valkyrie-v2/README.md`](./prototype/valkyrie-v2/README.md)를 참고하세요.
+
+## Why VALKYRIE
+
+기존 리서치 워크플로에서는 매크로, 채권, 주식 데이터와 판단이 서로 다른 파일·도구·보고서에 흩어져 있어 전체 시장의 연결관계를 빠르게 파악하기 어렵습니다.
+
+VALKYRIE는 다음 흐름을 하나의 시스템으로 통합합니다.
 
 ```text
 SEE → CONNECT → DECIDE → ACT → LEARN
@@ -24,21 +59,7 @@ Decision Log / Replay
 Briefing / Communication
 ```
 
-핵심 컨셉은 **“하나의 금리 충격이 채권과 주식에서 같은 듀레이션 논리로 어떻게 전파되는가”**를 시각적으로 보여주는 것입니다.
-
-## Current Status
-
-Repository foundation and product operating documents are in place. The next S0 task is importing the working VALKYRIE v2 HTML prototype into the repository and evolving it without breaking the current demo behavior.
-
-Current priorities:
-
-1. **Import v2 prototype / stable app shell** — [Issue #1](../../issues/1)
-2. **Motion System v3 / always-alive UI** — [Issue #2](../../issues/2)
-3. **Quant Stress as ontology action** — [Issue #3](../../issues/3)
-4. **Replay + Decision Log** — [Issue #4](../../issues/4)
-5. **Demo hardening / fallback** — [Issue #5](../../issues/5)
-
-See [`docs/STATUS.md`](./docs/STATUS.md) and [`docs/ROADMAP.md`](./docs/ROADMAP.md).
+핵심 컨셉은 **"하나의 금리 충격이 채권과 주식에서 같은 듀레이션 논리로 어떻게 전파되는가"**를 시각적으로 보여주는 것입니다.
 
 ## Core Experience
 
@@ -52,37 +73,42 @@ MACRO → RATES → EQUITY의 고정 인과 체인에서 시장 충격이 어떤
 - 관련 Domain Workspace 자동 전환
 - Cross-asset `SHARED DURATION LOGIC`
 
-현재 v2 기준 온톨로지는 [`docs/ONTOLOGY.md`](./docs/ONTOLOGY.md)에 기록합니다.
-
 ### 2. Cinematic HUD / Motion System
 
 VALKYRIE는 정적인 금융 대시보드가 아니라 **항상 살아 움직이는 Intelligence System**을 목표로 합니다.
 
 - Ambient data field
 - Causal edge flow / signal propagation
-- Cursor telemetry / node acquisition
+- Node acquisition / targeting HUD
 - Rolling market values
 - Signal lock animation
-- Temporal replay
-- System activity / live heartbeat
+- Temporal Replay
+- System activity / live telemetry
 
-Motion은 장식이 아니라 시스템 상태를 설명해야 합니다. 상세 지침은 [`docs/MOTION_SYSTEM.md`](./docs/MOTION_SYSTEM.md)를 참고합니다.
+Motion은 장식이 아니라 시스템 의미를 표현합니다.
+
+```text
+Spark          = information transmission
+Sweep          = state / time transition
+Bracket        = selection / acquisition
+Rolling number = data change
+Pulse          = event / signal
+Dim            = out of current context
+```
 
 ### 3. Macro / Rates / Equity Workspaces
 
 | Domain | Owner | 주요 기능 |
 |---|---|---|
-| MACRO | 정희강 | CPI·정책금리 모델, Macro Clock, 시나리오·Stress |
+| MACRO | 정희강 | CPI·정책금리 모델, Macro regime, 시나리오 분석 |
 | RATES | 정훈 | Yield curve, duration signal, Decision Log, 사후성과 |
-| EQUITY | 김유찬 | IPO Market Report, CB financing/risk, IPO selectivity |
-
-세 영역은 독립 앱처럼 보이면 안 됩니다. 하나의 Object를 선택하면 **Ontology → Inspector → Workspace → Terminal Signal**이 함께 반응해야 합니다.
+| EQUITY | 김유찬 | IPO Market Report, CB risk / financing, IPO selectivity |
 
 ### 4. Replay & Decision Log
 
 과거 특정 시점의 시장 상태와 당시 판단을 다시 불러와 실제 이후 성과를 추적합니다.
 
-- Snapshot replay
+- Snapshot Replay
 - D+5 / D+20 / D+60 성과
 - Benchmark-relative performance
 - Conflict detection
@@ -105,22 +131,24 @@ Motion은 장식이 아니라 시스템 상태를 설명해야 합니다. 상세
 목표 구조:
 
 ```text
-Python Quant Logic
-      ↓
-Normalized JSON / API / Snapshot
-      ↓
-VALKYRIE Object State
-      ↓
-Ontology / Inspector / Workspace
-      ↓
-Signal / Action / Replay
+Quant Engine
+   ↓ normalized state / JSON
+VALKYRIE Canonical State
+   ↓
+Ontology / Evidence
+   ↓
+Scenario / Stress / Replay
+   ↓
+Cross-Asset Signal
+   ↓
+Action / Decision Log
 ```
 
-자세한 계약은 [`docs/QUANT_INTEGRATION.md`](./docs/QUANT_INTEGRATION.md)를 참고합니다.
+첫 번째 S0 Quant Action은 **Stress Test**입니다. Streamlit 화면을 iframe으로 붙이는 대신, Python 계산 결과가 기존 온톨로지와 Terminal Signal을 다시 resolve하도록 설계합니다.
 
-## Platform Direction
+## Platform Principle
 
-기능은 가능하면 새로운 독립 탭이 아니라 **Object Action**으로 연결합니다.
+새 기능은 가능하면 독립 탭으로 들어오지 않습니다.
 
 ```text
                     ┌─ INSPECT
@@ -138,91 +166,96 @@ OBJECT → ONTOLOGY ──┼─ STRESS
                    TRACK RECORD
 ```
 
-이 구조가 VALKYRIE를 Dashboard가 아니라 **Decision Platform**으로 만듭니다.
+하나의 Object를 선택하면 Graph → Inspector → Workspace → Signal이 같은 상태를 공유해야 합니다. 자세한 계약은 [`docs/STATE_MODEL.md`](./docs/STATE_MODEL.md)에 정의되어 있습니다.
 
 ## Repository Architecture
 
 ```text
 Valkyrie-Odin/
+├─ prototype/
+│  └─ valkyrie-v2/          # runnable behavior reference
 ├─ apps/
-│  └─ valkyrie-web/          # UI / ontology / interaction
-├─ quant-core/               # deterministic Python quant logic
-├─ quant-api/                # optional FastAPI adapter (future)
+│  └─ valkyrie-web/         # target Next.js / TypeScript UI
+├─ quant-core/              # Python quant logic
+├─ quant-api/               # optional API layer when needed
 ├─ data/
-│  ├─ sample/                # public-safe demo/sample data only
-│  └─ snapshots/             # replay snapshots (future)
-├─ docs/
-│  ├─ README.md
-│  ├─ PRODUCT_SPEC.md
-│  ├─ ARCHITECTURE.md
-│  ├─ ONTOLOGY.md
-│  ├─ QUANT_INTEGRATION.md
-│  ├─ MOTION_SYSTEM.md
-│  ├─ DEMO_PLAYBOOK.md
-│  ├─ ROADMAP.md
-│  ├─ STATUS.md
-│  ├─ WORKSTREAMS.md
-│  ├─ DECISIONS.md
-│  └─ DATA_POLICY.md
-├─ CLAUDE.md                 # AI coding-agent working contract
-├─ CONTRIBUTING.md
-├─ SECURITY.md
+│  ├─ sample/               # public-safe demo/sample data only
+│  └─ snapshots/            # future normalized replay snapshots
+├─ scripts/                 # CI validation / public-repo guard
+├─ docs/                    # product / ontology / state / demo specs
 └─ README.md
 ```
 
 ### Target stack
 
 - **Frontend:** Next.js, TypeScript, SVG, Canvas
-- **Motion:** CSS / Framer Motion / GSAP as needed
-- **Charts:** Chart.js / Recharts / Plotly where appropriate
+- **Motion:** CSS / Framer Motion / GSAP where justified
+- **Charts:** Recharts / Plotly / targeted Canvas/SVG visualization
 - **Quant:** Python
-- **API:** FastAPI when runtime integration is justified
+- **API:** FastAPI only where a service boundary is useful
 - **Deployment:** Vercel / Netlify / approved internal hosting
-
-The current single-file HTML prototype remains a valid reference implementation. **Do not rewrite a working prototype merely to satisfy framework preference.**
 
 ## Development Workflow
 
+팀원이 동시에 작업할 수 있도록 기능별 브랜치를 사용합니다.
+
 ```text
 main
-└─ feat/<feature>
+├─ feat/macro
+├─ feat/rates
+├─ feat/equity
+└─ feat/platform
 ```
 
-Recommended examples:
+권장 흐름:
 
-```text
-feat/platform-shell
-feat/macro-clock
-feat/rates-curve
-feat/equity-ipo
-feat/quant-stress
-feat/replay-motion
-```
+1. `main` 최신화
+2. 자신의 feature branch 최신화
+3. 작은 단위로 commit
+4. Pull Request 생성
+5. CI 통과 확인
+6. 팀원 1명 이상 확인
+7. `Squash and merge`
 
-Flow:
+자세한 협업 규칙은 [`CONTRIBUTING.md`](./CONTRIBUTING.md)를 참고하세요.
 
-1. update from `main`
-2. create `feat/<feature>` or `fix/<feature>`
-3. commit in small units
-4. open Pull Request
-5. review financial-logic changes explicitly
-6. prefer Squash and Merge
+## Automated Quality Gates
 
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`docs/WORKSTREAMS.md`](./docs/WORKSTREAMS.md).
+### Public Repo Guard
 
-## AI-assisted Development
+Public 저장소에 위험한 경로/파일이 추적되는 실수를 줄이기 위한 체크입니다.
 
-Claude/Codex/ChatGPT 등 AI coding agent를 사용할 때는 먼저 [`CLAUDE.md`](./CLAUDE.md)를 읽도록 합니다.
+### Prototype Validation
 
-핵심 원칙:
+zero-dependency validator가 다음을 확인합니다.
 
-- 일반 SaaS Dashboard로 재설계하지 않기
-- 고정 금융 온톨로지 보존
-- Quant 계산과 LLM 설명 역할 분리
-- Motion에 의미 부여
-- Node / Inspector / Workspace / Signal 상태 동기화
-- Demo fallback 보존
-- Public repo 데이터 정책 준수
+- prototype 필수 파일 존재
+- JavaScript syntax
+- local file reference / CSP
+- 16 unique object IDs
+- 22 unique valid relations
+- edge source/target integrity
+- 3 terminal signals
+- object/signal metadata completeness
+- 5 snapshots completeness
+- signal confidence 0–100
+
+해커톤 데모 합격 기준은 [`docs/DEMO_QA.md`](./docs/DEMO_QA.md)를 따릅니다.
+
+## Documentation
+
+전체 문서 색인은 [`docs/README.md`](./docs/README.md)에 있습니다.
+
+특히 먼저 볼 문서:
+
+- [`docs/PRODUCT_SPEC.md`](./docs/PRODUCT_SPEC.md) — 제품 정의 / MVP
+- [`docs/STATUS.md`](./docs/STATUS.md) — 현재 상태
+- [`docs/ONTOLOGY.md`](./docs/ONTOLOGY.md) — 16 objects / 22 relations
+- [`docs/STATE_MODEL.md`](./docs/STATE_MODEL.md) — canonical state / action contract
+- [`docs/MOTION_SYSTEM.md`](./docs/MOTION_SYSTEM.md) — always-alive motion grammar
+- [`docs/QUANT_INTEGRATION.md`](./docs/QUANT_INTEGRATION.md) — Quant Engine 통합
+- [`docs/DEMO_PLAYBOOK.md`](./docs/DEMO_PLAYBOOK.md) — 발표 흐름
+- [`docs/DEMO_QA.md`](./docs/DEMO_QA.md) — release gate
 
 ## Demo Principles
 
@@ -233,14 +266,11 @@ Claude/Codex/ChatGPT 등 AI coding agent를 사용할 때는 먼저 [`CLAUDE.md`
 - Quant 계산과 LLM 생성 결과를 구분
 - 준비된 Demo command는 deterministic하게 동작 가능하도록 구성
 - 실제 라이브 데이터가 아닌 경우 `SAMPLE`, `DEMO`, `REVISION-ADJUSTED` 등을 명확히 표시
-
-60초 Demo Flow와 fallback은 [`docs/DEMO_PLAYBOOK.md`](./docs/DEMO_PLAYBOOK.md)에 관리합니다.
+- `RESET`은 언제나 알려진 상태로 복귀해야 함
 
 ## Data & Security — 중요
 
 이 저장소는 **Public Repository**입니다.
-
-Public은 “주소를 아는 사람만 볼 수 있음”을 의미하지 않습니다. 누구나 검색·clone·fork할 수 있습니다.
 
 따라서 아래 항목은 **절대 commit하지 않습니다.**
 
@@ -248,28 +278,12 @@ Public은 “주소를 아는 사람만 볼 수 있음”을 의미하지 않습
 - 고객정보 / 개인정보 / 계정정보
 - 내부 보고서 원문 또는 미공개 리서치
 - API Key / Token / Password / Secret
-- 비공개 사내 시스템 URL·접속정보
+- 사내 시스템 URL·접속정보 등 비공개 인프라 정보
 - 라이선스상 외부 공개가 금지된 데이터
 
 Public repo에는 **공개 데이터, 익명화된 sample data, synthetic/demo data만** 저장합니다.
 
-사내 원천데이터가 필요하면 코드와 분리하여 승인된 private/internal 환경에서 관리합니다.
-
-See [`docs/DATA_POLICY.md`](./docs/DATA_POLICY.md) and [`SECURITY.md`](./SECURITY.md).
-
-## Documentation
-
-전체 문서 인덱스: **[`docs/README.md`](./docs/README.md)**
-
-Recommended reading:
-
-1. [`CLAUDE.md`](./CLAUDE.md)
-2. [`docs/PRODUCT_SPEC.md`](./docs/PRODUCT_SPEC.md)
-3. [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md)
-4. [`docs/ONTOLOGY.md`](./docs/ONTOLOGY.md)
-5. [`docs/MOTION_SYSTEM.md`](./docs/MOTION_SYSTEM.md)
-6. [`docs/QUANT_INTEGRATION.md`](./docs/QUANT_INTEGRATION.md)
-7. [`docs/DEMO_PLAYBOOK.md`](./docs/DEMO_PLAYBOOK.md)
+사내 원천데이터가 필요하면 코드와 분리하여 승인된 내부 저장소 또는 사내 환경에서 관리하고, VALKYRIE에는 동일한 canonical state contract로 주입합니다. 자세한 기준은 [`docs/DATA_POLICY.md`](./docs/DATA_POLICY.md)를 참고하세요.
 
 ## Team RAVENS
 
@@ -277,15 +291,15 @@ Recommended reading:
 
 **VALKYRIE**는 RAVENS가 수집한 데이터와 리서치 시그널을 하나의 판단 체계로 통합해 ODIN에 전달하는 Research Intelligence System입니다.
 
-- **정희강** — Macro / Team Lead / Quant
-- **정훈** — Rates / Fixed Income
-- **김유찬** — Equity / IPO / Platform Integration
+- 정희강 — Macro / Team Lead
+- 정훈 — Rates / Fixed Income
+- 김유찬 — Equity / IPO / Integration
 
 ## Design Principle
 
 > **Always Alive · Always Watching · Always Connected · Always Ready to Decide**
 
-화려함은 장식에서 나오지 않습니다. **데이터가 이동하고, 상태가 변하고, 판단이 생성되는 과정**을 시각적으로 보여줄 때 미래적인 시스템처럼 보입니다.
+화려함은 장식에서 나오지 않습니다. 데이터가 이동하고, 상태가 변하고, 판단이 생성되는 과정을 시각적으로 보여줄 때 미래적인 시스템처럼 보입니다.
 
 ---
 
