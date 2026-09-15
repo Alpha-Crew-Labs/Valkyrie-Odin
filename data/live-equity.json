@@ -1,8 +1,0 @@
-{
-  "ok": false,
-  "source": "NAVER/KRX direct snapshot via GitHub Actions",
-  "fetchedAt": null,
-  "markets": {},
-  "pulse": {"regime": "NEUTRAL", "score": 50},
-  "message": "Awaiting first live-data snapshot"
-}
