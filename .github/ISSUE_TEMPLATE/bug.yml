@@ -1,0 +1,57 @@
+name: Bug / Demo Risk
+description: 기능 오류, 시각화 오류, 데이터 상태 불일치 또는 데모 리스크
+title: "[Bug] "
+labels: []
+body:
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - S0 — Demo blocker
+        - S1 — Core interaction broken
+        - S2 — Incorrect state / visual issue
+        - S3 — Polish
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptom
+    attributes:
+      label: What happened?
+      placeholder: 재현 가능한 증상을 적어주세요.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Open ...
+        2. Click ...
+        3. Run ...
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Chrome / viewport / branch / commit / deployment URL
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Impact check
+      options:
+        - label: RUN SIGNATURE에 영향
+        - label: REPLAY에 영향
+        - label: Node → Inspector → Workspace 동기화에 영향
+        - label: Quant/Scenario 계산에 영향
+        - label: 발표 fallback에도 영향
