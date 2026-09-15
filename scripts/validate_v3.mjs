@@ -74,7 +74,7 @@ assert(view.includes('정희강 · Quant')&&view.includes('정훈 · 국고3Y �
 assert(view.includes('적중률 지표는 사용하지 않습니다'),'Decision Log avoids hit-ratio framing');
 assert(view.includes('크레딧')&&view.includes('CB 조달 조건'),'rates-to-equity funding transmission is explained');
 assert(liveEquity.includes('LIVE MARKET · KOREA')&&liveEquity.includes('KOSPI')&&liveEquity.includes('KOSDAQ'),'live Equity surface covers both Korean markets');
-assert(liveEquity.includes('KOSDAQ - KOSPI')&&liveEquity.includes('RISK-CAPITAL LEADS'),'relative KOSDAQ-vs-KOSPI regime is rendered');
+assert(liveEquity.includes('KOSDAQ - KOSPI')&&liveEquity.includes('rel.regime'),'relative KOSDAQ-vs-KOSPI regime is rendered');
 assert(liveEquity.includes('EQUITY FUNDAMENTAL PULSE')&&liveEquity.includes('DART EARNINGS BREADTH'),'real public fundamental research layer is rendered');
 assert(liveEquity.includes('TRADINGVIEW SCANNER')&&liveEquity.includes('TV SCANNER'),'TradingView market scanner evidence is rendered');
 assert(liveEquity.includes('DART EVENT PULSE'),'intraday DART event pulse is rendered');
