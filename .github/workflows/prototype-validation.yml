@@ -4,14 +4,18 @@ on:
   pull_request:
     paths:
       - 'prototype/valkyrie-v2/**'
+      - 'prototype/valkyrie-v2.5/**'
       - 'scripts/validate_prototype.mjs'
+      - 'scripts/validate_v25.mjs'
       - '.github/workflows/prototype-validation.yml'
   push:
     branches:
       - main
     paths:
       - 'prototype/valkyrie-v2/**'
+      - 'prototype/valkyrie-v2.5/**'
       - 'scripts/validate_prototype.mjs'
+      - 'scripts/validate_v25.mjs'
       - '.github/workflows/prototype-validation.yml'
 
 permissions:
@@ -34,6 +38,13 @@ jobs:
           node --check prototype/valkyrie-v2/data.js
           node --check prototype/valkyrie-v2/system.js
           node --check prototype/valkyrie-v2/runtime.js
+          node --check prototype/valkyrie-v2.5/data.js
+          node --check prototype/valkyrie-v2.5/core.js
+          node --check prototype/valkyrie-v2.5/view.js
+          node --check prototype/valkyrie-v2.5/interaction.js
 
-      - name: Validate ontology and snapshot invariants
+      - name: Validate v2 reference invariants
         run: node scripts/validate_prototype.mjs
+
+      - name: Validate v2.5 release invariants
+        run: node scripts/validate_v25.mjs
