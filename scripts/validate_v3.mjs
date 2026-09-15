@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const root=process.cwd();
 const dir=path.join(root,'prototype','valkyrie-v3');
-const required=['index.html','styles.css','data-core.js','view.js','interaction.js','README.md'];
+const required=['index.html','styles.css','mobile.css','data-core.js','view.js','interaction.js','quant-hk.js','quant-hk.css','equity-yc.js','equity-yc.css','live-equity.js','live-equity.css','README.md'];
 let failed=false;
 const assert=(cond,msg)=>{if(cond)console.log(`✓ ${msg}`);else{console.error(`✗ ${msg}`);failed=true;}};
 
@@ -15,13 +15,26 @@ const css=fs.readFileSync(path.join(dir,'styles.css'),'utf8');
 const data=fs.readFileSync(path.join(dir,'data-core.js'),'utf8');
 const view=fs.readFileSync(path.join(dir,'view.js'),'utf8');
 const interaction=fs.readFileSync(path.join(dir,'interaction.js'),'utf8');
+const hkQuant=fs.readFileSync(path.join(dir,'quant-hk.js'),'utf8');
+const ycEquity=fs.readFileSync(path.join(dir,'equity-yc.js'),'utf8');
+const liveEquity=fs.readFileSync(path.join(dir,'live-equity.js'),'utf8');
 
+const approvedLiveOrigin='https://ipo-market-report.vercel.app';
+const htmlWithoutApprovedOrigin=html.split(approvedLiveOrigin).join('');
 assert(html.includes('VALKYRIE v3 — Research Intelligence System · v2.6 Baseline'),'approved v2.6 baseline title is present');
 assert(html.includes("script-src 'self'"),'CSP restricts scripts to local assets');
 assert(html.includes("style-src 'self'"),'CSP restricts styles to local assets');
-assert(!/https?:\/\//i.test(html),'v3 shell has no external HTTP runtime dependency');
+assert(html.includes(`connect-src ${approvedLiveOrigin}`),'CSP allows the approved live-equity API origin');
+assert(!/https?:\/\//i.test(htmlWithoutApprovedOrigin),'v3 shell has no unapproved external HTTP runtime dependency');
 assert(html.includes('./styles.css?v=2601'),'baseline stylesheet is versioned');
 for(const asset of ['data-core.js','view.js','interaction.js'])assert(html.includes(`./${asset}?v=2601`),`${asset} is wired and versioned`);
+assert(html.includes('./quant-hk.js?v=2603')&&html.includes('./quant-hk.css?v=2603'),'HK Quant integration is wired');
+assert(html.includes('./equity-yc.js?v=2604')&&html.includes('./equity-yc.css?v=2604'),'YC structural Equity integration is wired');
+assert(html.includes('./live-equity.js?v=2605')&&html.includes('./live-equity.css?v=2605'),'live Equity integration is wired');
+assert(liveEquity.includes(`${approvedLiveOrigin}/api/equity-pulse`),'live Equity integration uses only the approved proxy endpoint');
+assert(!/https?:\/\//i.test(liveEquity.split(`${approvedLiveOrigin}/api/equity-pulse`).join('')),'live Equity runtime has no second external endpoint');
+assert(hkQuant.includes('Quant Macro Terminal Pro'),'HK Quant snapshot integration is preserved');
+assert(ycEquity.includes('IPO Market Report')&&ycEquity.includes('CB Zero Finder'),'YC IPO/CB structural integration is preserved');
 assert(!html.includes('ontology.js')&&!html.includes('motion-v31')&&!html.includes('motion-v32')&&!html.includes('localize-v32'),'retired v3.2 runtime assets are not loaded');
 
 const ndBlock=(data.match(/var ND=\{([\s\S]*?)\n\};\nvar EG=/)||[])[1]||'';
@@ -54,6 +67,10 @@ for(const text of ['DECISION LOG','IPO MARKET REPORT','CB ZERO FINDER','DATA VIN
 assert(view.includes('정희강 · Quant')&&view.includes('정훈 · 국고3Y 대비')&&view.includes('김유찬 · 운영중'),'team-domain ownership is explicit');
 assert(view.includes('적중률 지표는 사용하지 않습니다'),'Decision Log avoids hit-ratio framing');
 assert(view.includes('크레딧')&&view.includes('CB 조달 조건'),'rates-to-equity funding transmission is explained');
+assert(liveEquity.includes('LIVE MARKET PULSE')&&liveEquity.includes('RISK-ON')&&liveEquity.includes('RISK-OFF'),'live Equity pulse exposes market-regime states');
+assert(liveEquity.includes('외국인')&&liveEquity.includes('기관')&&liveEquity.includes('상승 / 하락'),'live Equity pulse exposes flow and breadth evidence');
+assert(liveEquity.includes("POLL_MS=70000"),'live Equity polling cadence is explicit');
+assert(liveEquity.includes('DEGRADED')&&liveEquity.includes('구조적 시그널은 유지'),'live Equity feed has a graceful structural-signal fallback');
 
 const htmlIds=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
 const runtime=data+'\n'+view+'\n'+interaction;
