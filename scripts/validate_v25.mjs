@@ -29,17 +29,19 @@ assert(index.includes("script-src 'self'"), "v2.5 CSP restricts scripts to 'self
 assert(index.includes("style-src 'self' 'unsafe-inline'"), "v2.5 CSP allows the local stylesheet");
 assert(index.includes('Motion System v2.5'), 'v2.5 title marker is present');
 
-// Static DOM contract. These IDs/classes are consumed directly by the split runtime.
-// This prevents a visually valid HTML refactor from silently breaking JS initialization.
-const requiredIds = [
-  'app','ms','msT','msN','cf','asof','mode','modeT','sig','rst',
-  'cw','df','sweep','phb','hud','hud2','afd','chain','gLane','gEdge','gNode','gHud',
-  'iv','ic1','io','is','iaux','iev','iview','icf','icfb','ivin','iact','ci','pane',
-  'rp','ticks','snapL','boot','bt1','bt2','bl0','bl1','bl2','bl3','bl4','bl5','bootbar','bbi','skip'
-];
-for (const id of requiredIds) {
-  assert(index.includes(`id="${id}"`), `DOM contract contains #${id}`);
+const htmlIds = new Set([...index.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+const runtimeFiles = ['core.js', 'view.js', 'interaction.js'];
+const runtimeStaticIds = new Set();
+for (const file of runtimeFiles) {
+  const src = fs.readFileSync(path.join(proto, file), 'utf8');
+  for (const m of src.matchAll(/getElementById\(["']([^"']+)["']\)/g)) {
+    runtimeStaticIds.add(m[1]);
+  }
 }
+for (const id of [...runtimeStaticIds].sort()) {
+  assert(htmlIds.has(id), `runtime DOM id exists in HTML: #${id}`);
+}
+
 assert(/class="[^"]*chip[^"]*"[^>]*data-q="[^"]+"[^>]*data-n="[^"]+"/.test(index),
   'command chips expose data-q and data-n');
 assert((index.match(/class="[^"]*tab[^"]*"[^>]*data-t="(?:MACRO|RATES|EQUITY)"/g) || []).length === 3,
