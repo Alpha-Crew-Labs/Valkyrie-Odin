@@ -27,14 +27,16 @@ assert(html.includes("style-src 'self'"),'CSP restricts styles to local assets')
 assert(html.includes(`connect-src ${approvedLiveOrigin}`),'CSP allows the approved live-equity API origin');
 assert(!/https?:\/\//i.test(htmlWithoutApprovedOrigin),'v3 shell has no unapproved external HTTP runtime dependency');
 assert(html.includes('./styles.css?v=2601'),'baseline stylesheet is versioned');
-for(const asset of ['data-core.js','view.js','interaction.js'])assert(html.includes(`./${asset}?v=2601`),`${asset} is wired and versioned`);
+for(const asset of ['data-core.js','view.js'])assert(html.includes(`./${asset}?v=2601`),`${asset} is wired and versioned`);
+assert(html.includes('./interaction.js?v=2606'),'interaction.js current integration build is wired');
 assert(html.includes('./quant-hk.js?v=2603')&&html.includes('./quant-hk.css?v=2603'),'HK Quant integration is wired');
-assert(html.includes('./equity-yc.js?v=2604')&&html.includes('./equity-yc.css?v=2604'),'YC structural Equity integration is wired');
-assert(html.includes('./live-equity.js?v=2605')&&html.includes('./live-equity.css?v=2605'),'live Equity integration is wired');
+assert(html.includes('./equity-yc.js?v=2606')&&html.includes('./equity-yc.css?v=2606'),'YC structural Equity integration is wired');
+assert(html.includes('./live-equity.js?v=2606')&&html.includes('./live-equity.css?v=2606'),'live Korean Equity integration is wired');
 assert(liveEquity.includes(`${approvedLiveOrigin}/api/equity-pulse`),'live Equity integration uses only the approved proxy endpoint');
 assert(!/https?:\/\//i.test(liveEquity.split(`${approvedLiveOrigin}/api/equity-pulse`).join('')),'live Equity runtime has no second external endpoint');
 assert(hkQuant.includes('Quant Macro Terminal Pro'),'HK Quant snapshot integration is preserved');
 assert(ycEquity.includes('IPO Market Report')&&ycEquity.includes('CB Zero Finder'),'YC IPO/CB structural integration is preserved');
+assert(ycEquity.includes('덕산넵코어스')&&ycEquity.includes('20260915000085'),'real current IPO DART focus is wired');
 assert(!html.includes('ontology.js')&&!html.includes('motion-v31')&&!html.includes('motion-v32')&&!html.includes('localize-v32'),'retired v3.2 runtime assets are not loaded');
 
 const ndBlock=(data.match(/var ND=\{([\s\S]*?)\n\};\nvar EG=/)||[])[1]||'';
@@ -62,15 +64,20 @@ const stressUi=['data-s="ust">UST +50bp','data-s="cr">CREDIT +40bp','data-s="bok
 for(const preset of stressUi)assert(html.includes(preset),`stress preset UI is wired: ${preset.split('>')[1]}`);
 assert(interaction.includes("if(k==='ust')SH.ust+=50")&&interaction.includes("if(k==='cr')SH.cr+=40")&&interaction.includes("if(k==='bok')SH.bok+=25"),'stress preset engine applies deterministic shock magnitudes');
 assert(interaction.includes('TEMPORAL ACCESS')&&interaction.includes('TIMELINE RESTORED'),'temporal replay sequence is preserved');
+assert(interaction.includes('/kospi|kosdaq|주식|시장|equity/i'),'command router recognizes broader Equity intent');
+assert(interaction.includes("window.VALKYRIE_LIVE_EQUITY.status==='ready'"),'simulated feed does not overwrite a ready live feed');
 
 for(const text of ['DECISION LOG','IPO MARKET REPORT','CB ZERO FINDER','DATA VINTAGE','PIT'])assert(view.includes(text),`research surface preserved: ${text}`);
 assert(view.includes('정희강 · Quant')&&view.includes('정훈 · 국고3Y 대비')&&view.includes('김유찬 · 운영중'),'team-domain ownership is explicit');
 assert(view.includes('적중률 지표는 사용하지 않습니다'),'Decision Log avoids hit-ratio framing');
 assert(view.includes('크레딧')&&view.includes('CB 조달 조건'),'rates-to-equity funding transmission is explained');
-assert(liveEquity.includes('LIVE MARKET PULSE')&&liveEquity.includes('RISK-ON')&&liveEquity.includes('RISK-OFF'),'live Equity pulse exposes market-regime states');
-assert(liveEquity.includes('외국인')&&liveEquity.includes('기관')&&liveEquity.includes('상승 / 하락'),'live Equity pulse exposes flow and breadth evidence');
+assert(liveEquity.includes('LIVE MARKET · KOREA')&&liveEquity.includes('KOSPI')&&liveEquity.includes('KOSDAQ'),'live Equity surface covers both Korean markets');
+assert(liveEquity.includes('EQUITY FUNDAMENTAL PULSE')&&liveEquity.includes('DART EARNINGS BREADTH'),'real public fundamental research layer is rendered');
+assert(liveEquity.includes('RISK-ON')&&liveEquity.includes('RISK-OFF')&&liveEquity.includes('NEUTRAL'),'live Equity pulse exposes market-regime states');
+assert(liveEquity.includes('외국인')&&liveEquity.includes('기관')&&liveEquity.includes('상승/하락'),'live Equity pulse exposes flow and breadth evidence');
 assert(liveEquity.includes("POLL_MS=70000"),'live Equity polling cadence is explicit');
-assert(liveEquity.includes('DEGRADED')&&liveEquity.includes('구조적 시그널은 유지'),'live Equity feed has a graceful structural-signal fallback');
+assert(liveEquity.includes('DEGRADED')&&liveEquity.includes('IPO · CB 구조적 시그널과 Snapshot은 유지'),'live Equity feed has a graceful structural-signal fallback');
+assert(liveEquity.includes('r.stale')&&liveEquity.includes('Live 점수에는 반영하지 않습니다'),'stale research is disclosed and excluded from live scoring');
 
 const htmlIds=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
 const runtime=data+'\n'+view+'\n'+interaction;
