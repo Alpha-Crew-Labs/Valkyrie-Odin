@@ -1,71 +1,65 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import vm from 'node:vm';
 
 const root=process.cwd();
 const dir=path.join(root,'prototype','valkyrie-v3');
-const required=['index.html','styles.css','ontology.js','app.js','motion-v31.css','motion-v31.js','localize-v32.js','polish-v32.css','motion-v32.js'];
+const required=['index.html','styles.css','data-core.js','view.js','interaction.js','README.md'];
 let failed=false;
 const assert=(cond,msg)=>{if(cond)console.log(`✓ ${msg}`);else{console.error(`✗ ${msg}`);failed=true;}};
 
-for(const file of required)assert(fs.existsSync(path.join(dir,file)),`v3 file exists: ${file}`);
+for(const file of required)assert(fs.existsSync(path.join(dir,file)),`v3 baseline file exists: ${file}`);
 if(failed)process.exit(1);
 
 const html=fs.readFileSync(path.join(dir,'index.html'),'utf8');
 const css=fs.readFileSync(path.join(dir,'styles.css'),'utf8');
-const motionCss=fs.readFileSync(path.join(dir,'motion-v31.css'),'utf8');
-const polishCss=fs.readFileSync(path.join(dir,'polish-v32.css'),'utf8');
-const app=fs.readFileSync(path.join(dir,'app.js'),'utf8');
-const motion=fs.readFileSync(path.join(dir,'motion-v31.js'),'utf8');
-const motion32=fs.readFileSync(path.join(dir,'motion-v32.js'),'utf8');
-const localize32=fs.readFileSync(path.join(dir,'localize-v32.js'),'utf8');
-const ontology=fs.readFileSync(path.join(dir,'ontology.js'),'utf8');
+const data=fs.readFileSync(path.join(dir,'data-core.js'),'utf8');
+const view=fs.readFileSync(path.join(dir,'view.js'),'utf8');
+const interaction=fs.readFileSync(path.join(dir,'interaction.js'),'utf8');
 
-assert(/VALKYRIE v3\.2/.test(html),'v3.2 document title/version is present');
-assert(html.includes('살아있는 마켓 온톨로지'),'v3.2 Korean-first title is present');
-assert(!/https?:\/\//i.test(html),'v3 has no external HTTP runtime dependency');
-assert(html.includes("script-src 'self'"),'v3 CSP restricts scripts to self');
-assert(html.includes("style-src 'self' 'unsafe-inline'"),'v3 CSP allows local stylesheet');
-assert(/\.\/ontology\.js\?v=\d+/.test(html)&&/\.\/app\.js\?v=\d+/.test(html),'v3 core runtime assets are versioned');
-assert(/\.\/motion-v31\.css\?v=\d+/.test(html)&&/\.\/motion-v31\.js\?v=\d+/.test(html),'v3.1 motion assets remain wired');
-assert(/\.\/localize-v32\.js\?v=\d+/.test(html)&&/\.\/polish-v32\.css\?v=\d+/.test(html)&&/\.\/motion-v32\.js\?v=\d+/.test(html),'v3.2 Korean and hydro polish assets are versioned and wired');
-assert(css.includes('@keyframes bootFailSafe'),'v3 includes CSS boot fail-safe');
-assert(motionCss.includes('v31Hydro')&&motionCss.includes('v31Comet'),'v3.1 semantic hydro motion styles exist');
-assert(motion.includes('runScenarioPropagation')&&motion.includes('runTracePropagation')&&motion.includes('runTemporalPropagation'),'v3.1 semantic propagation orchestrator exists');
-assert(polishCss.includes('v32FlowA')&&polishCss.includes('v32FlowB'),'v3.2 triple-stream hydro styles exist');
-assert(motion32.includes('installStreams')&&motion32.includes('seedBeads'),'v3.2 flowing data-bead runtime exists');
-assert(localize32.includes('한국은행 금리 경로')&&localize32.includes('IPO 의사결정 점수'),'v3.2 domain localization exists');
+assert(html.includes('VALKYRIE v3 — Research Intelligence System · v2.6 Baseline'),'approved v2.6 baseline title is present');
+assert(html.includes("script-src 'self'"),'CSP restricts scripts to local assets');
+assert(html.includes("style-src 'self'"),'CSP restricts styles to local assets');
+assert(!/https?:\/\//i.test(html),'v3 shell has no external HTTP runtime dependency');
+assert(html.includes('./styles.css?v=2601'),'baseline stylesheet is versioned');
+for(const asset of ['data-core.js','view.js','interaction.js'])assert(html.includes(`./${asset}?v=2601`),`${asset} is wired and versioned`);
+assert(!html.includes('ontology.js')&&!html.includes('motion-v31')&&!html.includes('motion-v32')&&!html.includes('localize-v32'),'retired v3.2 runtime assets are not loaded');
 
-const sandbox={window:{},console};
-vm.createContext(sandbox);
-try{vm.runInContext(ontology,sandbox,{filename:'ontology.js'});console.log('✓ ontology.js evaluates in isolated VM');}catch(err){console.error(err.stack||err);process.exit(1);}
-const data=sandbox.window.VALKYRIE_V3;
-assert(Boolean(data),'VALKYRIE_V3 export exists');
-assert(data.objects.length===23,`v3 has exactly 23 objects (found ${data.objects.length})`);
-assert(data.relations.length===29,`v3 has exactly 29 relations (found ${data.relations.length})`);
-assert(data.snapshots.length===5,`v3 has exactly 5 temporal snapshots (found ${data.snapshots.length})`);
+const ndBlock=(data.match(/var ND=\{([\s\S]*?)\n\};\nvar EG=/)||[])[1]||'';
+const edgeBlock=(data.match(/var EG=\[([\s\S]*?)\n\];\nvar FM=/)||[])[1]||'';
+const snapBlock=(data.match(/var SNAP=\[([\s\S]*?)\n\];\nvar AV=/)||[])[1]||'';
+const objectIds=[...ndBlock.matchAll(/^\s*([a-z][a-z0-9_]*)\s*:\s*\{/gm)].map(m=>m[1]);
+const edgeCount=(edgeBlock.match(/\['[a-z0-9_]+','[a-z0-9_]+'/g)||[]).length;
+const snapshotCount=(snapBlock.match(/\{d:'2026-/g)||[]).length;
+assert(objectIds.length===16,`v3 has exactly 16 objects (found ${objectIds.length})`);
+assert(new Set(objectIds).size===16,'v3 object IDs are unique');
+assert(edgeCount===22,`v3 has exactly 22 causal relations (found ${edgeCount})`);
+assert(snapshotCount===5,`v3 has exactly 5 temporal snapshots (found ${snapshotCount})`);
 
-const ids=new Set(data.objects.map(o=>o.id));
-assert(ids.size===data.objects.length,'v3 object IDs are unique');
-for(const r of data.relations){assert(ids.has(r.from),`${r.id} source exists: ${r.from}`);assert(ids.has(r.to),`${r.id} target exists: ${r.to}`);assert(Boolean(r.type),`${r.id} relation type exists`);}
+for(const owner of ['정희강','정훈','김유찬'])assert(data.includes(`o:'${owner}'`),`${owner} domain objects are present`);
+for(const id of ['mac_krcpi','mac_bok','sig_macro','rat_ust','rat_ktb','rat_credit','sig_rates','eq_val','eq_cb','eq_ipo','sig_equity'])assert(objectIds.includes(id),`core object exists: ${id}`);
+assert(data.includes("['rat_credit','eq_cb',.61,1]"),'credit-to-CB cross-domain relation is preserved');
+assert(data.includes('SHARED')&&data.includes('DURATION'),'shared duration concept link is rendered');
 
-const types=new Set(data.objects.map(o=>o.type));
-for(const t of ['OBSERVATION','MODEL','MARKET','CONCEPT','SIGNAL','DECISION','OUTCOME'])assert(types.has(t),`ontology type exists: ${t}`);
-const owners=data.objects.map(o=>o.owner).join(' ');
-assert(owners.includes('정희강'),'정희강 macro objects exist');
-assert(owners.includes('정훈'),'정훈 rates objects exist');
-assert(owners.includes('김유찬'),'김유찬 equity objects exist');
-for(const id of ['cpi_model','bok_path','rates_signal','rates_decision','duration_concept','cb_refix','ipo_score','ipo_signal','ipo_decision'])assert(ids.has(id),`core ontology object exists: ${id}`);
-for(const s of ['BASE','HAWKISH','DOVISH','RISK_OFF'])assert(Boolean(data.scenarios[s]),`scenario exists: ${s}`);
-for(const [name,s] of Object.entries(data.scenarios)){for(const id of s.changed||[])assert(ids.has(id),`${name} scenario references valid object: ${id}`);for(const id of Object.keys(s.patch||{}))assert(ids.has(id),`${name} patch references valid object: ${id}`);}
+assert(css.includes('@keyframes flA')&&css.includes('@keyframes flB'),'dual hydro-flow animations are preserved');
+assert(css.includes('stroke-dashoffset'),'hydro flow uses directional stroke motion');
+assert(css.includes('.eg.hot'),'active causal paths have accelerated hot state');
+
+for(const fn of ['signature','replay','shock','command'])assert(new RegExp(`function ${fn}\\(`).test(interaction),`interaction exists: ${fn}()`);
+assert(interaction.includes("UST +50bp")&&interaction.includes("CREDIT +40bp")&&interaction.includes("BOK +25bp"),'deterministic stress presets are wired');
+assert(interaction.includes('TEMPORAL ACCESS')&&interaction.includes('TIMELINE RESTORED'),'temporal replay sequence is preserved');
+
+for(const text of ['DECISION LOG','IPO MARKET REPORT','CB ZERO FINDER','DATA VINTAGE','PIT'])assert(view.includes(text),`research surface preserved: ${text}`);
+assert(view.includes('정희강 · Quant')&&view.includes('정훈 · 국고3Y 대비')&&view.includes('김유찬 · 운영중'),'team-domain ownership is explicit');
+assert(view.includes('적중률 지표는 사용하지 않습니다'),'Decision Log avoids hit-ratio framing');
+assert(view.includes('크레딧')&&view.includes('CB 조달 조건'),'rates-to-equity funding transmission is explained');
 
 const htmlIds=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
-for(const m of app.matchAll(/byId\(['"]([^'"]+)['"]\)/g)){const id=m[1];assert(htmlIds.has(id),`static runtime DOM id exists: #${id}`);}
+const runtime=data+'\n'+view+'\n'+interaction;
+for(const m of runtime.matchAll(/\$\(['"]([^'"]+)['"]\)/g)){
+  const id=m[1];
+  if(['cd_sc','cd_cr','cd_ipo','cd_cb','dlb'].includes(id))continue; // dynamically rendered workspace IDs
+  assert(htmlIds.has(id),`static runtime DOM id exists: #${id}`);
+}
 
-assert(/TRACE/.test(app)&&/STRESS/.test(app)&&/TEMPORAL/.test(app),'v3 implements live trace stress temporal modes');
-assert(/runCommand/.test(app),'v3 graph operator routing exists');
-assert(/openWorkspace/.test(app),'v3 domain workspace drawer exists');
-assert(motionCss.includes('@media (prefers-reduced-motion:reduce)'),'v3.1 respects reduced-motion preference');
-assert(polishCss.includes('@media(prefers-reduced-motion:reduce)'),'v3.2 respects reduced-motion preference');
-
-if(failed){console.error('\nVALKYRIE v3.2 validation FAILED.');process.exit(1);}console.log('\nVALKYRIE v3.2 validation PASSED.');
+if(failed){console.error('\nVALKYRIE v3 v2.6-baseline validation FAILED.');process.exit(1);}
+console.log('\nVALKYRIE v3 v2.6-baseline validation PASSED.');
