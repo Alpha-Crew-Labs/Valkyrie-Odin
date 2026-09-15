@@ -1,29 +1,59 @@
-# VALKYRIE v3 Prototype
+# VALKYRIE v3 — v2.6 Baseline Rebase
 
-**Market Ontology Command Center** — an object-first evolution of VALKYRIE v2.5.
+`prototype/valkyrie-v3` is now the active development line for VALKYRIE and has been **rebased on the user-approved `VALKYRIE v2.6 — Research Intelligence System` prototype**.
 
-## What changed from v2.5
+The previous v3.2 ontology-command-center experiment is retired. Future UI, ontology, quant, motion, and AI work should evolve from this baseline rather than reintroducing the retired shell.
 
-- Full-screen ontology becomes the primary workspace.
-- Left rail controls Data Layers, Scenario, View Mode, and Object Search.
-- Right-side **Object Dossier** combines evidence, relations, provenance, and actions.
-- Objects now have semantic types: Observation / Model / Market / Concept / Signal / Decision / Outcome.
-- Relations use verbs such as `FORECASTS`, `PRICES`, `DISCOUNTS`, `SUPPORTS`, and `RESOLVES_TO`.
-- 정희강 Macro Forecast, 정훈 Rates Decision, and 김유찬 IPO/CB functions are modeled inside one cross-asset graph.
-- TRACE, STRESS, COMPARE, REPLAY, and deterministic Graph Operator interactions manipulate the same ontology state.
-- Domain analytics open as a Workspace Drawer instead of persistent dashboard tabs.
+## Current baseline
 
-## Demo interactions
+- 16 research objects
+- 22 predefined causal relations
+- 5 temporal snapshots
+- Macro / Rates / Equity domain workspaces
+- Hydro-flow causal edges
+- RUN SIGNATURE cinematic sequence
+- deterministic Stress presets
+- temporal REPLAY
+- Decision Log with benchmark-relative framing
+- IPO MARKET REPORT
+- CB ZERO FINDER
+- Evidence / Confidence / Data Vintage inspector
+- Shared Duration Logic between fixed income and equity
 
-1. Select **BOK POLICY PATH** and press `TRACE`.
-2. Switch TRACE between `DOWNSTREAM`, `UPSTREAM`, and `1-HOP`.
-3. Click **HAWKISH** scenario: impacted objects propagate through Rates → Duration → KOSDAQ → IPO.
-4. Click a temporal point such as **MAY 04** to restore the historical graph state.
-5. Select **IPO DECISION SCORE** and open `WORKSPACE`.
-6. Press `⌘ ASK VALKYRIE` and run `CPI +0.4%p → IPO`.
+## Team-domain mapping
 
-## Important prototype disclosure
+- **정희강 — Macro / Quant Engine**: GDP nowcast, CPI model, policy-rate path, Taylor Rule, Financial Stress, Stress Test & VaR
+- **정훈 — Fixed Income**: UST/KTB, curve, credit spread, duration signal, Decision Log, ontology/rule validation
+- **김유찬 — Equity / IPO / CB**: KOSDAQ discount-rate sensitivity, IPO demand, IPO fundamental score, CB refinancing/put risk, integration and demo
 
-`ASK VALKYRIE` is currently a **deterministic Graph Operator**, not a general-purpose LLM. It is deliberately labeled as such. The intended next layer is LLM tool-calling over explicit graph actions (`focus_object`, `trace_relation`, `run_stress`, etc.).
+## File structure
 
-All bundled values are sample / demo states until connected to approved data and `quant-core`.
+```text
+prototype/valkyrie-v3/
+├── index.html       # approved v2.6 shell
+├── styles.css       # visual system + hydro-flow motion
+├── data-core.js     # objects, relations, snapshots, graph runtime
+├── view.js          # research workspaces, inspector, quantitative views
+├── interaction.js   # signature, replay, stress, command interactions
+└── README.md
+```
+
+The original uploaded prototype embedded large Chart.js/date-adapter bundles that were not used by the actual interface. Those unused bundles were intentionally removed during the rebase, and the remaining application code was split into local files for stability and maintainability. The user-visible baseline and core behavior are preserved.
+
+## Deployment policy
+
+- `/` remains the v2.5 stable fallback.
+- `/v3/` is the current development baseline.
+- GitHub Pages deploys from `main`.
+- Core demo behavior must remain deterministic and local/static; external APIs are not required during the live presentation.
+
+## Research integrity
+
+- Relations are **predefined research ontology**, not AI-discovered causality.
+- Node values and states are data/model driven.
+- Replay data must disclose vintage limitations; demo snapshots may be revision-adjusted.
+- Do not use `적중률` as a headline metric. Use **Decision Log** and benchmark-relative outcomes.
+
+## Rule for future changes
+
+Do not redesign v3 around the retired v3.2 shell. Preserve this baseline first, then add improvements incrementally with validation and browser QA after each meaningful change.
