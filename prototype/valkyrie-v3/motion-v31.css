@@ -1,0 +1,117 @@
+/* VALKYRIE v3.1 — Semantic Hydro Motion Layer
+   Decorative motion is intentionally subordinate to ontology state.
+   Idle = breathing / flow. Focus = contextual energy. Stress/Trace/Replay = propagation. */
+
+:root{
+  --v31-cyan:#36d7e7;
+  --v31-cyan-soft:rgba(54,215,231,.16);
+  --v31-ice:#a8f6ff;
+  --v31-amber:#ffb54a;
+  --v31-violet:#9e91ff;
+  --v31-shadow:rgba(0,0,0,.72);
+}
+
+/* --- global atmosphere --------------------------------------------------- */
+.app-shell::before{
+  content:"";position:fixed;inset:42px 0 64px 0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(circle at var(--cursor-x,50%) var(--cursor-y,48%),rgba(45,199,217,.055),transparent 18%),
+    radial-gradient(circle at 51% 43%,rgba(31,79,102,.08),transparent 43%),
+    linear-gradient(115deg,transparent 0 47%,rgba(62,152,178,.018) 48%,transparent 49% 100%);
+}
+.app-shell::after{
+  content:"";position:fixed;inset:42px 0 64px 0;pointer-events:none;z-index:1;
+  background-image:
+    linear-gradient(rgba(74,108,126,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(74,108,126,.018) 1px,transparent 1px);
+  background-size:16px 16px;mask-image:radial-gradient(circle at 52% 48%,#000 0 47%,transparent 88%);
+}
+.topbar,.main-grid,.temporal-bar{position:relative;z-index:2}
+
+/* --- ambient canvas ----------------------------------------------------- */
+#ambientCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.72}
+.graph-viewport #ontologySvg{z-index:4}
+.graph-viewport .grid-field{z-index:0}
+.graph-viewport .scan-line{z-index:7;opacity:.72;box-shadow:0 0 18px rgba(52,213,230,.12)}
+.graph-viewport::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(60,216,231,.075),transparent 15%);
+  transition:background .08s linear;
+}
+.graph-viewport::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:6;
+  box-shadow:inset 0 0 100px rgba(0,0,0,.54),inset 0 0 24px rgba(43,144,166,.025);
+}
+
+/* --- subtle operational telemetry -------------------------------------- */
+.v31-telemetry{position:absolute;left:10px;bottom:8px;z-index:17;display:flex;align-items:center;gap:9px;pointer-events:none;font:7px var(--mono);letter-spacing:.12em;color:#3f5363}
+.v31-telemetry b{font-weight:600;color:#5a7282}.v31-heartbeat{width:36px;height:7px;position:relative;overflow:hidden}
+.v31-heartbeat::before{content:"";position:absolute;left:-40px;top:3px;width:76px;height:1px;background:linear-gradient(90deg,transparent,var(--v31-cyan),transparent);animation:v31Heartbeat 3.8s linear infinite}
+@keyframes v31Heartbeat{to{transform:translateX(110px)}}
+.v31-relation-peek{position:absolute;z-index:25;pointer-events:none;min-width:154px;padding:7px 8px;border:1px solid rgba(86,125,145,.38);background:rgba(6,12,17,.93);box-shadow:0 14px 34px rgba(0,0,0,.45);opacity:0;transform:translateY(4px);transition:opacity .14s,transform .14s;font:7px var(--mono);letter-spacing:.08em;color:#738796}
+.v31-relation-peek.show{opacity:1;transform:none}.v31-relation-peek b{display:block;color:#d6e4ec;font-size:8px;margin-bottom:3px}.v31-relation-peek em{font-style:normal;color:var(--v31-cyan)}
+
+/* --- hydro edge stack --------------------------------------------------- */
+#v31HaloLayer,#v31PulseLayer{pointer-events:none}
+.v31-edge-halo{fill:none;stroke:rgba(42,185,210,.13);stroke-width:5.6;stroke-linecap:round;opacity:.24;filter:url(#v31Blur);transition:opacity .2s,stroke .2s,stroke-width .2s}
+.v31-edge-halo.hot{stroke:rgba(54,215,231,.39);stroke-width:7.2;opacity:.58}.v31-edge-halo.stress{stroke:rgba(255,181,74,.38);opacity:.72}
+.v31-edge-core{fill:none;stroke:url(#v31FlowGradient);stroke-width:1.1;stroke-linecap:round;stroke-dasharray:1 7 13 8;opacity:.22;animation:v31Hydro 7.2s linear infinite;transition:opacity .18s,stroke-width .18s}
+.v31-edge-core.hot{opacity:.94;stroke-width:1.65;animation-duration:1.45s;filter:url(#v31Glow)}
+.v31-edge-core.stress{stroke:url(#v31StressGradient);opacity:1;stroke-width:2;animation-duration:.72s;filter:url(#v31GlowAmber)}
+.v31-edge-core.temporal{opacity:.82;animation-duration:1.9s}
+@keyframes v31Hydro{to{stroke-dashoffset:-116}}
+.edge.flow{animation-duration:10s!important;opacity:.22}.edge.active{opacity:.36!important}.edge.stress{opacity:.46!important}
+
+/* pulse comet sent down a causal path */
+.v31-comet{fill:none;stroke:var(--v31-ice);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:0 9999;opacity:0;filter:url(#v31Glow)}
+.v31-comet.run{opacity:1;animation:v31Comet .72s cubic-bezier(.25,.85,.35,1) forwards}
+.v31-comet.stress-run{stroke:var(--v31-amber);filter:url(#v31GlowAmber)}
+@keyframes v31Comet{0%{stroke-dasharray:0 9999;stroke-dashoffset:0;opacity:0}12%{opacity:1}55%{stroke-dasharray:28 9999}100%{stroke-dasharray:1 9999;stroke-dashoffset:-280;opacity:0}}
+
+/* --- nodes: system objects, not cards ---------------------------------- */
+.node{transform-box:fill-box;transform-origin:center;will-change:opacity}
+.node .node-box{filter:drop-shadow(0 8px 14px rgba(0,0,0,.16));transition:stroke .2s,fill .2s,filter .2s}
+.node:not(.dim):not(.hidden) .accent{animation:v31Accent 5.8s ease-in-out infinite}
+@keyframes v31Accent{0%,100%{opacity:.52}50%{opacity:.94}}
+.node.selected .node-box{filter:url(#softGlow) drop-shadow(0 0 13px rgba(54,215,231,.16))}
+.node.selected{animation:v31NodeBreath 2.8s ease-in-out infinite}
+@keyframes v31NodeBreath{0%,100%{opacity:1}50%{opacity:.88}}
+.node.v31-arrival .node-box{animation:v31Arrival .62s cubic-bezier(.2,.85,.3,1)}
+@keyframes v31Arrival{0%{stroke-width:1;filter:none}32%{stroke-width:2.4;filter:url(#v31Glow)}100%{stroke-width:1}}
+.node.v31-shock .node-box{animation:v31Shock .78s cubic-bezier(.2,.75,.25,1)}
+@keyframes v31Shock{0%{stroke:#ffdf9c;fill:#231b0d;filter:url(#v31GlowAmber)}35%{stroke-width:2.6}100%{stroke-width:1}}
+
+/* acquisition corners injected into selected object */
+.v31-corner{fill:none;stroke:var(--v31-cyan);stroke-width:1;opacity:.88;filter:url(#v31Glow);pointer-events:none}
+.v31-acquire-ring{fill:none;stroke:rgba(54,215,231,.38);stroke-width:.8;stroke-dasharray:4 5;animation:v31Ring 7s linear infinite;transform-box:fill-box;transform-origin:center;pointer-events:none}
+@keyframes v31Ring{to{transform:rotate(360deg)}}
+
+/* --- panels behave like instrument surfaces ---------------------------- */
+.control-rail,.dossier{background:rgba(8,13,19,.94)}
+.dossier{box-shadow:-18px 0 50px rgba(0,0,0,.18)}
+.dossier::before{content:"";position:sticky;display:block;top:-11px;margin:-11px -12px 10px;height:1px;background:linear-gradient(90deg,transparent,rgba(54,215,231,.4),transparent);animation:v31DossierScan 5.8s ease-in-out infinite;z-index:2}
+@keyframes v31DossierScan{0%,100%{transform:translateX(-45%);opacity:.15}50%{transform:translateX(45%);opacity:.7}}
+.dossier h1{transition:color .18s,text-shadow .18s}.dossier.v31-focus h1{color:#f4fbff;text-shadow:0 0 18px rgba(54,215,231,.11)}
+.dossier-actions button{position:relative;overflow:hidden}.dossier-actions button::after{content:"";position:absolute;left:-130%;top:0;width:85%;height:100%;background:linear-gradient(90deg,transparent,rgba(143,238,247,.07),transparent);transition:none}.dossier-actions button:hover::after{animation:v31SweepBtn .55s ease-out}@keyframes v31SweepBtn{to{left:150%}}
+
+/* scenario and mode feedback */
+body.v31-stress .ontology-panel{box-shadow:inset 0 0 80px rgba(245,166,35,.025)}
+body.v31-trace .ontology-panel{box-shadow:inset 0 0 80px rgba(40,199,217,.02)}
+body.v31-temporal .ontology-panel{box-shadow:inset 0 0 80px rgba(158,145,255,.022)}
+.scenario-row.v31-fired{animation:v31RailFlash .8s ease-out}@keyframes v31RailFlash{0%{background:rgba(255,181,74,.18)}100%{background:transparent}}
+.mode-btn.v31-fired{animation:v31RailCyan .7s ease-out}@keyframes v31RailCyan{0%{box-shadow:inset 0 0 0 1px var(--v31-cyan),0 0 16px rgba(54,215,231,.12)}100%{box-shadow:none}}
+
+/* temporal system line */
+.temporal-bar{box-shadow:0 -16px 46px rgba(0,0,0,.18)}
+.time-point{position:relative}.time-point::before{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:#41505f;left:50%;top:-6px;transform:translateX(-50%);transition:.2s}.time-point:hover::before,.time-point.active::before{background:var(--v31-cyan);box-shadow:0 0 10px rgba(54,215,231,.7)}
+.activity-line:first-child{animation:v31ActivityIn .32s ease-out}@keyframes v31ActivityIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* command modal enters like an operator surface */
+.command-box{animation:v31CommandIn .18s cubic-bezier(.2,.8,.3,1)}@keyframes v31CommandIn{from{opacity:0;transform:translateY(-9px) scale(.992)}to{opacity:1;transform:none}}
+
+/* responsive restraint */
+@media (max-width:1180px){.v31-telemetry{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .v31-edge-core,.v31-heartbeat::before,.v31-acquire-ring,.node.selected,.node:not(.dim):not(.hidden) .accent,.scan-line,.dossier::before{animation:none!important}
+  #ambientCanvas{display:none}
+}
