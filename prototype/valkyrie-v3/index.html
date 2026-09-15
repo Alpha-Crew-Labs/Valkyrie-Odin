@@ -5,107 +5,108 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'" />
   <meta name="color-scheme" content="dark" />
-  <title>VALKYRIE v3.1 — Semantic Hydro Market Ontology</title>
-  <link rel="stylesheet" href="./styles.css?v=3100" />
-  <link rel="stylesheet" href="./motion-v31.css?v=3100" />
+  <title>VALKYRIE v3.2 — 살아있는 마켓 온톨로지</title>
+  <link rel="stylesheet" href="./styles.css?v=3200" />
+  <link rel="stylesheet" href="./motion-v31.css?v=3200" />
+  <link rel="stylesheet" href="./polish-v32.css?v=3200" />
 </head>
 <body>
   <div id="boot" aria-hidden="true">
     <div class="boot-mark">RAVENS</div>
-    <div class="boot-title">VALKYRIE · MARKET ONTOLOGY</div>
-    <div class="boot-line"><span>OBJECT REGISTRY</span><b>23</b></div>
-    <div class="boot-line"><span>RELATION GRAPH</span><b>29</b></div>
-    <div class="boot-line"><span>SEMANTIC MOTION BUS</span><b>ONLINE</b></div>
-    <div class="boot-line"><span>TEMPORAL LAYER</span><b>READY</b></div>
-    <div class="boot-state">RESOLVING MARKET STATE</div>
+    <div class="boot-title">VALKYRIE · 마켓 온톨로지</div>
+    <div class="boot-line"><span>객체 레지스트리</span><b>23</b></div>
+    <div class="boot-line"><span>관계 그래프</span><b>29</b></div>
+    <div class="boot-line"><span>시맨틱 모션 버스</span><b>온라인</b></div>
+    <div class="boot-line"><span>시간축 레이어</span><b>준비</b></div>
+    <div class="boot-state">시장 상태를 해석하는 중</div>
   </div>
 
   <main id="app" class="app-shell">
     <header class="topbar">
       <div class="brand-block">
         <div class="brand">VAL<span>KYRIE</span></div>
-        <div class="version">v3.1 · SEMANTIC HYDRO ONTOLOGY</div>
+        <div class="version">v3.2 · LIVING MARKET ONTOLOGY</div>
       </div>
       <div class="top-sep"></div>
-      <div class="status-item"><span class="status-dot live-dot"></span><b>LIVE</b></div>
-      <div class="status-item muted">RISK</div>
-      <div class="risk-badge" id="riskBadge">CAUTION</div>
-      <div class="status-item muted">AS OF</div>
+      <div class="status-item"><span class="status-dot live-dot"></span><b>실시간</b></div>
+      <div class="status-item muted">리스크</div>
+      <div class="risk-badge" id="riskBadge">주의</div>
+      <div class="status-item muted">기준시각</div>
       <div class="mono" id="asOf">—</div>
       <div class="top-spacer"></div>
-      <div class="system-health"><span class="status-dot"></span><span id="healthText">ONTOLOGY SYNCED</span></div>
-      <button class="command-trigger" id="askBtn" type="button"><kbd>⌘</kbd> ASK VALKYRIE</button>
+      <div class="system-health"><span class="status-dot"></span><span id="healthText">온톨로지 동기화</span></div>
+      <button class="command-trigger" id="askBtn" type="button"><kbd>⌘</kbd> VALKYRIE 질의</button>
     </header>
 
     <div class="main-grid">
-      <aside class="control-rail" aria-label="Ontology controls">
+      <aside class="control-rail" aria-label="온톨로지 제어">
         <section class="rail-section search-section">
-          <div class="eyebrow">OBJECT SEARCH</div>
+          <div class="eyebrow">객체 검색</div>
           <div class="search-wrap">
             <span>⌕</span>
-            <input id="objectSearch" type="search" placeholder="FIND OBJECT" autocomplete="off" />
+            <input id="objectSearch" type="search" placeholder="지표 · 모델 · 시그널 검색" autocomplete="off" />
           </div>
           <div id="searchResults" class="search-results" hidden></div>
         </section>
 
         <section class="rail-section">
-          <div class="eyebrow">DATA LAYERS</div>
-          <label class="layer-row"><input type="checkbox" data-layer="MACRO" checked /><span class="layer-dot macro"></span><span>Macro</span><b id="countMacro">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="RATES" checked /><span class="layer-dot rates"></span><span>Rates</span><b id="countRates">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="CREDIT" checked /><span class="layer-dot credit"></span><span>Credit</span><b id="countCredit">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="EQUITY" checked /><span class="layer-dot equity"></span><span>Equity</span><b id="countEquity">0</b></label>
+          <div class="eyebrow">데이터 레이어</div>
+          <label class="layer-row"><input type="checkbox" data-layer="MACRO" checked /><span class="layer-dot macro"></span><span>매크로</span><b id="countMacro">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="RATES" checked /><span class="layer-dot rates"></span><span>금리</span><b id="countRates">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="CREDIT" checked /><span class="layer-dot credit"></span><span>크레딧</span><b id="countCredit">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="EQUITY" checked /><span class="layer-dot equity"></span><span>주식</span><b id="countEquity">0</b></label>
           <label class="layer-row"><input type="checkbox" data-layer="IPO_CB" checked /><span class="layer-dot ipo"></span><span>IPO / CB</span><b id="countIpo">0</b></label>
-          <label class="layer-row"><input type="checkbox" data-layer="DECISIONS" checked /><span class="layer-dot decision"></span><span>Decisions</span><b id="countDecisions">0</b></label>
+          <label class="layer-row"><input type="checkbox" data-layer="DECISIONS" checked /><span class="layer-dot decision"></span><span>판단 / 성과</span><b id="countDecisions">0</b></label>
         </section>
 
         <section class="rail-section">
-          <div class="eyebrow">SCENARIO</div>
-          <button class="scenario-row active" data-scenario="BASE" type="button"><span class="scenario-radio"></span><span>Base</span><b>LIVE</b></button>
-          <button class="scenario-row" data-scenario="HAWKISH" type="button"><span class="scenario-radio"></span><span>Hawkish</span><b>STRESS</b></button>
-          <button class="scenario-row" data-scenario="DOVISH" type="button"><span class="scenario-radio"></span><span>Dovish</span><b>STRESS</b></button>
-          <button class="scenario-row" data-scenario="RISK_OFF" type="button"><span class="scenario-radio"></span><span>Risk-Off</span><b>STRESS</b></button>
+          <div class="eyebrow">시나리오</div>
+          <button class="scenario-row active" data-scenario="BASE" type="button"><span class="scenario-radio"></span><span>기본</span><b>실시간</b></button>
+          <button class="scenario-row" data-scenario="HAWKISH" type="button"><span class="scenario-radio"></span><span>매파</span><b>스트레스</b></button>
+          <button class="scenario-row" data-scenario="DOVISH" type="button"><span class="scenario-radio"></span><span>비둘기</span><b>스트레스</b></button>
+          <button class="scenario-row" data-scenario="RISK_OFF" type="button"><span class="scenario-radio"></span><span>위험회피</span><b>스트레스</b></button>
         </section>
 
         <section class="rail-section">
-          <div class="eyebrow">VIEW</div>
+          <div class="eyebrow">탐색 모드</div>
           <div class="mode-grid">
-            <button class="mode-btn active" data-mode="LIVE" type="button">LIVE</button>
-            <button class="mode-btn" data-mode="TRACE" type="button">TRACE</button>
-            <button class="mode-btn" data-mode="STRESS" type="button">STRESS</button>
-            <button class="mode-btn" data-mode="TEMPORAL" type="button">TEMPORAL</button>
+            <button class="mode-btn active" data-mode="LIVE" type="button">실시간</button>
+            <button class="mode-btn" data-mode="TRACE" type="button">경로추적</button>
+            <button class="mode-btn" data-mode="STRESS" type="button">스트레스</button>
+            <button class="mode-btn" data-mode="TEMPORAL" type="button">시간재생</button>
           </div>
         </section>
 
         <section class="rail-section legend-section">
-          <div class="eyebrow">ONTOLOGY TYPES</div>
-          <div class="legend-row"><span class="type-mark observation"></span>OBSERVATION</div>
-          <div class="legend-row"><span class="type-mark model"></span>MODEL</div>
-          <div class="legend-row"><span class="type-mark market"></span>MARKET</div>
-          <div class="legend-row"><span class="type-mark concept"></span>CONCEPT</div>
-          <div class="legend-row"><span class="type-mark signal"></span>SIGNAL</div>
-          <div class="legend-row"><span class="type-mark decision"></span>DECISION / OUTCOME</div>
+          <div class="eyebrow">온톨로지 객체 유형</div>
+          <div class="legend-row"><span class="type-mark observation"></span>관측값</div>
+          <div class="legend-row"><span class="type-mark model"></span>모델</div>
+          <div class="legend-row"><span class="type-mark market"></span>시장</div>
+          <div class="legend-row"><span class="type-mark concept"></span>개념</div>
+          <div class="legend-row"><span class="type-mark signal"></span>시그널</div>
+          <div class="legend-row"><span class="type-mark decision"></span>판단 / 성과</div>
         </section>
       </aside>
 
       <section class="ontology-panel">
         <div class="ontology-head">
           <div>
-            <div class="eyebrow">MARKET ONTOLOGY</div>
-            <div class="ontology-title" id="graphTitle">CROSS-ASSET DECISION GRAPH</div>
+            <div class="eyebrow">마켓 온톨로지</div>
+            <div class="ontology-title" id="graphTitle">크로스에셋 의사결정 그래프</div>
           </div>
-          <div class="ontology-meta"><span id="objectCount">23 OBJECTS</span><span>·</span><span id="relationCount">29 RELATIONS</span><span>·</span><span id="scenarioLabel">BASE</span></div>
+          <div class="ontology-meta"><span id="objectCount">23 객체</span><span>·</span><span id="relationCount">29 관계</span><span>·</span><span id="scenarioLabel">기본</span></div>
           <div class="graph-tools">
-            <button id="fitBtn" type="button" title="Reset view">FIT</button>
-            <button id="zoomOutBtn" type="button" title="Zoom out">−</button>
+            <button id="fitBtn" type="button" title="전체 보기">전체</button>
+            <button id="zoomOutBtn" type="button" title="축소">−</button>
             <span id="zoomLabel">100%</span>
-            <button id="zoomInBtn" type="button" title="Zoom in">+</button>
+            <button id="zoomInBtn" type="button" title="확대">+</button>
           </div>
         </div>
 
         <div class="graph-viewport" id="graphViewport">
           <div class="grid-field"></div>
           <div class="scan-line"></div>
-          <svg id="ontologySvg" viewBox="0 0 1200 720" role="img" aria-label="VALKYRIE market ontology graph">
+          <svg id="ontologySvg" viewBox="0 0 1200 720" role="img" aria-label="VALKYRIE 마켓 온톨로지 그래프">
             <defs>
               <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="currentColor" /></marker>
               <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -117,58 +118,58 @@
             </g>
           </svg>
 
-          <div class="domain-label macro-label">MACRO</div>
-          <div class="domain-label rates-label">RATES / CREDIT</div>
-          <div class="domain-label equity-label">EQUITY / CAPITAL MARKETS</div>
+          <div class="domain-label macro-label">매크로</div>
+          <div class="domain-label rates-label">금리 / 크레딧</div>
+          <div class="domain-label equity-label">주식 / 자본시장</div>
 
           <div class="graph-banner" id="graphBanner" hidden></div>
           <div class="trace-controls" id="traceControls" hidden>
-            <span>TRACE</span>
-            <button class="active" data-trace="DOWNSTREAM" type="button">DOWNSTREAM</button>
-            <button data-trace="UPSTREAM" type="button">UPSTREAM</button>
-            <button data-trace="ONE_HOP" type="button">1-HOP</button>
+            <span>경로 추적</span>
+            <button class="active" data-trace="DOWNSTREAM" type="button">하류</button>
+            <button data-trace="UPSTREAM" type="button">상류</button>
+            <button data-trace="ONE_HOP" type="button">1단계</button>
           </div>
-          <div class="cursor-hud" id="cursorHud">CURSOR — · —</div>
+          <div class="cursor-hud" id="cursorHud">커서 — · —</div>
         </div>
       </section>
 
-      <aside class="dossier" aria-label="Selected object dossier">
+      <aside class="dossier" aria-label="선택 객체 분석 패널">
         <div class="dossier-head">
-          <div class="eyebrow">OBJECT DOSSIER</div>
+          <div class="eyebrow">객체 분석 패널</div>
           <div class="object-id mono" id="dossierId">—</div>
         </div>
 
-        <div class="type-line"><span class="type-pill" id="dossierType">OBJECT</span><span class="owner-chip" id="dossierOwner">RAVENS</span></div>
-        <h1 id="dossierName">Select an object</h1>
+        <div class="type-line"><span class="type-pill" id="dossierType">객체</span><span class="owner-chip" id="dossierOwner">RAVENS</span></div>
+        <h1 id="dossierName">객체를 선택하세요</h1>
         <div class="object-value"><span id="dossierValue">—</span><small id="dossierDelta">—</small></div>
-        <div class="state-row"><span>STATE</span><b id="dossierState">—</b></div>
+        <div class="state-row"><span>상태</span><b id="dossierState">—</b></div>
 
         <section class="dossier-section">
-          <div class="section-head"><span>EVIDENCE</span><b id="evidenceCount">00</b></div>
+          <div class="section-head"><span>근거</span><b id="evidenceCount">00</b></div>
           <div id="evidenceList" class="evidence-list"></div>
         </section>
 
         <section class="dossier-section">
-          <div class="section-head"><span>RELATIONS</span><b id="relationSummary">↑0 · ↓0</b></div>
+          <div class="section-head"><span>연결 관계</span><b id="relationSummary">↑0 · ↓0</b></div>
           <div id="relationList" class="relation-list"></div>
         </section>
 
         <section class="dossier-section model-section">
-          <div class="section-head"><span>PROVENANCE</span><b id="modelConfidence">—</b></div>
+          <div class="section-head"><span>출처 / 모델</span><b id="modelConfidence">—</b></div>
           <div class="provenance-grid">
-            <span>OWNER</span><b id="provOwner">—</b>
-            <span>MODEL</span><b id="provModel">—</b>
-            <span>VINTAGE</span><b id="provVintage">—</b>
+            <span>담당</span><b id="provOwner">—</b>
+            <span>모델</span><b id="provModel">—</b>
+            <span>기준시점</span><b id="provVintage">—</b>
           </div>
         </section>
 
         <section class="dossier-actions">
-          <button data-action="TRACE" type="button"><span>⌁</span>TRACE</button>
-          <button data-action="STRESS" type="button"><span>↯</span>STRESS</button>
-          <button data-action="COMPARE" type="button"><span>◫</span>COMPARE</button>
-          <button data-action="REPLAY" type="button"><span>◴</span>REPLAY</button>
-          <button data-action="ASK" type="button"><span>⌘</span>ASK</button>
-          <button data-action="WORKSPACE" type="button"><span>⌄</span>WORKSPACE</button>
+          <button data-action="TRACE" type="button"><span>⌁</span>경로 추적</button>
+          <button data-action="STRESS" type="button"><span>↯</span>충격 적용</button>
+          <button data-action="COMPARE" type="button"><span>◫</span>비교</button>
+          <button data-action="REPLAY" type="button"><span>◴</span>시간 재생</button>
+          <button data-action="ASK" type="button"><span>⌘</span>질의</button>
+          <button data-action="WORKSPACE" type="button"><span>⌄</span>상세 분석</button>
         </section>
 
         <div class="compare-card" id="compareCard" hidden></div>
@@ -177,11 +178,11 @@
 
     <footer class="temporal-bar">
       <div class="timeline-zone">
-        <div class="timeline-label"><span class="eyebrow">TEMPORAL LAYER</span><b id="snapshotLabel">LIVE</b></div>
+        <div class="timeline-label"><span class="eyebrow">시장 시간축</span><b id="snapshotLabel">실시간</b></div>
         <div class="timeline" id="timeline"></div>
       </div>
       <div class="activity-zone">
-        <div class="activity-head"><span class="eyebrow">ACTIVITY STREAM</span><b id="activityPulse">●</b></div>
+        <div class="activity-head"><span class="eyebrow">시스템 활동</span><b id="activityPulse">●</b></div>
         <div class="activity-feed" id="activityFeed"></div>
       </div>
     </footer>
@@ -189,29 +190,31 @@
 
   <section class="workspace-drawer" id="workspaceDrawer" aria-hidden="true">
     <div class="drawer-head">
-      <div><span class="eyebrow">DOMAIN WORKSPACE</span><h2 id="drawerTitle">—</h2></div>
-      <button id="drawerClose" type="button">CLOSE ×</button>
+      <div><span class="eyebrow">도메인 상세 분석</span><h2 id="drawerTitle">—</h2></div>
+      <button id="drawerClose" type="button">닫기 ×</button>
     </div>
     <div id="drawerBody" class="drawer-body"></div>
   </section>
 
   <div class="command-modal" id="commandModal" hidden>
     <div class="command-box" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
-      <div class="command-head"><div><span class="eyebrow">GRAPH OPERATOR</span><h2 id="commandTitle">ASK VALKYRIE</h2></div><button id="commandClose" type="button">ESC</button></div>
+      <div class="command-head"><div><span class="eyebrow">온톨로지 오퍼레이터</span><h2 id="commandTitle">VALKYRIE에게 질의</h2></div><button id="commandClose" type="button">닫기</button></div>
       <div class="command-input-wrap"><span>&gt;</span><input id="commandInput" autocomplete="off" placeholder="예: 물가가 0.4%p 다시 오르면 IPO 시장은?" /></div>
       <div class="command-chips">
-        <button data-command="왜 지금 장기채를 줄여야 하지?" type="button">WHY SHORT DURATION?</button>
+        <button data-command="왜 지금 장기채를 줄여야 하지?" type="button">왜 듀레이션 축소?</button>
         <button data-command="물가가 0.4%p 오르면 IPO는?" type="button">CPI +0.4%p → IPO</button>
-        <button data-command="CB 리픽싱 리스크 보여줘" type="button">CB RISK</button>
+        <button data-command="CB 리픽싱 리스크 보여줘" type="button">CB 리픽싱 리스크</button>
       </div>
       <div class="operator-output" id="operatorOutput">
-        <div class="operator-note">DEMO GRAPH OPERATOR · deterministic routing. LLM tool-calling is the next integration layer.</div>
+        <div class="operator-note">데모 그래프 오퍼레이터 · 현재는 결정론적 라우팅. 이후 LLM Tool Calling으로 확장.</div>
       </div>
     </div>
   </div>
 
-  <script src="./ontology.js?v=3100"></script>
-  <script src="./app.js?v=3100"></script>
-  <script src="./motion-v31.js?v=3100"></script>
+  <script src="./ontology.js?v=3200"></script>
+  <script src="./localize-v32.js?v=3200"></script>
+  <script src="./app.js?v=3200"></script>
+  <script src="./motion-v31.js?v=3200"></script>
+  <script src="./motion-v32.js?v=3200"></script>
 </body>
 </html>
