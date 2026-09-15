@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="./styles.css?v=2601">
 <link rel="stylesheet" href="./mobile.css?v=2602">
 <link rel="stylesheet" href="./quant-hk.css?v=2603">
-<link rel="stylesheet" href="./equity-yc.css?v=2604">
-<link rel="stylesheet" href="./live-equity.css?v=2605">
+<link rel="stylesheet" href="./equity-yc.css?v=2606">
+<link rel="stylesheet" href="./live-equity.css?v=2606">
 </head>
 <body>
 <div class="boot" id="boot">
@@ -26,7 +26,6 @@
 </div>
 
 <div class="app">
-
   <div class="hd">
     <div class="br"><div class="lg">VAL<span>KYRIE</span></div><div style="font-size:7px;letter-spacing:.26em;color:#39424E;margin-top:2px">RAVENS · RESEARCH OS</div></div>
     <div class="hcell"><div class="ml">Market Status</div><div class="stx" id="mst"><i class="dot"></i><span>CAUTION</span><span class="ml2 num" id="mstn" style="color:#49525F">3 ALERT</span></div></div>
@@ -45,14 +44,14 @@
     <div></div><div class="arw">▶</div>
     <div class="seg s2"><div class="tag">TRANSMISSION · 어디로 전파되는가</div><div class="txt" id="bf2">UST 4.18% → 국고 2.94% · 커브 +38bp 스티프닝</div></div>
     <div class="arw">▶</div>
-    <div class="seg s3"><div class="tag">DECISION · 그래서 무엇을 하는가</div><div class="txt" id="bf3">채권 단기 확대 · IPO 선별 청약</div></div>
+    <div class="seg s3"><div class="tag">DECISION · 그래서 무엇을 하는가</div><div class="txt" id="bf3">채권 단기 확대 · Equity 선별 대응</div></div>
   </div>
 
   <div class="cw" id="cw">
     <canvas id="df"></canvas>
     <div class="ovl">
       <div class="ml" style="color:#4E5A6B">INTELLIGENCE CHAIN</div>
-      <div class="ml2" style="margin-top:2px;color:#39424E">관계 = 사전 정의 온톨로지(고정) · 노드 값 = 데이터 기반 · SAMPLE</div>
+      <div class="ml2" style="margin-top:2px;color:#39424E">관계 = 고정 Ontology · Snapshot = Demo · Equity Live = 시장 데이터</div>
     </div>
     <div class="ovr">
       <div class="ml2 num" id="hud" style="color:#39424E">CURSOR — · —</div>
@@ -60,7 +59,7 @@
     </div>
     <div class="ovb">
       <div><span class="ml" style="color:#39424E">FLOW</span> <span class="ml2 num" id="fl1" style="color:#4E5A6B">22 CHANNELS OPEN</span></div>
-      <div><span class="ml" style="color:#39424E">FEED</span> <span class="ml2 num" id="fd" style="color:#4E5A6B">12:43:08 ECOS SYNC OK · SIMULATED</span></div>
+      <div><span class="ml" style="color:#39424E">FEED</span> <span class="ml2 num" id="fd" style="color:#4E5A6B">CONNECTING MARKET DATA</span></div>
     </div>
     <div class="ban" id="ban"><div class="b1" id="ban1"></div><div class="b2" id="ban2"></div></div>
     <svg id="chain" viewBox="0 0 1020 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VALKYRIE 인과 체인"></svg>
@@ -68,10 +67,10 @@
 
   <div class="cmd">
     <div class="pr">&gt;</div>
-    <input id="cin" placeholder="객체를 클릭하거나 명령을 입력하세요  —  예: 미국 10년물이 50bp 오르면 어떻게 돼?">
+    <input id="cin" placeholder="객체를 클릭하거나 명령을 입력하세요 — 예: 지금 KOSPI·KOSDAQ과 IPO/CB까지 같이 봐줘">
     <div class="cps">
       <div class="cp" data-q="지금 채권 포지션 어떻게 가져가야 해?">채권 포지션</div>
-      <div class="cp" data-q="지금 IPO 청약에 들어가도 돼?">IPO 청약</div>
+      <div class="cp" data-q="지금 KOSPI KOSDAQ 위험선호와 IPO CB까지 같이 봐줘">주식시장</div>
       <div class="cp" data-q="CB 리픽싱 위험 종목 보여줘">CB 리스크</div>
     </div>
     <div class="cps sk">
@@ -91,7 +90,7 @@
     <div class="tabs">
       <div class="tab" data-t="MACRO"><div class="tn">MACRO</div><div class="to">정희강 · Quant Engine</div></div>
       <div class="tab act" data-t="RATES"><div class="tn">RATES</div><div class="to">정훈 · Fixed Income</div></div>
-      <div class="tab" data-t="EQUITY"><div class="tn">EQUITY</div><div class="to">김유찬 · IPO / CB</div></div>
+      <div class="tab" data-t="EQUITY"><div class="tn">EQUITY</div><div class="to">김유찬 · KOSPI / KOSDAQ / IPO·CB</div></div>
       <div class="tabsp"><span class="ml2" style="color:#39424E">상단 객체 클릭 시 담당 도메인으로 자동 전환</span></div>
     </div>
     <div class="pane" id="pane"></div>
@@ -110,9 +109,9 @@
 
 <script src="./data-core.js?v=2601"></script>
 <script src="./view.js?v=2601"></script>
-<script src="./interaction.js?v=2601"></script>
+<script src="./interaction.js?v=2606"></script>
 <script src="./quant-hk.js?v=2603"></script>
-<script src="./equity-yc.js?v=2604"></script>
-<script src="./live-equity.js?v=2605"></script>
+<script src="./equity-yc.js?v=2606"></script>
+<script src="./live-equity.js?v=2606"></script>
 </body>
 </html>
