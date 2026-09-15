@@ -14,7 +14,7 @@
     STICKY:'고물가 지속',DISINFLATION:'물가 둔화',SOFT:'성장 둔화','FIRM USD':'달러 강세',BASE:'기본',
     'EASING BIAS':'인하 편향',REPRICING:'재가격',CHEAPENING:'약세',PRESSURE:'금리 상승 압력',CAUTION:'주의',WIDENING:'스프레드 확대',ACTIVE:'활성',
     TRACKED:'추적 중',CLOSED:'종료',FRAGILE:'취약',NORMALIZING:'정상화',FILTERING:'선별',OPEN:'진행 중',
-    'UPSIDE SHOCK':'상방 충격',HAWKISH:'매파', 'LESS DOVISH':'완화 기대 축소','SELL-OFF':'매도 우위',STRONG:'강한 시그널',RISK:'위험', 'HIGH RISK':'고위험',DEFENSIVE:'방어적',
+    'UPSIDE SHOCK':'상방 충격',HAWKISH:'매파','LESS DOVISH':'완화 기대 축소','SELL-OFF':'매도 우위',STRONG:'강한 시그널',RISK:'위험','HIGH RISK':'고위험',DEFENSIVE:'방어적',
     DOVISH:'비둘기',RALLY:'강세','BULL STEEP':'불 스티프닝',TIGHTENING:'축소',SUPPORTIVE:'우호적',PARTICIPATE:'참여',
     'RISK OFF':'위험회피',STRESSED:'스트레스','VERY HIGH':'매우 높음',PAUSE:'관망'
   };
@@ -43,8 +43,8 @@
     if(names[o.id]){o.name=names[o.id][0];o.short=names[o.id][1];}
     o.state=states[o.state]||o.state;
     o.owner=owners[o.owner]||o.owner;
-    if(Array.isArray(o.evidence))o.evidence=o.evidence.map(([n,t,r])=>[n,localEvidence(t),r==='HIGH'?'높음':r==='MED'?'중간':r==='LOW'?'낮음':r]);
-    // Re-layout clipped right/bottom objects before app.js builds SVG.
+    // Keep HIGH/MED/LOW in data so the existing semantic color classes continue to work.
+    if(Array.isArray(o.evidence))o.evidence=o.evidence.map(([n,t,r])=>[n,localEvidence(t),r]);
     if(['cb_refix','ipo_score','ipo_signal','ipo_decision','ipo_outcome'].includes(o.id))o.x=Math.min(o.x,1035);
     if(o.id==='ipo_outcome')o.y=648;
   });
