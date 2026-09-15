@@ -1,0 +1,56 @@
+/* VALKYRIE v3.2 — Korean-first visual hierarchy + stronger hydro cognition */
+
+:root{
+  --bg:#070b10;--panel:#0a1016;--panel2:#0c141c;--panel3:#111a24;
+  --text:#f0f5f8;--muted:#93a2b2;--faint:#556474;
+  --cyan:#36d7e7;--cyan2:#9cf5ff;--amber:#ffb54a;--green:#43d18d;--red:#ef646c;--purple:#a698ff;
+}
+
+html,body{font-size:13px}.app-shell{grid-template-rows:46px minmax(0,1fr) 72px}
+.topbar{gap:12px;padding:0 15px;background:rgba(7,12,18,.96);box-shadow:0 8px 28px rgba(0,0,0,.16)}
+.brand-block{min-width:330px}.brand{font-size:18px;letter-spacing:.08em}.version{font-size:9.5px;color:#718093}.status-item{font-size:10px}.risk-badge{font-size:10px;padding:4px 8px}.system-health{font-size:9px}.command-trigger{font-size:10px;padding:7px 12px}
+
+.main-grid{grid-template-columns:194px minmax(0,1fr) 316px}.control-rail{background:rgba(8,13,19,.96)}.rail-section{padding:13px 13px 12px}.eyebrow{font-size:10px;letter-spacing:.13em;color:#7b8999}
+.search-wrap{height:34px;margin-top:8px;padding:0 9px}.search-wrap input{font-size:11px}.layer-row{height:31px;grid-template-columns:15px 9px 1fr 24px;font-size:11px}.layer-row input{width:11px;height:11px}.layer-row b{font-size:9px}.layer-dot{width:6px;height:6px}
+.scenario-row{height:31px;font-size:11px}.scenario-row b{font-size:8px}.scenario-radio{width:8px;height:8px}.mode-grid{gap:6px;margin-top:9px}.mode-btn{height:30px;font-size:9.5px}.legend-row{height:23px;font-size:8.8px}
+
+.ontology-panel{grid-template-rows:50px minmax(0,1fr);background:linear-gradient(180deg,#080d13,#091018)}.ontology-head{padding:0 14px;gap:14px}.ontology-title{font-size:13px;margin-top:4px}.ontology-meta{font-size:9px;gap:8px}.graph-tools button{height:26px;font-size:9px}.domain-label{top:15px;font-size:9px;color:#4b5a6c}.cursor-hud{font-size:8px;color:#536274}
+
+/* make objects readable at a glance */
+.node-type{font-size:7.6px;letter-spacing:.09em;fill:#718092}.node-name{font-size:10.7px;font-weight:700;fill:#e8eef4}.node-value{font-size:14.2px;fill:#fff}.node-delta{font-size:8.2px;fill:#97a6b6}.node-state{font-size:7.3px;fill:#788798}.node .node-box{fill:#0d151d;stroke:#35485a;stroke-width:1.15;rx:3}.node:hover .node-box{stroke:#6b8195;fill:#101b25}.node.selected .node-box{fill:#0e1c24;stroke:#42dce9;stroke-width:1.45}.node.changed .node-box{fill:#1b160e}
+.edge-label{font-size:7.5px;fill:#637286;opacity:.46}.edge-label.active{fill:#d4e6ef;opacity:.9}
+
+/* stronger spatial hierarchy */
+.graph-viewport{background:
+ radial-gradient(circle at 50% 46%,rgba(40,110,133,.16),transparent 35%),
+ radial-gradient(circle at 70% 54%,rgba(48,55,115,.08),transparent 34%),
+ linear-gradient(180deg,#080d13,#081019)}
+.grid-field{background-size:28px 28px;opacity:.78}.domain-label::after{content:"";display:inline-block;width:38px;height:1px;background:#263340;margin-left:8px;vertical-align:middle}
+
+/* v2.5-inspired triple-stream hydro layer */
+.v32-streamA,.v32-streamB{fill:none;stroke-linecap:round;pointer-events:none}
+.v32-streamA{stroke:#4c6575;stroke-width:1.05;stroke-dasharray:2 22;opacity:.38;animation:v32FlowA 13s linear infinite}
+.v32-streamB{stroke:#65d5e4;stroke-width:1.75;stroke-dasharray:30 166;opacity:.34;filter:url(#v31Blur);animation:v32FlowB 10.5s linear infinite}
+.v32-streamA.hot{stroke:#95eff7;opacity:.75;animation-duration:2.4s}.v32-streamB.hot{stroke:#bcfbff;opacity:.92;stroke-width:2.1;animation-duration:1.9s;filter:url(#v31Glow)}
+.v32-streamA.stress,.v32-streamB.stress{stroke:#ffb54a;opacity:.95;animation-duration:.9s;filter:url(#v31GlowAmber)}
+.v32-streamA.temporal,.v32-streamB.temporal{stroke:#a99cff;opacity:.78;animation-duration:1.45s}
+.v32-streamA.dim,.v32-streamB.dim{opacity:.02}
+@keyframes v32FlowA{to{stroke-dashoffset:-286}}@keyframes v32FlowB{to{stroke-dashoffset:-198}}
+
+/* moving energy bead gives the feeling that data is traveling, not blinking */
+.v32-bead{fill:#d5fcff;opacity:.9;filter:url(#v31Glow);pointer-events:none}.v32-bead.stress{fill:#ffe0a1;filter:url(#v31GlowAmber)}
+
+/* simplify visual noise outside focus */
+body.v31-trace .edge-label:not(.active){opacity:.025}.node.dim{opacity:.065}.node.dim .node-name,.node.dim .node-value{fill:#40505e}
+.trace-controls{bottom:14px;padding:5px 6px;gap:5px}.trace-controls span{font-size:8px}.trace-controls button{font-size:8.5px;padding:6px 9px}.graph-banner{top:11%;font-size:9px;padding:8px 14px}
+
+/* dossier becomes a readable decision surface */
+.dossier{padding:14px 15px;background:rgba(8,13,19,.97)}.dossier-head .eyebrow{font-size:10px}.object-id{font-size:8px}.type-line{margin-top:14px}.type-pill,.owner-chip{font-size:9px;padding:4px 7px}.dossier h1{font-size:20px;line-height:1.22;margin:10px 0 2px}.object-value{margin-top:5px}.object-value>span{font-size:31px;letter-spacing:-.025em}.object-value small{font-size:10.5px}.state-row{font-size:10px;padding:8px 0}.state-row b{font-size:10.5px}.dossier-section{margin-top:15px}.section-head{font-size:10px;padding-bottom:7px}.evidence-item{grid-template-columns:17px 1fr auto;gap:8px;padding:6px 0}.evidence-item i{font-size:9px}.evidence-item span{font-size:10.8px;line-height:1.35}.evidence-item small{font-size:8px}.relation-item{grid-template-columns:16px 1fr auto;gap:7px;padding:5px 0}.relation-item span{font-size:10px}.relation-item b{font-size:8px}.provenance-grid{font-size:9px;row-gap:6px}.provenance-grid b{font-size:9.5px}.dossier-actions{gap:6px;margin-top:15px}.dossier-actions button{min-height:34px;font-size:9.5px;padding:6px}.compare-card{font-size:10px}
+
+/* temporal layer: read time before decoration */
+.temporal-bar{height:auto;background:rgba(8,13,19,.98)}.timeline-label{min-width:112px}.timeline-label b{font-size:10px}.time-point{font-size:9.5px}.activity-head .eyebrow{font-size:9px}.activity-line{font-size:9px;line-height:1.45}
+
+/* stronger first glance on 1440p, graceful fallback below */
+@media(max-width:1280px){.main-grid{grid-template-columns:184px minmax(0,1fr) 292px}.brand-block{min-width:280px}.version{display:none}.node-name{font-size:10px}.node-value{font-size:13px}.dossier h1{font-size:18px}.object-value>span{font-size:27px}}
+@media(max-width:1060px){.main-grid{grid-template-columns:170px minmax(0,1fr) 270px}.dossier{padding:11px 12px}.ontology-meta{display:none}}
+@media(prefers-reduced-motion:reduce){.v32-streamA,.v32-streamB{animation:none!important}}
