@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Next.js / frontend build
+.next/
+out/
+dist/
+build/
+.vercel/
+.netlify/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.*
+credentials.*
+
+# Internal / restricted data — never commit to public repo
+data/internal/
+data/private/
+data/raw-internal/
+internal-data/
+confidential/
+private/
+*.internal.csv
+*.internal.xlsx
+*.internal.parquet
+*.confidential.*
+
+# Local data / large generated outputs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+coverage/
+htmlcov/
+.cache/
+.tmp/
+tmp/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Notebook checkpoints
+.ipynb_checkpoints/
