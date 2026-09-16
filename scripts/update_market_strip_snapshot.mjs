@@ -86,3 +86,7 @@ await fs.mkdir(path.dirname(OUT),{recursive:true});
 await fs.writeFile(OUT,`${JSON.stringify(payload,null,2)}\n`,'utf8');
 console.log(`Wrote ${OUT}`);
 console.log(JSON.stringify({generatedAt:payload.generatedAt,validRows:valid,codes:items.filter(x=>x.price!==null).map(x=>x.code)},null,2));
+
+// Keep the ontology's current macro/rates inputs alive on the same schedule as the market tape.
+// This writes only public-source values and fails closed when a metric cannot be resolved.
+await import('./update_core_snapshot.mjs');
