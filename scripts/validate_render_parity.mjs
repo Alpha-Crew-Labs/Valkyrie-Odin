@@ -8,6 +8,7 @@ const pages=fs.readFileSync(path.join(root,'.github','workflows','pages.yml'),'u
 const tape=fs.readFileSync(path.join(dir,'market-strip.js'),'utf8');
 const liveCore=fs.readFileSync(path.join(dir,'live-core.js'),'utf8');
 const coreCollector=fs.readFileSync(path.join(root,'scripts','update_core_snapshot.mjs'),'utf8');
+const bokCollector=fs.readFileSync(path.join(root,'scripts','update_bok_rate.mjs'),'utf8');
 const tapeCollector=fs.readFileSync(path.join(root,'scripts','update_market_strip_snapshot.mjs'),'utf8');
 let failed=false;
 const assert=(cond,msg)=>{if(cond)console.log(`✓ ${msg}`);else{console.error(`✗ ${msg}`);failed=true;}};
@@ -30,6 +31,7 @@ assert(!/currentdownload-|rev=[0-9a-f]{7,40}/i.test(html),'source HTML does not 
 assert(pages.includes("s/__BUILD_REV__/${BUILD_REV}/g"),'Pages deploy replaces render revision with the current commit');
 assert(pages.includes("grep -q '__BUILD_REV__' _site/v3/index.html"),'Pages deploy fails if a revision placeholder leaks to production');
 assert(pages.includes('update_market_strip_snapshot.mjs'),'Pages deploy refreshes the market tape snapshot fallback');
+assert(pages.includes("'scripts/update_core_snapshot.mjs'")&&pages.includes("'scripts/update_bok_rate.mjs'"),'Pages deploy watches live core and BOK collector changes');
 
 assert(tape.includes('securityService/integration/indicators'),'market tape reads the consolidated Naver/Npay indicators endpoint');
 for(const code of ['KOSPI','KOSDAQ','KPI200','.DJI','.INX','FX_USDKRW','.IXIC','GCcv1','CLcv1'])assert(tape.includes(code),`market tape includes ${code}`);
@@ -41,10 +43,12 @@ assert(tape.includes("live-core.js?v=2611"),'market tape loads the live ontology
 assert(liveCore.includes("SNAPSHOT='./data/core-live.json'"),'live ontology reads the same-origin public-data snapshot');
 assert(liveCore.includes("MODEL · PUBLIC FEED PENDING")&&liveCore.includes('STRUCTURAL SNAPSHOT'),'unsupported ontology outputs stay explicitly tagged instead of being faked live');
 assert(tapeCollector.includes("import('./update_core_snapshot.mjs')"),'scheduled market-tape refresh also refreshes the ontology live snapshot');
+assert(tapeCollector.includes("import('./update_bok_rate.mjs')"),'scheduled refresh also resolves the BOK policy rate');
 for(const endpoint of ['bondList?countryCode=USA','bondList?countryCode=KOR','standardInterestList','domesticInterestList'])assert(coreCollector.includes(endpoint),`core collector includes Naver/Npay ${endpoint}`);
 for(const series of ['CPIAUCSL','NGDPRSAXDCKRQ','GDPC1','DFF','STLFSI4'])assert(coreCollector.includes(series),`core collector includes public FRED series ${series}`);
 assert(coreCollector.includes('disclosures_intraday.json'),'core collector includes the public DART disclosure feed');
 assert(coreCollector.includes('if(liveCount<4)throw'),'core collector fails closed when too few public metrics resolve');
+assert(bokCollector.includes('standardInterestList')&&bokCollector.includes('keeping DATA PENDING'),'BOK collector uses public Naver/Npay data and fails closed');
 
 if(failed){console.error('\nVALKYRIE render-parity validation FAILED.');process.exit(1);}
 console.log('\nVALKYRIE render-parity validation PASSED.');
