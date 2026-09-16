@@ -8,7 +8,7 @@ document.getElementById("rst").addEventListener("click",function(){clearSeq();re
 (function hover(){var gs=document.querySelectorAll(".nrow");for(var i=0;i<gs.length;i++){gs[i].addEventListener("mouseenter",function(){var id=this.getAttribute("data-id"),n=NM[id],w=n.T?TW:NW,h=n.T?TH:NH;});gs[i].addEventListener("mouseleave",function(){});gs[i].addEventListener("click",function(){select(this.getAttribute("data-id"));});};}());
 var tabsEl=document.querySelectorAll(".tab");for(var i=0;i<tabsEl.length;i++)tabsEl[i].addEventListener("click",function(){switchTab(this.getAttribute("data-t"));});
 /* MACRO STREAMLIT BUTTON */
-document.getElementById("macroBtn").addEventListener("click",function(){window.location.href="http://localhost:8501";});
+document.getElementById("macroBtn").addEventListener("click",function(){window.location.href="https://quantterminalpro2-h2dxkxcunskzfta9ffgyci.streamlit.app/";});
 var chips=document.querySelectorAll(".chip");for(var i=0;i<chips.length;i++)chips[i].addEventListener("click",function(){if(replaying)return;var q=this.getAttribute("data-q"),nid=this.getAttribute("data-n")||"sig_rates";clearSeq();resetChain(false);select(nid,{sweep:true});});
 document.getElementById("ci").addEventListener("keydown",function(e){if(e.key!=="Enter")return;var v=this.value,nid=/채권|듀레이션|커브|금리 포지션/.test(v)?"sig_rates":(/IPO|청약|신주|시장/.test(v)?"sig_equity":"macro_cpi");clearSeq();resetChain(false);select(nid,{sweep:true});this.value="";});
 function post(){try{parent.postMessage({type:"wrks:viz:resize",height:document.documentElement.scrollHeight},"*");}catch(err){}}
