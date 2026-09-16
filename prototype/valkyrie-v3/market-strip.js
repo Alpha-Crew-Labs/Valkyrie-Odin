@@ -126,4 +126,13 @@
 
   load();
   setInterval(load,REFRESH_MS);
+
+  // The live ontology bridge shares this script's deploy revision so web/download rendering stays in lockstep.
+  var selfSrc=(document.currentScript&&document.currentScript.src)||'';
+  var rev='';
+  try{rev=new URL(selfSrc,location.href).searchParams.get('rev')||'';}catch(e){}
+  var core=document.createElement('script');
+  core.src='./live-core.js?v=2611'+(rev?'&rev='+encodeURIComponent(rev):'');
+  core.async=false;
+  document.head.appendChild(core);
 })();
