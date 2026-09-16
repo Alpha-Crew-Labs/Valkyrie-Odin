@@ -40,15 +40,15 @@ assert(!hasInline || html.includes("style-src 'self' 'unsafe-inline'"),'CSP pres
 assert(html.includes('https://stock.naver.com'),'CSP allows Naver/Npay Stock live indicator and theme origin');
 assert(html.includes('./market-strip.css?v=2610&rev=__BUILD_REV__'),'market tape stylesheet uses deploy-time revision placeholder');
 assert(html.includes('./market-strip.js?v=2610&rev=__BUILD_REV__'),'market tape runtime uses deploy-time revision placeholder');
-assert(html.includes('./theme-equity.css?v=2612&rev=__BUILD_REV__'),'theme stylesheet uses deploy-time revision placeholder');
-assert(html.includes('./theme-equity.js?v=2612&rev=__BUILD_REV__'),'theme runtime uses deploy-time revision placeholder');
+assert(html.includes('./theme-equity.css?v=2613&rev=__BUILD_REV__'),'theme stylesheet uses deploy-time revision placeholder');
+assert(html.includes('./theme-equity.js?v=2613&rev=__BUILD_REV__'),'theme runtime uses deploy-time revision placeholder');
 assert(html.includes('id="marketStrip"')&&html.includes('id="marketStripTrack"'),'market tape DOM is part of the canonical page shell');
 
 const assets=[
   'styles.css?v=2601','mobile.css?v=2602','quant-hk.css?v=2603','equity-yc.css?v=2606',
-  'live-equity.css?v=2606','live-equity-extra.css?v=2607','theme-equity.css?v=2612','market-strip.css?v=2610',
+  'live-equity.css?v=2606','live-equity-extra.css?v=2607','theme-equity.css?v=2613','market-strip.css?v=2610',
   'data-core.js?v=2601','view.js?v=2601','interaction.js?v=2606','quant-hk.js?v=2603',
-  'equity-yc.js?v=2606','live-equity.js?v=2609','theme-equity.js?v=2612','market-strip.js?v=2610'
+  'equity-yc.js?v=2606','live-equity.js?v=2609','theme-equity.js?v=2613','market-strip.js?v=2610'
 ];
 for(const asset of assets)assert(html.includes(`./${asset}&rev=__BUILD_REV__`),`canonical asset shares deploy revision: ${asset}`);
 assert(!/currentdownload-|rev=[0-9a-f]{7,40}/i.test(html),'source HTML does not pin a stale fixed render revision');
@@ -64,12 +64,15 @@ assert(tape.includes("SNAPSHOT='./data/market-strip.json'"),'market tape has sam
 assert(tape.includes("mode:'DATA_PENDING'"),'market tape fails closed to DATA PENDING instead of fake live data');
 for(const fake of ['6,711.45','815.47','52,093.11','7,585.73','25,981.57','4,365.00','104.71'])assert(!tape.includes(fake),`market tape does not hardcode display price ${fake}`);
 
-assert(theme.includes("BASE='https://stock.naver.com/api/domestic/market/theme'"),'Equity theme runtime uses Naver/Npay public theme API');
-assert(theme.includes("'/list?startIdx='")&&theme.includes("'/stocklist?marketType=ALL&orderType=quantTop"),'theme runtime reads both ranking and constituent endpoints');
+assert(theme.includes("BASE='https://stock.naver.com/api/domestic/market/theme'")&&theme.includes("RANK='https://stock.naver.com/api/stockSecurity/rankings/v2/domestic/themes'"),'Equity theme runtime uses public Naver/Npay ranking and constituent APIs');
+assert(theme.includes('sortType=changeRate&size=100&excludeCodes=25&period=daily')&&theme.includes('raw&&raw.hasNext===true')&&theme.includes('raw.cursor'),'theme runtime cursor-paginates the full daily theme universe');
+assert(theme.includes("'/stocklist?marketType=ALL&orderType=quantTop"),'theme runtime reads selected theme constituents');
 assert(theme.includes("SNAPSHOT='./data/theme-pulse.json'"),'theme runtime has same-origin public snapshot fallback');
 assert(theme.includes("STATE.mode='DATA_PENDING'")||theme.includes("mode:'DATA_PENDING'"),'theme runtime fails closed to DATA PENDING');
-assert(themeCollector.includes('/list?startIdx=')&&themeCollector.includes('/stocklist?marketType=ALL&orderType=quantTop'),'theme collector refreshes rankings and constituents from public Naver/Npay endpoints');
-assert(themeCollector.includes('No fabricated fallback')||themeCollector.includes('no fabricated fallback'),'theme collector explicitly rejects fabricated fallback data');
+assert(theme.includes('!r.top.length||!r.bottom.length'),'theme runtime rejects incomplete universes without both gainers and losers');
+assert(themeCollector.includes('stockSecurity/rankings/v2/domestic/themes')&&themeCollector.includes('raw?.hasNext===true')&&themeCollector.includes('raw?.cursor'),'theme collector cursor-paginates public Naver/Npay rankings');
+assert(themeCollector.includes('/stocklist?marketType=ALL&orderType=quantTop'),'theme collector refreshes real constituent stocks');
+assert(themeCollector.includes('!top.length||!bottom.length')&&themeCollector.includes('no fabricated fallback'),'theme collector refuses snapshots that lack gainers or losers and never fabricates fallback data');
 
 assert(tape.includes("live-core.js?v=2611"),'market tape loads the live ontology bridge with the deploy revision');
 assert(liveCore.includes("SNAPSHOT='./data/core-live.json'"),'live ontology reads the same-origin public-data snapshot');
