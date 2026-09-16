@@ -183,3 +183,83 @@
   .hkq-section{font-size:8.5px;margin-top:7px}
   .hkq-rail{display:none}
 }
+
+/* =========================================================
+   DENSE LOWER RESEARCH WORKBENCH
+   Recreates the compact MACRO/RATES/EQUITY panel composition
+   from the preferred reference screenshot. Layout only.
+   Ontology nodes, SVG edges, and animation code are untouched.
+   ========================================================= */
+@media(min-width:1100px) and (orientation:landscape){
+  body .app{
+    grid-template-rows:
+      44px
+      60px
+      clamp(392px,43vh,520px)
+      42px
+      clamp(286px,30vh,330px)
+      42px;
+  }
+
+  .mw{
+    min-height:0!important;
+    height:auto!important;
+    grid-template-rows:32px minmax(0,1fr)!important;
+    overflow:hidden;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.012);
+  }
+  .tabs{min-height:0}
+  .tab{padding:0 16px;gap:8px}
+  .tabsp{padding:0 10px;gap:10px}
+
+  .pane{
+    min-height:0!important;
+    height:auto!important;
+    max-height:none!important;
+    padding:7px!important;
+    overflow:hidden!important;
+  }
+  .pane>div{
+    grid-template-columns:minmax(0,1fr) clamp(248px,15.5vw,310px)!important;
+    gap:6px!important;
+    min-height:0!important;
+    height:100%!important;
+  }
+  .pane>div>div{min-height:0!important}
+  .g4{gap:6px!important;height:100%!important;min-height:0!important}
+  .cd{padding:7px 8px!important;min-width:0;min-height:0;overflow:hidden}
+  .cdh{margin-bottom:5px!important;padding-bottom:4px!important}
+  .kv{padding:3px 0!important}
+  .tb th{padding:3px 4px!important}
+  .tb td{padding:3.2px 4px!important}
+  .sc{padding:3px 0!important;gap:5px!important}
+  .note{margin-top:4px;line-height:1.42}
+  .ins{gap:5px!important;min-height:0!important;overflow:hidden!important}
+
+  .ft{
+    min-height:42px!important;
+    height:42px!important;
+    background:#090D13;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.012);
+  }
+  .ft .fc{padding:0 10px;gap:7px}
+  .tl{padding:0 18px}
+  .ax{left:18px;right:18px}
+  .tk i{width:6px;height:6px}
+  .tkl{top:calc(50% + 9px)}
+}
+
+@media(min-width:1600px) and (orientation:landscape) and (min-height:900px){
+  body .app{
+    grid-template-rows:
+      44px
+      60px
+      clamp(420px,43vh,520px)
+      42px
+      clamp(300px,29vh,340px)
+      42px;
+  }
+  .pane{padding:8px!important}
+  .cd{padding:8px 9px!important}
+  .pane>div{grid-template-columns:minmax(0,1fr) clamp(270px,15vw,320px)!important}
+}
