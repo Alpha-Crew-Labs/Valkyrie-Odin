@@ -18,9 +18,12 @@
 .market-strip-price{font-size:10.5px;font-weight:800;letter-spacing:.015em;color:#E7EEF7}
 .market-strip-change{font-size:8.7px;font-weight:800;letter-spacing:.015em}
 .market-strip-dot{width:4px;height:4px;border-radius:50%;align-self:center;margin-left:1px}
-.market-strip-item.up .market-strip-change,.market-strip-item.up .market-strip-dot{color:#31F28B;background:#31F28B;text-shadow:0 0 8px rgba(49,242,139,.22);box-shadow:0 0 8px rgba(49,242,139,.38)}
-.market-strip-item.down .market-strip-change,.market-strip-item.down .market-strip-dot{color:#FF607A;background:#FF607A;text-shadow:0 0 8px rgba(255,96,122,.2);box-shadow:0 0 8px rgba(255,96,122,.35)}
-.market-strip-item.flat .market-strip-change,.market-strip-item.flat .market-strip-dot{color:#8793A3;background:#657182}
+.market-strip-item.up .market-strip-change{color:#31F28B;text-shadow:0 0 8px rgba(49,242,139,.22)}
+.market-strip-item.up .market-strip-dot{background:#31F28B;box-shadow:0 0 8px rgba(49,242,139,.38)}
+.market-strip-item.down .market-strip-change{color:#FF607A;text-shadow:0 0 8px rgba(255,96,122,.2)}
+.market-strip-item.down .market-strip-dot{background:#FF607A;box-shadow:0 0 8px rgba(255,96,122,.35)}
+.market-strip-item.flat .market-strip-change{color:#8793A3}
+.market-strip-item.flat .market-strip-dot{background:#657182}
 .market-strip-item.pending .market-strip-price,.market-strip-item.pending .market-strip-change{color:#4A5564}
 .market-strip-sep{width:1px;height:9px;background:#17212B}
 .market-strip-loading{font-size:7.5px;letter-spacing:.16em;color:#46515F;white-space:nowrap}
