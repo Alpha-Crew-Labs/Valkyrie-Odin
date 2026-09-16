@@ -1,6 +1,6 @@
 /* VALKYRIE · live macro/rates ontology bridge
  * Replaces API-available demo values in the latest snapshot with public-data inputs.
- * Historical replay remains a historical/demo archive; unsupported model outputs stay explicitly tagged MODEL/SNAPSHOT.
+ * Historical replay remains an archive; current mode fails closed to DATA PENDING when public data is unavailable.
  */
 (function(){
   'use strict';
@@ -29,22 +29,24 @@
   }
   function setValue(v,key,val){if(val!==null)v[key]=val;}
   function liveRateDecision(m){
-    var c=n(m.ktb3s10sBp),cr=n(m.creditAa3ySpreadBp);
-    if(c!==null&&c<0)return ['CURVE INVERTED',78,'장단기 역전 · 듀레이션 방어'];
-    if(c!==null&&c>=25&&cr!==null&&cr<100)return ['STEEPENING',82,'3s10s '+signed(c,0,'bp')+' · 크레딧 안정'];
-    return ['CURVE WATCH',74,'금리·크레딧 실시간 확인'];
+    var c=n(m.ktb3s10sBp),cr=n(m.creditAa3ySpreadBp),uc=n(m.ust2s10sBp),hy=n(m.usHyOasBp);
+    var global='US 2s10s '+(uc===null?'—':signed(uc,0,'bp'))+' · HY '+(hy===null?'—':Math.round(hy)+'bp');
+    if(c!==null&&c<0)return ['CURVE INVERTED',78,'KR 3s10s '+signed(c,0,'bp')+' · '+global];
+    if(c!==null&&c>=25&&cr!==null&&cr<100)return ['STEEPENING',82,'KR 3s10s '+signed(c,0,'bp')+' · '+global];
+    return ['CURVE WATCH',74,global];
   }
   function liveMacroDecision(m){
-    var c=n(m.usCpiYoy),f=n(m.fedFunds);
-    if(c!==null&&c<=2.5)return ['DISINFLATION',80,'US CPI '+c.toFixed(1)+'% · FED '+(f===null?'—':f.toFixed(2)+'%')];
-    if(c!==null&&c>=3.2)return ['INFLATION WATCH',78,'US CPI '+c.toFixed(1)+'% · 긴축 경계'];
-    return ['LIVE MACRO',76,'공개 API · CPI / GDP / 정책금리'];
+    var c=n(m.usCpiYoy),f=n(m.fedFunds),bei=n(m.breakeven10y),vix=n(m.vix);
+    var market='BEI '+(bei===null?'—':bei.toFixed(2)+'%')+' · VIX '+(vix===null?'—':vix.toFixed(1));
+    if(c!==null&&c<=2.5)return ['DISINFLATION',80,'US CPI '+c.toFixed(1)+'% · '+market];
+    if((c!==null&&c>=3.2)||(bei!==null&&bei>=2.6))return ['INFLATION WATCH',78,'CPI '+(c===null?'—':c.toFixed(1)+'%')+' · '+market];
+    return ['LIVE MACRO',76,'FED '+(f===null?'—':f.toFixed(2)+'%')+' · '+market];
   }
   function liveEquityDecision(m){
-    var s=n(m.kosdaqRiskScore),b=n(m.kosdaqBreadthPct);
-    if(s===null)return ['MARKET LIVE',70,'KOSPI·KOSDAQ API'];
+    var s=n(m.kosdaqRiskScore),b=n(m.kosdaqBreadthPct),vix=n(m.vix);
+    if(s===null)return ['MARKET LIVE',70,'KOSPI·KOSDAQ API · VIX '+(vix===null?'—':vix.toFixed(1))];
     var t=s>=63?'RISK-ON':s<=37?'RISK-OFF':'NEUTRAL';
-    return [t,76,'KOSDAQ PULSE '+Math.round(s)+'/100 · BREADTH '+(b===null?'—':Math.round(b)+'%')];
+    return [t,76,'KOSDAQ '+Math.round(s)+'/100 · BREADTH '+(b===null?'—':Math.round(b)+'%')+' · VIX '+(vix===null?'—':vix.toFixed(1))];
   }
   function updateTimeline(date){
     var ticks=document.querySelectorAll('.tk'); if(!ticks.length)return;
@@ -53,29 +55,42 @@
     if(tip&&date)tip.innerHTML=esc(date)+' · LIVE PUBLIC API<br>NAVER/NPAY · FRED · DART';
   }
   function applyNodeLabels(m){
+    var bei=n(m.breakeven10y),uc=n(m.ust2s10sBp),hy=n(m.usHyOasBp);
     setNodeMeta('mac_gdp','KR REAL GDP','YoY · IMF/FRED');
-    setNodeMeta('mac_uscpi','US CPI','YoY · BLS/FRED');
+    setNodeMeta('mac_uscpi','US CPI','YoY · 10Y BEI '+(bei===null?'PENDING':bei.toFixed(2)+'%'));
     setNodeMeta('mac_krcpi','KR CPI MODEL','MODEL · PUBLIC FEED PENDING');
     setNodeMeta('mac_fed','FED FUNDS','Effective · FRED');
     setNodeMeta('mac_bok','BOK 기준금리','NAVER/NPAY');
-    setNodeMeta('rat_ust','UST 10Y','NAVER/NPAY');
+    setNodeMeta('rat_ust','UST 10Y','US 2s10s '+(uc===null?'PENDING':signed(uc,0,'bp')));
     setNodeMeta('rat_ktb','국고 3Y',m.ktb10y!==null?'10Y '+Number(m.ktb10y).toFixed(2)+'%':'10Y DATA PENDING');
     setNodeMeta('rat_curve','3s10s CURVE','국고 10Y - 3Y');
-    setNodeMeta('rat_credit','CREDIT AA- 3Y','회사채 AA- - 국고 3Y');
+    setNodeMeta('rat_credit','CREDIT AA- 3Y','US HY OAS '+(hy===null?'PENDING':Math.round(hy)+'bp'));
     setNodeMeta('eq_fin','적자·차입 구조','STRUCTURAL SNAPSHOT');
     setNodeMeta('eq_val','코스닥 할인율','MODEL · RATE-LINKED');
-    setNodeMeta('eq_cb','CB 조달 · PUT','STRUCTURAL SNAPSHOT');
-    setNodeMeta('eq_ipo','IPO DEMAND','STRUCTURAL SNAPSHOT');
+    setNodeMeta('eq_cb','CB 조달 · PUT','PUBLIC DART + STRUCTURAL');
+    setNodeMeta('eq_ipo','IPO DEMAND','PUBLIC DART + MARKET');
+  }
+  function addLiveNote(card,text){
+    if(!card||card.querySelector('.live-core-extra'))return;
+    var d=document.createElement('div');d.className='note live-core-extra';d.style.marginTop='6px';d.textContent=text;card.appendChild(d);
   }
   function decoratePane(){
     if(typeof curTab==='undefined')return;
+    var m=STATE.data&&STATE.data.metrics?STATE.data.metrics:null;
     var cards=document.querySelectorAll('#pane .cd');
     for(var i=0;i<cards.length;i++){
       var t=cards[i].querySelector('.cdt'),o=cards[i].querySelector('.cdo'); if(!t)continue;
-      if(t.textContent.trim()==='GDP NOWCAST'){t.textContent='REAL GDP · LIVE MACRO';if(o)o.textContent='FRED · PUBLIC DATA';}
-      if(t.textContent.trim()==='TAYLOR RULE GAP'){if(o)o.textContent='MODEL · LIVE INPUTS';}
-      if(t.textContent.trim()==='SCENARIO MATRIX'){if(o)o.textContent='MODEL · LIVE INPUTS';}
-      if(t.textContent.trim()==='CREDIT AA- 3Y'){if(o)o.textContent='NAVER/NPAY · LIVE';}
+      var title=t.textContent.trim();
+      if(title==='GDP NOWCAST'||title==='REAL GDP · LIVE MACRO'){
+        t.textContent='REAL GDP · LIVE MACRO';if(o)o.textContent='FRED · PUBLIC DATA';
+        if(m)addLiveNote(cards[i],'10Y BEI '+(n(m.breakeven10y)===null?'DATA PENDING':n(m.breakeven10y).toFixed(2)+'%')+' · VIX '+(n(m.vix)===null?'DATA PENDING':n(m.vix).toFixed(1))+' · USD BROAD '+(n(m.broadDollarIndex)===null?'DATA PENDING':n(m.broadDollarIndex).toFixed(2)));
+      }
+      if(title==='TAYLOR RULE GAP'){if(o)o.textContent='MODEL · LIVE INPUTS';}
+      if(title==='SCENARIO MATRIX'){if(o)o.textContent='MODEL · LIVE INPUTS';}
+      if(title==='CREDIT AA- 3Y'){
+        if(o)o.textContent='NAVER/NPAY + FRED · LIVE';
+        if(m)addLiveNote(cards[i],'US HY OAS '+(n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp')+' · US 2s10s '+(n(m.ust2s10sBp)===null?'DATA PENDING':signed(n(m.ust2s10sBp),0,'bp'))+' · VIX '+(n(m.vix)===null?'DATA PENDING':n(m.vix).toFixed(1)));
+      }
     }
   }
   function installPaneDecorator(){
@@ -86,6 +101,23 @@
     var el=document.getElementById('asof'); if(!el)return;
     var paint=function(){if(STATE.asOfLabel&&el.textContent!==STATE.asOfLabel)el.textContent=STATE.asOfLabel;};
     new MutationObserver(paint).observe(el,{childList:true,characterData:true,subtree:true});paint();
+  }
+  function failClosed(reason){
+    var ids=['mac_gdp','mac_uscpi','mac_fed','mac_bok','rat_ust','rat_ktb','rat_curve','rat_credit'];
+    for(var i=0;i<ids.length;i++){
+      var e=window.NEL&&NEL[ids[i]];if(!e)continue;
+      if(e.v)e.v.textContent='DATA PENDING';
+      if(e.s)e.s.textContent='PUBLIC API UNAVAILABLE';
+    }
+    if(typeof si!=='undefined'&&si===4){
+      var b1=document.getElementById('bf1'),b2=document.getElementById('bf2'),b3=document.getElementById('bf3');
+      if(b1)b1.textContent='PUBLIC API DATA PENDING';
+      if(b2)b2.textContent='현재값을 샘플 숫자로 대체하지 않습니다';
+      if(b3)b3.textContent='LIVE DATA REQUIRED';
+    }
+    STATE.asOfLabel='DATA PENDING · PUBLIC API';observeAsOf();
+    var lv=document.getElementById('lvt');if(lv)lv.textContent='DATA PENDING';
+    var fd=document.getElementById('fd');if(fd)fd.textContent='CORE LIVE DATA PENDING · NO FABRICATED FALLBACK'+(reason?' · '+reason:'');
   }
   function hydrate(payload){
     if(!payload||!payload.ok||!payload.metrics)throw new Error('core live snapshot unavailable');
@@ -103,6 +135,11 @@
     SNAP[4].x.usg=n(m.usRealGdpYoy)!==null?n(m.usRealGdpYoy):SNAP[4].x.usg;
     SNAP[4].x.k10=n(m.ktb10y)!==null?n(m.ktb10y):SNAP[4].x.k10;
     SNAP[4].x.fs=n(m.financialStressIndex)!==null?n(m.financialStressIndex):SNAP[4].x.fs;
+    SNAP[4].x.bei=n(m.breakeven10y);
+    SNAP[4].x.us2s10s=n(m.ust2s10sBp);
+    SNAP[4].x.vix=n(m.vix);
+    SNAP[4].x.hy=n(m.usHyOasBp);
+    SNAP[4].x.usd=n(m.broadDollarIndex);
 
     var liveDate=(payload.generatedAtKst||'').slice(0,10)||new Date().toISOString().slice(0,10);
     SNAP[4].d=liveDate;
@@ -115,19 +152,19 @@
     if(n(m.ktb3s10sBp)!==null&&n(m.ktb3s10sBp)<0)alerts.push('rat_curve');
     SNAP[4].al=alerts;SNAP[4].n=Math.max(1,alerts.length);
     SNAP[4].bf=[
-      'US CPI '+(n(m.usCpiYoy)===null?'DATA PENDING':n(m.usCpiYoy).toFixed(1)+'%')+' · PUBLIC API',
-      'UST '+(n(m.ust10y)===null?'—':n(m.ust10y).toFixed(2)+'%')+' → 국고 3Y '+(n(m.ktb3y)===null?'—':n(m.ktb3y).toFixed(2)+'%')+' · 3s10s '+(n(m.ktb3s10sBp)===null?'—':signed(n(m.ktb3s10sBp),0,'bp')),
-      'LIVE INPUT '+payload.liveMetricCount+'개 · MODEL/SNAPSHOT 출력은 별도 태그'
+      'US CPI '+(n(m.usCpiYoy)===null?'DATA PENDING':n(m.usCpiYoy).toFixed(1)+'%')+' · 10Y BEI '+(n(m.breakeven10y)===null?'—':n(m.breakeven10y).toFixed(2)+'%')+' · VIX '+(n(m.vix)===null?'—':n(m.vix).toFixed(1)),
+      'UST 10Y '+(n(m.ust10y)===null?'—':n(m.ust10y).toFixed(2)+'%')+' · US 2s10s '+(n(m.ust2s10sBp)===null?'—':signed(n(m.ust2s10sBp),0,'bp'))+' → KR 3s10s '+(n(m.ktb3s10sBp)===null?'—':signed(n(m.ktb3s10sBp),0,'bp')),
+      'US HY OAS '+(n(m.usHyOasBp)===null?'—':Math.round(n(m.usHyOasBp))+'bp')+' · LIVE INPUT '+payload.liveMetricCount+'개 · MODEL/SNAPSHOT 별도 태그'
     ];
 
     AV.mac_gdp='IMF IFS 실질 GDP를 FRED 공개 CSV로 수집해 전년동기 대비로 계산합니다.';
-    AV.mac_uscpi='BLS CPI 지수를 FRED 공개 CSV로 수집해 전년동월 대비로 계산합니다.';
+    AV.mac_uscpi='BLS CPI 전년비와 FRED T10YIE 10년 기대인플레이션을 함께 확인합니다.';
     AV.mac_fed='FRED DFF의 Effective Federal Funds Rate 최신 관측치입니다.';
     AV.mac_bok='Naver/Npay 공개 marketIndex 기준금리 피드의 한국 정책금리입니다.';
-    AV.rat_ust='Naver/Npay 공개 미국 국채 수익률 피드의 10년물입니다.';
+    AV.rat_ust='Naver/Npay UST 10Y를 주값으로 쓰고 FRED DGS2/DGS10 2s10s 커브를 교차 확인합니다.';
     AV.rat_ktb='Naver/Npay 공개 한국 국채 수익률 피드의 3년물입니다.';
     AV.rat_curve='Naver/Npay 국고 10년물 - 3년물로 계산한 실시간 커브 스프레드입니다.';
-    AV.rat_credit='Naver/Npay 국내금리 피드의 회사채 AA- 3년 수익률에서 국고 3년을 차감한 값입니다.';
+    AV.rat_credit='한국 AA- 3년 스프레드와 FRED ICE BofA US HY OAS를 함께 확인해 글로벌 크레딧 상태를 교차 점검합니다.';
 
     applyNodeLabels(m);
     if(si===4){cur=SNAP[4];for(var k in FM)V[k]=cur.v[k];apply(0);}
@@ -137,7 +174,7 @@
     STATE.asOfLabel=stamp+' · PUBLIC API';observeAsOf();
     var sn=document.getElementById('snl');if(sn)sn.textContent=liveDate;
     var lv=document.getElementById('lvt');if(lv)lv.textContent='LIVE API';
-    var fd=document.getElementById('fd');if(fd)fd.textContent='NAVER/NPAY · FRED · DART · '+payload.liveMetricCount+' LIVE METRICS';
+    var fd=document.getElementById('fd');if(fd)fd.textContent='NAVER/NPAY · FRED H.15/CBOE/ICE · DART · '+payload.liveMetricCount+' LIVE METRICS';
     var ov=document.querySelector('.ovl .ml2');if(ov)ov.textContent='관계 = 사전 정의 온톨로지 · 값 = PUBLIC API 우선 · MODEL/SNAPSHOT 별도 태그';
     updateTimeline(liveDate);
   }
@@ -146,7 +183,7 @@
     STATE.status='loading';
     try{
       var p=await getJson(SNAPSHOT+'?t='+Date.now());STATE.data=p;hydrate(p);STATE.status='ready';STATE.error=null;
-    }catch(e){STATE.status='error';STATE.error=String(e&&e.message||e);var fd=document.getElementById('fd');if(fd)fd.textContent='CORE LIVE DATA PENDING · MODEL/SNAPSHOT VALUES TAGGED';}
+    }catch(e){STATE.status='error';STATE.error=String(e&&e.message||e);failClosed('PUBLIC SNAPSHOT UNAVAILABLE');}
   }
   start();
   setInterval(start,600000);
