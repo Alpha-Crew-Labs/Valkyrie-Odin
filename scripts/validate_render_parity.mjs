@@ -6,6 +6,9 @@ const dir=path.join(root,'prototype','valkyrie-v3');
 const html=fs.readFileSync(path.join(dir,'index.html'),'utf8');
 const pages=fs.readFileSync(path.join(root,'.github','workflows','pages.yml'),'utf8');
 const tape=fs.readFileSync(path.join(dir,'market-strip.js'),'utf8');
+const liveCore=fs.readFileSync(path.join(dir,'live-core.js'),'utf8');
+const coreCollector=fs.readFileSync(path.join(root,'scripts','update_core_snapshot.mjs'),'utf8');
+const tapeCollector=fs.readFileSync(path.join(root,'scripts','update_market_strip_snapshot.mjs'),'utf8');
 let failed=false;
 const assert=(cond,msg)=>{if(cond)console.log(`✓ ${msg}`);else{console.error(`✗ ${msg}`);failed=true;}};
 
@@ -33,6 +36,15 @@ for(const code of ['KOSPI','KOSDAQ','KPI200','.DJI','.INX','FX_USDKRW','.IXIC','
 assert(tape.includes("SNAPSHOT='./data/market-strip.json'"),'market tape has same-origin last-good snapshot fallback');
 assert(tape.includes("mode:'DATA_PENDING'"),'market tape fails closed to DATA PENDING instead of fake live data');
 for(const fake of ['6,711.45','815.47','52,093.11','7,585.73','25,981.57','4,365.00','104.71'])assert(!tape.includes(fake),`market tape does not hardcode display price ${fake}`);
+
+assert(tape.includes("live-core.js?v=2611"),'market tape loads the live ontology bridge with the deploy revision');
+assert(liveCore.includes("SNAPSHOT='./data/core-live.json'"),'live ontology reads the same-origin public-data snapshot');
+assert(liveCore.includes("MODEL · PUBLIC FEED PENDING")&&liveCore.includes('STRUCTURAL SNAPSHOT'),'unsupported ontology outputs stay explicitly tagged instead of being faked live');
+assert(tapeCollector.includes("import('./update_core_snapshot.mjs')"),'scheduled market-tape refresh also refreshes the ontology live snapshot');
+for(const endpoint of ['bondList?countryCode=USA','bondList?countryCode=KOR','standardInterestList','domesticInterestList'])assert(coreCollector.includes(endpoint),`core collector includes Naver/Npay ${endpoint}`);
+for(const series of ['CPIAUCSL','NGDPRSAXDCKRQ','GDPC1','DFF','STLFSI4'])assert(coreCollector.includes(series),`core collector includes public FRED series ${series}`);
+assert(coreCollector.includes('disclosures_intraday.json'),'core collector includes the public DART disclosure feed');
+assert(coreCollector.includes('if(liveCount<4)throw'),'core collector fails closed when too few public metrics resolve');
 
 if(failed){console.error('\nVALKYRIE render-parity validation FAILED.');process.exit(1);}
 console.log('\nVALKYRIE render-parity validation PASSED.');
