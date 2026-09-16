@@ -1,6 +1,7 @@
 /* VALKYRIE · YC Equity integration layer
  * Public-data only. No personal API key, Vercel function, private proxy, or fabricated live value.
  * IPO/CB funding pulse is derived from the public aikstockdata DART disclosure feed.
+ * Surface labels: IPO Market Report · CB Zero Finder.
  * RETIRED MIGRATION MARKERS ONLY, never fetched or rendered: ipo-market-report.vercel.app · cb-zero-finder.vercel.app
  * RETIRED SNAPSHOT MARKER ONLY, never rendered as current data: 덕산넵코어스 · 20260915000085
  */
