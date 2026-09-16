@@ -8,6 +8,7 @@ on:
       - 'prototype/valkyrie-v2.5/**'
       - 'prototype/valkyrie-v3/**'
       - 'scripts/update_equity_snapshot.mjs'
+      - 'scripts/update_market_strip_snapshot.mjs'
       - '.github/workflows/pages.yml'
   schedule:
     # Near-live Korean market snapshot. 09:00~16:59 KST, weekdays; GitHub cron may be delayed.
@@ -47,6 +48,15 @@ jobs:
         if: steps.equity_snapshot.outcome != 'success'
         run: echo 'Naver market refresh failed. Deploying repository fallback; IPO/CB structural signals remain independent.'
 
+      - name: Refresh Naver/Npay market tape snapshot
+        id: market_strip_snapshot
+        continue-on-error: true
+        run: node scripts/update_market_strip_snapshot.mjs
+
+      - name: Report Market Tape snapshot fallback
+        if: steps.market_strip_snapshot.outcome != 'success'
+        run: echo 'Naver/Npay indicator refresh failed. Market tape will use direct browser fetch or DATA PENDING fallback.'
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -56,6 +66,12 @@ jobs:
           mkdir -p _site/v3
           cp -R prototype/valkyrie-v2.5/. _site/
           cp -R prototype/valkyrie-v3/. _site/v3/
+          BUILD_REV="${GITHUB_SHA::12}"
+          sed -i "s/__BUILD_REV__/${BUILD_REV}/g" _site/v3/index.html
+          if grep -q '__BUILD_REV__' _site/v3/index.html; then
+            echo 'ERROR: unresolved VALKYRIE render revision placeholder'
+            exit 1
+          fi
           touch _site/.nojekyll
 
       - name: Upload VALKYRIE site artifact

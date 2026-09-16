@@ -9,7 +9,9 @@ on:
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
       - 'scripts/validate_v3.mjs'
+      - 'scripts/validate_render_parity.mjs'
       - 'scripts/update_equity_snapshot.mjs'
+      - 'scripts/update_market_strip_snapshot.mjs'
       - '.github/workflows/prototype-validation.yml'
   push:
     branches:
@@ -22,7 +24,9 @@ on:
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
       - 'scripts/validate_v3.mjs'
+      - 'scripts/validate_render_parity.mjs'
       - 'scripts/update_equity_snapshot.mjs'
+      - 'scripts/update_market_strip_snapshot.mjs'
       - '.github/workflows/prototype-validation.yml'
 
 permissions:
@@ -55,7 +59,10 @@ jobs:
           node --check prototype/valkyrie-v3/quant-hk.js
           node --check prototype/valkyrie-v3/equity-yc.js
           node --check prototype/valkyrie-v3/live-equity.js
+          node --check prototype/valkyrie-v3/market-strip.js
           node --check scripts/update_equity_snapshot.mjs
+          node --check scripts/update_market_strip_snapshot.mjs
+          node --check scripts/validate_render_parity.mjs
 
       - name: Validate v2 reference invariants
         run: node scripts/validate_prototype.mjs
@@ -65,3 +72,6 @@ jobs:
 
       - name: Validate v3 rebased v2.6 release invariants
         run: node scripts/validate_v3.mjs
+
+      - name: Validate web/download render parity
+        run: node scripts/validate_render_parity.mjs
