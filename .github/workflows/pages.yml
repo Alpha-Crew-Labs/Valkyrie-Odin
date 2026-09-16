@@ -10,6 +10,7 @@ on:
       - 'scripts/update_equity_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
       - 'scripts/update_core_snapshot.mjs'
+      - 'scripts/update_bok_rate.mjs'
       - '.github/workflows/pages.yml'
   schedule:
     # Near-live Korean market snapshot. 09:00~16:59 KST, weekdays; GitHub cron may be delayed.
