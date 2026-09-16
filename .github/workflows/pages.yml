@@ -8,6 +8,7 @@ on:
       - 'prototype/valkyrie-v2.5/**'
       - 'prototype/valkyrie-v3/**'
       - 'scripts/update_equity_snapshot.mjs'
+      - 'scripts/update_theme_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
       - 'scripts/update_core_snapshot.mjs'
       - 'scripts/update_bok_rate.mjs'
@@ -52,6 +53,15 @@ jobs:
       - name: Report Equity snapshot fallback
         if: steps.equity_snapshot.outcome != 'success'
         run: echo 'Public Naver market refresh failed. Deploying last-good public snapshot or DATA PENDING; no fabricated values.'
+
+      - name: Refresh Naver/Npay theme snapshot
+        id: theme_snapshot
+        continue-on-error: true
+        run: node scripts/update_theme_snapshot.mjs
+
+      - name: Report Theme snapshot fallback
+        if: steps.theme_snapshot.outcome != 'success'
+        run: echo 'Public Naver/Npay theme refresh failed. Theme board will use direct public browser fetch, snapshot fallback, or DATA PENDING.'
 
       - name: Refresh Naver/Npay market tape snapshot
         id: market_strip_snapshot
