@@ -33,13 +33,12 @@
   }
   body .app{
     display:grid;
-    grid-template-rows:44px 60px minmax(392px,1fr) 42px minmax(286px,.47fr) 42px;
+    grid-template-rows:44px 60px clamp(392px,43vh,520px) 42px minmax(286px,auto) 42px;
     gap:7px;
     width:100%;
     max-width:2100px;
     height:auto!important;
-    min-height:calc(100vh - 16px)!important;
-    min-height:calc(100dvh - 16px)!important;
+    min-height:0!important;
     margin:0 auto;
   }
 
@@ -49,18 +48,19 @@
   .bf{padding:0 4px}
   .bf .seg{padding:0 15px}
 
-  .cw{min-height:0}
+  /* The ontology canvas keeps the original node/edge/animation engine, but its shell is capped so the SVG never floats inside a giant empty viewport. */
+  .cw{min-height:392px;max-height:520px;height:auto}
 
   .cmd .pr{padding:0 11px 0 14px}
   .cps{gap:5px;padding:0 8px}
   .cp{padding:5px 9px}
   .btn{padding:7px 13px}
 
-  .mw{grid-template-rows:34px 1fr;min-height:0}
+  .mw{grid-template-rows:34px minmax(286px,auto);min-height:320px;height:auto;overflow:hidden}
   .tabs{min-height:0}
   .tab{padding:0 18px;gap:8px}
   .tabsp{padding:0 14px;gap:14px}
-  .pane{padding:9px;overflow-y:auto;overflow-x:hidden;min-height:0}
+  .pane{padding:9px;overflow-y:auto;overflow-x:hidden;min-height:286px;max-height:none}
   .pane>div{min-height:0}
   .g4{gap:7px;height:auto;min-height:100%}
   .cd{padding:9px 10px;min-width:0;min-height:0}
@@ -71,7 +71,7 @@
   .sc{padding:3.2px 0;gap:6px}
   .ins{gap:6px;min-height:0}
 
-  .ft{min-height:0;background:var(--pn);box-shadow:none}
+  .ft{min-height:42px;height:42px;background:var(--pn);box-shadow:none}
   .ft .fc{padding:0 13px;gap:9px}
   .tl{padding:0 22px}
   .ax{left:22px;right:22px}
@@ -85,14 +85,34 @@
   *{scrollbar-width:thin;scrollbar-color:#19212C #06080C}
 }
 
-@media(min-width:721px) and (min-height:1000px){
-  body .app{grid-template-rows:44px 60px minmax(520px,1fr) 42px minmax(322px,.44fr) 42px}
+/* Tall landscape monitors get a little more ontology room, but never an unbounded 1fr row. */
+@media(min-width:721px) and (orientation:landscape) and (min-height:1000px){
+  body .app{grid-template-rows:44px 60px clamp(480px,43vh,560px) 42px minmax(322px,auto) 42px}
+  .cw{min-height:480px;max-height:560px}
+  .mw{min-height:356px}
 }
-@media(min-width:721px) and (min-height:1240px){
-  body .app{grid-template-rows:46px 62px minmax(620px,1fr) 44px minmax(360px,.42fr) 44px}
+@media(min-width:721px) and (orientation:landscape) and (min-height:1240px){
+  body .app{grid-template-rows:46px 62px clamp(520px,42vh,600px) 44px minmax(360px,auto) 44px}
+  .cw{min-height:520px;max-height:600px}
+  .mw{min-height:394px}
 }
 @media(min-width:721px) and (max-height:760px){
-  body .app{grid-template-rows:44px 60px minmax(360px,1fr) 42px minmax(260px,.5fr) 42px}
+  body .app{grid-template-rows:44px 60px 360px 42px minmax(260px,auto) 42px}
+  .cw{min-height:360px;max-height:360px}
+  .mw{min-height:294px}
+  .pane{min-height:260px}
+}
+
+/* Desktop-site mode on a portrait phone/tablet reports a desktop CSS width but a very tall viewport.
+   Keep the shell compact instead of stretching the 1020x400 SVG into a huge letterboxed panel. */
+@media(min-width:721px) and (orientation:portrait){
+  body .app{
+    grid-template-rows:44px 60px clamp(380px,42vw,430px) 42px minmax(286px,auto) 42px;
+    min-height:0!important;
+  }
+  .cw{min-height:380px;max-height:430px}
+  .mw{min-height:320px}
+  .pane{min-height:286px}
 }
 
 @media(max-width:720px){
