@@ -1,4 +1,4 @@
-/* HK Quant Macro Terminal integration — additive only, preserves v2.6 desktop/mobile shell */
+/* HK Quant Macro Terminal integration — additive only, preserves v2.6 shell */
 .hkq .cdh{margin-bottom:5px}
 .hkq-section{font-size:7.8px;letter-spacing:.14em;font-weight:700;color:#596473;margin:5px 0 1px;padding-top:3px;border-top:1px solid #141B23}
 .hkq-section.result{color:#7C8698;margin-top:6px}
@@ -15,156 +15,68 @@
   100%{box-shadow:none;border-color:var(--bd)}
 }
 
-/* HK Quant deep-analytics launcher. It floats outside the operating logic. */
-.hkq-rail{
-  position:fixed;
-  z-index:70;
-  left:4px;
-  top:50%;
-  transform:translateY(-50%);
-  width:30px;
-  height:50px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  text-decoration:none;
-  border:1px solid #21303B;
-  border-radius:3px;
-  background:rgba(8,13,19,.97);
-  box-shadow:0 10px 34px rgba(0,0,0,.3);
-  transition:width .22s cubic-bezier(.22,1,.36,1),border-color .18s,background .18s;
-  backdrop-filter:blur(8px);
-}
-.hkq-rail:hover,.hkq-rail:focus-visible{
-  width:168px;
-  border-color:#3A6470;
-  background:#0A1219;
-  outline:none;
-}
-.hkq-mark{
-  flex:0 0 29px;
-  height:48px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border-right:1px solid #18232D;
-  line-height:1;
-}
-.hkq-mark-q{font-size:14px;font-weight:850;letter-spacing:.02em;color:#3FD9E6}
-.hkq-mark-hk{margin-top:3px;font-size:6px;font-weight:750;letter-spacing:.16em;color:#596777}
-.hkq-rail-copy{min-width:132px;padding:0 10px;display:flex;flex-direction:column;gap:4px;white-space:nowrap}
-.hkq-rail-copy b{font-size:9px;letter-spacing:.18em;color:#DDE6EF}
-.hkq-rail-copy small{font-size:7px;letter-spacing:.08em;color:#697687}
-.hkq-rail:hover .hkq-rail-copy small,.hkq-rail:focus-visible .hkq-rail-copy small{color:#94A6B8}
+/* Keep the uploaded fullscreen reference as the visual source of truth. */
+.hkq-rail{display:none}
 
-/* =========================================================
-   V2.6 SOURCE-OF-TRUTH SHELL · DESKTOP
-   Re-aligns chrome, header, brief, tabs and footer to the
-   uploaded fullscreen reference. Ontology node/edge styling,
-   SVG transforms and flow animations are intentionally untouched.
-   ========================================================= */
 @media(min-width:721px){
-  html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
-  body{padding:8px!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior-y:none}
-
+  html,body{
+    height:auto!important;
+    min-height:100%!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+  body{
+    padding:8px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior-y:none;
+  }
   body .app{
     display:grid;
+    grid-template-rows:44px 60px minmax(392px,1fr) 42px minmax(286px,.47fr) 42px;
+    gap:7px;
     width:100%;
     max-width:2100px;
     height:auto!important;
     min-height:calc(100vh - 16px)!important;
     min-height:calc(100dvh - 16px)!important;
     margin:0 auto;
-    gap:7px;
-    grid-template-rows:44px 60px minmax(392px,1fr) 42px minmax(286px,.47fr) 42px 24px;
   }
 
-  /* Header + shock/transmission/decision brief follow the original fullscreen file. */
   .hd{position:sticky;top:8px;z-index:40}
   .hd .br{padding:0 15px}
   .hcell{padding:0 14px}
   .bf{padding:0 4px}
   .bf .seg{padding:0 15px}
 
-  /* Command row keeps original visual density. */
+  .cw{min-height:0}
+
   .cmd .pr{padding:0 11px 0 14px}
   .cps{gap:5px;padding:0 8px}
   .cp{padding:5px 9px}
   .btn{padding:7px 13px}
 
-  /* Lower workbench restored to the v2.6 tab geometry shown in the reference capture. */
-  .mw{grid-template-rows:34px minmax(0,1fr);min-height:0}
+  .mw{grid-template-rows:34px 1fr;min-height:0}
   .tabs{min-height:0}
   .tab{padding:0 18px;gap:8px}
   .tabsp{padding:0 14px;gap:14px}
   .pane{padding:9px;overflow-y:auto;overflow-x:hidden;min-height:0}
   .pane>div{min-height:0}
-  .g4{gap:7px;min-height:100%}
+  .g4{gap:7px;height:auto;min-height:100%}
   .cd{padding:9px 10px;min-width:0;min-height:0}
   .cdh{margin-bottom:7px;padding-bottom:5px}
   .kv{padding:3.5px 0}
   .tb th{padding:3px 5px}
   .tb td{padding:3.6px 5px}
   .sc{padding:3.2px 0;gap:6px}
-  .ins{gap:7px;min-height:0}
+  .ins{gap:6px;min-height:0}
 
-  /* Footer geometry restored. */
   .ft{min-height:0;background:var(--pn);box-shadow:none}
   .ft .fc{padding:0 13px;gap:9px}
   .tl{padding:0 22px}
   .ax{left:22px;right:22px}
   .tk i{width:7px;height:7px}
   .tkl{top:calc(50% + 10px)}
-
-  /* Naver Pay Securities-inspired market ribbon. Static values are user-provided snapshot values. */
-  .market-strip{
-    display:flex;
-    align-items:center;
-    min-width:0;
-    overflow:hidden;
-    border:1px solid var(--bd);
-    border-radius:3px;
-    background:linear-gradient(180deg,#090E15 0%,#070B10 100%);
-    position:relative;
-    isolation:isolate;
-  }
-  .market-strip:before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(90deg,rgba(45,255,143,.045),transparent 30%,transparent 70%,rgba(255,79,108,.04));
-    pointer-events:none;
-    z-index:0;
-  }
-  .market-strip-label{
-    position:relative;
-    z-index:2;
-    align-self:stretch;
-    display:flex;
-    align-items:center;
-    padding:0 12px;
-    border-right:1px solid #1B2632;
-    background:#091019;
-    color:#566273;
-    font-size:7.6px;
-    font-weight:700;
-    letter-spacing:.22em;
-    white-space:nowrap;
-  }
-  .market-strip-window{position:relative;z-index:1;flex:1;min-width:0;overflow:hidden}
-  .market-strip-track{display:flex;width:max-content;will-change:transform;animation:marketStripFlow 44s linear infinite}
-  .market-strip:hover .market-strip-track{animation-play-state:paused}
-  .market-strip-group{display:flex;align-items:center;gap:22px;padding:0 11px 0 18px;flex:0 0 auto}
-  .market-tick{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-variant-numeric:tabular-nums}
-  .market-tick .name{font-size:8.2px;letter-spacing:.08em;color:#778293;font-weight:650}
-  .market-tick .price{font-size:10.3px;color:#E6ECF5;font-weight:750;letter-spacing:.01em}
-  .market-tick .move{font-size:9px;font-weight:750;letter-spacing:.01em}
-  .market-tick .pulse{width:5px;height:5px;border-radius:50%;box-shadow:0 0 9px currentColor}
-  .market-tick.up .move,.market-tick.up .pulse{color:#2CFF8E;text-shadow:0 0 7px rgba(44,255,142,.22)}
-  .market-tick.down .move,.market-tick.down .pulse{color:#FF5875;text-shadow:0 0 7px rgba(255,88,117,.18)}
-  .market-sep{width:1px;height:9px;background:#1A2430;flex:0 0 auto}
-  @keyframes marketStripFlow{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
   *::-webkit-scrollbar{width:9px;height:9px}
   *::-webkit-scrollbar-track{background:#06080C}
@@ -174,13 +86,13 @@
 }
 
 @media(min-width:721px) and (min-height:1000px){
-  body .app{grid-template-rows:44px 60px minmax(520px,1fr) 42px minmax(322px,.44fr) 42px 24px}
+  body .app{grid-template-rows:44px 60px minmax(520px,1fr) 42px minmax(322px,.44fr) 42px}
 }
 @media(min-width:721px) and (min-height:1240px){
-  body .app{grid-template-rows:46px 62px minmax(620px,1fr) 44px minmax(360px,.42fr) 44px 24px}
+  body .app{grid-template-rows:46px 62px minmax(620px,1fr) 44px minmax(360px,.42fr) 44px}
 }
 @media(min-width:721px) and (max-height:760px){
-  body .app{grid-template-rows:44px 60px minmax(360px,1fr) 42px minmax(260px,.5fr) 42px 24px}
+  body .app{grid-template-rows:44px 60px minmax(360px,1fr) 42px minmax(260px,.5fr) 42px}
 }
 
 @media(max-width:720px){
@@ -190,9 +102,4 @@
   .hkq-link{min-height:36px;font-size:10.5px;margin-top:8px}
   .hkq-section{font-size:8.5px;margin-top:7px}
   .hkq-rail{display:none}
-  .market-strip{display:none}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .market-strip-track{animation:none!important}
 }
