@@ -22,11 +22,11 @@
   .app{min-height:965px}
 }
 
-/* HK Quant deep-analytics launcher. It floats outside the operating canvas and does not consume layout width. */
+/* HK Quant deep-analytics launcher. It floats in a slim left utility rail. */
 .hkq-rail{
   position:fixed;
   z-index:40;
-  left:12px;
+  left:4px;
   top:50%;
   transform:translateY(-50%);
   width:36px;
@@ -90,11 +90,11 @@
   html,body{width:100%;min-height:100%;overflow-x:hidden}
   body{padding:6px}
 
-  /* Full-width operating shell instead of the legacy 1520px centered page. */
+  /* Full workstation shell with only a 42px utility gutter for the Quant launcher. */
   body .app{
-    width:100%;
+    width:calc(100% - 42px);
     max-width:none;
-    margin:0;
+    margin:0 0 0 42px;
     gap:6px;
   }
 
