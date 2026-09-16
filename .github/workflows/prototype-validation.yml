@@ -11,6 +11,7 @@ on:
       - 'scripts/validate_v3.mjs'
       - 'scripts/validate_render_parity.mjs'
       - 'scripts/update_equity_snapshot.mjs'
+      - 'scripts/update_theme_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
       - '.github/workflows/prototype-validation.yml'
   push:
@@ -26,6 +27,7 @@ on:
       - 'scripts/validate_v3.mjs'
       - 'scripts/validate_render_parity.mjs'
       - 'scripts/update_equity_snapshot.mjs'
+      - 'scripts/update_theme_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
       - '.github/workflows/prototype-validation.yml'
 
@@ -59,8 +61,10 @@ jobs:
           node --check prototype/valkyrie-v3/quant-hk.js
           node --check prototype/valkyrie-v3/equity-yc.js
           node --check prototype/valkyrie-v3/live-equity.js
+          node --check prototype/valkyrie-v3/theme-equity.js
           node --check prototype/valkyrie-v3/market-strip.js
           node --check scripts/update_equity_snapshot.mjs
+          node --check scripts/update_theme_snapshot.mjs
           node --check scripts/update_market_strip_snapshot.mjs
           node --check scripts/validate_render_parity.mjs
 
