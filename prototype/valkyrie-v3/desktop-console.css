@@ -1,0 +1,134 @@
+/* VALKYRIE desktop console fit
+ * Layout-only overrides for wide screens.
+ * IMPORTANT: this file intentionally does not touch ontology node/edge animation
+ * selectors, SVG keyframes, node transforms, or interaction logic.
+ */
+
+@media (min-width:1100px){
+  html,body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+  }
+
+  body{
+    padding:6px;
+  }
+
+  /* Remove the old centered 1520px ceiling so the OS reads as a full workstation. */
+  .app{
+    width:100%;
+    max-width:none;
+    margin:0;
+    gap:6px;
+  }
+
+  /* Dense terminal chrome. */
+  .hd .br{padding-left:13px;padding-right:13px}
+  .hcell{padding-left:12px;padding-right:12px}
+  .bf .seg{padding-left:13px;padding-right:13px}
+  .cmd .pr{padding-left:12px;padding-right:9px}
+  .cps{gap:4px;padding-left:6px;padding-right:6px}
+  .cp{padding:5px 8px}
+  .btn{padding:7px 11px}
+
+  /* Lower workspace: same information architecture, tighter terminal density. */
+  .mw{
+    min-height:0;
+    grid-template-rows:32px minmax(0,1fr);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.012);
+  }
+  .tabs{min-height:0}
+  .tab{padding-left:16px;padding-right:16px}
+  .tabsp{padding-left:10px;padding-right:10px}
+  .pane{
+    min-height:0;
+    padding:7px;
+    overflow:hidden;
+  }
+  .pane>div{
+    grid-template-columns:minmax(0,1fr) clamp(248px,15.5vw,310px)!important;
+    gap:6px!important;
+    min-height:0;
+  }
+  .pane>div>div{min-height:0}
+  .g4{gap:6px;min-height:0}
+  .cd{
+    padding:7px 8px;
+    min-width:0;
+    min-height:0;
+  }
+  .cdh{
+    margin-bottom:5px;
+    padding-bottom:4px;
+  }
+  .kv{padding:3px 0}
+  .tb th{padding:3px 4px}
+  .tb td{padding:3.2px 4px}
+  .sc{padding:3px 0;gap:5px}
+  .note{margin-top:4px;line-height:1.42}
+  .ins{gap:5px;min-height:0;overflow:hidden}
+
+  /* Bottom system rail should read as a fixed replay/snapshot console. */
+  .ft{
+    min-height:0;
+    background:#090D13;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.012);
+  }
+  .ft .fc{padding-left:10px;padding-right:10px;gap:7px}
+  .tl{padding-left:18px;padding-right:18px}
+  .ax{left:18px;right:18px}
+  .tk i{width:6px;height:6px}
+  .tkl{top:calc(50% + 9px)}
+}
+
+/* Normal laptop / desktop viewport: one-screen workstation.
+ * No SVG/node animation rules are overridden here.
+ */
+@media (min-width:1100px) and (min-height:760px){
+  html,body{
+    height:100%;
+    overflow-y:hidden!important;
+  }
+  body{height:100vh}
+  .app{
+    height:calc(100vh - 12px);
+    min-height:0;
+    grid-template-rows:
+      clamp(38px,4.7vh,44px)
+      clamp(48px,5.8vh,60px)
+      minmax(300px,1.46fr)
+      clamp(38px,4.5vh,42px)
+      minmax(218px,1fr)
+      clamp(36px,4.3vh,42px);
+  }
+  .cw,.cmd,.mw,.ft{min-height:0}
+}
+
+/* Short PC windows still remain reachable by page scroll instead of clipping. */
+@media (min-width:1100px) and (max-height:759px){
+  html,body{overflow-y:auto!important}
+  .app{
+    height:760px;
+    min-height:760px;
+    grid-template-rows:38px 48px 300px 38px 220px 36px;
+  }
+}
+
+/* Large desktop: use the extra pixels for the intelligence chain and lower workbench,
+ * not for empty outside margins.
+ */
+@media (min-width:1600px) and (min-height:860px){
+  .app{
+    grid-template-rows:
+      42px
+      56px
+      minmax(340px,1.52fr)
+      40px
+      minmax(245px,1fr)
+      40px;
+  }
+  .pane{padding:8px}
+  .cd{padding:8px 9px}
+  .pane>div{grid-template-columns:minmax(0,1fr) clamp(270px,15vw,320px)!important}
+}
