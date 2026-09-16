@@ -1,0 +1,14 @@
+{
+  "ok": false,
+  "mode": "DATA_PENDING",
+  "provider": "Naver/Npay Securities public read-only theme API",
+  "generatedAt": null,
+  "themesCount": 0,
+  "themes": [],
+  "top": [],
+  "bottom": [],
+  "constituents": {},
+  "sources": {
+    "note": "GitHub Actions refreshes this file from public Naver/Npay theme endpoints. No demo theme returns or constituent prices are stored here."
+  }
+}
