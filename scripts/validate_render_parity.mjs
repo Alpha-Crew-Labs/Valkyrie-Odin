@@ -10,8 +10,28 @@ const liveCore=fs.readFileSync(path.join(dir,'live-core.js'),'utf8');
 const coreCollector=fs.readFileSync(path.join(root,'scripts','update_core_snapshot.mjs'),'utf8');
 const bokCollector=fs.readFileSync(path.join(root,'scripts','update_bok_rate.mjs'),'utf8');
 const tapeCollector=fs.readFileSync(path.join(root,'scripts','update_market_strip_snapshot.mjs'),'utf8');
+const equityCollector=fs.readFileSync(path.join(root,'scripts','update_equity_snapshot.mjs'),'utf8');
 let failed=false;
 const assert=(cond,msg)=>{if(cond)console.log(`✓ ${msg}`);else{console.error(`✗ ${msg}`);failed=true;}};
+
+function collectTextFiles(base){
+  const out=[];
+  for(const entry of fs.readdirSync(base,{withFileTypes:true})){
+    const p=path.join(base,entry.name);
+    if(entry.isDirectory())out.push(...collectTextFiles(p));
+    else if(/\.(?:js|html|css|json|md)$/i.test(entry.name))out.push({path:p,text:fs.readFileSync(p,'utf8')});
+  }
+  return out;
+}
+
+const runtimeFiles=collectTextFiles(dir);
+const runtimeText=runtimeFiles.map(x=>x.text).join('\n');
+const collectorText=[coreCollector,bokCollector,tapeCollector,equityCollector].join('\n');
+
+// Hard rule: production data must be public/read-only and keyless.
+assert(!/https?:\/\/[^\s'"`]*(?:vercel\.app|vercel\.com)/i.test(runtimeText),'v3 runtime has no Vercel dependency or Vercel data endpoint');
+assert(!/(?:process\.env|x-api-key|api[_-]?key\s*[:=]|client[_-]?secret\s*[:=]|access[_-]?token\s*[:=]|authorization\s*[:=]\s*['"`]?bearer)/i.test(collectorText),'public-data collectors require no personal API key, token, or secret');
+assert(pages.includes("cron: '*/10 0-7 * * 1-5'")&&pages.includes("cron: '7 * * * *'"),'public data auto-refreshes every 10 minutes in KR market hours and hourly otherwise');
 
 const hasInline=/\sstyle="/i.test(html);
 assert(!hasInline || html.includes("style-src 'self' 'unsafe-inline'"),'CSP preserves inline-style parity with downloadable HTML');
@@ -35,7 +55,7 @@ assert(pages.includes("'scripts/update_core_snapshot.mjs'")&&pages.includes("'sc
 
 assert(tape.includes('securityService/integration/indicators'),'market tape reads the consolidated Naver/Npay indicators endpoint');
 for(const code of ['KOSPI','KOSDAQ','KPI200','.DJI','.INX','FX_USDKRW','.IXIC','GCcv1','CLcv1'])assert(tape.includes(code),`market tape includes ${code}`);
-assert(tape.includes("SNAPSHOT='./data/market-strip.json'"),'market tape has same-origin last-good snapshot fallback');
+assert(tape.includes("SNAPSHOT='./data/market-strip.json'"),'market tape has same-origin last-good public snapshot fallback');
 assert(tape.includes("mode:'DATA_PENDING'"),'market tape fails closed to DATA PENDING instead of fake live data');
 for(const fake of ['6,711.45','815.47','52,093.11','7,585.73','25,981.57','4,365.00','104.71'])assert(!tape.includes(fake),`market tape does not hardcode display price ${fake}`);
 
