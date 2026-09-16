@@ -112,6 +112,12 @@
   .ban .b1{font-size:13px;letter-spacing:.16em}
   .ban .b2{font-size:7.5px;letter-spacing:.1em}
 
+  /* Slight mobile-only type lift inside the existing node boxes. No geometry/animation changes. */
+  .nlb{font-size:9.2px}
+  .nvl{font-size:20px}
+  .nsb{font-size:8.9px}
+  .nown{font-size:7.9px}
+
   /* Command line stays compact; chip groups become swipeable rows. */
   .cmd{
     display:grid;
@@ -161,35 +167,94 @@
   }
   .tabs{
     height:40px;
-    overflow-x:auto;
-    overflow-y:hidden;
+    overflow:hidden;
     flex-wrap:nowrap;
-    scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;
   }
-  .tabs::-webkit-scrollbar{display:none}
-  .tab{flex:0 0 auto;height:40px;padding:0 17px;gap:0}
+  .tab{
+    flex:1 1 0;
+    min-width:0;
+    height:40px;
+    padding:0 8px;
+    gap:0;
+    justify-content:center;
+  }
   .tab .tn{font-size:10px;letter-spacing:.14em}
   .tab .to,.tabsp{display:none}
-  .pane{padding:7px;overflow:visible}
-  .g4{
-    grid-template-columns:1fr!important;
-    grid-auto-rows:auto;
-    height:auto;
+
+  /* Critical mobile fix: the desktop pane has an inline 1fr + 268px inspector grid.
+     Force it to one column so the main research cards keep the full phone width. */
+  .pane{
+    padding:7px;
+    overflow:hidden;
+  }
+  .pane>div{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:7px!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+  }
+  .pane>div>div:first-child{
+    width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+  }
+  .ins{
+    width:100%;
+    min-width:0;
+    min-height:0;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
     gap:7px;
   }
-  .cd{min-height:0;overflow:visible;padding:10px}
-  .cdh{margin-bottom:8px}
-  .cdt{font-size:9.2px}
-  .cdo{font-size:8px}
+
+  .g4{
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-auto-rows:auto;
+    width:100%;
+    height:auto;
+    min-width:0;
+    gap:7px;
+  }
+  .cd{
+    min-width:0;
+    min-height:0;
+    overflow:hidden;
+    padding:10px;
+  }
+  .g4>.cd{
+    overflow-x:auto;
+    overflow-y:visible;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+  }
+  .g4>.cd::-webkit-scrollbar{display:none}
+  .g4>.cd .tb{
+    width:max-content;
+    min-width:100%;
+    white-space:nowrap;
+  }
+  .g4>.cd:has(#dlb) .tb{min-width:720px}
+  .g4>.cd:has(#dlb) .cdo:after{
+    content:' · SWIPE ↔';
+    color:#3FD9E6;
+    letter-spacing:.08em;
+  }
+  .ins .cd{overflow:hidden}
+
+  .cdh{margin-bottom:8px;gap:8px}
+  .cdt{font-size:9.5px;line-height:1.3}
+  .cdo{font-size:7.8px;white-space:nowrap}
   .tb{font-size:9.2px}
   .tb th{font-size:7.8px;padding:4px}
   .tb td{padding:4.5px 4px}
   .kv{font-size:9.8px;padding:4.5px 0}
   .kv b{font-size:11.5px}
-  .note{font-size:8.8px;line-height:1.55}
-  .sc{grid-template-columns:58px 1fr auto 14px;font-size:9.2px}
-  .evr{font-size:9.2px}
+  .note{font-size:8.9px;line-height:1.58}
+  .sc{grid-template-columns:58px minmax(0,1fr) auto 14px;font-size:9.2px}
+  .evr{grid-template-columns:minmax(0,1fr) auto 34px;font-size:9.2px}
 
   /* Timeline is useful on desktop but too dense on a narrow viewport. */
   .ft{min-height:48px;height:48px;justify-content:space-between}
@@ -213,6 +278,9 @@
   .cw{height:302px;min-height:302px}
   #chain{width:760px;height:298px}
   .bf .txt{font-size:11.3px}
+  .pane{padding:6px}
+  .cd{padding:9px}
+  .g4>.cd:has(#dlb) .tb{min-width:690px}
 }
 
 @media (prefers-reduced-motion: reduce) and (max-width:720px){
