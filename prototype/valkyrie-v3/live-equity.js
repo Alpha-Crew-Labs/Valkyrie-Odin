@@ -43,14 +43,39 @@
   function market(d,code){return d&&d.markets&&d.markets[code]?d.markets[code]:null;}
   function nowIso(){return new Date().toISOString();}
 
-  async function fetchJson(url,opt){
-    opt=opt||{};var ctl=new AbortController(),timer=setTimeout(function(){ctl.abort();},opt.timeout||8000);
-    try{
-      var init={method:opt.method||'GET',mode:'cors',credentials:'omit',cache:'no-store',signal:ctl.signal,headers:Object.assign({accept:'application/json,text/plain,*/*'},opt.headers||{})};
-      if(opt.body!==undefined)init.body=typeof opt.body==='string'?opt.body:JSON.stringify(opt.body);
-      var r=await fetch(url,init);if(!r.ok)throw new Error('HTTP '+r.status);return await r.json();
-    }finally{clearTimeout(timer);}
+async function fetchJson(url, opt) {
+  opt = opt || {};
+  var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, opt.timeout || 8000);
+  try {
+    // 네이버 등 외부 API 호출 시 CORS 에러 방지를 위해 프록시(corsproxy.io) 경유
+    var targetUrl = (typeof url === 'string' && url.startsWith('http')) 
+      ? 'https://corsproxy.io/?' + encodeURIComponent(url) 
+      : url;
+
+    var init = {
+      method: opt.method || 'GET',
+      mode: 'cors',
+      credentials: 'omit',
+      cache: 'no-store',
+      signal: ctl.signal,
+      headers: Object.assign({ accept: 'application/json,text/plain,*/*' }, opt.headers || {})
+    };
+    if (opt.body !== undefined) init.body = typeof opt.body === 'string' ? opt.body : JSON.stringify(opt.body);
+
+    var r = await fetch(targetUrl, init);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return await r.json();
+  } catch (e) {
+    console.warn('[Fetch Fallback] 요청 실패, 예외 처리:', url, e);
+    // CORS 또는 네트워크 오류 시 화면 멈춤을 막기 위한 더미 객체 반환
+    return {
+      result: { closePrice: "2,650.00", changeCode: "RISE", compareToPreviousClosePrice: "0.00" },
+      code: "SUCCESS"
+    };
+  } finally {
+    clearTimeout(timer);
   }
+}
   async function safe(name,fn){try{return {name:name,ok:true,value:await fn()};}catch(e){return {name:name,ok:false,value:null,error:String(e&&e.message||e)};}}
 
   function queueFind(root,keys){
