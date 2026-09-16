@@ -143,8 +143,6 @@ function paneRender(){
   }
 
   if(curTab==='RATES'){
-    // (기존 코드 유지)
-  if(curTab==='RATES'){
     h+='<div class="g4" style="grid-template-columns:1.85fr 1fr 1fr 1.05fr">';
     h+='<div class="cd"><div class="cdh"><span class="cdt">판단 로그 DECISION LOG</span><span class="cdo">정훈 · 국고3Y 대비</span></div>'+ '<table class="tb"><thead><tr><th>발신일</th><th>판단</th><th>근거</th><th class="n">D+5</th><th class="n">D+20</th><th class="n">D+60</th><th class="n">BM 대비</th><th class="n">상태</th></tr></thead><tbody id="dlb">'+ row(0,'2026-05-04','장기채 축소 · 단기채 확대','CPI 서프라이즈 · 커브 역전','+0.21','+0.68','+1.42','+0.94','CLOSED')+ row(1,'2026-06-15','단기 구간 유지','인하 지연 · 크레딧 축소','+0.09','+0.31','+0.77','+0.42','CLOSED')+ row(2,'2026-07-27','스티프너 진입','첫 인하 가시화','+0.14','+0.46','','+0.38','OPEN')+ row(3,'2026-08-17','듀레이션 방어 유지','크레딧 재확대','-0.06','+0.12','','-0.04','OPEN')+ row(4,'2026-09-30','단기 확대 · 장기 축소','커브 +38bp 스티프닝','','','','','PENDING')+ '</tbody></table><div class="note">미도래 구간은 0이 아니라 공란 · 상태는 <b>PENDING</b>으로 표기합니다. 표본이 5건이므로 <b>적중률 지표는 사용하지 않습니다.</b></div></div>';
     h+='<div class="cd"><div class="cdh"><span class="cdt">CURVE</span><span class="cdo">국고</span></div>'+ '<div class="kv"><span>국고 3Y</span><b>'+o.rat_ktb.toFixed(2)+'%</b></div>'+ '<div class="kv"><span>국고 10Y</span><b>'+(cur.x.k10+(SH.ust*0.52+SH.bok*0.2)/100).toFixed(2)+'%</b></div>'+ '<div class="kv"><span>2s10s</span><b class="'+(o.rat_curve>=0?'gr':'rd')+'">'+(o.rat_curve>=0?'+':'')+Math.round(o.rat_curve)+'bp</b></div>'+ curveSVG(o)+ '<div class="note">5월 역전(-6bp) → 현재 '+(o.rat_curve>=0?'+':'')+Math.round(o.rat_curve)+'bp. <b>스티프닝이 단기 확대 판단의 직접 근거</b>입니다.</div></div>';
