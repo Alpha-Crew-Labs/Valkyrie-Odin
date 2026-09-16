@@ -15,8 +15,67 @@
   100%{box-shadow:none;border-color:var(--bd)}
 }
 
-/* Keep the uploaded fullscreen reference as the visual source of truth. */
-.hkq-rail{display:none}
+/* Left-edge HK Quant hover drawer.
+   Nearly invisible at rest; moving the pointer to the left edge reveals it. */
+.hkq-rail{
+  position:fixed;
+  z-index:75;
+  left:0;
+  top:46%;
+  width:188px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  text-decoration:none;
+  border:1px solid #24323E;
+  border-left:0;
+  border-radius:0 4px 4px 0;
+  background:linear-gradient(90deg,rgba(8,13,19,.995),rgba(10,18,25,.985));
+  box-shadow:0 12px 34px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.025);
+  transform:translate(calc(-100% + 7px),-50%);
+  opacity:.2;
+  transition:transform .24s cubic-bezier(.22,1,.36,1),opacity .18s,border-color .18s,box-shadow .18s;
+  backdrop-filter:blur(10px);
+  will-change:transform;
+}
+.hkq-rail:after{
+  content:'';
+  position:absolute;
+  top:9px;
+  right:1px;
+  bottom:9px;
+  width:2px;
+  border-radius:2px;
+  background:#3FD9E6;
+  box-shadow:0 0 10px rgba(63,217,230,.42);
+  opacity:.45;
+  transition:opacity .18s,box-shadow .18s;
+}
+.hkq-rail:hover,.hkq-rail:focus-visible{
+  transform:translate(0,-50%);
+  opacity:1;
+  border-color:#355866;
+  box-shadow:0 14px 38px rgba(0,0,0,.42),0 0 18px rgba(63,217,230,.06),inset 0 1px 0 rgba(255,255,255,.035);
+  outline:none;
+}
+.hkq-rail:hover:after,.hkq-rail:focus-visible:after{opacity:.95;box-shadow:0 0 14px rgba(63,217,230,.7)}
+.hkq-mark{
+  flex:0 0 48px;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-right:1px solid #1B2833;
+  line-height:1;
+}
+.hkq-mark-q{font-size:15px;font-weight:850;letter-spacing:.04em;color:#3FD9E6;text-shadow:0 0 10px rgba(63,217,230,.18)}
+.hkq-mark-hk{margin-top:4px;font-size:6.5px;font-weight:750;letter-spacing:.18em;color:#667587}
+.hkq-rail-copy{min-width:0;padding:0 12px;display:flex;flex-direction:column;gap:5px;white-space:nowrap}
+.hkq-rail-copy b{font-size:9.4px;letter-spacing:.2em;color:#E2E8F0}
+.hkq-rail-copy small{font-size:7.2px;letter-spacing:.07em;color:#748294}
+.hkq-rail:hover .hkq-rail-copy small,.hkq-rail:focus-visible .hkq-rail-copy small{color:#A5B3C2}
 
 @media(min-width:721px){
   html,body{
@@ -113,6 +172,7 @@
   .cw{min-height:380px;max-height:430px}
   .mw{min-height:320px}
   .pane{min-height:286px}
+  .hkq-rail{top:42%}
 }
 
 @media(max-width:720px){
