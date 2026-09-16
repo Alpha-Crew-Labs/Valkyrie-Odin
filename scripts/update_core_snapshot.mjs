@@ -99,6 +99,12 @@ const tasks=await Promise.all([
   safe('usGdp',()=>fetchText(URLS.fred('GDPC1'))),
   safe('fedFunds',()=>fetchText(URLS.fred('DFF'))),
   safe('stress',()=>fetchText(URLS.fred('STLFSI4'))),
+  safe('breakeven10y',()=>fetchText(URLS.fred('T10YIE'))),
+  safe('ust2yFred',()=>fetchText(URLS.fred('DGS2'))),
+  safe('ust10yFred',()=>fetchText(URLS.fred('DGS10'))),
+  safe('vix',()=>fetchText(URLS.fred('VIXCLS'))),
+  safe('hyOas',()=>fetchText(URLS.fred('BAMLH0A0HYM2'))),
+  safe('broadDollar',()=>fetchText(URLS.fred('DTWEXBGS'))),
 ]);
 const R=Object.fromEntries(tasks.map(x=>[x.name,x]));
 
@@ -108,12 +114,18 @@ const kr10=R.korBonds.ok?bond(R.korBonds.value,['kr10yt=rr','kr10y'],['한국 �
 const bok=R.policy.ok?policy(R.policy.value,['한국','korea','bok','한국은행']):null;
 const aaYield=R.domestic.ok?domesticAA(R.domestic.value):null;
 
-let usCpi=null,krGdp=null,usGdp=null,fedFunds=null,stress=null;
+let usCpi=null,krGdp=null,usGdp=null,fedFunds=null,stress=null,breakeven10y=null,ust2yFred=null,ust10yFred=null,vix=null,hyOas=null,broadDollar=null;
 try{if(R.usCpi.ok)usCpi=yoy(parseFred(R.usCpi.value,'CPIAUCSL'),12);}catch{}
 try{if(R.krGdp.ok)krGdp=yoy(parseFred(R.krGdp.value,'NGDPRSAXDCKRQ'),4);}catch{}
 try{if(R.usGdp.ok)usGdp=yoy(parseFred(R.usGdp.value,'GDPC1'),4);}catch{}
 try{if(R.fedFunds.ok)fedFunds=latest(parseFred(R.fedFunds.value,'DFF'));}catch{}
 try{if(R.stress.ok){const z=latest(parseFred(R.stress.value,'STLFSI4'));stress={z:z.value,index:stressIndex(z.value),date:z.date};}}catch{}
+try{if(R.breakeven10y.ok)breakeven10y=latest(parseFred(R.breakeven10y.value,'T10YIE'));}catch{}
+try{if(R.ust2yFred.ok)ust2yFred=latest(parseFred(R.ust2yFred.value,'DGS2'));}catch{}
+try{if(R.ust10yFred.ok)ust10yFred=latest(parseFred(R.ust10yFred.value,'DGS10'));}catch{}
+try{if(R.vix.ok)vix=latest(parseFred(R.vix.value,'VIXCLS'));}catch{}
+try{if(R.hyOas.ok)hyOas=latest(parseFred(R.hyOas.value,'BAMLH0A0HYM2'));}catch{}
+try{if(R.broadDollar.ok)broadDollar=latest(parseFred(R.broadDollar.value,'DTWEXBGS'));}catch{}
 
 let equity=null;
 try{equity=JSON.parse(await fs.readFile(EQUITY,'utf8'));}catch{}
@@ -129,6 +141,14 @@ const metrics={
   fedFunds:fedFunds?.value??null,
   bokBaseRate:bok?.value??null,
   ust10y:us10?.value??null,
+  ust2yFred:ust2yFred?.value??null,
+  ust10yFred:ust10yFred?.value??null,
+  ust2s10sBp:(ust2yFred&&ust10yFred)?(ust10yFred.value-ust2yFred.value)*100:null,
+  breakeven10y:breakeven10y?.value??null,
+  vix:vix?.value??null,
+  usHyOasPct:hyOas?.value??null,
+  usHyOasBp:hyOas?hyOas.value*100:null,
+  broadDollarIndex:broadDollar?.value??null,
   ktb3y:kr3?.value??null,
   ktb10y:kr10?.value??null,
   ktb3s10sBp:(kr3&&kr10)?(kr10.value-kr3.value)*100:null,
@@ -151,12 +171,31 @@ const payload={
   generatedAtKst:kstStamp(),
   liveMetricCount:liveCount,
   metrics,
-  observationDates:{usCpi:usCpi?.date??null,krGdp:krGdp?.date??null,usGdp:usGdp?.date??null,fedFunds:fedFunds?.date??null,financialStress:stress?.date??null,equity:equity?.generatedAt??null},
+  observationDates:{
+    usCpi:usCpi?.date??null,
+    krGdp:krGdp?.date??null,
+    usGdp:usGdp?.date??null,
+    fedFunds:fedFunds?.date??null,
+    financialStress:stress?.date??null,
+    breakeven10y:breakeven10y?.date??null,
+    ust2yFred:ust2yFred?.date??null,
+    ust10yFred:ust10yFred?.date??null,
+    vix:vix?.date??null,
+    usHyOas:hyOas?.date??null,
+    broadDollar:broadDollar?.date??null,
+    equity:equity?.generatedAt??null,
+  },
   eventPulse:{cb:dartCb,ipo:dartIpo},
   sources:{
     krRealGdpYoy:'FRED / IMF IFS · NGDPRSAXDCKRQ',
     usCpiYoy:'FRED / BLS · CPIAUCSL',
     fedFunds:'FRED · DFF',
+    breakeven10y:'FRED · T10YIE',
+    ust2yFred:'FRED / Federal Reserve H.15 · DGS2',
+    ust10yFred:'FRED / Federal Reserve H.15 · DGS10',
+    vix:'FRED / CBOE · VIXCLS',
+    usHyOas:'FRED / ICE BofA · BAMLH0A0HYM2',
+    broadDollarIndex:'FRED / Federal Reserve H.10 · DTWEXBGS',
     bokBaseRate:'Naver/Npay standardInterestList',
     ust10y:'Naver/Npay bondList USA',
     ktb3y:'Naver/Npay bondList KOR',
