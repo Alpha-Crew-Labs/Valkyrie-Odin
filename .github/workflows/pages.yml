@@ -13,8 +13,11 @@ on:
       - 'scripts/update_bok_rate.mjs'
       - '.github/workflows/pages.yml'
   schedule:
-    # Near-live Korean market snapshot. 09:00~16:59 KST, weekdays; GitHub cron may be delayed.
+    # Korean market hours: near-live public snapshots every 10 minutes, weekdays.
     - cron: '*/10 0-7 * * 1-5'
+    # Macro/rates/fundamental public feeds continue refreshing outside Korean market hours.
+    # No personal API keys, private endpoints, Vercel functions, or paid proxy are used.
+    - cron: '7 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -48,7 +51,7 @@ jobs:
 
       - name: Report Equity snapshot fallback
         if: steps.equity_snapshot.outcome != 'success'
-        run: echo 'Naver market refresh failed. Deploying repository fallback; IPO/CB structural signals remain independent.'
+        run: echo 'Public Naver market refresh failed. Deploying last-good public snapshot or DATA PENDING; no fabricated values.'
 
       - name: Refresh Naver/Npay market tape snapshot
         id: market_strip_snapshot
@@ -57,7 +60,7 @@ jobs:
 
       - name: Report Market Tape snapshot fallback
         if: steps.market_strip_snapshot.outcome != 'success'
-        run: echo 'Naver/Npay indicator refresh failed. Market tape will use direct browser fetch or DATA PENDING fallback.'
+        run: echo 'Public Naver/Npay indicator refresh failed. Market tape will use direct public browser fetch, last-good public snapshot, or DATA PENDING.'
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
