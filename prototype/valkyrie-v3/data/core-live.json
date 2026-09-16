@@ -1,0 +1,12 @@
+{
+  "ok": false,
+  "mode": "DATA_PENDING",
+  "generatedAt": null,
+  "generatedAtKst": null,
+  "liveMetricCount": 0,
+  "metrics": {},
+  "sources": {},
+  "providerStatus": {
+    "note": "Deployment workflow refreshes this file from public Naver/Npay, FRED and DART-related feeds. No demo prices are stored here."
+  }
+}
