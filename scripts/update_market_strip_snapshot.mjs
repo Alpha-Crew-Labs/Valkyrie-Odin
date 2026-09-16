@@ -87,6 +87,7 @@ await fs.writeFile(OUT,`${JSON.stringify(payload,null,2)}\n`,'utf8');
 console.log(`Wrote ${OUT}`);
 console.log(JSON.stringify({generatedAt:payload.generatedAt,validRows:valid,codes:items.filter(x=>x.price!==null).map(x=>x.code)},null,2));
 
-// Keep the ontology's current macro/rates inputs alive on the same schedule as the market tape.
-// This writes only public-source values and fails closed when a metric cannot be resolved.
+// Keep current ontology inputs alive on the same schedule as the market tape.
+// Core collector fails closed; policy-rate resolver only fills BOK when a public value is actually found.
 await import('./update_core_snapshot.mjs');
+try{await import('./update_bok_rate.mjs');}catch(e){console.log(`BOK live resolver: ${e.message}`);}
