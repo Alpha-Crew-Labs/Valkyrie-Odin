@@ -1,139 +1,107 @@
-/* VALKYRIE · YC Equity integration layer
- * Public-data only. No personal API key, Vercel function, private proxy, or fabricated live value.
- * IPO/CB funding pulse is derived from the public aikstockdata DART disclosure feed.
- * Surface labels: IPO Market Report · CB Zero Finder.
- * RETIRED MIGRATION MARKERS ONLY, never fetched or rendered: ipo-market-report.vercel.app · cb-zero-finder.vercel.app
- * RETIRED SNAPSHOT MARKER ONLY, never rendered as current data: 덕산넵코어스 · 20260915000085
+/* VALKYRIE · Equity research insight layer
+ * Browser reads only a same-origin aggregate snapshot.
+ * Source apps are sampled by GitHub Actions twice per weekday; no Vercel runtime dependency.
+ * No fabricated fallback values.
  */
 (function(){
   'use strict';
 
-  var API={
-    intraday:'https://aikstockdata.com/data/public/disclosures_intraday.json',
-    today:'https://aikstockdata.com/data/public/today.json'
-  };
-  var POLL_MS=300000;
-  var STATE={status:'loading',data:null,error:null,lastFetch:0,timer:null,mode:'PUBLIC_API'};
+  var SNAPSHOT='./data/research-insights.json';
+  var POLL_MS=1800000;
+  var STATE={status:'loading',data:null,error:null,lastFetch:0,timer:null,mode:'12H_SNAPSHOT'};
   window.VALKYRIE_YC_EQUITY=STATE;
 
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function n(v){var x=Number(v);return Number.isFinite(x)?x:null;}
+  function pct(v,d){var x=n(v);return x===null?'—':(x>0?'+':'')+x.toFixed(d==null?1:d)+'%';}
+  function plainPct(v,d){var x=n(v);return x===null?'—':x.toFixed(d==null?1:d)+'%';}
+  function count(v,label){var x=n(v);return x===null?'—':Math.round(x).toLocaleString('ko-KR')+(label||'');}
+  function amount(v){var x=n(v);if(x===null)return '—';if(Math.abs(x)>=10000)return (x/10000).toFixed(1)+'조';return Math.round(x).toLocaleString('ko-KR')+'억';}
+  function tone(v){var x=n(v);return x===null?'':x>0?'gr':x<0?'rd':'';}
+  function clamp(v){return Math.max(0,Math.min(100,Number(v)||0));}
+  function scopePeriod(p){if(!p)return '';if(typeof p==='string')return p;var a=p.begin||'',b=p.end||'';if(a&&b)return a.slice(2)+' ~ '+b.slice(2);return a||b||'';}
   function cardByTitle(title){
     var cards=document.querySelectorAll('#pane .cd');
     for(var i=0;i<cards.length;i++){
       var t=cards[i].querySelector('.cdt');
-      if(t && t.textContent.trim()===title) return cards[i];
+      if(t&&t.textContent.trim()===title)return cards[i];
     }
     return null;
   }
-  function eventList(raw){
-    if(Array.isArray(raw))return raw;
-    var keys=['events','data','items','disclosures'];
-    for(var i=0;i<keys.length;i++)if(Array.isArray(raw&&raw[keys[i]]))return raw[keys[i]];
-    return [];
-  }
-  function eventText(e){return JSON.stringify(e||{});}
-  function pick(e,keys){for(var i=0;i<keys.length;i++){var v=e&&e[keys[i]];if(v!==undefined&&v!==null&&String(v).trim())return String(v);}return '';}
-  function normalizeEvent(e){
-    return {
-      company:pick(e,['corp_name','corpName','company','name','stock_name']),
-      title:pick(e,['report_nm','reportName','title','report','disclosure_name']),
-      time:pick(e,['rcept_dt','rceptDt','date','datetime','time','published_at']),
-      rcpNo:pick(e,['rcept_no','rceptNo','rcpNo'])
-    };
-  }
-  function pulse(raw,re){
-    var all=eventList(raw),hits=[];
-    for(var i=0;i<all.length;i++)if(re.test(eventText(all[i])))hits.push(normalizeEvent(all[i]));
-    return {count:hits.length,total:all.length,top:hits.slice(0,4)};
-  }
-  function stamp(raw){
-    return pick(raw,['generated_kst','generatedAtKst','generated_at','generatedAt','disclosure_through','as_of'])||new Date().toISOString();
-  }
-  function hhmm(v){
-    if(!v)return '—';
-    var d=new Date(v);if(isNaN(d.getTime()))return esc(v);
-    return new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(d);
-  }
+  function link(url,label){return '<a class="ycq-detail" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+' ↗</a>';}
+  function mini(label,value,cls){return '<div class="ycq-mini"><span>'+esc(label)+'</span><b'+(cls?' class="'+cls+'"':'')+'>'+esc(value)+'</b></div>';}
+  function meter(value,cls){var x=n(value);return '<div class="ycq-meter"><i class="'+(cls||'')+'" style="width:'+(x===null?0:clamp(x))+'%"></i></div>';}
+
   async function fetchJson(url){
-    var ctl=new AbortController(),timer=setTimeout(function(){ctl.abort();},8000);
+    var ctl=new AbortController(),timer=setTimeout(function(){ctl.abort();},7000);
     try{
-      var r=await fetch(url,{method:'GET',mode:'cors',credentials:'omit',cache:'no-store',signal:ctl.signal,headers:{accept:'application/json,text/plain,*/*'}});
+      var r=await fetch(url,{cache:'no-store',credentials:'omit',signal:ctl.signal,headers:{accept:'application/json'}});
       if(!r.ok)throw new Error('HTTP '+r.status);
       return await r.json();
     }finally{clearTimeout(timer);}
   }
+
+  function pending(title,url){
+    return '<div class="cdh"><span class="cdt">'+esc(title)+'</span><span class="cdo">12H</span></div>'+
+      '<div class="ycq-hero pending"><span>INSIGHT</span><strong>DATA PENDING</strong></div>'+
+      '<div class="ycq-empty">공개 리서치 스냅샷 확인 대기</div>'+link(url,'DETAIL');
+  }
+
+  function ipoCard(x){
+    if(!x||!x.ok)return pending('IPO MARKET REPORT',x&&x.url||'https://ipo-market-report.vercel.app/');
+    var scope=[x.period,x.companies!=null?count(x.companies,' IPO'):''].filter(Boolean).join(' · ');
+    var hero=x.avgCurrentReturnPct;
+    var best=x.best&&x.best.name?(x.best.name+' '+pct(x.best.returnPct,0)):'—';
+    var worst=x.worst&&x.worst.name?(x.worst.name+' '+pct(x.worst.returnPct,0)):'—';
+    return '<div class="cdh"><span class="cdt">IPO MARKET REPORT</span><span class="cdo">'+esc(scope||'12M')+'</span></div>'+
+      '<div class="ycq-hero"><span>AVG RETURN</span><strong class="'+tone(hero)+'">'+esc(pct(hero,1))+'</strong></div>'+
+      '<div class="ycq-grid">'+
+        mini('공모가 상회',plainPct(x.aboveOfferPct,1),'cy')+
+        mini('중앙값',pct(x.medianCurrentReturnPct,1),tone(x.medianCurrentReturnPct))+
+      '</div>'+meter(x.aboveOfferPct,'cy')+
+      '<div class="ycq-range"><span><em>BEST</em>'+esc(best)+'</span><span><em>WORST</em>'+esc(worst)+'</span></div>'+
+      link(x.url||'https://ipo-market-report.vercel.app/','REPORT');
+  }
+
+  function cbCard(x){
+    if(!x||!x.ok)return pending('CB ZERO FINDER',x&&x.url||'https://cb-zero-finder.vercel.app/');
+    var scope=[scopePeriod(x.period),x.totalCount!=null?count(x.totalCount,'건'):''].filter(Boolean).join(' · ');
+    var top=x.topIssue&&x.topIssue.name?(x.topIssue.name+' · '+amount(x.topIssue.amountEok)):'—';
+    return '<div class="cdh"><span class="cdt">CB ZERO FINDER</span><span class="cdo">'+esc(scope||'SNAPSHOT')+'</span></div>'+
+      '<div class="ycq-hero"><span>ZERO · ZERO</span><strong class="am">'+esc(plainPct(x.zeroZeroSharePct,1))+'</strong></div>'+
+      '<div class="ycq-grid">'+
+        mini('발행액',amount(x.totalAmountEok),'')+
+        mini('평균 희석',plainPct(x.averageDilutionPct,1),n(x.averageDilutionPct)>=20?'rd':'')+
+      '</div>'+meter(x.zeroZeroSharePct,'am')+
+      '<div class="ycq-focusline"><span>최대 발행</span><b>'+esc(top)+'</b></div>'+
+      link(x.url||'https://cb-zero-finder.vercel.app/','SCREENER');
+  }
+
+  function enhanceEquity(){
+    if(typeof curTab==='undefined'||curTab!=='EQUITY')return;
+    var ipo=cardByTitle('IPO MARKET REPORT'),cb=cardByTitle('CB ZERO FINDER');
+    if(!ipo&&!cb)return;
+    var d=STATE.data;
+    if(ipo){ipo.classList.add('ycq');ipo.innerHTML=d?ipoCard(d.ipo):pending('IPO MARKET REPORT','https://ipo-market-report.vercel.app/');}
+    if(cb){cb.classList.add('ycq');cb.innerHTML=d?cbCard(d.cb):pending('CB ZERO FINDER','https://cb-zero-finder.vercel.app/');}
+    if(typeof window.declutterValkyrie==='function')window.declutterValkyrie();
+  }
+
   async function refresh(){
     STATE.status='loading';STATE.error=null;
     try{
-      var rs=await Promise.all([fetchJson(API.intraday),fetchJson(API.today).catch(function(){return null;})]);
-      var raw=rs[0],today=rs[1];
-      var ipo=pulse(raw,/(신규상장|상장예비심사|기업공개|수요예측|공모주|상장주선인|증권신고서\(지분증권\))/i);
-      var cb=pulse(raw,/(전환사채|교환사채|신주인수권부사채|전환가액|리픽싱)/i);
-      STATE.data={ipo:ipo,cb:cb,generated:stamp(today||raw),provider:'AIKSTOCKDATA · PUBLIC DART FEED'};
-      STATE.status='ready';STATE.lastFetch=Date.now();
+      var d=await fetchJson(SNAPSHOT+'?t='+Date.now());
+      if(!d||d.ok!==true)throw new Error('research snapshot unavailable');
+      STATE.data=d;STATE.status='ready';STATE.lastFetch=Date.now();
     }catch(e){
       STATE.status='error';STATE.data=null;STATE.error=String(e&&e.message||e);STATE.lastFetch=Date.now();
     }
     enhanceEquity();
   }
-  function eventRows(rows){
-    if(!rows||!rows.length)return '<div class="note ycq-note">현재 공개 피드에서 해당 이벤트 없음</div>';
-    var out='<div class="ycq-feed">';
-    for(var i=0;i<rows.length;i++){
-      var x=rows[i],label=[x.company,x.title].filter(Boolean).join(' · ')||'공시 이벤트';
-      var link=x.rcpNo?'https://dart.fss.or.kr/dsaf001/main.do?rcpNo='+encodeURIComponent(x.rcpNo):'';
-      out+='<div class="kv"><span>'+esc(label)+'</span>'+(link?'<a class="ycq-dart" href="'+link+'" target="_blank" rel="noopener noreferrer">DART ↗</a>':'<b>'+esc(x.time||'')+'</b>')+'</div>';
-    }
-    return out+'</div>';
-  }
-  function pendingCard(title,subtitle){
-    return '<div class="cdh"><span class="cdt">'+title+'</span><span class="cdo">'+subtitle+'</span></div>'+
-      '<div class="ycq-signal warn"><span class="lbl">PUBLIC FEED</span><strong>DATA PENDING</strong></div>'+
-      '<div class="note ycq-note">공개 DART 피드가 확인될 때까지 숫자를 임의 생성하지 않습니다.</div>';
-  }
-  function liveCard(title,subtitle,label,p){
-    return '<div class="cdh"><span class="cdt">'+title+'</span><span class="cdo">'+subtitle+'</span></div>'+
-      '<div class="ycq-signal"><span class="lbl">'+label+'</span><strong>'+p.count+' EVENTS</strong></div>'+
-      '<div class="ycq-grid">'+
-        '<div class="ycq-mini"><span>해당 이벤트</span><b>'+p.count+'건</b></div>'+
-        '<div class="ycq-mini"><span>전체 피드</span><b>'+p.total+'건</b></div>'+
-      '</div>'+eventRows(p.top);
-  }
-  function enhanceEquity(){
-    if(typeof curTab==='undefined' || curTab!=='EQUITY')return;
-    var ipo=cardByTitle('IPO MARKET REPORT'),cb=cardByTitle('CB ZERO FINDER');
-    if(!ipo&&!cb)return;
-    if(STATE.status!=='ready'||!STATE.data){
-      if(ipo){ipo.classList.add('ycq');ipo.innerHTML=pendingCard('IPO MARKET REPORT','김유찬 · PUBLIC DART');}
-      if(cb){cb.classList.add('ycq');cb.innerHTML=pendingCard('CB ZERO FINDER','김유찬 · PUBLIC DART');}
-      return;
-    }
-    var d=STATE.data;
-    if(ipo){
-      ipo.classList.add('ycq');
-      ipo.innerHTML=liveCard('IPO MARKET REPORT','김유찬 · PUBLIC DART','IPO / EQUITY EVENT PULSE',d.ipo)+
-        '<div class="note ycq-note">'+esc(d.provider)+' · '+hhmm(d.generated)+' · 5분 자동 갱신</div>';
-    }
-    if(cb){
-      cb.classList.add('ycq');
-      cb.innerHTML=liveCard('CB ZERO FINDER','김유찬 · PUBLIC DART','CB / MEZZANINE EVENT PULSE',d.cb)+
-        '<div class="note ycq-note">'+esc(d.provider)+' · '+hhmm(d.generated)+' · 5분 자동 갱신</div>';
-    }
-  }
-  function installQuickLink(){
-    var groups=document.querySelectorAll('.cmd .cps'),target=null;
-    for(var i=0;i<groups.length;i++)if(!groups[i].classList.contains('sk')){target=groups[i];break;}
-    if(!target||target.querySelector('.ycq-chip'))return;
-    var chip=document.createElement('div');
-    chip.className='cp ycq-chip';chip.textContent='유찬 Equity';chip.title='KOSPI · KOSDAQ · IPO · CB Equity intelligence';
-    chip.addEventListener('click',function(){if(typeof tab==='function')tab('EQUITY');setTimeout(enhanceEquity,30);});
-    target.appendChild(chip);
-  }
 
   var originalPaneRender=window.paneRender;
-  if(typeof originalPaneRender==='function')window.paneRender=function(){originalPaneRender.apply(this,arguments);enhanceEquity();};
+  if(typeof originalPaneRender==='function')window.paneRender=function(){var r=originalPaneRender.apply(this,arguments);enhanceEquity();return r;};
 
-  installQuickLink();
   enhanceEquity();
   refresh();
   STATE.timer=setInterval(refresh,POLL_MS);
