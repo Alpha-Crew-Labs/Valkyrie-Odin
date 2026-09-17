@@ -82,6 +82,42 @@
       if(after!==before)nodes[i].nodeValue=after;
     }
   }
+  function liveReadyForDomain(){
+    if(typeof si==='undefined'||si!==4)return false;
+    if((window.curTab||'RATES')==='EQUITY'){
+      var e=window.VALKYRIE_LIVE_EQUITY;return !!(e&&e.status==='ready'&&e.data&&e.data.ok);
+    }
+    var c=window.VALKYRIE_LIVE_CORE;return !!(c&&c.status==='ready'&&c.data&&c.data.ok);
+  }
+  function sanitizeLiveInspector(){
+    if(typeof si==='undefined'||si!==4)return;
+    var ins=document.querySelector('#pane .ins');if(!ins)return;
+    var ready=liveReadyForDomain(),rows=ins.querySelectorAll('.kv');
+    for(var i=0;i<rows.length;i++){
+      var label=rows[i].querySelector('span'),value=rows[i].querySelector('b');if(!label||!value)continue;
+      var key=label.textContent.trim();
+      if(key==='CONFIDENCE'){
+        value.textContent='MODEL PENDING';value.className='am';
+        var bar=rows[i].parentElement&&rows[i].parentElement.querySelector('.bar i');if(bar)bar.style.width='0%';
+      }
+      if(key==='DATA VINTAGE'){
+        value.textContent=ready?'LIVE PUBLIC API':'DATA PENDING';value.className=ready?'cy':'am';
+      }
+    }
+    var notes=ins.querySelectorAll('.note');
+    for(var j=0;j<notes.length;j++)if(notes[j].textContent.indexOf('공표시점')>=0)notes[j].textContent=ready?'현재 LIVE 화면은 공개 API timestamp 기준 · 모델/PIT 검증값은 별도 연결 예정':'공개 API 수신 전 · 샘플/가정값을 사용하지 않습니다.';
+    var id=(typeof INS!=='undefined'&&INS)?INS.id:null;
+    if(id==='mac_krcpi'||id==='eq_cb'||id==='eq_ipo'){
+      var big=ins.querySelector('.cd .big');if(big){big.textContent=id==='mac_krcpi'?'MODEL PENDING':'DATA PENDING';big.style.fontSize='12px';big.style.color='#EFA83A';}
+    }
+  }
+  function sanitizeEquitySignal(){
+    if(typeof si==='undefined'||si!==4||!window.NEL||!NEL.sig_equity||!NEL.sig_equity.s)return;
+    var e=NEL.sig_equity.s,t=String(e.textContent||'');
+    var next=t.replace(/DIRECT LIVE\s*·\s*CONF\s*(\d+(?:\.\d+)?)%/i,'DIRECT LIVE · PULSE $1/100');
+    if(next!==t)e.textContent=next;
+  }
+  function sanitizeLiveSurface(){sanitizeLiveInspector();sanitizeEquitySignal();}
   function declutter(){
     var tabs=document.querySelectorAll('.tab');
     for(var i=0;i<tabs.length;i++){
@@ -96,6 +132,7 @@
     var tabsp=document.querySelector('.tabsp');if(tabsp)tabsp.setAttribute('aria-hidden','true');
     var feed=document.querySelector('.ovb>div:nth-child(2)');if(feed)feed.style.display='none';
     var flow=byId('fl1');if(flow)flow.textContent='22 FLOWS';
+    sanitizeLiveSurface();
   }
   window.declutterValkyrie=declutter;
 
@@ -154,6 +191,7 @@
   if(typeof basePane==='function')window.paneRender=function(){var r=basePane.apply(this,arguments);declutter();return r;};
 
   installNodeWheelZoom();declutter();paintBrief();
+  if(window.MutationObserver&&window.NEL&&NEL.sig_equity&&NEL.sig_equity.s){new MutationObserver(sanitizeEquitySignal).observe(NEL.sig_equity.s,{childList:true,characterData:true,subtree:true});sanitizeEquitySignal();}
   setInterval(function(){paintBrief();declutter();},30000);
   setTimeout(function(){declutter();if(!window.sel&&!window.busy)focusDomain(window.curTab||'RATES');},2450);
 })();
