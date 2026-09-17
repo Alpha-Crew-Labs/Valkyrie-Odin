@@ -2,7 +2,7 @@
  * 1) Node focus on hover only; wheel keeps normal page scrolling.
  * 2) Theme rotation is embedded into the Equity live-market card.
  * 3) Empty inspector becomes a transparent 1-100 tactical positioning gauge.
- * 4) Replay holds each snapshot for 10 seconds with soft transitions.
+ * 4) Replay holds each snapshot for at least 10 seconds with soft transitions.
  */
 (function(){
   'use strict';
@@ -24,6 +24,7 @@
     SV.classList.remove('ux-hover-focus','node-zoom','zoom-l1','zoom-l2');
     if(window.NEL)for(var id in NEL)if(NEL[id]&&NEL[id].g)NEL[id].g.classList.remove('zoom-main','zoom-rel','zoom-muted');
     if(window.EL)for(var i=0;i<EL.length;i++)EL[i].g.classList.remove('zoom-rel');
+    var hud=byId('hud2');if(hud&&!window.busy)hud.textContent='HOVER READY · MOVE TO OBJECT';
   }
   function applyHoverFocus(id){
     if(!window.SV||!window.NEL||!window.ND||!NEL[id]||typeof chain!=='function')return;
@@ -48,7 +49,10 @@
   function installHoverOnlyFocus(){
     /* Capture wheel before the legacy target listener. We intentionally do not preventDefault,
        so wheel/trackpad returns to normal page scrolling. */
-    document.addEventListener('wheel',function(e){if(insideNode(e.target))e.stopPropagation();},true);
+    if(!document.__uxWheelFocusGuard){
+      document.__uxWheelFocusGuard=true;
+      document.addEventListener('wheel',function(e){if(insideNode(e.target))e.stopPropagation();},true);
+    }
     if(!window.NEL)return;
     for(var id in NEL){
       (function(nodeId,g){
@@ -157,17 +161,17 @@
     REPLAY.running=true;if(typeof busy!=='undefined')busy=true;
     if(typeof clearT==='function')clearT();if(typeof cool==='function')cool();clearReplayTimers();
     document.body.classList.add('replay-active');
-    var rp=byId('rp'),lead=700,hold=10000,total=SNAP.length;
+    var rp=byId('rp'),lead=700,hold=10000,transition=600,step=hold+transition,total=SNAP.length;
     REPLAY.startedAt=Date.now()+lead;
     if(typeof banner==='function')banner('TEMPORAL REPLAY','5 SNAPSHOTS · 10 SEC EACH');
-    for(var k=0;k<total;k++)(function(idx){replayTimer(function(){softSnap(idx);},lead+idx*hold);})(k);
+    for(var k=0;k<total;k++)(function(idx){replayTimer(function(){softSnap(idx);},lead+idx*step);})(k);
     REPLAY.tick=setInterval(function(){
       if(!REPLAY.running)return;var delta=Date.now()-REPLAY.startedAt;
       if(delta<0){if(rp)rp.textContent='■ REPLAY · READY';return;}
-      var step=Math.min(total-1,Math.floor(delta/hold)),within=((delta%hold)+hold)%hold,remain=Math.max(1,Math.ceil((hold-within)/1000));
-      if(rp)rp.textContent='■ REPLAY '+(step+1)+'/'+total+' · '+String(remain).padStart(2,'0')+'s';
+      var stage=Math.min(total-1,Math.floor(delta/step)),within=((delta%step)+step)%step,visibleElapsed=Math.max(0,within-260),remain=Math.max(1,Math.ceil((hold-visibleElapsed)/1000));
+      if(rp)rp.textContent='■ REPLAY '+(stage+1)+'/'+total+' · '+String(remain).padStart(2,'0')+'s';
     },250);
-    replayTimer(finishReplay,lead+total*hold+700);
+    replayTimer(finishReplay,lead+(total-1)*step+260+hold+700);
   }
   function installReplayOverride(){
     var rp=byId('rp');if(!rp||rp.__uxReplay)return;rp.__uxReplay=true;
