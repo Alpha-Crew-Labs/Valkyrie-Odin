@@ -117,7 +117,29 @@
     var next=t.replace(/DIRECT LIVE\s*·\s*CONF\s*(\d+(?:\.\d+)?)%/i,'DIRECT LIVE · PULSE $1/100');
     if(next!==t)e.textContent=next;
   }
-  function sanitizeLiveSurface(){sanitizeLiveInspector();sanitizeEquitySignal();}
+  function sanitizeUnsupportedLiveNodes(){
+    if(typeof si==='undefined'||si!==4||!window.NEL)return;
+    var spec=[['mac_krcpi','MODEL PENDING'],['eq_cb','DATA PENDING'],['eq_ipo','DATA PENDING']];
+    for(var i=0;i<spec.length;i++){
+      var e=NEL[spec[i][0]],txt=spec[i][1];if(!e||!e.v)continue;
+      if(e.v.textContent!==txt)e.v.textContent=txt;
+    }
+  }
+  function sanitizeRuleSignals(){
+    if(typeof si==='undefined'||si!==4||!window.NEL)return;
+    ['sig_macro','sig_rates'].forEach(function(id){
+      var e=NEL[id];if(!e)return;
+      if(e.s){var t=String(e.s.textContent||''),next=t.replace(/\s*·\s*CONF\s*\d+(?:\.\d+)?%/i,' · RULE');if(next!==t)e.s.textContent=next;}
+      if(e.bf)e.bf.setAttribute('width','0');
+      if(e.st)e.st.textContent='LIVE';
+    });
+  }
+  function sanitizeLiveSurface(){sanitizeLiveInspector();sanitizeEquitySignal();sanitizeUnsupportedLiveNodes();sanitizeRuleSignals();}
+  function installLiveDisplayGuards(){
+    if(!window.MutationObserver||!window.NEL)return;
+    ['mac_krcpi','eq_cb','eq_ipo'].forEach(function(id){var e=NEL[id];if(e&&e.v&&!e.v.__livePendingGuard){e.v.__livePendingGuard=true;new MutationObserver(sanitizeUnsupportedLiveNodes).observe(e.v,{childList:true,characterData:true,subtree:true});}});
+    ['sig_macro','sig_rates'].forEach(function(id){var e=NEL[id];if(e&&e.s&&!e.s.__liveRuleGuard){e.s.__liveRuleGuard=true;new MutationObserver(sanitizeRuleSignals).observe(e.s,{childList:true,characterData:true,subtree:true});}});
+  }
   function declutter(){
     var tabs=document.querySelectorAll('.tab');
     for(var i=0;i<tabs.length;i++){
@@ -190,7 +212,7 @@
   var basePane=window.paneRender;
   if(typeof basePane==='function')window.paneRender=function(){var r=basePane.apply(this,arguments);declutter();return r;};
 
-  installNodeWheelZoom();declutter();paintBrief();
+  installNodeWheelZoom();installLiveDisplayGuards();declutter();paintBrief();
   if(window.MutationObserver&&window.NEL&&NEL.sig_equity&&NEL.sig_equity.s){new MutationObserver(sanitizeEquitySignal).observe(NEL.sig_equity.s,{childList:true,characterData:true,subtree:true});sanitizeEquitySignal();}
   setInterval(function(){paintBrief();declutter();},30000);
   setTimeout(function(){declutter();if(!window.sel&&!window.busy)focusDomain(window.curTab||'RATES');},2450);
