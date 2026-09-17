@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "generatedAt": null,
+  "cadence": "12H",
+  "runtimeDependency": "NONE",
+  "note": "Awaiting first public research insight refresh. No fabricated fallback values.",
+  "ipo": {
+    "ok": false,
+    "source": "IPO Market Report",
+    "url": "https://ipo-market-report.vercel.app/",
+    "status": "pending"
+  },
+  "cb": {
+    "ok": false,
+    "source": "CB Zero Finder",
+    "url": "https://cb-zero-finder.vercel.app/",
+    "status": "pending"
+  }
+}
