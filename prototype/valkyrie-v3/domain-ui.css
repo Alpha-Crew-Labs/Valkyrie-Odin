@@ -11,6 +11,11 @@ body{overflow-y:auto!important;overscroll-behavior-y:auto!important}
 .tab.act{background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(63,217,230,.025))}.tab.act .tn{color:#F4F7FB}
 .tabsp{display:none!important}.nown{display:none!important}
 
+/* Fail-safe render gate: never expose bundled demo cards before the public-data bridge resolves. */
+body:not(.core-ready) #pane{position:relative;min-height:120px!important}
+body:not(.core-ready) #pane>div{visibility:hidden!important}
+body:not(.core-ready) #pane::before{content:'PUBLIC DATA SYNC';position:absolute;z-index:20;inset:8px;display:flex;align-items:center;justify-content:center;border:1px solid #182531;background:linear-gradient(180deg,#091018,#070D13);color:#667487;font-size:8px;font-weight:850;letter-spacing:.18em;pointer-events:none}
+
 /* Wheel focus: hovered node grows first, connected causal chain grows slightly. */
 @media(pointer:fine){
   #chain .nd{transform-box:fill-box;transform-origin:center;transition:transform .2s cubic-bezier(.22,1,.36,1),opacity .22s}
