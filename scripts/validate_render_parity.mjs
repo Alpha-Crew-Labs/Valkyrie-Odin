@@ -27,11 +27,12 @@ function collectTextFiles(base){
 }
 
 const runtimeFiles=collectTextFiles(dir);
-const runtimeText=runtimeFiles.map(x=>x.text).join('\n');
+const browserRuntime=runtimeFiles.filter(x=>/\.(?:js|html)$/i.test(x.path)).map(x=>x.text).join('\n');
 const collectorText=[coreCollector,bokCollector,tapeCollector,equityCollector,themeCollector].join('\n');
 
-// Hard rule: production data must be public/read-only and keyless.
-assert(!/https?:\/\/[^\s'"`]*(?:vercel\.app|vercel\.com)/i.test(runtimeText),'v3 runtime has no Vercel dependency or Vercel data endpoint');
+// Hard rule: production market data is public/read-only and keyless. Vercel research products may only be outbound links;
+// browser code must never fetch them as a runtime data dependency.
+assert(!/(?:fetchJson|fetch)\s*\(\s*['"]https?:\/\/[^'"]*(?:vercel\.app|vercel\.com)/i.test(browserRuntime),'v3 browser runtime has no Vercel fetch dependency');
 assert(!/(?:process\.env|x-api-key|api[_-]?key\s*[:=]|client[_-]?secret\s*[:=]|access[_-]?token\s*[:=]|authorization\s*[:=]\s*['"`]?bearer)/i.test(collectorText),'public-data collectors require no personal API key, token, or secret');
 assert(pages.includes("cron: '*/10 0-7 * * 1-5'")&&pages.includes("cron: '7 * * * *'"),'public data auto-refreshes every 10 minutes in KR market hours and hourly otherwise');
 
@@ -46,9 +47,9 @@ assert(html.includes('id="marketStrip"')&&html.includes('id="marketStripTrack"')
 
 const assets=[
   'styles.css?v=2601','mobile.css?v=2602','quant-hk.css?v=2603','equity-yc.css?v=2606',
-  'live-equity.css?v=2606','live-equity-extra.css?v=2607','theme-equity.css?v=2613','market-strip.css?v=2610',
+  'live-equity.css?v=2606','live-equity-extra.css?v=2607','theme-equity.css?v=2613','market-strip.css?v=2610','domain-ui.css?v=2614',
   'data-core.js?v=2601','view.js?v=2601','interaction.js?v=2606','quant-hk.js?v=2603',
-  'equity-yc.js?v=2606','live-equity.js?v=2609','theme-equity.js?v=2613','market-strip.js?v=2610'
+  'equity-yc.js?v=2606','live-equity.js?v=2609','theme-equity.js?v=2613','market-strip.js?v=2610','domain-ui.js?v=2614'
 ];
 for(const asset of assets)assert(html.includes(`./${asset}&rev=__BUILD_REV__`),`canonical asset shares deploy revision: ${asset}`);
 assert(!/currentdownload-|rev=[0-9a-f]{7,40}/i.test(html),'source HTML does not pin a stale fixed render revision');
