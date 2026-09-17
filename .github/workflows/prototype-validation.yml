@@ -71,6 +71,7 @@ jobs:
           node --check prototype/valkyrie-v3/decision-log.js
           node --check prototype/valkyrie-v3/equity-decision.js
           node --check prototype/valkyrie-v3/reasoning-trace.js
+          node --check prototype/valkyrie-v3/equity-node-live.js
           node --check scripts/update_equity_snapshot.mjs
           node --check scripts/update_theme_snapshot.mjs
           node --check scripts/update_market_strip_snapshot.mjs

@@ -50,4 +50,8 @@
   function wrapPaneRender(){var base=window.paneRender;if(typeof base!=='function'||base.__equityDecisionWrapped)return;var fn=function(){var r=base.apply(this,arguments);render();return r;};fn.__equityDecisionWrapped=true;window.paneRender=fn;}
 
   wrapPaneRender();render();setInterval(render,2200);
+
+  /* Exposed so other modules (equity-node-live.js) reuse the exact same
+     read/threshold logic instead of re-deriving OW/N/UW from scratch. */
+  window.VALKYRIE_EQUITY_READS={marketRead:marketRead,structuralRead:structuralRead,fundingRead:fundingRead,fundamentalRead:fundamentalRead,TONE_HEX:TONE_HEX};
 })();
