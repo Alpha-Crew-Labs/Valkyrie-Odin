@@ -138,11 +138,6 @@ setInterval(function(){
   var t=new Date();
   $('fd').textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+':'+String(t.getSeconds()).padStart(2,'0')+'  '+FEED[fi]+' · DEMO';
 },4300);
-setInterval(function(){
-  if(si!==4)return;
-  var t=new Date();
-  $('asof').textContent='2026-09-30 '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+':'+String(t.getSeconds()).padStart(2,'0');
-},1000);
 
 window.addEventListener('resize',function(){PT=[];rs();});
 rs();requestAnimationFrame(draw);

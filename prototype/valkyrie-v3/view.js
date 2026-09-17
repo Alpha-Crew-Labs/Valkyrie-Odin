@@ -88,7 +88,7 @@ function brief(){
 }
 function apply(ms){
   tween(calc(),ms||480);subs();sigs();alerts();brief();
-  $('snl').textContent=cur.d;$('asof').textContent=cur.d+' 15:42:08';
+  $('snl').textContent=cur.d;$('asof').textContent=si===4?'PUBLIC DATA CONNECTING':(cur.d+' · REPLAY');
   var tk=document.querySelectorAll('.tk');
   for(var i=0;i<tk.length;i++)tk[i].classList.toggle('on',i===si);
 }
