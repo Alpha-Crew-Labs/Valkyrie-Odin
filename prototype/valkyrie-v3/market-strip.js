@@ -83,4 +83,13 @@
   var selfSrc=(document.currentScript&&document.currentScript.src)||'',rev='';
   try{rev=new URL(selfSrc,location.href).searchParams.get('rev')||'';}catch(e){}
   var core=document.createElement('script');core.src='./live-core.js?v=2611'+(rev?'&rev='+encodeURIComponent(rev):'');core.async=false;document.head.appendChild(core);
+
+  /* Keep bundled demo cards hidden until live-core has rendered either verified public values or explicit PENDING state. */
+  var coreGate=setInterval(function(){
+    var s=window.VALKYRIE_LIVE_CORE;
+    if(s&&(s.status==='ready'||s.status==='error')){
+      if(document.body)document.body.classList.add('core-ready');
+      clearInterval(coreGate);
+    }
+  },40);
 })();
