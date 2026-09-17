@@ -8,6 +8,7 @@ const pages=fs.readFileSync(path.join(root,'.github','workflows','pages.yml'),'u
 const tape=fs.readFileSync(path.join(dir,'market-strip.js'),'utf8');
 const theme=fs.readFileSync(path.join(dir,'theme-equity.js'),'utf8');
 const liveCore=fs.readFileSync(path.join(dir,'live-core.js'),'utf8');
+const domainUi=fs.readFileSync(path.join(dir,'domain-ui.css'),'utf8');
 const coreCollector=fs.readFileSync(path.join(root,'scripts','update_core_snapshot.mjs'),'utf8');
 const bokCollector=fs.readFileSync(path.join(root,'scripts','update_bok_rate.mjs'),'utf8');
 const tapeCollector=fs.readFileSync(path.join(root,'scripts','update_market_strip_snapshot.mjs'),'utf8');
@@ -83,6 +84,9 @@ assert(liveCore.includes("SNAPSHOT='./data/core-live.json'"),'live ontology read
 assert(liveCore.includes("MODEL · PUBLIC FEED PENDING")&&liveCore.includes('STRUCTURAL SNAPSHOT'),'unsupported ontology outputs stay explicitly tagged instead of being faked live');
 assert(liveCore.includes("si!==4")&&liveCore.includes('MARKET STRESS · LIVE')&&liveCore.includes('DECISION LOG · PENDING'),'current Macro/Rates workbench replaces unsupported demo outputs while historical Replay remains intact');
 assert(liveCore.includes('VaR 및 기여도 숫자는 표시하지 않습니다')&&liveCore.includes('가정 수익률을 LIVE 화면에 표시하지 않습니다'),'current workbench explicitly suppresses unverified VaR and decision-return figures');
+assert(domainUi.includes('body:not(.core-ready) #pane')&&domainUi.includes("content:'PUBLIC DATA SYNC'"),'lower workbench is visually gated before public core resolution');
+assert(tape.includes("s&&(s.status==='ready'||s.status==='error')")&&tape.includes("document.body.classList.add('core-ready')"),'workbench gate opens only after live core reaches verified or fail-closed terminal state');
+assert(liveCore.includes("STATE.status='ready'")&&liveCore.includes("STATE.status='error'")&&liveCore.includes('failClosed('),'live core exposes explicit ready/error states and a fail-closed renderer for the gate');
 assert(!tapeCollector.includes("import('./update_core_snapshot.mjs')")&&!tapeCollector.includes("import('./update_bok_rate.mjs')"),'market-tape collector is single-purpose; Pages owns core/BOK refresh ordering');
 for(const endpoint of ['bondList?countryCode=USA','bondList?countryCode=KOR','standardInterestList','domesticInterestList'])assert(coreCollector.includes(endpoint),`core collector includes Naver/Npay ${endpoint}`);
 for(const series of ['CPIAUCSL','NGDPRSAXDCKRQ','GDPC1','DFF','STLFSI4'])assert(coreCollector.includes(series),`core collector includes public FRED series ${series}`);
