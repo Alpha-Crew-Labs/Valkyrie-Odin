@@ -44,26 +44,26 @@
 
   <div class="bf" data-domain="RATES">
     <div class="bsweep"></div>
-    <div class="seg s1"><div class="tag">SHOCK · 핵심 입력</div><div class="txt" id="bf1">PUBLIC DATA PENDING</div></div>
+    <div class="seg s1"><div class="tag">SHOCK</div><div class="txt" id="bf1">PUBLIC DATA PENDING</div></div>
     <div></div><div class="arw">▶</div>
-    <div class="seg s2"><div class="tag">TRANSMISSION · 전이</div><div class="txt" id="bf2">LIVE INPUT REQUIRED</div></div>
+    <div class="seg s2"><div class="tag">FLOW</div><div class="txt" id="bf2">LIVE INPUT REQUIRED</div></div>
     <div class="arw">▶</div>
-    <div class="seg s3"><div class="tag">DECISION · 판단</div><div class="txt" id="bf3">SIGNAL PENDING</div></div>
+    <div class="seg s3"><div class="tag">DECISION</div><div class="txt" id="bf3">SIGNAL PENDING</div></div>
   </div>
 
   <div class="cw" id="cw">
     <canvas id="df"></canvas>
     <div class="ovl">
       <div class="ml" style="color:#4E5A6B">INTELLIGENCE CHAIN</div>
-      <div class="ml2" style="margin-top:2px;color:#39424E">관계 = 사전 정의 온톨로지 · 값 = PUBLIC API 우선 · MODEL/SNAPSHOT 별도 태그</div>
+      <div class="ml2" style="margin-top:2px;color:#39424E">ONTOLOGY · LIVE DATA</div>
     </div>
     <div class="ovr">
       <div class="ml2 num" id="hud" style="color:#39424E">CURSOR — · —</div>
       <div class="ml2 num" id="hud2" style="color:#39424E;margin-top:1px">NO OBJECT ACQUIRED</div>
     </div>
     <div class="ovb">
-      <div><span class="ml" style="color:#39424E">FLOW</span> <span class="ml2 num" id="fl1" style="color:#4E5A6B">22 CHANNELS OPEN</span></div>
-      <div><span class="ml" style="color:#39424E">FEED</span> <span class="ml2 num" id="fd" style="color:#4E5A6B">PUBLIC FEED CONNECTING</span></div>
+      <div><span class="ml" style="color:#39424E">FLOW</span> <span class="ml2 num" id="fl1" style="color:#4E5A6B">22 FLOWS</span></div>
+      <div style="display:none"><span class="ml">FEED</span> <span class="ml2 num" id="fd">PUBLIC FEED CONNECTING</span></div>
     </div>
     <div class="ban" id="ban"><div class="b1" id="ban1"></div><div class="b2" id="ban2"></div></div>
     <svg id="chain" viewBox="0 0 1020 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VALKYRIE 인과 체인"></svg>
@@ -92,10 +92,10 @@
 
   <div class="mw">
     <div class="tabs">
-      <div class="tab" data-t="MACRO"><div class="tn">MACRO</div><div class="to">정희강 · Quant Engine</div></div>
-      <div class="tab act" data-t="RATES"><div class="tn">RATES</div><div class="to">정훈 · Fixed Income</div></div>
-      <div class="tab" data-t="EQUITY"><div class="tn">EQUITY</div><div class="to">김유찬 · IPO / CB</div></div>
-      <div class="tabsp"><span class="ml2" style="color:#39424E">도메인 선택 → 브리프 · 노드 포커스 · 하단 분석 동기화</span></div>
+      <div class="tab" data-t="MACRO"><div class="tn">MACRO</div><div class="to">정희강</div></div>
+      <div class="tab act" data-t="RATES"><div class="tn">RATES</div><div class="to">정훈</div></div>
+      <div class="tab" data-t="EQUITY"><div class="tn">EQUITY</div><div class="to">김유찬</div></div>
+      <div class="tabsp" aria-hidden="true"></div>
     </div>
     <div class="pane" id="pane"></div>
   </div>
@@ -108,10 +108,10 @@
     </div>
   </div>
 
-  <div class="market-strip" id="marketStrip" aria-label="시장 주요 지표 실시간 띠">
-    <div class="market-strip-brand"><i></i><span>MARKET TAPE</span><small id="marketStripSource">NAVER PAY · CONNECTING</small></div>
+  <div class="market-strip" id="marketStrip" data-state="pending" aria-label="시장 주요 지표 실시간 띠">
+    <div class="market-strip-brand"><i></i><span>MKT</span><small id="marketStripSource">WAIT</small></div>
     <div class="market-strip-window">
-      <div class="market-strip-track" id="marketStripTrack"><span class="market-strip-loading">NAVER PAY SECURITIES MARKET DATA CONNECTING…</span></div>
+      <div class="market-strip-track" id="marketStripTrack"><span class="market-strip-loading">MARKET DATA…</span></div>
     </div>
   </div>
 </div>
