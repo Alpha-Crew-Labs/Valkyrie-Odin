@@ -12,7 +12,13 @@ on:
       - 'scripts/update_market_strip_snapshot.mjs'
       - 'scripts/update_core_snapshot.mjs'
       - 'scripts/update_bok_rate.mjs'
+      - 'scripts/update_research_insights.mjs'
       - '.github/workflows/pages.yml'
+  workflow_run:
+    workflows:
+      - 'Refresh Research Insight Snapshot'
+    types:
+      - completed
   schedule:
     # Korean market hours: near-live public snapshots every 10 minutes, weekdays.
     - cron: '*/10 0-7 * * 1-5'
@@ -32,6 +38,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -39,6 +46,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Node
         uses: actions/setup-node@v4
