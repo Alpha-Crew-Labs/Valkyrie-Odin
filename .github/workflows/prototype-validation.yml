@@ -13,7 +13,9 @@ on:
       - 'scripts/update_equity_snapshot.mjs'
       - 'scripts/update_theme_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
+      - 'scripts/update_research_insights.mjs'
       - '.github/workflows/prototype-validation.yml'
+      - '.github/workflows/research-insights.yml'
   push:
     branches:
       - main
@@ -29,7 +31,9 @@ on:
       - 'scripts/update_equity_snapshot.mjs'
       - 'scripts/update_theme_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
+      - 'scripts/update_research_insights.mjs'
       - '.github/workflows/prototype-validation.yml'
+      - '.github/workflows/research-insights.yml'
 
 permissions:
   contents: read
@@ -63,9 +67,11 @@ jobs:
           node --check prototype/valkyrie-v3/live-equity.js
           node --check prototype/valkyrie-v3/theme-equity.js
           node --check prototype/valkyrie-v3/market-strip.js
+          node --check prototype/valkyrie-v3/domain-ui.js
           node --check scripts/update_equity_snapshot.mjs
           node --check scripts/update_theme_snapshot.mjs
           node --check scripts/update_market_strip_snapshot.mjs
+          node --check scripts/update_research_insights.mjs
           node --check scripts/validate_render_parity.mjs
 
       - name: Validate v2 reference invariants
