@@ -51,11 +51,14 @@
   }
   window.refreshDomainBrief=paintBrief;window.brief=paintBrief;
 
-  function stripOwnerText(v){
+  function stripOwnerInline(v){
     return String(v||'')
       .replace(/정희강\s*·?\s*/g,'')
       .replace(/정훈\s*·?\s*/g,'')
-      .replace(/김유찬\s*·?\s*/g,'')
+      .replace(/김유찬\s*·?\s*/g,'');
+  }
+  function stripOwnerText(v){
+    return stripOwnerInline(v)
       .replace(/^\s*·\s*/,'')
       .replace(/\s*·\s*$/,'')
       .replace(/\s{2,}/g,' ')
@@ -66,6 +69,19 @@
     s=s.replace(/AIKSTOCKDATA\s*·?\s*/gi,'').replace(/PUBLIC\s+DART/gi,'DART').replace(/PUBLIC\s+DATA/gi,'DATA').replace(/PUBLIC\s+API/gi,'API').replace(/\s*·\s*LIVE INPUTS/gi,'').replace(/\s*·\s*LIVE$/i,'');
     return s.replace(/^\s*·\s*/,'').replace(/\s*·\s*$/,'').trim();
   }
+  function cleanPaneTextNodes(){
+    var pane=byId('pane');if(!pane||!document.createTreeWalker)return;
+    var showText=window.NodeFilter?window.NodeFilter.SHOW_TEXT:4,walker=document.createTreeWalker(pane,showText),nodes=[],node;
+    while((node=walker.nextNode()))nodes.push(node);
+    for(var i=0;i<nodes.length;i++){
+      var before=nodes[i].nodeValue,after=stripOwnerInline(before)
+        .replace(/AIKSTOCKDATA\s*·?\s*/gi,'')
+        .replace(/PUBLIC\s+DART/gi,'DART')
+        .replace(/PUBLIC\s+DATA/gi,'DATA')
+        .replace(/PUBLIC\s+API/gi,'API');
+      if(after!==before)nodes[i].nodeValue=after;
+    }
+  }
   function declutter(){
     var tabs=document.querySelectorAll('.tab');
     for(var i=0;i<tabs.length;i++){
@@ -74,7 +90,7 @@
     var lanes=document.querySelectorAll('.lnm');for(var j=0;j<lanes.length;j++)lanes[j].textContent=String(lanes[j].textContent||'').split('·')[0].trim();
     var owns=document.querySelectorAll('.nown');for(var k=0;k<owns.length;k++)owns[k].textContent='';
     var cdo=document.querySelectorAll('#pane .cdo');for(var a=0;a<cdo.length;a++)cdo[a].textContent=compactCdo(cdo[a].textContent);
-    var txt=document.querySelectorAll('#pane .note,#pane .ml2,#pane .evr');for(var b=0;b<txt.length;b++){var cleaned=stripOwnerText(txt[b].textContent);if(cleaned!==txt[b].textContent&&txt[b].children.length===0)txt[b].textContent=cleaned;}
+    cleanPaneTextNodes();
     if(window.ND){for(var id in ND)if(ND[id])ND[id].o='';}
     var meta=document.querySelector('.ovl .ml2');if(meta)meta.textContent='ONTOLOGY · LIVE DATA';
     var tabsp=document.querySelector('.tabsp');if(tabsp)tabsp.setAttribute('aria-hidden','true');
