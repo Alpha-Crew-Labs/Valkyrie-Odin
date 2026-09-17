@@ -58,6 +58,9 @@ assert(pages.includes("grep -q '__BUILD_REV__' _site/v3/index.html"),'Pages depl
 assert(pages.includes('update_market_strip_snapshot.mjs'),'Pages deploy refreshes the market tape snapshot fallback');
 assert(pages.includes('update_theme_snapshot.mjs'),'Pages deploy refreshes the public theme snapshot');
 assert(pages.includes("'scripts/update_core_snapshot.mjs'")&&pages.includes("'scripts/update_bok_rate.mjs'"),'Pages deploy watches live core and BOK collector changes');
+assert(pages.includes('name: Refresh Macro Rates core snapshot')&&pages.includes('node scripts/update_core_snapshot.mjs'),'Pages deploy explicitly refreshes the Macro/Rates core snapshot');
+assert(pages.includes('name: Supplement BOK base rate')&&pages.includes('node scripts/update_bok_rate.mjs'),'Pages deploy explicitly resolves the BOK policy rate after core refresh');
+assert(pages.includes('/tmp/core-live-before-refresh.json')&&pages.includes("cp /tmp/core-live-before-refresh.json prototype/valkyrie-v3/data/core-live.json"),'failed core refresh restores the repository fallback instead of deploying a partial snapshot');
 
 assert(tape.includes('securityService/integration/indicators'),'market tape reads the consolidated Naver/Npay indicators endpoint');
 for(const code of ['KOSPI','KOSDAQ','KPI200','.DJI','.INX','FX_USDKRW','.IXIC','GCcv1','CLcv1'])assert(tape.includes(code),`market tape includes ${code}`);
@@ -78,8 +81,9 @@ assert(themeCollector.includes('!top.length||!bottom.length')&&themeCollector.in
 assert(tape.includes("live-core.js?v=2611"),'market tape loads the live ontology bridge with the deploy revision');
 assert(liveCore.includes("SNAPSHOT='./data/core-live.json'"),'live ontology reads the same-origin public-data snapshot');
 assert(liveCore.includes("MODEL · PUBLIC FEED PENDING")&&liveCore.includes('STRUCTURAL SNAPSHOT'),'unsupported ontology outputs stay explicitly tagged instead of being faked live');
-assert(tapeCollector.includes("import('./update_core_snapshot.mjs')"),'scheduled market-tape refresh also refreshes the ontology live snapshot');
-assert(tapeCollector.includes("import('./update_bok_rate.mjs')"),'scheduled refresh also resolves the BOK policy rate');
+assert(liveCore.includes("si!==4")&&liveCore.includes('MARKET STRESS · LIVE')&&liveCore.includes('DECISION LOG · PENDING'),'current Macro/Rates workbench replaces unsupported demo outputs while historical Replay remains intact');
+assert(liveCore.includes('VaR 및 기여도 숫자는 표시하지 않습니다')&&liveCore.includes('가정 수익률을 LIVE 화면에 표시하지 않습니다'),'current workbench explicitly suppresses unverified VaR and decision-return figures');
+assert(!tapeCollector.includes("import('./update_core_snapshot.mjs')")&&!tapeCollector.includes("import('./update_bok_rate.mjs')"),'market-tape collector is single-purpose; Pages owns core/BOK refresh ordering');
 for(const endpoint of ['bondList?countryCode=USA','bondList?countryCode=KOR','standardInterestList','domesticInterestList'])assert(coreCollector.includes(endpoint),`core collector includes Naver/Npay ${endpoint}`);
 for(const series of ['CPIAUCSL','NGDPRSAXDCKRQ','GDPC1','DFF','STLFSI4'])assert(coreCollector.includes(series),`core collector includes public FRED series ${series}`);
 assert(coreCollector.includes('disclosures_intraday.json'),'core collector includes the public DART disclosure feed');
