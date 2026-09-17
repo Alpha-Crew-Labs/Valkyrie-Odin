@@ -103,13 +103,14 @@ assert(domainUiJs.includes('function sanitizeEquitySignal()')&&domainUiJs.includ
 assert(domainUiJs.includes('MutationObserver(sanitizeEquitySignal)')&&domainUiJs.includes('NEL.sig_equity.s'),'Equity PULSE label is re-applied after live signal mutations');
 
 // Final interaction UX invariants requested for the demo surface.
-assert(uxJs.includes("document.addEventListener('wheel'")&&uxJs.includes('if(insideNode(e.target))e.stopPropagation()'),'ontology wheel event is intercepted without preventDefault so scrolling no longer controls node focus');
+assert(uxJs.includes("document.addEventListener('wheel'")&&uxJs.includes('if(insideNode(e.target))e.stopPropagation()')&&uxJs.includes('document.__uxWheelFocusGuard'),'ontology wheel event is intercepted once without preventDefault so scrolling no longer controls node focus');
 assert(uxJs.includes("addEventListener('mouseenter'")&&uxJs.includes('applyHoverFocus(nodeId)')&&uxJs.includes("addEventListener('mouseleave'"),'ontology focus is activated by hover and released on mouse leave');
 assert(uxJs.includes("SV.classList.add('ux-hover-focus','node-zoom','zoom-l2')"),'hover reuses the strong legacy zoom/focus visual effect');
 assert(uxCss.includes('#pane>#themePulse{display:none!important}')&&uxJs.includes('THEME ROTATION')&&uxJs.includes("byId('cd_live_equity')"),'large standalone theme panel is suppressed and theme rotation is embedded into the Equity live-market card');
 assert(uxJs.includes("addComponent(parts,'MARKET',pulse,35")&&uxJs.includes("addComponent(parts,'BREADTH',breadth,20")&&uxJs.includes("addComponent(parts,'VIX',vixScore,20")&&uxJs.includes("addComponent(parts,'HY OAS',hyScore,15")&&uxJs.includes("addComponent(parts,'THEME',themeShare,10"),'tactical gauge has a transparent 35/20/20/15/10 public-input weighting model');
-assert(uxJs.includes("score>=65?'OVERWEIGHT':score<=35?'UNDERWEIGHT':'NEUTRAL'")&&uxJs.includes('POSITIONING GAUGE'),'empty inspector is replaced by the 1-100 Overweight/Neutral/Underweight gauge');
-assert(uxJs.includes('hold=10000')&&uxJs.includes("banner('REPLAY '+(k+1)+' / '+SNAP.length")&&uxJs.includes('replay-transition'),'Replay holds each snapshot for 10 seconds and applies a soft transition between timeline points');
+assert(uxJs.includes('if(w<55)')&&uxJs.includes("score>=65?'OVERWEIGHT':score<=35?'UNDERWEIGHT':'NEUTRAL'")&&uxJs.includes('POSITIONING GAUGE'),'gauge requires at least 55% source coverage and maps 1-100 to Overweight/Neutral/Underweight');
+assert(uxJs.includes('hold=10000')&&uxJs.includes('step=hold+transition')&&uxJs.includes("banner('REPLAY '+(k+1)+' / '+SNAP.length")&&uxJs.includes('replay-transition'),'Replay separates the 10-second stable hold from its soft transition time');
+assert(uxJs.includes('lead+(total-1)*step+260+hold+700'),'final Replay snapshot also receives the full ten-second visible hold before LIVE restore');
 assert(uxJs.includes("rp.addEventListener('click'")&&uxJs.includes('e.stopImmediatePropagation();startReplay();'),'new Replay capture handler replaces the legacy rapid replay interaction');
 
 assert(!tapeCollector.includes("import('./update_core_snapshot.mjs')")&&!tapeCollector.includes("import('./update_bok_rate.mjs')"),'market-tape collector is single-purpose; Pages owns core/BOK refresh ordering');
