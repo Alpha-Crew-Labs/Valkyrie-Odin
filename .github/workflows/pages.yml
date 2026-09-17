@@ -63,6 +63,33 @@ jobs:
         if: steps.equity_snapshot.outcome != 'success'
         run: echo 'Public Naver market refresh failed. Deploying last-good public snapshot or DATA PENDING; no fabricated values.'
 
+      - name: Refresh Macro Rates core snapshot
+        id: core_snapshot
+        continue-on-error: true
+        run: |
+          cp prototype/valkyrie-v3/data/core-live.json /tmp/core-live-before-refresh.json
+          if node scripts/update_core_snapshot.mjs; then
+            echo 'Core public snapshot refreshed.'
+          else
+            cp /tmp/core-live-before-refresh.json prototype/valkyrie-v3/data/core-live.json
+            echo 'Core refresh failed; restored repository fallback.'
+            exit 1
+          fi
+
+      - name: Supplement BOK base rate
+        id: bok_rate
+        if: steps.core_snapshot.outcome == 'success'
+        continue-on-error: true
+        run: node scripts/update_bok_rate.mjs
+
+      - name: Report Core snapshot fallback
+        if: steps.core_snapshot.outcome != 'success'
+        run: echo 'Public Macro/Rates refresh failed. Deploying repository fallback or DATA PENDING; no fabricated values.'
+
+      - name: Report BOK supplement fallback
+        if: steps.core_snapshot.outcome == 'success' && steps.bok_rate.outcome != 'success'
+        run: echo 'BOK supplement refresh failed. Core public snapshot remains valid without the supplemental rate update.'
+
       - name: Refresh Naver/Npay theme snapshot
         id: theme_snapshot
         continue-on-error: true
