@@ -7,6 +7,7 @@
 
   function n(v){if(v===null||v===undefined||v==='')return null;var x=Number(v);return Number.isFinite(x)?x:null;}
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  var TONE_HEX={gr:'#31C08C',rd:'#EF5A61',am:'#EFA83A'};
   function marketRead(){
     var s=window.VALKYRIE_LIVE_EQUITY,d=s&&s.status==='ready'&&s.data&&s.data.ok?s.data:null,p=d&&d.pulse,score=p?n(p.score):null;
     if(score===null)return null;
@@ -44,7 +45,7 @@
     if(node&&node.parentNode!==host){node.remove();node=null;}
     if(!node){node=document.createElement('div');node.id='equityDecisionLine';node.className='liveq-rel equity-decision-line';var source=host.querySelector('.liveq-source');if(source)host.insertBefore(node,source);else host.appendChild(node);}
     if(lastSig===sig&&node.dataset.sig===sig)return;lastSig=sig;node.dataset.sig=sig;node.title=d.detail||d.summary;
-    node.innerHTML='<span>EQUITY DECISION</span><b class="'+d.tone+'">'+esc(d.label)+'</b><em>'+esc(d.summary)+'</em>';
+    node.innerHTML='<span>EQUITY DECISION</span><b style="color:'+(TONE_HEX[d.tone]||'#E6EBF3')+'">'+esc(d.label)+'</b><em>'+esc(d.summary)+'</em>';
   }
   function wrapPaneRender(){var base=window.paneRender;if(typeof base!=='function'||base.__equityDecisionWrapped)return;var fn=function(){var r=base.apply(this,arguments);render();return r;};fn.__equityDecisionWrapped=true;window.paneRender=fn;}
 
