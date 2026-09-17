@@ -14,7 +14,7 @@
   function byId(id){return document.getElementById(id);}
   function n(v){var x=Number(v);return Number.isFinite(x)?x:null;}
   function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
   function signedPct(v){var x=n(v);return x===null?'—':(x>0?'+':'')+x.toFixed(2)+'%';}
 
   /* ---------- 1. HOVER-ONLY ONTOLOGY FOCUS ---------- */
@@ -111,7 +111,7 @@
     addComponent(parts,'THEME',themeShare,10,themeShare===null?'—':Math.round(themeShare)+'%');
 
     var w=0,sum=0;parts.forEach(function(p){w+=p.weight;sum+=p.score*p.weight;});
-    if(w<35)return {score:null,parts:parts,coverage:w};
+    if(w<55)return {score:null,parts:parts,coverage:w};
     var score=clamp(Math.round(sum/w),1,100),stance=score>=65?'OVERWEIGHT':score<=35?'UNDERWEIGHT':'NEUTRAL';
     var msg=stance==='OVERWEIGHT'?'위험선호 우위 · 투자확대':stance==='UNDERWEIGHT'?'방어 우위 · 투자축소':'균형 구간 · 중립';
     return {score:score,parts:parts,coverage:w,stance:stance,message:msg};
@@ -167,7 +167,7 @@
       var step=Math.min(total-1,Math.floor(delta/hold)),within=((delta%hold)+hold)%hold,remain=Math.max(1,Math.ceil((hold-within)/1000));
       if(rp)rp.textContent='■ REPLAY '+(step+1)+'/'+total+' · '+String(remain).padStart(2,'0')+'s';
     },250);
-    replayTimer(finishReplay,lead+total*hold+120);
+    replayTimer(finishReplay,lead+total*hold+700);
   }
   function installReplayOverride(){
     var rp=byId('rp');if(!rp||rp.__uxReplay)return;rp.__uxReplay=true;
