@@ -1,103 +1,47 @@
-/* VALKYRIE v3 · domain-aware shell refinements
- * Makes the page itself scrollable as research content grows.
- * Keeps ontology geometry intact while making the brief denser and domain-specific.
- */
-html,body{
-  height:auto!important;
-  min-height:100%!important;
-  overflow-x:hidden!important;
-  overflow-y:auto!important;
-  scroll-behavior:smooth;
-}
-body{
-  overflow-y:auto!important;
-  overscroll-behavior-y:auto!important;
-}
+/* VALKYRIE v3 · domain-aware shell refinements */
+html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;scroll-behavior:smooth}
+body{overflow-y:auto!important;overscroll-behavior-y:auto!important}
 
 /* Concise domain brief */
-.bf{
-  --domain-accent:var(--cy);
-  box-shadow:inset 2px 0 0 var(--domain-accent);
-}
+.bf{--domain-accent:var(--cy);box-shadow:inset 2px 0 0 var(--domain-accent)}
 .bf[data-domain="MACRO"]{--domain-accent:var(--vi)}
 .bf[data-domain="RATES"]{--domain-accent:var(--am)}
 .bf[data-domain="EQUITY"]{--domain-accent:var(--cy)}
-.bf .seg{gap:2px}
-.bf .tag{
-  color:var(--domain-accent)!important;
-  font-size:7.9px;
-  letter-spacing:.13em;
-}
-.bf .txt{
-  font-size:13.2px;
-  font-weight:700;
-  letter-spacing:-.015em;
-}
-.bf .arw{color:#394654}
-.tab.act{
-  background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(63,217,230,.025));
-}
-.tab.act .tn{color:#F4F7FB}
+.bf .seg{gap:2px}.bf .tag{color:var(--domain-accent)!important;font-size:7.8px;letter-spacing:.15em}.bf .txt{font-size:13px;font-weight:700;letter-spacing:-.015em}.bf .arw{color:#394654}
+.tab.act{background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(63,217,230,.025))}.tab.act .tn{color:#F4F7FB}
+.tabsp{display:none!important}.nown{display:none!important}
 
-/* The lower research surface grows with its content so the document scrolls naturally. */
+/* Wheel focus: hovered node grows first, connected causal chain grows slightly. */
+@media(pointer:fine){
+  #chain .nd{transform-box:fill-box;transform-origin:center;transition:transform .2s cubic-bezier(.22,1,.36,1),opacity .22s}
+  #chain .eg{transition:opacity .22s,filter .22s}
+  #chain.node-zoom .nd{opacity:.14!important}
+  #chain.node-zoom .nd.zoom-rel{opacity:.9!important;transform:scale(1.035)}
+  #chain.node-zoom .nd.zoom-main{opacity:1!important;transform:scale(1.12);filter:drop-shadow(0 0 5px rgba(63,217,230,.16))}
+  #chain.node-zoom.zoom-l2 .nd.zoom-rel{transform:scale(1.065)}
+  #chain.node-zoom.zoom-l2 .nd.zoom-main{transform:scale(1.19);filter:drop-shadow(0 0 8px rgba(63,217,230,.24))}
+  #chain.node-zoom .eg{opacity:.05!important}
+  #chain.node-zoom .eg.zoom-rel{opacity:.92!important;filter:drop-shadow(0 0 2px rgba(63,217,230,.16))}
+  #chain.node-zoom .eg.zoom-rel .efB{stroke:var(--cy);opacity:.9}
+  #chain.node-zoom .eg.zoom-rel .efA{stroke:#9FEFF6;opacity:.9}
+}
+
+/* Lower research surface grows with content; the document itself scrolls. */
 @media(min-width:721px){
-  body .app{
-    grid-template-rows:
-      44px
-      60px
-      clamp(392px,43vh,520px)
-      42px
-      auto
-      42px
-      auto!important;
-    height:auto!important;
-    min-height:calc(100vh - 16px)!important;
-    overflow:visible!important;
-  }
-  .mw{
-    grid-template-rows:34px auto!important;
-    height:auto!important;
-    min-height:320px!important;
-    overflow:visible!important;
-  }
-  .pane{
-    min-height:286px!important;
-    height:auto!important;
-    max-height:none!important;
-    overflow:visible!important;
-  }
-  .pane>div{
-    height:auto!important;
-    min-height:286px!important;
-    align-items:start;
-  }
-  .pane>div>div:first-child{height:auto!important;min-height:286px!important}
-  .g4{height:auto!important;min-height:286px!important}
-  .ins{height:auto!important;align-self:start}
-  .themeq{margin-top:7px}
+  body .app{grid-template-rows:44px 60px clamp(392px,43vh,520px) 42px auto 42px auto!important;height:auto!important;min-height:calc(100vh - 16px)!important;overflow:visible!important}
+  .mw{grid-template-rows:34px auto!important;height:auto!important;min-height:320px!important;overflow:visible!important}
+  .pane{min-height:286px!important;height:auto!important;max-height:none!important;overflow:visible!important}
+  .pane>div{height:auto!important;min-height:286px!important;align-items:start}.pane>div>div:first-child{height:auto!important;min-height:286px!important}
+  .g4{height:auto!important;min-height:286px!important}.ins{height:auto!important;align-self:start}.themeq{margin-top:7px}
+  #pane .cdo{max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #pane .note{line-height:1.38;color:#596473}
 }
-
-@media(min-width:721px) and (orientation:landscape) and (min-height:1000px){
-  body .app{grid-template-rows:44px 60px clamp(480px,43vh,560px) 42px auto 42px auto!important}
-}
-@media(min-width:721px) and (orientation:landscape) and (min-height:1240px){
-  body .app{grid-template-rows:46px 62px clamp(520px,42vh,600px) 44px auto 44px auto!important}
-}
-@media(min-width:721px) and (max-height:760px){
-  body .app{grid-template-rows:44px 60px 360px 42px auto 42px auto!important}
-}
-@media(min-width:721px) and (orientation:portrait){
-  body .app{grid-template-rows:44px 60px clamp(380px,42vw,430px) 42px auto 42px auto!important}
-}
+@media(min-width:721px) and (orientation:landscape) and (min-height:1000px){body .app{grid-template-rows:44px 60px clamp(480px,43vh,560px) 42px auto 42px auto!important}}
+@media(min-width:721px) and (orientation:landscape) and (min-height:1240px){body .app{grid-template-rows:46px 62px clamp(520px,42vh,600px) 44px auto 44px auto!important}}
+@media(min-width:721px) and (max-height:760px){body .app{grid-template-rows:44px 60px 360px 42px auto 42px auto!important}}
+@media(min-width:721px) and (orientation:portrait){body .app{grid-template-rows:44px 60px clamp(380px,42vw,430px) 42px auto 42px auto!important}}
 
 @media(max-width:720px){
-  html,body,body{overflow-y:auto!important;overscroll-behavior-y:auto!important}
-  .app{overflow:visible!important}
-  .pane{height:auto!important;overflow:visible!important}
-  .mw{overflow:visible!important}
-  .bf{padding:3px 7px}
-  .bf .seg{padding:6px 3px}
-  .bf .tag{font-size:7.3px;letter-spacing:.1em}
-  .bf .txt{font-size:11.4px;line-height:1.32}
-  .themeq{margin-top:6px}
+  html,body,body{overflow-y:auto!important;overscroll-behavior-y:auto!important}.app{overflow:visible!important}.pane{height:auto!important;overflow:visible!important}.mw{overflow:visible!important}
+  .bf{padding:3px 7px}.bf .seg{padding:6px 3px}.bf .tag{font-size:7.2px;letter-spacing:.12em}.bf .txt{font-size:11.3px;line-height:1.32}.themeq{margin-top:6px}
 }
