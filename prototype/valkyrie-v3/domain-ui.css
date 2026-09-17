@@ -31,7 +31,7 @@ body:not(.core-ready) #pane::before{content:'PUBLIC DATA SYNC';position:absolute
   #chain.node-zoom .eg.zoom-rel .efA{stroke:#9FEFF6;opacity:.9}
 }
 
-/* Lower research surface grows with content; the document itself scrolls. */
+/* Medium desktop and portrait desktop-site mode can grow with content. */
 @media(min-width:721px){
   body .app{grid-template-rows:44px 60px clamp(392px,43vh,520px) 42px auto 42px auto!important;height:auto!important;min-height:calc(100vh - 16px)!important;overflow:visible!important}
   .mw{grid-template-rows:34px auto!important;height:auto!important;min-height:320px!important;overflow:visible!important}
@@ -57,4 +57,54 @@ body:not(.core-ready) #pane::before{content:'PUBLIC DATA SYNC';position:absolute
 @media(max-width:720px){
   html,body,body{overflow-y:auto!important;overscroll-behavior-y:auto!important}.app{overflow:visible!important}.pane{height:auto!important;overflow:visible!important}.mw{overflow:visible!important}
   .bf{padding:3px 7px}.bf .seg{padding:6px 3px}.bf .tag{font-size:7.2px;letter-spacing:.12em}.bf .txt{font-size:11.3px;line-height:1.32}.themeq{margin-top:6px}
+}
+
+/* Wide desktop final authority: retain the screenshot-like compact terminal.
+   Content that exceeds the panel scrolls inside cards/inspector instead of stretching the whole page. */
+@media(min-width:1100px) and (orientation:landscape){
+  body .app{
+    grid-template-rows:44px 60px clamp(392px,43vh,520px) 42px clamp(286px,30vh,330px) 42px!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  .mw{
+    grid-template-rows:32px minmax(0,1fr)!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:hidden!important;
+  }
+  .pane{
+    min-height:0!important;
+    height:auto!important;
+    max-height:none!important;
+    padding:7px!important;
+    overflow:hidden!important;
+  }
+  .pane>div{
+    min-height:0!important;
+    height:100%!important;
+    align-items:stretch!important;
+  }
+  .pane>div>div:first-child,.g4{
+    min-height:0!important;
+    height:100%!important;
+  }
+  #pane .g4>.cd{
+    min-height:0!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+  #pane .ins{
+    min-height:0!important;
+    height:100%!important;
+    align-self:stretch!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+  }
+}
+
+@media(min-width:1600px) and (orientation:landscape) and (min-height:900px){
+  body .app{grid-template-rows:44px 60px clamp(420px,43vh,520px) 42px clamp(300px,29vh,340px) 42px!important}
+  .pane{padding:8px!important}
 }
