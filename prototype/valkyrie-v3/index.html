@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="./live-equity-extra.css?v=2607&rev=__BUILD_REV__">
 <link rel="stylesheet" href="./theme-equity.css?v=2613&rev=__BUILD_REV__">
 <link rel="stylesheet" href="./market-strip.css?v=2610&rev=__BUILD_REV__">
+<link rel="stylesheet" href="./domain-ui.css?v=2614&rev=__BUILD_REV__">
 </head>
 <body>
 <div class="boot" id="boot">
@@ -31,30 +32,30 @@
 <div class="app">
   <div class="hd">
     <div class="br"><div class="lg">VAL<span>KYRIE</span></div><div style="font-size:7px;letter-spacing:.26em;color:#39424E;margin-top:2px">RAVENS · RESEARCH OS</div></div>
-    <div class="hcell"><div class="ml">Market Status</div><div class="stx" id="mst"><i class="dot"></i><span>CAUTION</span><span class="ml2 num" id="mstn" style="color:#49525F">3 ALERT</span></div></div>
-    <div class="hcell"><div class="ml">As Of</div><div class="stx num" id="asof">2026-09-30 15:42:08</div></div>
+    <div class="hcell"><div class="ml">Market Status</div><div class="stx" id="mst"><i class="dot"></i><span>CONNECTING</span><span class="ml2 num" id="mstn" style="color:#49525F">—</span></div></div>
+    <div class="hcell"><div class="ml">As Of</div><div class="stx num" id="asof">PUBLIC DATA CONNECTING</div></div>
     <div class="hcell"><div class="ml">Ontology</div><div class="stx num">16 OBJ · 22 REL</div></div>
     <div class="hcell"><div class="ml">Engine</div><div class="stx" style="font-size:11px">QUANT · ONTOLOGY · LLM</div></div>
     <div class="hcell gr1" style="flex-direction:row;gap:8px;align-items:center">
       <div class="conf" id="cfb">CONFLICT DETECTED</div>
-      <div class="live" id="lv"><i class="bt"></i><span id="lvt">LIVE</span></div>
+      <div class="live" id="lv"><i class="bt"></i><span id="lvt">CONNECTING</span></div>
     </div>
   </div>
 
-  <div class="bf">
+  <div class="bf" data-domain="RATES">
     <div class="bsweep"></div>
-    <div class="seg s1"><div class="tag">SHOCK · 무엇이 발생했는가</div><div class="txt" id="bf1">US CPI 2.8% · 둔화 확인</div></div>
+    <div class="seg s1"><div class="tag">SHOCK · 핵심 입력</div><div class="txt" id="bf1">PUBLIC DATA PENDING</div></div>
     <div></div><div class="arw">▶</div>
-    <div class="seg s2"><div class="tag">TRANSMISSION · 어디로 전파되는가</div><div class="txt" id="bf2">UST 4.18% → 국고 2.94% · 커브 +38bp 스티프닝</div></div>
+    <div class="seg s2"><div class="tag">TRANSMISSION · 전이</div><div class="txt" id="bf2">LIVE INPUT REQUIRED</div></div>
     <div class="arw">▶</div>
-    <div class="seg s3"><div class="tag">DECISION · 그래서 무엇을 하는가</div><div class="txt" id="bf3">채권 단기 확대 · IPO 선별 청약</div></div>
+    <div class="seg s3"><div class="tag">DECISION · 판단</div><div class="txt" id="bf3">SIGNAL PENDING</div></div>
   </div>
 
   <div class="cw" id="cw">
     <canvas id="df"></canvas>
     <div class="ovl">
       <div class="ml" style="color:#4E5A6B">INTELLIGENCE CHAIN</div>
-      <div class="ml2" style="margin-top:2px;color:#39424E">관계 = 사전 정의 온톨로지(고정) · 노드 값 = 데이터 기반 · SAMPLE</div>
+      <div class="ml2" style="margin-top:2px;color:#39424E">관계 = 사전 정의 온톨로지 · 값 = PUBLIC API 우선 · MODEL/SNAPSHOT 별도 태그</div>
     </div>
     <div class="ovr">
       <div class="ml2 num" id="hud" style="color:#39424E">CURSOR — · —</div>
@@ -62,7 +63,7 @@
     </div>
     <div class="ovb">
       <div><span class="ml" style="color:#39424E">FLOW</span> <span class="ml2 num" id="fl1" style="color:#4E5A6B">22 CHANNELS OPEN</span></div>
-      <div><span class="ml" style="color:#39424E">FEED</span> <span class="ml2 num" id="fd" style="color:#4E5A6B">12:43:08 ECOS SYNC OK · SIMULATED</span></div>
+      <div><span class="ml" style="color:#39424E">FEED</span> <span class="ml2 num" id="fd" style="color:#4E5A6B">PUBLIC FEED CONNECTING</span></div>
     </div>
     <div class="ban" id="ban"><div class="b1" id="ban1"></div><div class="b2" id="ban2"></div></div>
     <svg id="chain" viewBox="0 0 1020 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VALKYRIE 인과 체인"></svg>
@@ -94,7 +95,7 @@
       <div class="tab" data-t="MACRO"><div class="tn">MACRO</div><div class="to">정희강 · Quant Engine</div></div>
       <div class="tab act" data-t="RATES"><div class="tn">RATES</div><div class="to">정훈 · Fixed Income</div></div>
       <div class="tab" data-t="EQUITY"><div class="tn">EQUITY</div><div class="to">김유찬 · IPO / CB</div></div>
-      <div class="tabsp"><span class="ml2" style="color:#39424E">상단 객체 클릭 시 담당 도메인으로 자동 전환</span></div>
+      <div class="tabsp"><span class="ml2" style="color:#39424E">도메인 선택 → 브리프 · 노드 포커스 · 하단 분석 동기화</span></div>
     </div>
     <div class="pane" id="pane"></div>
   </div>
@@ -103,7 +104,7 @@
     <div class="fc"><button class="btn g" id="rp">◀ REPLAY</button><span class="ml" style="color:#39424E">시간 재생</span></div>
     <div class="tl"><div class="ax"></div><div id="tks"></div></div>
     <div class="fc" style="border-right:0;border-left:1px solid #19212C;flex-direction:column;align-items:flex-end;gap:1px">
-      <div class="ml">SNAPSHOT</div><div class="num" id="snl" style="font-size:11.5px;font-weight:700">2026-09-30</div>
+      <div class="ml">SNAPSHOT</div><div class="num" id="snl" style="font-size:11.5px;font-weight:700">—</div>
     </div>
   </div>
 
@@ -125,5 +126,6 @@
 <script src="./live-equity.js?v=2609&rev=__BUILD_REV__"></script>
 <script src="./theme-equity.js?v=2613&rev=__BUILD_REV__"></script>
 <script src="./market-strip.js?v=2610&rev=__BUILD_REV__"></script>
+<script src="./domain-ui.js?v=2614&rev=__BUILD_REV__"></script>
 </body>
 </html>
