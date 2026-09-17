@@ -1,0 +1,54 @@
+name: Refresh Research Insight Snapshot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_research_insights.mjs'
+      - '.github/workflows/research-insights.yml'
+  schedule:
+    # 09:23 and 17:23 KST on weekdays.
+    - cron: '23 0,8 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: research-insight-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install PDF text extractor
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Build public research insight snapshot
+        run: node scripts/update_research_insights.mjs
+
+      - name: Commit refreshed snapshot
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add prototype/valkyrie-v3/data/research-insights.json
+          if git diff --cached --quiet; then
+            echo 'No research insight changes.'
+            exit 0
+          fi
+          git commit -m 'Refresh public research insight snapshot'
+          git pull --rebase origin main
+          git push origin HEAD:main
