@@ -12,7 +12,7 @@
   window.VALKYRIE_YC_EQUITY=STATE;
 
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function n(v){var x=Number(v);return Number.isFinite(x)?x:null;}
+  function n(v){if(v===null||v===undefined||v==="")return null;var x=Number(v);return Number.isFinite(x)?x:null;}
   function pct(v,d){var x=n(v);return x===null?'—':(x>0?'+':'')+x.toFixed(d==null?1:d)+'%';}
   function plainPct(v,d){var x=n(v);return x===null?'—':x.toFixed(d==null?1:d)+'%';}
   function count(v,label){var x=n(v);return x===null?'—':Math.round(x).toLocaleString('ko-KR')+(label||'');}

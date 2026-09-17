@@ -8,7 +8,7 @@
   var STATE={status:'idle',data:null,error:null,asOfLabel:null};
   window.VALKYRIE_LIVE_CORE=STATE;
 
-  function n(v){var x=Number(v);return Number.isFinite(x)?x:null;}
+  function n(v){if(v===null||v===undefined||v==="")return null;var x=Number(v);return Number.isFinite(x)?x:null;}
   function signed(v,d,suffix){if(v===null)return '—';return (v>0?'+':'')+v.toFixed(d)+(suffix||'');}
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function pct(v,d){var x=n(v);return x===null?'DATA PENDING':x.toFixed(d==null?2:d)+'%';}
