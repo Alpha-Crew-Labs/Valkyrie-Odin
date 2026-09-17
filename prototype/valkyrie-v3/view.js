@@ -100,10 +100,10 @@ function evid(id){
   var u=ups(id),r=[];
   for(var i=0;i<u.length&&i<3;i++){
     var n=u[i].id;
-    r.push([ND[n].l,V[n]!==undefined?FM[n](V[n]):'—',u[i].w>=.55?'HIGH':(u[i].w>=.4?'MED':'LOW')]);
+    r.push([ND[n].l,V[n]!==undefined?FM[n](V[n]):'—',u[i].w>=.55?'HIGH':(u[i].w>=.4?'MED':'LOW'),u[i].w]);
   }
-  if(!r.length)r.push([ND[id].s||'원천 데이터',V[id]!==undefined?FM[id](V[id]):'—','SRC']);
-  r.push(['담당 · 도메인',ND[id].o+' · '+(ND[id].d==='mac'?'MACRO':ND[id].d==='rat'?'RATES':'EQUITY'),'—']);
+  if(!r.length)r.push([ND[id].s||'원천 데이터',V[id]!==undefined?FM[id](V[id]):'—','SRC',null]);
+  r.push(['담당 · 도메인',ND[id].o+' · '+(ND[id].d==='mac'?'MACRO':ND[id].d==='rat'?'RATES':'EQUITY'),'—',null]);
   return r;
 }
 function insHTML(){
@@ -117,7 +117,10 @@ function insHTML(){
   h+='<div class="ml2" style="margin-top:2px;color:#49525F">'+(n.s||'최종 판단')+' · '+n.o+'</div></div>';
   h+='<div class="cd" style="flex:1 1 auto"><div class="cdh"><span class="cdt">근거 EVIDENCE</span><span class="cdo">'+ev.length+' ITEMS</span></div>';
   for(var i=0;i<ev.length;i++){
-    h+='<div class="evr mo" style="animation-delay:'+(i*70)+'ms"><span><span class="idx">0'+(i+1)+'</span> '+ev[i][0]+'</span><span class="vv">'+ev[i][1]+'</span><span class="ii'+(ev[i][2]==='HIGH'?' h':'')+'">'+ev[i][2]+'</span></div>';
+    var ew=ev[i][3],epct=(ew!=null)?Math.round(ew*100):null;
+    var ebs=epct!=null?' style="background:linear-gradient(90deg,rgba(63,217,230,.24) '+epct+'%,transparent '+epct+'%)"':'';
+    var ebt=epct!=null?' title="온톨로지 관계 가중치 '+epct+'%"':'';
+    h+='<div class="evr mo" style="animation-delay:'+(i*70)+'ms"><span><span class="idx">0'+(i+1)+'</span> '+ev[i][0]+'</span><span class="vv">'+ev[i][1]+'</span><span class="ii'+(ev[i][2]==='HIGH'?' h':'')+'"'+ebs+ebt+'>'+ev[i][2]+'</span></div>';
   }
   h+='<div class="note" style="margin-top:7px">'+AV[id]+'</div></div>';
   h+='<div class="cd" style="flex:0 0 auto"><div class="kv"><span>CONFIDENCE</span><b class="cy">'+cf+'%</b></div><div class="bar"><i style="width:'+cf+'%"></i></div>';
