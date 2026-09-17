@@ -10,6 +10,8 @@ const theme=fs.readFileSync(path.join(dir,'theme-equity.js'),'utf8');
 const liveCore=fs.readFileSync(path.join(dir,'live-core.js'),'utf8');
 const domainUi=fs.readFileSync(path.join(dir,'domain-ui.css'),'utf8');
 const domainUiJs=fs.readFileSync(path.join(dir,'domain-ui.js'),'utf8');
+const uxCss=fs.readFileSync(path.join(dir,'ux-overlay.css'),'utf8');
+const uxJs=fs.readFileSync(path.join(dir,'ux-overlay.js'),'utf8');
 const coreCollector=fs.readFileSync(path.join(root,'scripts','update_core_snapshot.mjs'),'utf8');
 const bokCollector=fs.readFileSync(path.join(root,'scripts','update_bok_rate.mjs'),'utf8');
 const tapeCollector=fs.readFileSync(path.join(root,'scripts','update_market_strip_snapshot.mjs'),'utf8');
@@ -45,13 +47,14 @@ assert(html.includes('./market-strip.css?v=2610&rev=__BUILD_REV__'),'market tape
 assert(html.includes('./market-strip.js?v=2610&rev=__BUILD_REV__'),'market tape runtime uses deploy-time revision placeholder');
 assert(html.includes('./theme-equity.css?v=2613&rev=__BUILD_REV__'),'theme stylesheet uses deploy-time revision placeholder');
 assert(html.includes('./theme-equity.js?v=2613&rev=__BUILD_REV__'),'theme runtime uses deploy-time revision placeholder');
+assert(html.includes('./ux-overlay.css?v=2615&rev=__BUILD_REV__')&&html.includes('./ux-overlay.js?v=2615&rev=__BUILD_REV__'),'final UX overlay is loaded with the deploy revision');
 assert(html.includes('id="marketStrip"')&&html.includes('id="marketStripTrack"'),'market tape DOM is part of the canonical page shell');
 
 const assets=[
   'styles.css?v=2601','mobile.css?v=2602','quant-hk.css?v=2603','equity-yc.css?v=2606',
-  'live-equity.css?v=2606','live-equity-extra.css?v=2607','theme-equity.css?v=2613','market-strip.css?v=2610','domain-ui.css?v=2614',
+  'live-equity.css?v=2606','live-equity-extra.css?v=2607','theme-equity.css?v=2613','market-strip.css?v=2610','domain-ui.css?v=2614','ux-overlay.css?v=2615',
   'data-core.js?v=2601','view.js?v=2601','interaction.js?v=2606','quant-hk.js?v=2603',
-  'equity-yc.js?v=2606','live-equity.js?v=2609','theme-equity.js?v=2613','market-strip.js?v=2610','domain-ui.js?v=2614'
+  'equity-yc.js?v=2606','live-equity.js?v=2609','theme-equity.js?v=2613','market-strip.js?v=2610','domain-ui.js?v=2614','ux-overlay.js?v=2615'
 ];
 for(const asset of assets)assert(html.includes(`./${asset}&rev=__BUILD_REV__`),`canonical asset shares deploy revision: ${asset}`);
 assert(!/currentdownload-|rev=[0-9a-f]{7,40}/i.test(html),'source HTML does not pin a stale fixed render revision');
@@ -98,6 +101,16 @@ assert(domainUiJs.includes('function sanitizeLiveInspector()')&&domainUiJs.inclu
 assert(domainUiJs.includes("id==='eq_cb'||id==='eq_ipo'")&&domainUiJs.includes("big.textContent=id==='mac_krcpi'?'MODEL PENDING':'DATA PENDING'"),'unsupported current Equity IPO/CB inspector values fail closed');
 assert(domainUiJs.includes('function sanitizeEquitySignal()')&&domainUiJs.includes('DIRECT LIVE · PULSE $1/100'),'Equity risk-appetite score is labeled PULSE rather than confidence');
 assert(domainUiJs.includes('MutationObserver(sanitizeEquitySignal)')&&domainUiJs.includes('NEL.sig_equity.s'),'Equity PULSE label is re-applied after live signal mutations');
+
+// Final interaction UX invariants requested for the demo surface.
+assert(uxJs.includes("document.addEventListener('wheel'")&&uxJs.includes('if(insideNode(e.target))e.stopPropagation()'),'ontology wheel event is intercepted without preventDefault so scrolling no longer controls node focus');
+assert(uxJs.includes("addEventListener('mouseenter'")&&uxJs.includes('applyHoverFocus(nodeId)')&&uxJs.includes("addEventListener('mouseleave'"),'ontology focus is activated by hover and released on mouse leave');
+assert(uxJs.includes("SV.classList.add('ux-hover-focus','node-zoom','zoom-l2')"),'hover reuses the strong legacy zoom/focus visual effect');
+assert(uxCss.includes('#pane>#themePulse{display:none!important}')&&uxJs.includes('THEME ROTATION')&&uxJs.includes("byId('cd_live_equity')"),'large standalone theme panel is suppressed and theme rotation is embedded into the Equity live-market card');
+assert(uxJs.includes("addComponent(parts,'MARKET',pulse,35")&&uxJs.includes("addComponent(parts,'BREADTH',breadth,20")&&uxJs.includes("addComponent(parts,'VIX',vixScore,20")&&uxJs.includes("addComponent(parts,'HY OAS',hyScore,15")&&uxJs.includes("addComponent(parts,'THEME',themeShare,10"),'tactical gauge has a transparent 35/20/20/15/10 public-input weighting model');
+assert(uxJs.includes("score>=65?'OVERWEIGHT':score<=35?'UNDERWEIGHT':'NEUTRAL'")&&uxJs.includes('POSITIONING GAUGE'),'empty inspector is replaced by the 1-100 Overweight/Neutral/Underweight gauge');
+assert(uxJs.includes('hold=10000')&&uxJs.includes("banner('REPLAY '+(k+1)+' / '+SNAP.length")&&uxJs.includes('replay-transition'),'Replay holds each snapshot for 10 seconds and applies a soft transition between timeline points');
+assert(uxJs.includes("rp.addEventListener('click'")&&uxJs.includes('e.stopImmediatePropagation();startReplay();'),'new Replay capture handler replaces the legacy rapid replay interaction');
 
 assert(!tapeCollector.includes("import('./update_core_snapshot.mjs')")&&!tapeCollector.includes("import('./update_bok_rate.mjs')"),'market-tape collector is single-purpose; Pages owns core/BOK refresh ordering');
 for(const endpoint of ['bondList?countryCode=USA','bondList?countryCode=KOR','standardInterestList','domesticInterestList'])assert(coreCollector.includes(endpoint),`core collector includes Naver/Npay ${endpoint}`);
