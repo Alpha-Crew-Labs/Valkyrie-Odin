@@ -44,6 +44,11 @@ body{overflow-y:auto!important;overscroll-behavior-y:auto!important}
 /* Secondary research chrome is intentionally suppressed: insight first, links/events second. */
 #pane .ycq-detail,#pane .fundq-event{display:none!important}
 
+/* Never flash the legacy demo IPO/CB numbers while the real same-origin insight snapshot is loading. */
+#pane #cd_ipo:not(.ycq),#pane #cd_cb:not(.ycq){position:relative;min-height:96px}
+#pane #cd_ipo:not(.ycq)>*,#pane #cd_cb:not(.ycq)>*{visibility:hidden!important}
+#pane #cd_ipo:not(.ycq)::after,#pane #cd_cb:not(.ycq)::after{position:absolute;inset:8px;display:flex;align-items:center;justify-content:center;border:1px solid #182531;background:#091018;color:#596473;font-size:8px;font-weight:800;letter-spacing:.14em;content:'INSIGHT · DATA PENDING'}
+
 @media(max-width:720px){
   html,body,body{overflow-y:auto!important;overscroll-behavior-y:auto!important}.app{overflow:visible!important}.pane{height:auto!important;overflow:visible!important}.mw{overflow:visible!important}
   .bf{padding:3px 7px}.bf .seg{padding:6px 3px}.bf .tag{font-size:7.2px;letter-spacing:.12em}.bf .txt{font-size:11.3px;line-height:1.32}.themeq{margin-top:6px}
