@@ -14,7 +14,7 @@
   function byId(id){return document.getElementById(id);}
   function n(v){var x=Number(v);return Number.isFinite(x)?x:null;}
   function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function signedPct(v){var x=n(v);return x===null?'—':(x>0?'+':'')+x.toFixed(2)+'%';}
 
   /* ---------- 1. HOVER-ONLY ONTOLOGY FOCUS ---------- */
