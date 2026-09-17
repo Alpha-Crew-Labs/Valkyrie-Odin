@@ -10,7 +10,10 @@
 
   function n(v){var x=Number(v);return Number.isFinite(x)?x:null;}
   function signed(v,d,suffix){if(v===null)return '—';return (v>0?'+':'')+v.toFixed(d)+(suffix||'');}
-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function pct(v,d){var x=n(v);return x===null?'DATA PENDING':x.toFixed(d==null?2:d)+'%';}
+  function bp(v){var x=n(v);return x===null?'DATA PENDING':signed(x,0,'bp');}
+  function plain(v,d){var x=n(v);return x===null?'DATA PENDING':x.toFixed(d==null?1:d);}
   function kstClock(iso){
     var d=new Date(iso); if(isNaN(d.getTime()))return null;
     try{return new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(d);}catch(e){return null;}
@@ -55,14 +58,14 @@
     if(tip&&date)tip.innerHTML=esc(date)+' · LIVE PUBLIC API<br>NAVER/NPAY · FRED · DART';
   }
   function applyNodeLabels(m){
-    var bei=n(m.breakeven10y),uc=n(m.ust2s10sBp),hy=n(m.usHyOasBp);
+    var bei=n(m.breakeven10y),uc=n(m.ust2s10sBp),hy=n(m.usHyOasBp),k10=n(m.ktb10y);
     setNodeMeta('mac_gdp','KR REAL GDP','YoY · IMF/FRED');
     setNodeMeta('mac_uscpi','US CPI','YoY · 10Y BEI '+(bei===null?'PENDING':bei.toFixed(2)+'%'));
     setNodeMeta('mac_krcpi','KR CPI MODEL','MODEL · PUBLIC FEED PENDING');
     setNodeMeta('mac_fed','FED FUNDS','Effective · FRED');
     setNodeMeta('mac_bok','BOK 기준금리','NAVER/NPAY');
     setNodeMeta('rat_ust','UST 10Y','US 2s10s '+(uc===null?'PENDING':signed(uc,0,'bp')));
-    setNodeMeta('rat_ktb','국고 3Y',m.ktb10y!==null?'10Y '+Number(m.ktb10y).toFixed(2)+'%':'10Y DATA PENDING');
+    setNodeMeta('rat_ktb','국고 3Y',k10!==null?'10Y '+k10.toFixed(2)+'%':'10Y DATA PENDING');
     setNodeMeta('rat_curve','3s10s CURVE','국고 10Y - 3Y');
     setNodeMeta('rat_credit','CREDIT AA- 3Y','US HY OAS '+(hy===null?'PENDING':Math.round(hy)+'bp'));
     setNodeMeta('eq_fin','적자·차입 구조','STRUCTURAL SNAPSHOT');
@@ -70,32 +73,73 @@
     setNodeMeta('eq_cb','CB 조달 · PUT','PUBLIC DART + STRUCTURAL');
     setNodeMeta('eq_ipo','IPO DEMAND','PUBLIC DART + MARKET');
   }
-  function addLiveNote(card,text){
-    if(!card||card.querySelector('.live-core-extra'))return;
-    var d=document.createElement('div');d.className='note live-core-extra';d.style.marginTop='6px';d.textContent=text;card.appendChild(d);
+
+  function header(title,source){return '<div class="cdh"><span class="cdt">'+esc(title)+'</span><span class="cdo">'+esc(source||'PUBLIC DATA')+'</span></div>';}
+  function kv(label,value,cls){return '<div class="kv"><span>'+esc(label)+'</span><b'+(cls?' class="'+cls+'"':'')+'>'+esc(value)+'</b></div>';}
+  function note(text){return '<div class="note">'+esc(text)+'</div>';}
+  function providerOk(p,keys){for(var i=0;i<keys.length;i++)if(!p||p[keys[i]]!=='ok')return false;return true;}
+  function status(ok){return '<span class="'+(ok?'up':'pd')+'">'+(ok?'OK':'PENDING')+'</span>';}
+  function paintCard(card,html){if(!card)return;card.classList.add('live-core-card');card.innerHTML=html;}
+  function pendingWorkbench(cards,domain){
+    for(var i=0;i<cards.length;i++)paintCard(cards[i],header(i===0?domain+' · LIVE':'PUBLIC INPUT','DATA PENDING')+'<div class="big" style="font-size:13px;color:#EFA83A">DATA PENDING</div>'+note('공개 데이터가 확인되기 전에는 샘플 숫자를 표시하지 않습니다.'));
+  }
+  function macroWorkbench(cards,m,payload){
+    if(cards.length<5)return;
+    var ps=payload.providerStatus||{};
+    paintCard(cards[0],header('MACRO STATE · LIVE','PUBLIC API')+
+      kv('US CPI YoY',pct(m.usCpiYoy,1),'')+kv('10Y BEI',pct(m.breakeven10y,2),'cy')+kv('FED FUNDS',pct(m.fedFunds,2),'')+kv('BOK 기준금리',pct(m.bokBaseRate,2),'am')+kv('VIX',plain(m.vix,1),'')+
+      note('현재 공개 입력만 표시합니다. 시나리오 수치는 검증된 모델이 연결될 때까지 PENDING입니다.'));
+    paintCard(cards[1],header('POLICY GAP · MODEL','LIVE INPUT / MODEL PENDING')+
+      kv('실제 BOK',pct(m.bokBaseRate,2),'')+kv('FED',pct(m.fedFunds,2),'')+kv('KR 적정금리','MODEL PENDING','am')+kv('정책 GAP','DATA PENDING','')+
+      note('검증된 현재형 Taylor Rule 파라미터가 연결되지 않아 임의의 적정금리와 GAP을 산출하지 않습니다.'));
+    paintCard(cards[2],header('REAL GDP · LIVE MACRO','FRED · PUBLIC DATA')+
+      kv('KR 실질 GDP YoY',pct(m.krRealGdpYoy,2),'')+kv('US 실질 GDP YoY',pct(m.usRealGdpYoy,2),'')+kv('USD BROAD',plain(m.broadDollarIndex,2),'')+kv('10Y BEI',pct(m.breakeven10y,2),'cy')+
+      note('Nowcast가 아닌 최신 공개 실질성장률입니다. Nowcast 모델 출력은 별도 검증 후 연결합니다.'));
+    paintCard(cards[3],header('MARKET STRESS · LIVE','PUBLIC MARKET INPUTS')+
+      '<div class="big" style="color:'+(n(m.financialStressIndex)!==null&&n(m.financialStressIndex)>55?'#EFA83A':'#31C08C')+'">'+esc(n(m.financialStressIndex)===null?'DATA PENDING':Math.round(n(m.financialStressIndex))+'/100')+'</div>'+
+      kv('VIX',plain(m.vix,1),'')+kv('US HY OAS',n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp','')+kv('US 2s10s',bp(m.ust2s10sBp),'')+
+      note('포트폴리오 보유·가중치가 연결되지 않아 VaR 및 기여도 숫자는 표시하지 않습니다.'));
+    paintCard(cards[4],header('LIVE INPUT STACK',payload.liveMetricCount+' METRICS')+
+      '<table class="tb"><thead><tr><th>입력 계층</th><th class="n">상태</th></tr></thead><tbody>'+
+      '<tr><td>NAVER/NPAY RATES</td><td class="n">'+status(providerOk(ps,['usaBonds','korBonds','domestic']))+'</td></tr>'+
+      '<tr><td>FRED MACRO</td><td class="n">'+status(providerOk(ps,['usCpi','fedFunds','ust10yFred','vix','hyOas']))+'</td></tr>'+
+      '<tr><td>BOK RATE</td><td class="n">'+status(n(m.bokBaseRate)!==null)+'</td></tr>'+
+      '<tr><td>DART EVENT</td><td class="n">'+status(ps.dart==='ok')+'</td></tr>'+
+      '</tbody></table>'+note('모델 MAE는 검증구간 데이터가 없으므로 표시하지 않습니다.'));
+  }
+  function ratesWorkbench(cards,m,payload){
+    if(cards.length<4)return;
+    var ps=payload.providerStatus||{},sg=window.SNAP&&SNAP[4]&&SNAP[4].sg&&SNAP[4].sg.rates?SNAP[4].sg.rates:null;
+    paintCard(cards[0],header('DECISION LOG · PENDING','LIVE SIGNAL ONLY')+
+      '<div class="big" style="font-size:16px;color:#EFA83A">'+esc(sg&&sg[0]?sg[0]:'SIGNAL PENDING')+'</div>'+
+      kv('KR 3s10s',bp(m.ktb3s10sBp),'cy')+kv('AA- 3Y SPREAD',n(m.creditAa3ySpreadBp)===null?'DATA PENDING':Math.round(n(m.creditAa3ySpreadBp))+'bp','')+kv('UST 10Y',pct(m.ust10y,3),'')+
+      note('실제 판단 로그와 사후성과 원장이 연결되기 전에는 가정 수익률을 LIVE 화면에 표시하지 않습니다.'));
+    paintCard(cards[1],header('CURVE · LIVE','NAVER/NPAY')+
+      kv('국고 3Y',pct(m.ktb3y,3),'')+kv('국고 10Y',pct(m.ktb10y,3),'')+kv('KR 3s10s',bp(m.ktb3s10sBp),n(m.ktb3s10sBp)!==null&&n(m.ktb3s10sBp)>=0?'gr':'rd')+kv('UST 10Y',pct(m.ust10y,3),'')+
+      note('현재 공개 국채 수익률로 계산한 커브입니다. 과거 비교선은 Replay에서만 사용합니다.'));
+    paintCard(cards[2],header('CREDIT AA- 3Y · LIVE','NAVER/NPAY + FRED')+
+      '<div class="big" style="color:'+(n(m.creditAa3ySpreadBp)!==null&&n(m.creditAa3ySpreadBp)>90?'#EF5A61':'#31C08C')+'">'+esc(n(m.creditAa3ySpreadBp)===null?'DATA PENDING':Math.round(n(m.creditAa3ySpreadBp))+'bp')+'</div>'+
+      kv('AA- 3Y YIELD',pct(m.creditAa3yYield,3),'')+kv('US HY OAS',n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp','')+kv('VIX',plain(m.vix,1),'')+
+      note('크레딧 → CB 조달 조건 전이관계는 온톨로지에 유지하되 현재값은 공개 데이터만 사용합니다.'));
+    paintCard(cards[3],header('DATA COVERAGE',payload.liveMetricCount+' LIVE METRICS')+
+      kv('NAVER/NPAY RATES',providerOk(ps,['usaBonds','korBonds','domestic'])?'OK':'PENDING',providerOk(ps,['usaBonds','korBonds','domestic'])?'gr':'am')+
+      kv('FRED CURVE / RISK',providerOk(ps,['ust2yFred','ust10yFred','vix','hyOas'])?'OK':'PENDING',providerOk(ps,['ust2yFred','ust10yFred','vix','hyOas'])?'gr':'am')+
+      kv('BOK',n(m.bokBaseRate)!==null?'OK':'PENDING',n(m.bokBaseRate)!==null?'gr':'am')+
+      note('미수신 값은 0으로 채우지 않고 DATA PENDING으로 남깁니다.'));
   }
   function decoratePane(){
-    if(typeof curTab==='undefined')return;
-    var m=STATE.data&&STATE.data.metrics?STATE.data.metrics:null;
-    var cards=document.querySelectorAll('#pane .cd');
-    for(var i=0;i<cards.length;i++){
-      var t=cards[i].querySelector('.cdt'),o=cards[i].querySelector('.cdo'); if(!t)continue;
-      var title=t.textContent.trim();
-      if(title==='GDP NOWCAST'||title==='REAL GDP · LIVE MACRO'){
-        t.textContent='REAL GDP · LIVE MACRO';if(o)o.textContent='FRED · PUBLIC DATA';
-        if(m)addLiveNote(cards[i],'10Y BEI '+(n(m.breakeven10y)===null?'DATA PENDING':n(m.breakeven10y).toFixed(2)+'%')+' · VIX '+(n(m.vix)===null?'DATA PENDING':n(m.vix).toFixed(1))+' · USD BROAD '+(n(m.broadDollarIndex)===null?'DATA PENDING':n(m.broadDollarIndex).toFixed(2)));
-      }
-      if(title==='TAYLOR RULE GAP'){if(o)o.textContent='MODEL · LIVE INPUTS';}
-      if(title==='SCENARIO MATRIX'){if(o)o.textContent='MODEL · LIVE INPUTS';}
-      if(title==='CREDIT AA- 3Y'){
-        if(o)o.textContent='NAVER/NPAY + FRED · LIVE';
-        if(m)addLiveNote(cards[i],'US HY OAS '+(n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp')+' · US 2s10s '+(n(m.ust2s10sBp)===null?'DATA PENDING':signed(n(m.ust2s10sBp),0,'bp'))+' · VIX '+(n(m.vix)===null?'DATA PENDING':n(m.vix).toFixed(1)));
-      }
-    }
+    if(typeof curTab==='undefined'||typeof si==='undefined'||si!==4)return;
+    if(curTab!=='MACRO'&&curTab!=='RATES')return;
+    var cards=document.querySelectorAll('#pane .g4>.cd');
+    var payload=STATE.data,m=payload&&payload.ok===true&&payload.metrics?payload.metrics:null;
+    if(!m){pendingWorkbench(cards,curTab);return;}
+    if(curTab==='MACRO')macroWorkbench(cards,m,payload);
+    if(curTab==='RATES')ratesWorkbench(cards,m,payload);
+    if(typeof window.declutterValkyrie==='function')window.declutterValkyrie();
   }
   function installPaneDecorator(){
     var base=window.paneRender; if(typeof base!=='function'||base.__liveCoreWrapped)return;
-    var wrap=function(){base.apply(this,arguments);decoratePane();};wrap.__liveCoreWrapped=true;window.paneRender=wrap;
+    var wrap=function(){var r=base.apply(this,arguments);decoratePane();return r;};wrap.__liveCoreWrapped=true;window.paneRender=wrap;
   }
   function observeAsOf(){
     var el=document.getElementById('asof'); if(!el)return;
@@ -118,6 +162,7 @@
     STATE.asOfLabel='DATA PENDING · PUBLIC API';observeAsOf();
     var lv=document.getElementById('lvt');if(lv)lv.textContent='DATA PENDING';
     var fd=document.getElementById('fd');if(fd)fd.textContent='CORE LIVE DATA PENDING · NO FABRICATED FALLBACK'+(reason?' · '+reason:'');
+    installPaneDecorator();if(typeof paneRender==='function')paneRender();else decoratePane();
   }
   function hydrate(payload){
     if(!payload||!payload.ok||!payload.metrics)throw new Error('core live snapshot unavailable');
