@@ -9,6 +9,7 @@ const tape=fs.readFileSync(path.join(dir,'market-strip.js'),'utf8');
 const theme=fs.readFileSync(path.join(dir,'theme-equity.js'),'utf8');
 const liveCore=fs.readFileSync(path.join(dir,'live-core.js'),'utf8');
 const domainUi=fs.readFileSync(path.join(dir,'domain-ui.css'),'utf8');
+const domainUiJs=fs.readFileSync(path.join(dir,'domain-ui.js'),'utf8');
 const coreCollector=fs.readFileSync(path.join(root,'scripts','update_core_snapshot.mjs'),'utf8');
 const bokCollector=fs.readFileSync(path.join(root,'scripts','update_bok_rate.mjs'),'utf8');
 const tapeCollector=fs.readFileSync(path.join(root,'scripts','update_market_strip_snapshot.mjs'),'utf8');
@@ -87,6 +88,17 @@ assert(liveCore.includes('VaR 및 기여도 숫자는 표시하지 않습니다'
 assert(domainUi.includes('body:not(.core-ready) #pane')&&domainUi.includes("content:'PUBLIC DATA SYNC'"),'lower workbench is visually gated before public core resolution');
 assert(tape.includes("s&&(s.status==='ready'||s.status==='error')")&&tape.includes("document.body.classList.add('core-ready')"),'workbench gate opens only after live core reaches verified or fail-closed terminal state');
 assert(liveCore.includes("STATE.status='ready'")&&liveCore.includes("STATE.status='error'")&&liveCore.includes('failClosed('),'live core exposes explicit ready/error states and a fail-closed renderer for the gate');
+
+// Presentation/data-integrity invariants for the current workbench.
+assert(domainUi.includes('@media(min-width:1100px) and (orientation:landscape)')&&domainUi.includes('clamp(286px,30vh,330px)'),'wide desktop keeps the lower research workbench in the compact terminal height band');
+assert(domainUi.includes('#pane .g4>.cd')&&domainUi.includes('overflow-y:auto!important'),'dense wide-desktop cards scroll internally instead of stretching the page');
+assert(liveCore.includes("key==='CONFIDENCE'")&&liveCore.includes("value.textContent='MODEL PENDING'")&&liveCore.includes("key==='DATA VINTAGE'")&&liveCore.includes("'LIVE PUBLIC API'"),'Macro/Rates live inspector never presents synthetic confidence as measured data');
+assert(liveCore.includes("id==='mac_krcpi'")&&liveCore.includes("big.textContent='MODEL PENDING'"),'unsupported KR CPI model value is suppressed in the current live inspector');
+assert(domainUiJs.includes('function sanitizeLiveInspector()')&&domainUiJs.includes("value.textContent='MODEL PENDING'")&&domainUiJs.includes("value.textContent=ready?'LIVE PUBLIC API':'DATA PENDING'"),'all live domains share the no-synthetic-confidence inspector guard');
+assert(domainUiJs.includes("id==='eq_cb'||id==='eq_ipo'")&&domainUiJs.includes("big.textContent=id==='mac_krcpi'?'MODEL PENDING':'DATA PENDING'"),'unsupported current Equity IPO/CB inspector values fail closed');
+assert(domainUiJs.includes('function sanitizeEquitySignal()')&&domainUiJs.includes('DIRECT LIVE · PULSE $1/100'),'Equity risk-appetite score is labeled PULSE rather than confidence');
+assert(domainUiJs.includes('MutationObserver(sanitizeEquitySignal)')&&domainUiJs.includes('NEL.sig_equity.s'),'Equity PULSE label is re-applied after live signal mutations');
+
 assert(!tapeCollector.includes("import('./update_core_snapshot.mjs')")&&!tapeCollector.includes("import('./update_bok_rate.mjs')"),'market-tape collector is single-purpose; Pages owns core/BOK refresh ordering');
 for(const endpoint of ['bondList?countryCode=USA','bondList?countryCode=KOR','standardInterestList','domesticInterestList'])assert(coreCollector.includes(endpoint),`core collector includes Naver/Npay ${endpoint}`);
 for(const series of ['CPIAUCSL','NGDPRSAXDCKRQ','GDPC1','DFF','STLFSI4'])assert(coreCollector.includes(series),`core collector includes public FRED series ${series}`);
