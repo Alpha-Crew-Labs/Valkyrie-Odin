@@ -1,47 +1,43 @@
-/* VALKYRIE bottom market tape — live Naver/Npay indicators, layout-only addition. */
+/* VALKYRIE bottom market tape — concise live/fallback freshness state. */
 .market-strip{
   min-height:24px;height:24px;display:flex;align-items:stretch;overflow:hidden;
   border:1px solid var(--bd);border-top:0;background:linear-gradient(180deg,#080D13 0%,#060A0F 100%);
   border-radius:0 0 3px 3px;box-shadow:inset 0 1px 0 rgba(255,255,255,.012);position:relative;
 }
-.market-strip:before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(40,245,139,.028),transparent 28%,transparent 72%,rgba(255,86,112,.024))}
-.market-strip-brand{position:relative;z-index:2;flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:0 10px;border-right:1px solid #18222D;background:#080E15;white-space:nowrap}
+.market-strip:before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(40,245,139,.02),transparent 28%,transparent 72%,rgba(255,86,112,.018))}
+.market-strip-brand{position:relative;z-index:2;flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:0 8px;border-right:1px solid #18222D;background:#080E15;white-space:nowrap;min-width:72px}
 .market-strip-brand i{width:5px;height:5px;border-radius:50%;background:#31F28B;box-shadow:0 0 9px rgba(49,242,139,.55)}
-.market-strip-brand span{font-size:7.5px;font-weight:800;letter-spacing:.19em;color:#778496}
-.market-strip-brand small{font-size:6.7px;letter-spacing:.12em;color:#3F4A59}
+.market-strip[data-state="fresh"] .market-strip-brand i{background:#3FD9E6;box-shadow:0 0 8px rgba(63,217,230,.4)}
+.market-strip[data-state="delay"] .market-strip-brand i{background:#EFA83A;box-shadow:none}
+.market-strip[data-state="stale"] .market-strip-brand i,.market-strip[data-state="pending"] .market-strip-brand i{background:#5B6472;box-shadow:none}
+.market-strip-brand span{font-size:7.5px;font-weight:850;letter-spacing:.16em;color:#7C899A}
+.market-strip-brand small{font-size:6.7px;letter-spacing:.1em;color:#465260;font-weight:750}
+.market-strip[data-state="live"] .market-strip-brand small{color:#31C08C}
+.market-strip[data-state="fresh"] .market-strip-brand small{color:#3FD9E6}
+.market-strip[data-state="delay"] .market-strip-brand small{color:#EFA83A}
 .market-strip-window{position:relative;z-index:1;min-width:0;flex:1;overflow:hidden;display:flex;align-items:center;mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent 100%)}
 .market-strip-track{display:flex;align-items:center;width:max-content;min-width:max-content;gap:28px;padding-left:20px;will-change:transform;animation:valkyrieMarketTape 52s linear infinite}
 .market-strip-window:hover .market-strip-track{animation-play-state:paused}
 .market-strip-group{display:flex;align-items:center;gap:22px;white-space:nowrap}
 .market-strip-item{display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap;font-variant-numeric:tabular-nums}
-.market-strip-name{font-size:7.5px;font-weight:750;letter-spacing:.11em;color:#677486}
-.market-strip-price{font-size:10.5px;font-weight:800;letter-spacing:.015em;color:#E7EEF7}
-.market-strip-change{font-size:8.7px;font-weight:800;letter-spacing:.015em}
+.market-strip-name{font-size:7.3px;font-weight:750;letter-spacing:.08em;color:#677486}
+.market-strip-price{font-size:10.4px;font-weight:800;letter-spacing:.015em;color:#E7EEF7}
+.market-strip-change{font-size:8.6px;font-weight:800;letter-spacing:.015em}
 .market-strip-dot{width:4px;height:4px;border-radius:50%;align-self:center;margin-left:1px}
-.market-strip-item.up .market-strip-change{color:#31F28B;text-shadow:0 0 8px rgba(49,242,139,.22)}
-.market-strip-item.up .market-strip-dot{background:#31F28B;box-shadow:0 0 8px rgba(49,242,139,.38)}
-.market-strip-item.down .market-strip-change{color:#FF607A;text-shadow:0 0 8px rgba(255,96,122,.2)}
-.market-strip-item.down .market-strip-dot{background:#FF607A;box-shadow:0 0 8px rgba(255,96,122,.35)}
-.market-strip-item.flat .market-strip-change{color:#8793A3}
-.market-strip-item.flat .market-strip-dot{background:#657182}
+.market-strip-item.up .market-strip-change{color:#31F28B}.market-strip-item.up .market-strip-dot{background:#31F28B}
+.market-strip-item.down .market-strip-change{color:#FF607A}.market-strip-item.down .market-strip-dot{background:#FF607A}
+.market-strip-item.flat .market-strip-change{color:#8793A3}.market-strip-item.flat .market-strip-dot{background:#657182}
 .market-strip-item.pending .market-strip-price,.market-strip-item.pending .market-strip-change{color:#4A5564}
 .market-strip-sep{width:1px;height:9px;background:#17212B}
-.market-strip-loading{font-size:7.5px;letter-spacing:.16em;color:#46515F;white-space:nowrap}
+.market-strip-loading{font-size:7.4px;letter-spacing:.14em;color:#46515F;white-space:nowrap}
 @keyframes valkyrieMarketTape{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-50% - 14px),0,0)}}
 
-@media(min-width:721px){
-  body .app{grid-auto-rows:24px}
-}
-@media(max-width:1100px){
-  .market-strip-brand small{display:none}
-  .market-strip-track{animation-duration:46s}
-}
+@media(min-width:721px){body .app{grid-auto-rows:24px}}
+@media(max-width:1100px){.market-strip-track{animation-duration:46s}}
 @media(max-width:720px){
   .market-strip{min-height:22px;height:22px}
-  .market-strip-brand{display:none}
-  .market-strip-track{padding-left:12px;gap:22px;animation-duration:42s}
-  .market-strip-group{gap:18px}
-  .market-strip-name{font-size:7px}
-  .market-strip-price{font-size:9.8px}
-  .market-strip-change{font-size:8.2px}
+  .market-strip-brand{display:flex;min-width:58px;padding:0 6px;gap:5px}
+  .market-strip-brand span{font-size:6.8px}.market-strip-brand small{font-size:6px}
+  .market-strip-track{padding-left:12px;gap:22px;animation-duration:42s}.market-strip-group{gap:18px}
+  .market-strip-name{font-size:6.9px}.market-strip-price{font-size:9.7px}.market-strip-change{font-size:8.1px}
 }
