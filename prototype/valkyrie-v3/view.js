@@ -109,7 +109,8 @@ function evid(id){
 function insHTML(){
   var id=INS.id;
   if(!id){return '<div class="cd"><div class="cdh"><span class="cdt">선택 객체 분석</span><span class="cdo">OBJECT</span></div>'+ '<div class="ml2" style="color:#49525F;line-height:1.7;margin-top:6px">상단 체인에서 객체를 선택하면<br>근거 · 신뢰도 · 담당 분석이 표시됩니다.<br><br>관계는 사전 정의된 온톨로지이며<br>값과 상태만 데이터로 갱신됩니다.</div></div>';}
-  var n=ND[id],ev=evid(id),cf=Math.round(52+(n.x/1020)*32+(shocked()?-6:0));
+  var n=ND[id],ev=evid(id),u=ups(id),ws=0;for(var wi=0;wi<u.length;wi++)ws+=u[wi].w;
+  var cf=Math.max(40,Math.min(94,Math.round((u.length?48+Math.min(40,ws*44):58)+(shocked()?-6:0))));
   var h='<div class="cd" style="flex:0 0 auto"><div class="cdh"><span class="cdt">선택 객체 분석</span><span class="cdo">'+id.toUpperCase()+'</span></div>';
   h+='<div class="ml" style="color:#5D6675">'+n.l+'</div>';
   h+='<div class="big rv" style="margin-top:3px">'+(V[id]!==undefined?FM[id](V[id]):(NEL[id]?NEL[id].v.textContent:'—'))+'</div>';
