@@ -127,14 +127,39 @@
       kv('BOK',n(m.bokBaseRate)!==null?'OK':'PENDING',n(m.bokBaseRate)!==null?'gr':'am')+
       note('미수신 값은 0으로 채우지 않고 DATA PENDING으로 남깁니다.'));
   }
+  function decorateInspector(m){
+    if(typeof si==='undefined'||si!==4)return;
+    var ins=document.querySelector('#pane .ins');if(!ins)return;
+    var rows=ins.querySelectorAll('.kv');
+    for(var i=0;i<rows.length;i++){
+      var label=rows[i].querySelector('span'),value=rows[i].querySelector('b');if(!label||!value)continue;
+      var key=label.textContent.trim();
+      if(key==='CONFIDENCE'){
+        value.textContent='MODEL PENDING';value.className='am';
+        var bar=rows[i].parentElement&&rows[i].parentElement.querySelector('.bar i');if(bar)bar.style.width='0%';
+      }
+      if(key==='DATA VINTAGE'){
+        value.textContent=m?'LIVE PUBLIC API':'DATA PENDING';value.className=m?'cy':'am';
+      }
+    }
+    var notes=ins.querySelectorAll('.note');
+    for(var j=0;j<notes.length;j++){
+      if(notes[j].textContent.indexOf('공표시점')>=0)notes[j].textContent=m?'현재 LIVE 화면은 공개 API timestamp 기준 · 모델/PIT 검증값은 별도 연결 예정':'공개 API 수신 전 · 샘플/가정값을 사용하지 않습니다.';
+    }
+    var id=(typeof INS!=='undefined'&&INS)?INS.id:null;
+    if(id==='mac_krcpi'){
+      var big=ins.querySelector('.cd .big');if(big){big.textContent='MODEL PENDING';big.style.fontSize='12px';big.style.color='#EFA83A';}
+    }
+  }
   function decoratePane(){
     if(typeof curTab==='undefined'||typeof si==='undefined'||si!==4)return;
     if(curTab!=='MACRO'&&curTab!=='RATES')return;
     var cards=document.querySelectorAll('#pane .g4>.cd');
     var payload=STATE.data,m=payload&&payload.ok===true&&payload.metrics?payload.metrics:null;
-    if(!m){pendingWorkbench(cards,curTab);return;}
+    if(!m){pendingWorkbench(cards,curTab);decorateInspector(null);return;}
     if(curTab==='MACRO')macroWorkbench(cards,m,payload);
     if(curTab==='RATES')ratesWorkbench(cards,m,payload);
+    decorateInspector(m);
     if(typeof window.declutterValkyrie==='function')window.declutterValkyrie();
   }
   function installPaneDecorator(){
