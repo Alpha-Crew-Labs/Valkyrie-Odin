@@ -136,11 +136,17 @@
     font-size:11px;
     padding-right:8px;
   }
+  /* The chip rows scroll sideways on a phone but gave no sign of it, so the
+   * last chip (복합 스트레스) just looked cut off at the edge. A mask that
+   * fades the right edge reads as "there is more here" without adding an
+   * element or changing the row height. */
   .cps{
     grid-column:1/-1;
     width:100%;
     height:auto;
     min-height:44px;
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 26px),transparent 100%);
+    mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 26px),transparent 100%);
     overflow-x:auto;
     overflow-y:hidden;
     flex-wrap:nowrap;
