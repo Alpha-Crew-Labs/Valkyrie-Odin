@@ -76,6 +76,7 @@ jobs:
           node --check prototype/valkyrie-v3/equity-node-live.js
           node --check prototype/valkyrie-v3/chain-briefing.js
           node --check prototype/valkyrie-v3/node-fit.js
+          node --check prototype/valkyrie-v3/node-spark.js
           node --check prototype/valkyrie-v3/graph-viewport.js
           node --check prototype/valkyrie-v3/research-rail.js
           node --check prototype/valkyrie-v3/cross-asset.js
