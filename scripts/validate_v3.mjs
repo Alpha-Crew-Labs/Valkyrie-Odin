@@ -104,7 +104,7 @@ for(const owner of ['정희강','정훈','김유찬']){
 }
 
 assert(liveEquity.includes('EQUITY FUNDAMENTAL PULSE'),'hardcoded IPO score is replaced by a real fundamental pulse at runtime');
-assert(liveEquity.includes('샘플 기업 점수는 표시하지 않습니다'),'fundamental API failure never falls back to a fake sample company score');
+assert(liveEquity.includes('if(!r||!r.ok)return')&&liveEquity.includes('cd fundq degraded'),'fundamental API failure returns the degraded card instead of a fake sample company score');
 assert(liveEquity.includes('TRADINGVIEW SCANNER')&&liveEquity.includes('TV SCANNER'),'TradingView direct scanner evidence is rendered');
 assert(liveEquity.includes('AIKSTOCKDATA')&&liveEquity.includes('DART/FSC'),'direct public research source is disclosed');
 assert(liveEquity.includes('Research 기준일이 오래'),'stale structural research is explicitly excluded from the live score');
@@ -145,7 +145,7 @@ assert(liveEquity.includes('LIVE MARKET · KOREA')&&liveEquity.includes('KOSPI')
 assert(liveEquity.includes('KOSDAQ - KOSPI')&&liveEquity.includes('rel.regime'),'relative KOSDAQ-vs-KOSPI regime is rendered');
 assert(liveEquity.includes('RISK-ON')&&liveEquity.includes('RISK-OFF')&&liveEquity.includes('NEUTRAL'),'live Equity pulse exposes market-regime states');
 assert(liveEquity.includes('외국인')&&liveEquity.includes('기관')&&liveEquity.includes('상승/하락'),'live Equity pulse exposes flow and breadth evidence');
-assert(liveEquity.includes('GitHub Snapshot은 API 장애 때만 last-good fallback'),'fallback role is disclosed instead of presented as the primary feed');
+assert(liveEquity.includes('esc(d.mode)'),'the feed mode (direct vs snapshot fallback) is disclosed on the live card header');
 
 const htmlIds=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
 const runtime=data+'\n'+view+'\n'+interaction;

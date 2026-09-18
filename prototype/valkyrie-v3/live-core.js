@@ -81,51 +81,46 @@
   function status(ok){return '<span class="'+(ok?'up':'pd')+'">'+(ok?'OK':'PENDING')+'</span>';}
   function paintCard(card,html){if(!card)return;card.classList.add('live-core-card');card.innerHTML=html;}
   function pendingWorkbench(cards,domain){
-    for(var i=0;i<cards.length;i++)paintCard(cards[i],header(i===0?domain+' · LIVE':'PUBLIC INPUT','DATA PENDING')+'<div class="big" style="font-size:13px;color:#EFA83A">DATA PENDING</div>'+note('공개 데이터가 확인되기 전에는 샘플 숫자를 표시하지 않습니다.'));
+    for(var i=0;i<cards.length;i++)paintCard(cards[i],header(i===0?domain+' · LIVE':'PUBLIC INPUT','DATA PENDING')+'<div class="big" style="font-size:13px;color:#EFA83A">DATA PENDING</div>');
   }
   function macroWorkbench(cards,m,payload){
     if(cards.length<5)return;
     var ps=payload.providerStatus||{};
     paintCard(cards[0],header('MACRO STATE · LIVE','PUBLIC API')+
-      kv('US CPI YoY',pct(m.usCpiYoy,1),'')+kv('10Y BEI',pct(m.breakeven10y,2),'cy')+kv('FED FUNDS',pct(m.fedFunds,2),'')+kv('BOK 기준금리',pct(m.bokBaseRate,2),'am')+kv('VIX',plain(m.vix,1),'')+
-      note('현재 공개 입력만 표시합니다. 시나리오 수치는 검증된 모델이 연결될 때까지 PENDING입니다.'));
+      kv('US CPI YoY',pct(m.usCpiYoy,1),'')+kv('10Y BEI',pct(m.breakeven10y,2),'cy')+kv('FED FUNDS',pct(m.fedFunds,2),'')+kv('BOK 기준금리',pct(m.bokBaseRate,2),'am')+kv('VIX',plain(m.vix,1),''));
     paintCard(cards[1],header('POLICY GAP · MODEL','LIVE INPUT / MODEL PENDING')+
       kv('실제 BOK',pct(m.bokBaseRate,2),'')+kv('FED',pct(m.fedFunds,2),'')+kv('KR 적정금리','MODEL PENDING','am')+kv('정책 GAP','DATA PENDING','')+
-      note('검증된 현재형 Taylor Rule 파라미터가 연결되지 않아 임의의 적정금리와 GAP을 산출하지 않습니다.'));
+      note('Taylor Rule 파라미터 검증 후 연결 예정.'));
     paintCard(cards[2],header('REAL GDP · LIVE MACRO','FRED · PUBLIC DATA')+
       kv('KR 실질 GDP YoY',pct(m.krRealGdpYoy,2),'')+kv('US 실질 GDP YoY',pct(m.usRealGdpYoy,2),'')+kv('USD BROAD',plain(m.broadDollarIndex,2),'')+kv('10Y BEI',pct(m.breakeven10y,2),'cy')+
-      note('Nowcast가 아닌 최신 공개 실질성장률입니다. Nowcast 모델 출력은 별도 검증 후 연결합니다.'));
+      note('최신 공개 실질성장률 기준 · Nowcast 아님.'));
     paintCard(cards[3],header('MARKET STRESS · LIVE','PUBLIC MARKET INPUTS')+
       '<div class="big" style="color:'+(n(m.financialStressIndex)!==null&&n(m.financialStressIndex)>55?'#EFA83A':'#31C08C')+'">'+esc(n(m.financialStressIndex)===null?'DATA PENDING':Math.round(n(m.financialStressIndex))+'/100')+'</div>'+
-      kv('VIX',plain(m.vix,1),'')+kv('US HY OAS',n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp','')+kv('US 2s10s',bp(m.ust2s10sBp),'')+
-      note('포트폴리오 보유·가중치가 연결되지 않아 VaR 및 기여도 숫자는 표시하지 않습니다.'));
+      kv('VIX',plain(m.vix,1),'')+kv('US HY OAS',n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp','')+kv('US 2s10s',bp(m.ust2s10sBp),''));
     paintCard(cards[4],header('LIVE INPUT STACK',payload.liveMetricCount+' METRICS')+
       '<table class="tb"><thead><tr><th>입력 계층</th><th class="n">상태</th></tr></thead><tbody>'+
       '<tr><td>NAVER/NPAY RATES</td><td class="n">'+status(providerOk(ps,['usaBonds','korBonds','domestic']))+'</td></tr>'+
       '<tr><td>FRED MACRO</td><td class="n">'+status(providerOk(ps,['usCpi','fedFunds','ust10yFred','vix','hyOas']))+'</td></tr>'+
       '<tr><td>BOK RATE</td><td class="n">'+status(n(m.bokBaseRate)!==null)+'</td></tr>'+
       '<tr><td>DART EVENT</td><td class="n">'+status(ps.dart==='ok')+'</td></tr>'+
-      '</tbody></table>'+note('모델 MAE는 검증구간 데이터가 없으므로 표시하지 않습니다.'));
+      '</tbody></table>');
   }
   function ratesWorkbench(cards,m,payload){
     if(cards.length<4)return;
     var ps=payload.providerStatus||{},sg=window.SNAP&&SNAP[4]&&SNAP[4].sg&&SNAP[4].sg.rates?SNAP[4].sg.rates:null;
     paintCard(cards[0],header('DECISION LOG · PENDING','LIVE SIGNAL ONLY')+
       '<div class="big" style="font-size:16px;color:#EFA83A">'+esc(sg&&sg[0]?sg[0]:'SIGNAL PENDING')+'</div>'+
-      kv('KR 3s10s',bp(m.ktb3s10sBp),'cy')+kv('AA- 3Y SPREAD',n(m.creditAa3ySpreadBp)===null?'DATA PENDING':Math.round(n(m.creditAa3ySpreadBp))+'bp','')+kv('UST 10Y',pct(m.ust10y,3),'')+
-      note('실제 판단 로그와 사후성과 원장이 연결되기 전에는 가정 수익률을 LIVE 화면에 표시하지 않습니다.'));
+      kv('KR 3s10s',bp(m.ktb3s10sBp),'cy')+kv('AA- 3Y SPREAD',n(m.creditAa3ySpreadBp)===null?'DATA PENDING':Math.round(n(m.creditAa3ySpreadBp))+'bp','')+kv('UST 10Y',pct(m.ust10y,3),''));
     paintCard(cards[1],header('CURVE · LIVE','NAVER/NPAY')+
       kv('국고 3Y',pct(m.ktb3y,3),'')+kv('국고 10Y',pct(m.ktb10y,3),'')+kv('KR 3s10s',bp(m.ktb3s10sBp),n(m.ktb3s10sBp)!==null&&n(m.ktb3s10sBp)>=0?'gr':'rd')+kv('UST 10Y',pct(m.ust10y,3),'')+
-      note('현재 공개 국채 수익률로 계산한 커브입니다. 과거 비교선은 Replay에서만 사용합니다.'));
+      note('공개 국채 수익률 기준 · 과거 비교선은 REPLAY에서만.'));
     paintCard(cards[2],header('CREDIT AA- 3Y · LIVE','NAVER/NPAY + FRED')+
       '<div class="big" style="color:'+(n(m.creditAa3ySpreadBp)!==null&&n(m.creditAa3ySpreadBp)>90?'#EF5A61':'#31C08C')+'">'+esc(n(m.creditAa3ySpreadBp)===null?'DATA PENDING':Math.round(n(m.creditAa3ySpreadBp))+'bp')+'</div>'+
-      kv('AA- 3Y YIELD',pct(m.creditAa3yYield,3),'')+kv('US HY OAS',n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp','')+kv('VIX',plain(m.vix,1),'')+
-      note('크레딧 → CB 조달 조건 전이관계는 온톨로지에 유지하되 현재값은 공개 데이터만 사용합니다.'));
+      kv('AA- 3Y YIELD',pct(m.creditAa3yYield,3),'')+kv('US HY OAS',n(m.usHyOasBp)===null?'DATA PENDING':Math.round(n(m.usHyOasBp))+'bp','')+kv('VIX',plain(m.vix,1),''));
     paintCard(cards[3],header('DATA COVERAGE',payload.liveMetricCount+' LIVE METRICS')+
       kv('NAVER/NPAY RATES',providerOk(ps,['usaBonds','korBonds','domestic'])?'OK':'PENDING',providerOk(ps,['usaBonds','korBonds','domestic'])?'gr':'am')+
       kv('FRED CURVE / RISK',providerOk(ps,['ust2yFred','ust10yFred','vix','hyOas'])?'OK':'PENDING',providerOk(ps,['ust2yFred','ust10yFred','vix','hyOas'])?'gr':'am')+
-      kv('BOK',n(m.bokBaseRate)!==null?'OK':'PENDING',n(m.bokBaseRate)!==null?'gr':'am')+
-      note('미수신 값은 0으로 채우지 않고 DATA PENDING으로 남깁니다.'));
+      kv('BOK',n(m.bokBaseRate)!==null?'OK':'PENDING',n(m.bokBaseRate)!==null?'gr':'am'));
   }
   function decorateInspector(m){
     if(typeof si==='undefined'||si!==4)return;

@@ -70,8 +70,7 @@
         kv('10Y Real Rate',q.result.real10y.toFixed(2)+'%','am')+
         kv('Market VIX',q.result.vix.toFixed(1),'')+
         '<div class="hkq-section">TARGET WEIGHTS</div>'+
-        '<div class="hkq-weights"><span>주식 <b>'+q.weights.equity+'%</b></span><span>채권 <b>'+q.weights.bond+'%</b></span><span>금·원자재 <b>'+q.weights.commodityGold+'%</b></span></div>'+
-        '<div class="note hkq-note">Monte Carlo · Macro Clock · 3D Yield Curve · Financial Stress는 <b>좌측 HK Q 런처</b>에서 상세 분석</div>';
+        '<div class="hkq-weights"><span>주식 <b>'+q.weights.equity+'%</b></span><span>채권 <b>'+q.weights.bond+'%</b></span><span>금·원자재 <b>'+q.weights.commodityGold+'%</b></span></div>';
     }
   }
 

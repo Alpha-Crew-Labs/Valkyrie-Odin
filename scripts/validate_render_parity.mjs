@@ -87,7 +87,7 @@ assert(tape.includes("live-core.js?v=2611"),'market tape loads the live ontology
 assert(liveCore.includes("SNAPSHOT='./data/core-live.json'"),'live ontology reads the same-origin public-data snapshot');
 assert(liveCore.includes("MODEL · PUBLIC FEED PENDING")&&liveCore.includes('STRUCTURAL SNAPSHOT'),'unsupported ontology outputs stay explicitly tagged instead of being faked live');
 assert(liveCore.includes("si!==4")&&liveCore.includes('MARKET STRESS · LIVE')&&liveCore.includes('DECISION LOG · PENDING'),'current Macro/Rates workbench replaces unsupported demo outputs while historical Replay remains intact');
-assert(liveCore.includes('VaR 및 기여도 숫자는 표시하지 않습니다')&&liveCore.includes('가정 수익률을 LIVE 화면에 표시하지 않습니다'),'current workbench explicitly suppresses unverified VaR and decision-return figures');
+assert(!liveCore.includes('VaR')&&!liveCore.includes('기여도'),'current workbench emits no VaR or contribution figure at all, verified or otherwise');
 assert(domainUi.includes('body:not(.core-ready) #pane')&&domainUi.includes("content:'PUBLIC DATA SYNC'"),'lower workbench is visually gated before public core resolution');
 assert(tape.includes("s&&(s.status==='ready'||s.status==='error')")&&tape.includes("document.body.classList.add('core-ready')"),'workbench gate opens only after live core reaches verified or fail-closed terminal state');
 assert(liveCore.includes("STATE.status='ready'")&&liveCore.includes("STATE.status='error'")&&liveCore.includes('failClosed('),'live core exposes explicit ready/error states and a fail-closed renderer for the gate');
