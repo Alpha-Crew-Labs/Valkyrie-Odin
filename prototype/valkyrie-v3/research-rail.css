@@ -1,0 +1,178 @@
+/* VALKYRIE v3 · research rail (team tool sidebar)
+   Collapsed to an icon strip, expands over the app on hover/focus.
+   The app grid itself is never re-laid-out - only the page gutter changes. */
+
+:root{--rail-w:46px;--rail-open:268px}
+
+/* quant-hk.css sets body{padding:8px!important} inside @media(min-width:721px),
+   so the gutter that makes room for the rail has to match that weight. */
+body{padding-left:calc(8px + var(--rail-w))!important}
+
+.rrail{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:80;
+  width:var(--rail-w);
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding:9px 0;
+  background:linear-gradient(180deg,#080C12,#070A0F);
+  border-right:1px solid #161D26;
+  overflow:hidden;
+  transition:width .19s cubic-bezier(.4,0,.2,1),box-shadow .19s;
+}
+.rrail:hover,.rrail:focus-within,.rrail.open{
+  width:var(--rail-open);
+  box-shadow:14px 0 42px rgba(0,0,0,.62);
+}
+
+.rrail-top{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:0 0 9px 0;
+  margin:0 9px 6px;
+  border-bottom:1px solid #141B24;
+  min-height:28px;
+}
+.rrail-logo{
+  flex:0 0 28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #223040;
+  border-radius:3px;
+  color:#3FD9E6;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.02em;
+  background:#0B1219;
+}
+.rrail-title{
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity .13s;
+  min-width:0;
+}
+.rrail:hover .rrail-title,.rrail:focus-within .rrail-title,.rrail.open .rrail-title{opacity:1}
+.rrail-title b{display:block;font-size:9.6px;letter-spacing:.16em;color:#98A2B2;font-weight:700}
+.rrail-title small{display:block;font-size:7.4px;letter-spacing:.14em;color:#3E4654;margin-top:2px}
+
+.rrail-sec{
+  margin:9px 9px 3px;
+  font-size:7.2px;
+  letter-spacing:.2em;
+  color:#39424E;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity .13s;
+}
+.rrail:hover .rrail-sec,.rrail:focus-within .rrail-sec,.rrail.open .rrail-sec{opacity:1}
+
+.rrail-item{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:0 7px;
+  padding:7px 6px;
+  border-radius:4px;
+  text-decoration:none;
+  color:inherit;
+  border:1px solid transparent;
+  transition:background .14s,border-color .14s;
+}
+.rrail-item:hover,.rrail-item:focus-visible{
+  background:#0D141C;
+  border-color:#1E2A36;
+  outline:none;
+}
+.rrail-mark{
+  flex:0 0 28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:3px;
+  font-size:9.4px;
+  font-weight:800;
+  letter-spacing:.02em;
+  background:#0E1620;
+  border:1px solid #1C2733;
+  color:#7B8796;
+}
+.rrail-item:hover .rrail-mark{border-color:#2B5F6B;color:#3FD9E6}
+.rrail-body{
+  min-width:0;
+  flex:1 1 auto;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity .13s;
+}
+.rrail:hover .rrail-body,.rrail:focus-within .rrail-body,.rrail.open .rrail-body{opacity:1}
+.rrail-nm{
+  display:flex;
+  align-items:baseline;
+  gap:5px;
+  font-size:9.8px;
+  font-weight:600;
+  color:#C3CBD6;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.rrail-nm em{
+  font-style:normal;
+  font-size:7.2px;
+  letter-spacing:.1em;
+  color:#39424E;
+  flex:0 0 auto;
+}
+.rrail-met{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  margin-top:3px;
+  font-size:8.2px;
+  letter-spacing:.04em;
+  color:#5A6472;
+}
+.rrail-met b{font-weight:700;font-variant-numeric:tabular-nums}
+.rrail-met b.up{color:#31C08C}
+.rrail-met b.dn{color:#EF5A61}
+.rrail-met b.am{color:#EFA83A}
+.rrail-met b.cy{color:#3FD9E6}
+.rrail-met span{color:#333B46}
+
+.rrail-foot{
+  margin-top:auto;
+  padding:8px 9px 0;
+  border-top:1px solid #141B24;
+  font-size:7.2px;
+  letter-spacing:.12em;
+  color:#333B46;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity .13s;
+}
+.rrail:hover .rrail-foot,.rrail:focus-within .rrail-foot,.rrail.open .rrail-foot{opacity:1}
+
+/* The old single-purpose floating launcher is superseded by this rail. */
+.hkq-rail{display:none!important}
+
+@media (max-width: 720px){
+  :root{--rail-w:38px;--rail-open:80vw}
+  body{padding-left:calc(6px + var(--rail-w))!important}
+  .rrail{padding:7px 0}
+  /* touch has no hover: the rail only opens when tapped */
+  .rrail:hover{width:var(--rail-w);box-shadow:none}
+  .rrail.open{width:var(--rail-open);box-shadow:14px 0 42px rgba(0,0,0,.72)}
+  .rrail:hover .rrail-title,.rrail:hover .rrail-sec,.rrail:hover .rrail-body,.rrail:hover .rrail-foot{opacity:0}
+  .rrail.open .rrail-title,.rrail.open .rrail-sec,.rrail.open .rrail-body,.rrail.open .rrail-foot{opacity:1}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .rrail,.rrail-title,.rrail-sec,.rrail-body,.rrail-foot{transition:none}
+}
