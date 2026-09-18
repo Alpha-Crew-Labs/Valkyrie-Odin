@@ -1,0 +1,121 @@
+/* VALKYRIE v3 · theme flow (EQUITY money-concentration strip + drawer) */
+
+/* Always-visible strip, sits above the EQUITY card row. */
+.tfl-bar{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:auto auto auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px;
+  height:34px;
+  padding:0 10px;
+  margin-bottom:6px;
+  border:1px solid #1A2530;
+  background:linear-gradient(90deg,rgba(63,217,230,.05),#0A1118 42%);
+  cursor:pointer;
+  font:inherit;
+  color:inherit;
+  text-align:left;
+  transition:border-color .16s,background .16s;
+}
+.tfl-bar:hover,.tfl-bar:focus-visible{border-color:#2C4A57;outline:none}
+.tfl-bar>.tfl-t{font-size:8px;letter-spacing:.16em;color:#7E8A9A;font-weight:800;white-space:nowrap}
+.tfl-m{display:flex;align-items:baseline;gap:5px;white-space:nowrap}
+.tfl-m span{font-size:6.8px;letter-spacing:.1em;color:#465362}
+.tfl-m b{font-size:10.5px;font-weight:700;font-variant-numeric:tabular-nums;color:#C3CBD6}
+.tfl-m b.up{color:#31C08C}
+.tfl-m b.dn{color:#EF5A61}
+.tfl-m b.am{color:#EFA83A}
+.tfl-lead{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  overflow:hidden;
+}
+.tfl-lead i{
+  flex:0 0 auto;
+  font-style:normal;
+  font-size:7.4px;
+  padding:2px 6px;
+  border:1px solid #1E2A36;
+  border-radius:2px;
+  color:#8E9BAB;
+  background:#0B1219;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.tfl-lead i.up{border-color:#1E4A3C;color:#31C08C}
+.tfl-lead i.dn{border-color:#4A2328;color:#EF5A61}
+.tfl-open{font-size:7px;letter-spacing:.14em;color:#3FD9E6;white-space:nowrap}
+
+/* Drawer: the full theme terminal gets the room the 252px pane cannot give it. */
+.tfl-scrim{
+  position:fixed;
+  inset:0;
+  z-index:88;
+  background:rgba(4,7,11,.72);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s;
+}
+.tfl-scrim.on{opacity:1;pointer-events:auto}
+.tfl-drawer{
+  position:fixed;
+  z-index:89;
+  left:calc(8px + var(--rail-w,46px));
+  right:8px;
+  bottom:8px;
+  max-height:min(76vh,560px);
+  display:flex;
+  flex-direction:column;
+  border:1px solid #23313D;
+  background:#080D13;
+  box-shadow:0 -18px 60px rgba(0,0,0,.66);
+  transform:translateY(calc(100% + 16px));
+  transition:transform .22s cubic-bezier(.4,0,.2,1);
+}
+.tfl-drawer.on{transform:translateY(0)}
+.tfl-dhead{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  height:36px;
+  padding:0 11px;
+  border-bottom:1px solid #17212B;
+}
+.tfl-dhead b{font-size:9px;letter-spacing:.17em;color:#AAB5C2;font-weight:800}
+.tfl-dhead small{font-size:7px;letter-spacing:.1em;color:#465362;margin-left:8px}
+.tfl-close{
+  border:1px solid #1E2A36;
+  background:#0B1219;
+  color:#7C8698;
+  font:inherit;
+  font-size:8px;
+  letter-spacing:.12em;
+  padding:5px 10px;
+  border-radius:2px;
+  cursor:pointer;
+}
+.tfl-close:hover{border-color:#2C4A57;color:#C3CBD6}
+.tfl-dbody{flex:1 1 auto;min-height:0;overflow:auto}
+/* the relocated terminal is no longer a direct child of #pane, so the
+   ux-overlay.css rule that hides it there no longer applies */
+.tfl-dbody>#themePulse{display:block!important;border:0}
+/* the drawer header already names the source; the terminal's own bar would
+   repeat it verbatim, so only its freshness badge is kept */
+.tfl-dbody>#themePulse>.themeq-head>div:first-child{display:none}
+.tfl-dbody>#themePulse>.themeq-head{justify-content:flex-end;height:26px}
+
+@media (max-width:720px){
+  .tfl-bar{grid-template-columns:auto minmax(0,1fr) auto;height:auto;padding:7px 8px;gap:8px}
+  .tfl-bar>.tfl-m:nth-of-type(2){display:none}
+  .tfl-lead{display:none}
+  .tfl-drawer{left:calc(6px + var(--rail-w,38px));right:6px;bottom:6px;max-height:84vh}
+}
+@media (prefers-reduced-motion: reduce){
+  .tfl-drawer,.tfl-scrim{transition:none}
+}
