@@ -78,6 +78,7 @@ jobs:
           node --check prototype/valkyrie-v3/node-fit.js
           node --check prototype/valkyrie-v3/graph-viewport.js
           node --check prototype/valkyrie-v3/research-rail.js
+          node --check prototype/valkyrie-v3/cross-asset.js
           node --check scripts/update_equity_snapshot.mjs
           node --check scripts/update_theme_snapshot.mjs
           node --check scripts/update_market_strip_snapshot.mjs
