@@ -193,7 +193,7 @@ svg.fc .eg.rel{opacity:1}
 .tip{position:absolute;bottom:calc(50% + 12px);left:50%;transform:translateX(-50%);background:#0D141C;border:1px solid var(--bd2);padding:5px 8px;border-radius:2px;font-size:8.6px;color:#95A0AE;white-space:nowrap;opacity:0;pointer-events:none;transition:.16s;z-index:9;line-height:1.5}
 .tk:hover .tip{opacity:1}
 
-.ban{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;text-align:center;pointer-events:none;opacity:0}
+.ban{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;text-align:center;pointer-events:none;opacity:0;padding:13px 30px;background:rgba(7,11,16,.86);border:1px solid rgba(63,217,230,.2);border-radius:3px;box-shadow:0 0 0 1px rgba(7,11,16,.86),0 8px 34px rgba(0,0,0,.6)}
 .ban.on{animation:ban 1.5s ease both}
 @keyframes ban{0%{opacity:0;letter-spacing:.5em}18%{opacity:1;letter-spacing:.26em}78%{opacity:1;letter-spacing:.26em}100%{opacity:0;letter-spacing:.34em}}
 .ban .b1{font-size:19px;font-weight:800;letter-spacing:.26em;color:var(--cy)}
