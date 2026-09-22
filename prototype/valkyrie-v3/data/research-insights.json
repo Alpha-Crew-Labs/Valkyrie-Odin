@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-09-21T15:10:24.172Z",
+  "generatedAt": "2026-09-22T05:09:27.333Z",
   "cadence": "12H",
   "runtimeDependency": "NONE",
   "note": "Aggregated public insight snapshot only. Browser runtime never calls the source Vercel apps.",
@@ -8,22 +8,22 @@
     "ok": true,
     "source": "IPO Market Report",
     "url": "https://ipo-market-report.vercel.app/",
-    "generatedAt": "2026.09.16",
+    "generatedAt": "2026.09.22",
     "period": "25.09~26.09",
     "companies": 51,
-    "dataDate": "26.09.14",
-    "avgCurrentReturnPct": -13.3,
-    "medianCurrentReturnPct": -31.4,
+    "dataDate": "26.09.18",
+    "avgCurrentReturnPct": -13,
+    "medianCurrentReturnPct": -31.6,
     "aboveOfferCount": 15,
     "aboveOfferPct": 29.4,
     "belowOfferPct": 70.6,
     "best": {
-      "name": "스카이랩스",
-      "returnPct": 156
+      "name": "알지노믹스",
+      "returnPct": 145
     },
     "worst": {
       "name": "한패스",
-      "returnPct": -73
+      "returnPct": -75
     },
     "status": "ready"
   },
@@ -31,17 +31,17 @@
     "ok": true,
     "source": "CB Zero Finder",
     "url": "https://cb-zero-finder.vercel.app/",
-    "updatedAt": "2026-09-21T09:02:41.452Z",
+    "updatedAt": "2026-09-22T00:33:59.038Z",
     "period": {
       "begin": "2026-01-01",
-      "end": "2026-09-21"
+      "end": "2026-09-22"
     },
-    "totalCount": 367,
-    "totalAmountEok": 88397.9,
-    "zeroZeroCount": 93,
+    "totalCount": 371,
+    "totalAmountEok": 88887.9,
+    "zeroZeroCount": 94,
     "zeroZeroSharePct": 25.3,
-    "averageDilutionPct": 12.9,
-    "highDilutionSharePct": 16,
+    "averageDilutionPct": 12.8,
+    "highDilutionSharePct": 15.8,
     "topIssue": {
       "name": "삼성에스디에스",
       "amountEok": 12200,
