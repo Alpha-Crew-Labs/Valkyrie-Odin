@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-09-25T13:56:49.497Z",
+  "generatedAt": "2026-09-28T05:35:48.418Z",
   "cadence": "12H",
   "runtimeDependency": "NONE",
   "note": "Aggregated public insight snapshot only. Browser runtime never calls the source Vercel apps.",
@@ -31,15 +31,15 @@
     "ok": true,
     "source": "CB Zero Finder",
     "url": "https://cb-zero-finder.vercel.app/",
-    "updatedAt": "2026-09-25T09:02:41.493Z",
+    "updatedAt": "2026-09-28T00:33:59.073Z",
     "period": {
       "begin": "2026-01-01",
-      "end": "2026-09-25"
+      "end": "2026-09-28"
     },
-    "totalCount": 376,
-    "totalAmountEok": 89467.9,
-    "zeroZeroCount": 95,
-    "zeroZeroSharePct": 25.3,
+    "totalCount": 377,
+    "totalAmountEok": 89617.9,
+    "zeroZeroCount": 96,
+    "zeroZeroSharePct": 25.5,
     "averageDilutionPct": 13,
     "highDilutionSharePct": 16.4,
     "topIssue": {
