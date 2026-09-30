@@ -33,7 +33,7 @@ v4 build:
 
 자세한 실행/구조는 [`prototype/valkyrie-v4/README.md`](./prototype/valkyrie-v4/README.md), 금융 로직 변경 이력은 [`prototype/valkyrie-v4/docs/DECISIONS.md`](./prototype/valkyrie-v4/docs/DECISIONS.md)를 참고하세요.
 
-이전 정적 프로토타입(v2 / v2.5 / v3)은 그대로 보존되며, GitHub Pages는 v2.5(`/`)와 v3(`/v3/`)를 배포합니다.
+GitHub Pages의 **정본은 v4 정적 오프라인 번들(`/`)** 입니다. 같은 빌드를 `/v4/`에도 고정 배포하며, 이전 v3(`/v3/`)와 v2.5(`/v2.5/`)는 회귀·비교용으로 보존합니다. v4의 서버 전용 기능(`/api/*`, Claude 질의 저장/발간 등)은 로컬 `run.ps1` 실행 시 활성화되고, Pages에서는 스냅샷 기반 OFFLINE BUNDLE 모드로 안전하게 동작합니다.
 
 ```bash
 cd Valkyrie-Odin/prototype/valkyrie-v3
@@ -177,9 +177,9 @@ OBJECT → ONTOLOGY ──┼─ STRESS
 Valkyrie-Odin/
 ├─ prototype/
 │  ├─ valkyrie-v2/          # behavior reference (static)
-│  ├─ valkyrie-v2.5/        # GitHub Pages fallback at /
+│  ├─ valkyrie-v2.5/        # legacy static build at /v2.5/
 │  ├─ valkyrie-v3/          # static baseline at /v3/
-│  └─ valkyrie-v4/          # ACTIVE: real-data pipeline + local server + owner models + AI assistant
+│  └─ valkyrie-v4/          # ACTIVE / canonical Pages at / and /v4/ + local server full mode
 ├─ apps/
 │  └─ valkyrie-web/         # target Next.js / TypeScript UI
 ├─ quant-core/              # Python quant logic
