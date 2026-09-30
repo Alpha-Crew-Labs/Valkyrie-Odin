@@ -1,0 +1,123 @@
+{
+  "items": [
+    {
+      "code": "USFOMC=ECIX",
+      "name": "미국연방준비은행",
+      "rate": 4.0,
+      "lastChange": 0.25,
+      "decidedAt": "2026-09-17T03:00:00+09:00"
+    },
+    {
+      "code": "KROCRT=ECIX",
+      "name": "한국은행",
+      "rate": 3.0,
+      "lastChange": 0.25,
+      "decidedAt": "2026-08-27T10:00:00+09:00"
+    },
+    {
+      "code": "EUECBR=ECIX",
+      "name": "유럽중앙은행",
+      "rate": 2.65,
+      "lastChange": 0.25,
+      "decidedAt": "2026-09-10T21:15:00+09:00"
+    },
+    {
+      "code": "GBBOEI=ECIX",
+      "name": "영국은행",
+      "rate": 3.75,
+      "lastChange": 0.0,
+      "decidedAt": "2026-09-17T20:00:00+09:00"
+    },
+    {
+      "code": "JPINTN=ECIX",
+      "name": "일본은행",
+      "rate": 1.25,
+      "lastChange": 0.25,
+      "decidedAt": "2026-09-18T23:59:59+09:00"
+    },
+    {
+      "code": "CNLPRO=ECIX",
+      "name": "중국인민은행",
+      "rate": 3.0,
+      "lastChange": 0.0,
+      "decidedAt": "2026-09-20T10:00:00+09:00"
+    },
+    {
+      "code": "CABOCR=ECIX",
+      "name": "캐나다은행",
+      "rate": 2.25,
+      "lastChange": 0.0,
+      "decidedAt": "2026-09-02T22:45:00+09:00"
+    },
+    {
+      "code": "AUCBIR=ECIX",
+      "name": "호주연방준비은행",
+      "rate": 4.6,
+      "lastChange": 0.25,
+      "decidedAt": "2026-09-29T13:30:00+09:00"
+    },
+    {
+      "code": "RUCBIR=ECIX",
+      "name": "러시아연방중앙은행",
+      "rate": 14.0,
+      "lastChange": 0.0,
+      "decidedAt": "2026-09-11T19:30:00+09:00"
+    },
+    {
+      "code": "SAINTR=ECIX",
+      "name": "사우디아라비아 통화청",
+      "rate": 4.5,
+      "lastChange": 0.25,
+      "decidedAt": "2026-09-17T03:00:00+09:00"
+    },
+    {
+      "code": "BRCBMP=ECIX",
+      "name": "브라질중앙은행",
+      "rate": 13.75,
+      "lastChange": 0.25,
+      "decidedAt": "2026-09-17T06:30:00+09:00"
+    },
+    {
+      "code": "INREPO=ECIX",
+      "name": "인도연방준비은행",
+      "rate": 5.25,
+      "lastChange": 0.0,
+      "decidedAt": "2026-08-05T13:30:00+09:00"
+    },
+    {
+      "code": "TRINT=ECIX",
+      "name": "튀르키예중앙은행",
+      "rate": 37.0,
+      "lastChange": 0.0,
+      "decidedAt": "2026-09-10T20:00:00+09:00"
+    },
+    {
+      "code": "ZAREPO=ECIX",
+      "name": "남아프리카준비은행",
+      "rate": 7.25,
+      "lastChange": 0.25,
+      "decidedAt": "2026-09-23T22:00:00+09:00"
+    },
+    {
+      "code": "ARINTR=ECIX",
+      "name": "아르헨티나중앙은행",
+      "rate": 29.0,
+      "lastChange": 3.0,
+      "decidedAt": "2025-01-30T21:00:00+09:00"
+    },
+    {
+      "code": "MXCBIR=ECIX",
+      "name": "멕시코은행",
+      "rate": 6.5,
+      "lastChange": 0.0,
+      "decidedAt": "2026-09-25T04:00:00+09:00"
+    },
+    {
+      "code": "IDCBRR=ECIX",
+      "name": "인도네시아은행",
+      "rate": 5.75,
+      "lastChange": 0.0,
+      "decidedAt": "2026-09-23T16:30:00+09:00"
+    }
+  ]
+}

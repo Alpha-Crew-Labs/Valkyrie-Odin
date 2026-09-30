@@ -1,0 +1,13 @@
+# 강조색만 바꾸고 라이트/다크 자동 전환(OS 설정 따름)은 유지한다.
+# [theme] 최상위에 색을 넣으면 단일 커스텀 테마가 되어 다크모드가 꺼지므로 light/dark로 나눠 지정.
+[theme.light]
+primaryColor = "#2a78d6"
+
+[theme.dark]
+primaryColor = "#3987e5"
+
+[browser]
+gatherUsageStats = false
+
+[server]
+runOnSave = true

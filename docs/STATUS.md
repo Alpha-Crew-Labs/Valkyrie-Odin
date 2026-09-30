@@ -1,16 +1,30 @@
 # Project Status
 
-_Last updated: 2026-09-15_
+_Last updated: 2026-09-30_
 
 ## Current state
 
-VALKYRIE now has three deliberately separated prototype lines:
+VALKYRIE now has four deliberately separated prototype lines:
 
 ```text
 prototype/valkyrie-v2/      regression / behavior reference
 prototype/valkyrie-v2.5/    stable GitHub Pages fallback at /
-prototype/valkyrie-v3/      active development baseline at /v3/
+prototype/valkyrie-v3/      static baseline at /v3/
+prototype/valkyrie-v4/      ACTIVE — local server, real-data pipeline, owner-model fusion, AI assistant
 ```
+
+## v4 (2026-09-30)
+
+`prototype/valkyrie-v4` runs locally (`run.ps1` → http://127.0.0.1:4134/) and is the hackathon demo build.
+
+- 17 objects / 24 relations (KOSPI added); every β carries a data basis or an explicit expert prior
+- Real public data: ECOS, FRED, NAVER Finance, DART (CB Zero Finder), 38커뮤니케이션 — snapshot fallback on every fetch
+- Owner models are inputs (`Tools.anchors()`): 8501 macro regime, 8511 volatility-target duration, 8512 equity weight
+- Home starts as a question box; the AI assistant (Claude) interprets and explains, all numbers come from the engine
+- Node gauges show the current level (1-year percentile), not a forecast; desks get an executable action plan
+- Financial-logic history: `prototype/valkyrie-v4/docs/DECISIONS.md` (D-001 … D-016)
+
+The notes below describe the v3 static baseline and remain valid for `/v3/`.
 
 The **active v3 source of truth has been rebased on the user-approved `VALKYRIE v2.6 — Research Intelligence System` prototype.** The previous v3.2 ontology-command-center experiment is retired and its runtime files have been removed.
 

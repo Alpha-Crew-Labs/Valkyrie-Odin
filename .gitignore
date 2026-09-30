@@ -70,3 +70,13 @@ Thumbs.db
 
 # Notebook checkpoints
 .ipynb_checkpoints/
+
+# VALKYRIE v4 (prototype/valkyrie-v4) — local-only runtime state, demo workfiles, generated reports
+prototype/valkyrie-v4/data/state/
+prototype/valkyrie-v4/demo/_work/
+prototype/valkyrie-v4/demo/_vendor/
+prototype/valkyrie-v4/demo/out/
+prototype/valkyrie-v4/macro/reports/
+prototype/valkyrie-v4/macro/assets/hanwha_am_logo.svg
+*.mp4
+*.mp3

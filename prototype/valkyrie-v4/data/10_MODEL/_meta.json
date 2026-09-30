@@ -1,0 +1,11 @@
+{
+  "rows": 669,
+  "first": "2024-01-02",
+  "last": "2026-09-29",
+  "model_version": "valkyrie-macro-0.1 (taylor+ar1)",
+  "cpi_mae": 0.2412496540468997,
+  "equity_sample": "REAL",
+  "ipo_rows": 195,
+  "cb_rows": 293,
+  "equity_sources": "38커뮤니케이션 수요예측·신규상장 · CB Zero Finder(DART) · NAVER 시세·재무"
+}

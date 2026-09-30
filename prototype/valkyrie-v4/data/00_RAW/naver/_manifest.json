@@ -1,0 +1,115 @@
+{
+  "collectedAt": "2026-09-30T07:49:14.794211+00:00",
+  "start": "2023-01-01",
+  "provider": "NAVER/Npay Securities public read-only endpoints",
+  "series": {
+    "investor_flow_kospi": {
+      "source": "NAVER",
+      "endpoint": "trend/daily (투자자별 매매동향)",
+      "cycle": "D",
+      "rows": 200,
+      "last": "2026-09-30"
+    },
+    "investor_flow_kosdaq": {
+      "source": "NAVER",
+      "endpoint": "trend/daily (투자자별 매매동향)",
+      "cycle": "D",
+      "rows": 200,
+      "last": "2026-09-30"
+    },
+    "liquidity": {
+      "source": "NAVER",
+      "endpoint": "trendDeposit (증시자금동향)",
+      "cycle": "D*",
+      "rows": 911,
+      "last": "2026-09-28"
+    },
+    "ohlcv_kospi": {
+      "source": "NAVER",
+      "endpoint": "siseJson KOSPI",
+      "cycle": "D",
+      "rows": 913,
+      "last": "2026-09-30"
+    },
+    "ohlcv_kosdaq": {
+      "source": "NAVER",
+      "endpoint": "siseJson KOSDAQ",
+      "cycle": "D",
+      "rows": 913,
+      "last": "2026-09-30"
+    },
+    "ohlcv_kpi200": {
+      "source": "NAVER",
+      "endpoint": "siseJson KPI200",
+      "cycle": "D",
+      "rows": 913,
+      "last": "2026-09-30"
+    },
+    "sectors": {
+      "source": "NAVER",
+      "endpoint": "upjong/list (업종)",
+      "cycle": "snapshot",
+      "rows": 79
+    },
+    "large_caps": {
+      "source": "NAVER",
+      "endpoint": "stock/default marketSum",
+      "cycle": "snapshot",
+      "rows": 50
+    },
+    "policy_rates": {
+      "source": "NAVER",
+      "endpoint": "marketindex/standardInterest",
+      "cycle": "snapshot",
+      "rows": 17
+    },
+    "ipo_pipeline": {
+      "source": "NAVER",
+      "endpoint": "ipo/progress",
+      "cycle": "snapshot",
+      "rows": 25
+    },
+    "news": {
+      "source": "NAVER",
+      "endpoint": "news/list mainnews",
+      "cycle": "snapshot",
+      "rows": 20
+    },
+    "briefing": {
+      "source": "NAVER",
+      "endpoint": "home/v3/briefing",
+      "cycle": "snapshot",
+      "rows": 5
+    },
+    "market_board": {
+      "source": "NAVER",
+      "endpoint": "integration/indicators + chart + coin/price",
+      "cycle": "snapshot",
+      "rows": 11
+    },
+    "us_sectors": {
+      "source": "NAVER",
+      "endpoint": "SPDR sector ETFs basic + chart",
+      "cycle": "snapshot",
+      "rows": 11
+    },
+    "us_watchlist": {
+      "source": "NAVER",
+      "endpoint": "stock basic + chart",
+      "cycle": "snapshot",
+      "rows": 23
+    },
+    "world_news": {
+      "source": "NAVER",
+      "endpoint": "news/worldNews",
+      "cycle": "snapshot",
+      "rows": 30
+    },
+    "calendar": {
+      "source": "NAVER",
+      "endpoint": "marketCalendars/v1/events/search",
+      "cycle": "snapshot",
+      "rows": 26
+    }
+  }
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VALKYRIE v4 — Intelligence Chain</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='2' fill='%2306080C'/%3E%3Cpath d='M3 4l5 9 5-9' fill='none' stroke='%233FD9E6' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/rail.css">
+<link rel="stylesheet" href="css/board.css">
+<link rel="stylesheet" href="css/insight.css">
+<link rel="stylesheet" href="css/brief.css">
+<link rel="stylesheet" href="css/ask.css">
+</head>
+<body>
+<div class="boot" id="boot">
+  <div class="boot-team">R A V E N S</div>
+  <div class="boot-logo">VAL<span>KYRIE</span></div>
+  <div class="boot-sub">MACRO · RATES · KOSDAQ INTELLIGENCE CHAIN</div>
+  <div class="boot-lines">
+    <div class="bl" id="b0">INITIALIZING ONTOLOGY <b>OK</b></div>
+    <div class="bl" id="b1">LOADING OBJECTS <b id="b1v">—</b></div>
+    <div class="bl" id="b2">LINKING RELATIONS <b id="b2v">—</b></div>
+    <div class="bl" id="b3">MOUNTING DATA <b id="b3v">—</b></div>
+    <div class="bl" id="b4">DATA SOURCES <b>ECOS · FRED · NAVER</b></div>
+    <div class="bl ready" id="b5">SYSTEM READY</div>
+  </div>
+</div>
+
+<!-- VALKYRIE home — the kick: ask first (Google-style start), the intelligence chain answers -->
+<section class="home" id="home" aria-label="VALKYRIE 시작">
+  <div class="hm-bg"></div>
+  <div class="hm-c">
+    <div class="hm-team">R A V E N S · HANWHA AI PLUSTHON 2026</div>
+    <div class="hm-logo">VAL<span>KYRIE</span></div>
+    <div class="hm-tag">운용역의 의사결정 <b>오토파일럿</b> — 질문하면 인텔리전스 체인이 계산하고, 데스크별 액션 플랜으로 답합니다</div>
+    <form class="hm-box" id="homeForm" autocomplete="off">
+      <span class="hm-orb"></span>
+      <input id="homeQ" placeholder="미국 10년물이 30bp 오르면 채권 데스크는 뭘 해야 해?" aria-label="VALKYRIE에게 질문" maxlength="300">
+      <button type="submit" id="homeGo">ASK ⏎</button>
+    </form>
+    <div class="hm-chips" id="homeChips"></div>
+    <div class="hm-calls" id="homeCalls"></div>
+    <div class="hm-foot"><span id="homeStat">—</span><a href="#chain" id="homeSkip">인텔리전스 체인으로 바로 가기 →</a></div>
+    <div class="hm-hint">ENTER 질문 · ESC 체인 · 답변은 엔진 수치 + 담당 모델(8501 · 8511 · 8512) + NAVER LIVE</div>
+  </div>
+</section>
+
+<!-- ODIN portal mockup (사내 시스템 목업) -->
+<div class="odin">
+  <div class="odin-logo">ODIN</div>
+  <nav class="odin-nav">
+    <span>홈</span><span>리서치</span><span>운용</span><span>리스크</span><span class="act">VALKYRIE</span>
+  </nav>
+  <div class="odin-tabs" id="odinTabs">
+    <span data-go="chain" class="act">인텔리전스 체인</span>
+    <span data-go="signals">매크로</span><span data-go="impact">채권</span><span data-go="cb">주식</span>
+  </div>
+  <div class="odin-right"><span class="mock">MOCKUP</span><span id="odinUser">리서치센터 · RAVENS</span></div>
+</div>
+
+<div class="app">
+  <header class="hd">
+    <div class="br"><div class="lg">VAL<span>KYRIE</span></div><div class="lg-sub">v4 · RAVENS RESEARCH OS</div></div>
+    <div class="hcell"><div class="ml">As Of</div><div class="stx num" id="asof">—</div></div>
+    <div class="hcell"><div class="ml">Mode</div><div class="stx" id="mode"><i class="dot"></i><span>—</span></div></div>
+    <div class="hcell kp" id="kpLevel" data-go="signals" title="현재 스트레스 수준 · 지난 1년 분포 내 위치 (전망 아님)"><div class="ml">현재 수준</div><div class="stx num"><b id="kpTemp">—</b><span class="kp-bar"><i id="kpBar"></i></span><small id="kpLab">—</small></div></div>
+    <div class="hcell kp" id="kpCalls" data-go="signals" title="VALKYRIE 판단 3종 (클릭: 판단 탭)"><div class="ml">판단</div><div class="stx" id="kpSig">—</div></div>
+    <div class="hcell kp" id="kpTools" data-go="signals" title="담당 모델 결합: 8511 목표 듀레이션 → 채권 판단, 8512 위험점수·비중 → 주식 판단, 8501 국면 → 매크로 참고"><div class="ml">모델 반영</div><div class="stx num" id="kpMatch">—</div></div>
+    <div class="hcell kp" id="kpData" data-go="market" title="데이터 신선도"><div class="ml">데이터</div><div class="stx num" id="kpFresh">—</div></div>
+    <div class="hcell grow">
+      <div class="conf" id="conf" title="">CONFLICT DETECTED</div>
+      <div class="live" id="clockBox"><i class="bt"></i><span id="clock">--:--:--</span></div>
+    </div>
+  </header>
+  <section class="mk" id="mk" aria-label="LIVE 시장">
+    <div class="mk-tiles tkr" id="mkTiles"><div class="tk-track" id="mkTrack"></div></div>
+    <button class="mk-now" id="mkBoard" title="글로벌 마켓 보드 (G)">▦ GLOBAL BOARD</button>
+    <button class="mk-now" id="mkNow" disabled>NOWCAST</button>
+    <div class="mk-st" id="mkSt"><i></i><b>NAVER</b></div>
+  </section>
+
+  <section class="sr" id="sitrep" title="클릭: 관련 화면 열기"></section>
+  <section class="main">
+    <div class="cw" id="cw">
+      <canvas id="df"></canvas>
+      <div class="ovr"><div class="ml2 num" id="hud">NO OBJECT ACQUIRED</div><button class="dbtn" id="inBtn" title="인스펙터 열기/닫기 (I)">INSPECTOR ◂</button></div>
+      <div class="ovb"><span class="ml">FLOW</span> <span class="ml2 num" id="flowInfo">24 RELATIONS · β 표시: 노드 선택</span></div>
+      <div class="rlg" title="노드 색 = 현재 값이 지난 1년 분포에서 어디에 있는지 (전망 아님)"><b>LEVEL</b><i class="l"></i>1년 하단<i class="m"></i>중간<i class="h"></i>1년 상단 · 현재 위치 · 전망 아님</div>
+      <div class="ban" id="ban"><div class="b1" id="ban1"></div><div class="b2" id="ban2"></div></div>
+      <svg id="chain" viewBox="0 0 1020 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VALKYRIE 인텔리전스 체인"></svg>
+    </div>
+    <aside class="drw-r" id="inspBox" aria-label="인스펙터">
+      <div class="dh"><span class="ml">INSPECTOR</span><span class="ml2" id="inspSub">노드 · 계산식 · 근거</span><button class="dx" id="inClose" title="닫기 (Esc)">✕</button></div>
+      <div class="insp" id="insp"></div>
+    </aside>
+  </section>
+
+  <section class="cmd">
+    <div class="cmd-row">
+      <div class="askbox" id="askbox">
+        <span class="ask-tag"><i class="ask-orb"></i><b id="cpr">AI ▸</b></span>
+        <input id="cin" placeholder="무엇이든 물어보세요 — 예: 미국 10년물이 30bp 오르면 채권 데스크는 뭘 해야 해?  ·  지금 주식 상황 설명해줘" autocomplete="off">
+        <span class="ask-status" id="askStatus">READY</span><button class="ask-go" id="askGo" title="Enter">ASK ⏎</button>
+      </div>
+      <div class="cps end">
+        <button class="btn" id="sigBtn">▶ RUN SIGNATURE</button>
+        <button class="btn g" id="rstBtn">RESET</button>
+      </div>
+    </div>
+    <div class="cmd-strip">
+      <span class="ml">예시</span><span class="strip" id="qchips"></span>
+      <span class="ml amb">SHOCK</span><span class="strip" id="kchips"></span>
+      <span class="ml2 strip-note">키워드를 누르면 질문에 삽입 · Enter로 AI에게 질문 · 체인이 자동으로 따라갑니다</span>
+    </div>
+  </section>
+  <section class="mw" id="ws" aria-label="워크스페이스">
+    <div class="tabs" id="tabs">
+      <div class="tab" data-t="signals"><div class="tn">판단 · 온도계</div><div class="to">DECISION</div></div>
+      <div class="tab" data-t="node"><div class="tn">노드 인사이트</div><div class="to">OBJECT</div></div>
+      <div class="tab" data-t="impact"><div class="tn">충격 영향표</div><div class="to">WHAT-IF</div></div>
+      <div class="tab" data-t="cb"><div class="tn">코스닥 CB · IPO</div><div class="to">김유찬</div></div>
+      <div class="tab" data-t="log"><div class="tn">판단 로그</div><div class="to">D+5·20·60</div></div>
+      <div class="tab" data-t="similar"><div class="tn">유사 국면</div><div class="to">COSINE</div></div>
+      <div class="tab" data-t="ask"><div class="tn">AI 어시스턴트</div><div class="to">CLAUDE</div></div>
+      <div class="tab" data-t="publish"><div class="tn">명령 · 발간</div><div class="to">ODIN</div></div>
+      <div class="tab" data-t="market"><div class="tn">LIVE 마켓</div><div class="to">NAVER</div></div>
+      <div class="tabsp" id="tabNote"></div>
+      <button class="dx" id="wsClose" title="닫기 (W)">▼</button>
+    </div>
+    <div class="pane" id="pane"></div>
+  </section>
+
+  <footer class="ft">
+    <div class="fc"><button class="btn g" id="rpBtn">◀ REPLAY</button><button class="btn g ws-btn" id="wsBtn" title="워크스페이스 열기/닫기 (W)">▲ WORKSPACE</button></div>
+    <div class="tl" id="tl">
+      <input type="range" id="tlr" min="0" max="0" value="0" aria-label="날짜 선택">
+      <div id="tks"></div>
+    </div>
+    <div class="fc end"><div class="ml">SNAPSHOT</div><div class="num" id="snl">—</div></div>
+  </footer>
+</div>
+<div class="tipbox" id="tip"></div>
+
+<script src="data/bundle.js"></script>
+<script src="js/api.js"></script>
+<script src="js/chain.js"></script>
+<script src="js/views.js"></script>
+<script src="js/insight.js"></script>
+<script src="js/market.js"></script>
+<script src="js/sitrep.js"></script>
+<script src="js/board.js"></script>
+<script src="js/brief.js"></script>
+<script src="js/ask.js"></script>
+<script src="js/main.js"></script>
+<script src="js/rail.js"></script>
+</body>
+</html>

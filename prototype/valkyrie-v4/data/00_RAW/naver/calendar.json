@@ -1,0 +1,294 @@
+{
+  "from": "2026-09-29",
+  "to": "2026-10-07",
+  "items": [
+    {
+      "date": "2026-09-29",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "기업심리지수",
+      "subtitle": "06:00 발표 · 시장 영향력 매우 높음",
+      "code": "KRCBSI=ECIX",
+      "info": {
+        "발표": "99.10",
+        "이전 대비": null
+      }
+    },
+    {
+      "date": "2026-09-29",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "CB 소비자신뢰지수",
+      "subtitle": "23:00 발표 · 시장 영향력 높음",
+      "code": "USCONC=ECIX",
+      "info": {
+        "발표": "81.90",
+        "이전 대비": null
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "광공업생산 전월비(계절조정)",
+      "subtitle": "08:00 예정 · 시장 영향력 매우 높음",
+      "code": "KRIO=ECIX",
+      "info": {
+        "이전": "0.20%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "서비스업생산지수 전월비(계절조정)",
+      "subtitle": "08:00 예정 · 시장 영향력 매우 높음",
+      "code": "KRSVSO=ECIX",
+      "info": {
+        "이전": "-1.30%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "개인지출 전월대비",
+      "subtitle": "21:30 예정 · 시장 영향력 높음",
+      "code": "USGPCS=ECIX",
+      "info": {
+        "이전": "0.20%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "근원 소비지출물가지수 전월대비",
+      "subtitle": "21:30 예정 · 시장 영향력 보통",
+      "code": "USPCEM=ECIX",
+      "info": {
+        "이전": "0.20%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "수출 전년대비",
+      "subtitle": "09:00 예정 · 시장 영향력 매우 높음",
+      "code": "KREXP=ECIX",
+      "info": {
+        "이전": "68.70%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "수입 전년대비",
+      "subtitle": "09:00 예정 · 시장 영향력 매우 높음",
+      "code": "KRIMP=ECIX",
+      "info": {
+        "이전": "22.50%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "신규 실업수당청구건수",
+      "subtitle": "21:30 예정 · 시장 영향력 매우 높음",
+      "code": "USJOB=ECIX",
+      "info": {
+        "이전": "197.00K",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "ISM 제조업 구매관리자지수(PMI)",
+      "subtitle": "23:00 예정 · 시장 영향력 매우 높음",
+      "code": "USPMI=ECIX",
+      "info": {
+        "이전": "54.60",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "천연가스 재고량",
+      "subtitle": "23:30 예정 · 시장 영향력 낮음",
+      "code": "USOILN=ECIX",
+      "info": {
+        "이전": "53.00B",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "소비자물가지수(CPI) 전년대비",
+      "subtitle": "08:00 예정 · 시장 영향력 매우 높음",
+      "code": "KRCPIY=ECIX",
+      "info": {
+        "이전": "3.10%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "비농업고용지수",
+      "subtitle": "21:30 예정 · 시장 영향력 높음",
+      "code": "USNFAR=ECIX",
+      "info": {
+        "이전": "162.00K",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "실업률",
+      "subtitle": "21:30 예정 · 시장 영향력 매우 높음",
+      "code": "USUNR=ECIX",
+      "info": {
+        "이전": "4.10%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "공장수주 전월대비",
+      "subtitle": "23:00 예정 · 시장 영향력 높음",
+      "code": "USFORD=ECIX",
+      "info": {
+        "이전": "0.90%",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-05",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "ISM 비제조업 구매자지수",
+      "subtitle": "23:00 예정 · 시장 영향력 높음",
+      "code": "USNPMI=ECIX",
+      "info": {
+        "이전": "55.40",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "외환보유고 (미국달러)",
+      "subtitle": "06:00 예정 · 시장 영향력 매우 높음",
+      "code": "KRFX=ECIX",
+      "info": {
+        "이전": "442.28B",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-06",
+      "category": "economicIndicators",
+      "nation": "USA",
+      "title": "무역수지",
+      "subtitle": "21:30 예정 · 시장 영향력 매우 높음",
+      "code": "USTBAL=ECIX",
+      "info": {
+        "이전": "-88.60B",
+        "발표": "-"
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "category": "earnings",
+      "nation": "USA",
+      "title": "마이크론 테크놀로지 4분기 실적 발표",
+      "subtitle": null,
+      "code": "MU.O",
+      "info": {}
+    },
+    {
+      "date": "2026-10-01",
+      "category": "holiday",
+      "nation": "CHN",
+      "title": "중국 휴장일",
+      "subtitle": "국경절",
+      "code": null,
+      "info": {}
+    },
+    {
+      "date": "2026-10-01",
+      "category": "holiday",
+      "nation": "HKG",
+      "title": "홍콩 휴장일",
+      "subtitle": "국경절",
+      "code": null,
+      "info": {}
+    },
+    {
+      "date": "2026-10-02",
+      "category": "holiday",
+      "nation": "CHN",
+      "title": "중국 휴장일",
+      "subtitle": "국경절 연휴",
+      "code": null,
+      "info": {}
+    },
+    {
+      "date": "2026-10-05",
+      "category": "holiday",
+      "nation": "KOR",
+      "title": "한국 휴장일",
+      "subtitle": "개천절",
+      "code": null,
+      "info": {}
+    },
+    {
+      "date": "2026-10-05",
+      "category": "holiday",
+      "nation": "CHN",
+      "title": "중국 휴장일",
+      "subtitle": "국경절 연휴",
+      "code": null,
+      "info": {}
+    },
+    {
+      "date": "2026-10-06",
+      "category": "holiday",
+      "nation": "CHN",
+      "title": "중국 휴장일",
+      "subtitle": "국경절 연휴",
+      "code": null,
+      "info": {}
+    },
+    {
+      "date": "2026-10-07",
+      "category": "holiday",
+      "nation": "CHN",
+      "title": "중국 휴장일",
+      "subtitle": "국경절 연휴",
+      "code": null,
+      "info": {}
+    }
+  ]
+}

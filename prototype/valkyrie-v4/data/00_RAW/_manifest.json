@@ -1,0 +1,114 @@
+{
+  "collectedAt": "2026-09-30T02:56:09.921883+00:00",
+  "start": "2023-01-01",
+  "end": "2026-09-30",
+  "series": {
+    "bok_rate": {
+      "source": "한국은행 ECOS",
+      "stat": "722Y001",
+      "item": "0101000",
+      "cycle": "D",
+      "label": "한국은행 기준금리",
+      "rows": 1366,
+      "last": "2026-09-27"
+    },
+    "ktb3": {
+      "source": "한국은행 ECOS",
+      "stat": "817Y002",
+      "item": "010200000",
+      "cycle": "D",
+      "label": "국고채(3년)",
+      "rows": 915,
+      "last": "2026-09-29"
+    },
+    "ktb10": {
+      "source": "한국은행 ECOS",
+      "stat": "817Y002",
+      "item": "010210000",
+      "cycle": "D",
+      "label": "국고채(10년)",
+      "rows": 915,
+      "last": "2026-09-29"
+    },
+    "corp_aa3": {
+      "source": "한국은행 ECOS",
+      "stat": "817Y002",
+      "item": "010300000",
+      "cycle": "D",
+      "label": "회사채(3년, AA-)",
+      "rows": 915,
+      "last": "2026-09-29"
+    },
+    "kr_cpi_index": {
+      "source": "한국은행 ECOS",
+      "stat": "901Y009",
+      "item": "0",
+      "cycle": "M",
+      "label": "소비자물가지수 총지수(2020=100)",
+      "rows": 44,
+      "last": "2026-08-01"
+    },
+    "kospi": {
+      "source": "한국은행 ECOS",
+      "stat": "802Y001",
+      "item": "0001000",
+      "cycle": "D",
+      "label": "KOSPI지수",
+      "rows": 912,
+      "last": "2026-09-29"
+    },
+    "kosdaq": {
+      "source": "한국은행 ECOS",
+      "stat": "802Y001",
+      "item": "0089000",
+      "cycle": "D",
+      "label": "KOSDAQ지수",
+      "rows": 912,
+      "last": "2026-09-29"
+    },
+    "kr_gdp_qoq": {
+      "source": "한국은행 ECOS",
+      "stat": "200Y102",
+      "item": "10111",
+      "cycle": "Q",
+      "label": "국내총생산(실질, 계절조정, 전기비)",
+      "rows": 14,
+      "last": "2026-04-01"
+    },
+    "ust10": {
+      "source": "FRED (FRED API)",
+      "id": "DGS10",
+      "label": "미국채 10년 (Treasury Constant Maturity)",
+      "rows": 935,
+      "last": "2026-09-28"
+    },
+    "us_cpi_index": {
+      "source": "FRED (FRED API)",
+      "id": "CPIAUCSL",
+      "label": "US CPI-U (SA)",
+      "rows": 43,
+      "last": "2026-08-01"
+    },
+    "fed_funds": {
+      "source": "FRED (FRED API)",
+      "id": "DFF",
+      "label": "Federal Funds Effective Rate",
+      "rows": 1367,
+      "last": "2026-09-28"
+    },
+    "us_core_pce": {
+      "source": "FRED (FRED API)",
+      "id": "PCEPILFE",
+      "label": "US Core PCE Price Index (SA)",
+      "rows": 43,
+      "last": "2026-07-01"
+    },
+    "us_gdp_real": {
+      "source": "FRED (FRED API)",
+      "id": "GDPC1",
+      "label": "US Real GDP (SAAR, chained 2017$)",
+      "rows": 14,
+      "last": "2026-04-01"
+    }
+  }
+}

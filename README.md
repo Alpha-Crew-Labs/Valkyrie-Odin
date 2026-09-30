@@ -11,31 +11,34 @@ VALKYRIE는 매크로·금리·채권·주식/IPO 리서치를 하나의 온톨�
 
 ## Current Build
 
-현재 v2 인터랙션 레퍼런스는 저장소 안에서 직접 실행할 수 있습니다.
+현재 활성 버전은 **`prototype/valkyrie-v4`** 입니다. 실데이터 파이프라인(ECOS · FRED · NAVER · DART · 38)과 로컬 서버, 담당자 모델(8501 · 8511 · 8512) 결합, AI 어시스턴트가 들어 있습니다.
+
+```powershell
+git clone https://github.com/Alpha-Crew-Labs/Valkyrie-Odin.git
+cd Valkyrie-Odin/prototype/valkyrie-v4
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\run.ps1 -Offline          # http://127.0.0.1:4134/  (수집 생략 · 스냅샷으로 실행)
+```
+
+v4 build:
+
+- 17 Objects / 24 Relations (KOSPI 추가) — β마다 데이터 근거 표기
+- 질문창으로 시작하는 홈 → 체인 재계산 → 데스크별 액션 플랜
+- 담당자 모델(매크로 8501 · 채권 8511 · 주식 8512)을 입력으로 결합
+- 노드 수준(1년 백분위) · 스트레스 온도계 · What-If 충격 전파
+- 5개 시점 Replay · Decision Log · 보유 기록 · ODIN 발행
+- NAVER 실시간 시세 · SITREP · 매시 브리핑 (숫자는 엔진만)
+- 외부 호출 실패 시 스냅샷 폴백, 서버 없이 `web/index.html` 오프라인 번들
+
+자세한 실행/구조는 [`prototype/valkyrie-v4/README.md`](./prototype/valkyrie-v4/README.md), 금융 로직 변경 이력은 [`prototype/valkyrie-v4/docs/DECISIONS.md`](./prototype/valkyrie-v4/docs/DECISIONS.md)를 참고하세요.
+
+이전 정적 프로토타입(v2 / v2.5 / v3)은 그대로 보존되며, GitHub Pages는 v2.5(`/`)와 v3(`/v3/`)를 배포합니다.
 
 ```bash
-git clone https://github.com/Alpha-Crew-Labs/Valkyrie-Odin.git
-cd Valkyrie-Odin/prototype/valkyrie-v2
-python -m http.server 8080
+cd Valkyrie-Odin/prototype/valkyrie-v3
+python -m http.server 8080      # http://localhost:8080
 ```
-
-브라우저에서:
-
-```text
-http://localhost:8080
-```
-
-Reference build:
-
-- 16 Objects / 22 Relations
-- 5 deterministic Replay snapshots
-- Boot / Intelligence Chain / Inspector / 3 Domain Workspaces
-- RUN SIGNATURE / Command / Replay
-- Ambient Canvas field / causal propagation / target acquisition
-- Decision Log / benchmark-relative post-performance
-- local-only demo path with no required external data API
-
-자세한 실행/파일 책임은 [`prototype/valkyrie-v2/README.md`](./prototype/valkyrie-v2/README.md)를 참고하세요.
 
 ## Why VALKYRIE
 
@@ -173,7 +176,10 @@ OBJECT → ONTOLOGY ──┼─ STRESS
 ```text
 Valkyrie-Odin/
 ├─ prototype/
-│  └─ valkyrie-v2/          # runnable behavior reference
+│  ├─ valkyrie-v2/          # behavior reference (static)
+│  ├─ valkyrie-v2.5/        # GitHub Pages fallback at /
+│  ├─ valkyrie-v3/          # static baseline at /v3/
+│  └─ valkyrie-v4/          # ACTIVE: real-data pipeline + local server + owner models + AI assistant
 ├─ apps/
 │  └─ valkyrie-web/         # target Next.js / TypeScript UI
 ├─ quant-core/              # Python quant logic

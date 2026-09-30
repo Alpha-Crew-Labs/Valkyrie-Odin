@@ -1,0 +1,312 @@
+[
+  {
+    "id": "real-2026-05-04",
+    "date": "2026-05-04",
+    "asset": "국고채",
+    "domain": "rat",
+    "decision": "장기채 축소 · 단기채 확대",
+    "dir": "SHORT",
+    "source": "REAL",
+    "rationale": "실제 발신 판단 (공개 가능 리서치). 테일러 갭 확대 · UST 상승 압력 → 듀레이션 축소."
+  },
+  {
+    "id": "sim-2024-01-30-rat",
+    "date": "2024-01-30",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "SHORT",
+    "decision": "듀레이션 축소 (VALKYRIE 압력 규칙) (국고10Y 매도 · 국고3Y 매수)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 +14.3bp (충격 +0.0 · UST 20일 +11.0 · 갭 +10.5) → 상승 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2024-02-29-eq",
+    "date": "2024-02-29",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "SELECTIVE",
+    "decision": "흑자 IPO 선별 청약",
+    "source": "SIMULATED",
+    "rationale": "크레딧 65bp (≥65 경계) / 빛과전자 재무스코어 4/5 · Put 안정"
+  },
+  {
+    "id": "sim-2024-03-29-rat",
+    "date": "2024-03-29",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "SHORT",
+    "decision": "듀레이션 축소 (VALKYRIE 압력 규칙) (국고10Y 매도 · 국고3Y 매수)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 +18.1bp (충격 +0.0 · UST 20일 −5.0 · 갭 +19.8) → 상승 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2024-04-29-eq",
+    "date": "2024-04-29",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "SELECTIVE",
+    "decision": "흑자 IPO 선별 청약",
+    "source": "SIMULATED",
+    "rationale": "코스닥 할인율 20일 +29.1bp (>+15bp 경계) / 빛과전자 재무스코어 4/5 · Put 안정"
+  },
+  {
+    "id": "sim-2024-05-30-rat",
+    "date": "2024-05-30",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "SHORT",
+    "decision": "듀레이션 축소 (VALKYRIE 압력 규칙) (국고10Y 매도 · 국고3Y 매수)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 +17.2bp (충격 +0.0 · UST 20일 −8.0 · 갭 +20.0) → 상승 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2024-06-28-eq",
+    "date": "2024-06-28",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "ENGAGE",
+    "decision": "코스닥 IPO 청약 참여 · 비중 확대",
+    "source": "SIMULATED",
+    "rationale": "빛과전자 재무스코어 4/5 · Put 안정 / 크레딧 48bp (≥65 경계)"
+  },
+  {
+    "id": "sim-2024-08-26-eq",
+    "date": "2024-08-26",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "SELECTIVE",
+    "decision": "흑자 IPO 선별 청약",
+    "source": "SIMULATED",
+    "rationale": "코스피 위험점수 0.50 (경계, 8512 ≥0.45 경계) / 빛과전자 재무스코어 4/5 · Put 안정"
+  },
+  {
+    "id": "sim-2024-09-26-rat",
+    "date": "2024-09-26",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "LONG",
+    "decision": "듀레이션 확대 (VALKYRIE 압력 규칙) (국고10Y 매수 · 국고3Y 매도)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 −15.7bp (충격 +0.0 · UST 20일 −3.0 · 갭 −14.6) → 하락 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2024-10-29-eq",
+    "date": "2024-10-29",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "ENGAGE",
+    "decision": "코스닥 IPO 청약 참여 · 비중 확대",
+    "source": "SIMULATED",
+    "rationale": "빛과전자 재무스코어 4/5 · Put 안정 / 크레딧 57bp (≥65 경계)"
+  },
+  {
+    "id": "sim-2024-11-26-rat",
+    "date": "2024-11-26",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "LONG",
+    "decision": "듀레이션 확대 (VALKYRIE 압력 규칙) (국고10Y 매수 · 국고3Y 매도)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 −19.3bp (충격 +0.0 · UST 20일 +2.0 · 갭 −20.0) → 하락 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2024-12-24-eq",
+    "date": "2024-12-24",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "AVOID",
+    "decision": "코스닥 IPO 청약 보류 · 비중 축소",
+    "source": "SIMULATED",
+    "rationale": "크레딧 68bp (≥65 경계) / 수요예측 중앙값 489:1 (1년 하위 20% 839:1 미만)"
+  },
+  {
+    "id": "sim-2025-01-23-rat",
+    "date": "2025-01-23",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "LONG",
+    "decision": "듀레이션 확대 (VALKYRIE 압력 규칙) (국고10Y 매수 · 국고3Y 매도)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 −13.9bp (충격 +0.0 · UST 20일 +6.0 · 갭 −16.0) → 하락 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2025-02-26-eq",
+    "date": "2025-02-26",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "ENGAGE",
+    "decision": "코스닥 IPO 청약 참여 · 비중 확대",
+    "source": "SIMULATED",
+    "rationale": "빛과전자 재무스코어 4/5 · Put 안정 / 크레딧 58bp (≥65 경계)"
+  },
+  {
+    "id": "sim-2025-03-27-rat",
+    "date": "2025-03-27",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "LONG",
+    "decision": "듀레이션 확대 (VALKYRIE 압력 규칙) (국고10Y 매수 · 국고3Y 매도)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 −8.8bp (충격 +0.0 · UST 20일 +13.0 · 갭 −13.4) → 하락 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2025-04-24-eq",
+    "date": "2025-04-24",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "ENGAGE",
+    "decision": "코스닥 IPO 청약 참여 · 비중 확대",
+    "source": "SIMULATED",
+    "rationale": "빛과전자 재무스코어 4/5 · Put 안정 / 크레딧 59bp (≥65 경계)"
+  },
+  {
+    "id": "sim-2025-05-27-rat",
+    "date": "2025-05-27",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "LONG",
+    "decision": "듀레이션 확대 (VALKYRIE 압력 규칙) (국고10Y 매수 · 국고3Y 매도)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 −16.2bp (충격 +0.0 · UST 20일 +11.0 · 갭 −20.0) → 하락 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2025-06-26-eq",
+    "date": "2025-06-26",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "ENGAGE",
+    "decision": "코스닥 IPO 청약 참여 · 비중 확대",
+    "source": "SIMULATED",
+    "rationale": "빛과전자 재무스코어 4/5 · Put 안정 / 크레딧 52bp (≥65 경계)"
+  },
+  {
+    "id": "sim-2025-07-24-rat",
+    "date": "2025-07-24",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "LONG",
+    "decision": "듀레이션 확대 (VALKYRIE 압력 규칙) (국고10Y 매수 · 국고3Y 매도)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 −10.0bp (충격 +0.0 · UST 20일 +17.0 · 갭 −15.9) → 하락 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2025-08-22-eq",
+    "date": "2025-08-22",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "SELECTIVE",
+    "decision": "흑자 IPO 선별 청약",
+    "source": "SIMULATED",
+    "rationale": "수요예측 중앙값 822:1 (1년 하위 20% 888:1 미만) / 빛과전자 재무스코어 4/5 · Put 안정"
+  },
+  {
+    "id": "sim-2025-09-19-rat",
+    "date": "2025-09-19",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "LONG",
+    "decision": "듀레이션 확대 (VALKYRIE 압력 규칙) (국고10Y 매수 · 국고3Y 매도)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 −24.2bp (충격 +0.0 · UST 20일 −12.0 · 갭 −20.0) → 하락 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2025-10-24-eq",
+    "date": "2025-10-24",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "ENGAGE",
+    "decision": "코스닥 IPO 청약 참여 · 비중 확대",
+    "source": "SIMULATED",
+    "rationale": "빛과전자 재무스코어 4/5 · Put 안정 / 크레딧 42bp (≥65 경계)"
+  },
+  {
+    "id": "sim-2025-11-21-rat",
+    "date": "2025-11-21",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "SHORT",
+    "decision": "듀레이션 축소 (VALKYRIE 압력 규칙) (국고10Y 매도 · 국고3Y 매수)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 +12.8bp (충격 +0.0 · UST 20일 +4.0 · 갭 +11.4) → 상승 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2025-12-19-eq",
+    "date": "2025-12-19",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "ENGAGE",
+    "decision": "코스닥 IPO 청약 참여 · 비중 확대",
+    "source": "SIMULATED",
+    "rationale": "빛과전자 재무스코어 4/5 · Put 안정 / 크레딧 51bp (≥65 경계)"
+  },
+  {
+    "id": "sim-2026-01-20-rat",
+    "date": "2026-01-20",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "SHORT",
+    "decision": "듀레이션 축소 (VALKYRIE 압력 규칙) (국고10Y 매도 · 국고3Y 매수)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 +14.3bp (충격 +0.0 · UST 20일 +14.0 · 갭 +9.4) → 상승 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2026-02-20-eq",
+    "date": "2026-02-20",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "SELECTIVE",
+    "decision": "흑자 IPO 선별 청약",
+    "source": "SIMULATED",
+    "rationale": "CB 차환 유출 압력 32% (1,270억/4,016억, ≥25% 경계) / 코스닥 할인율 20일 −11.3bp (>+15bp 경계)"
+  },
+  {
+    "id": "sim-2026-04-20-eq",
+    "date": "2026-04-20",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "SELECTIVE",
+    "decision": "흑자 IPO 선별 청약",
+    "source": "SIMULATED",
+    "rationale": "크레딧 67bp (≥65 경계) / CB 차환 유출 압력 58% (8,227억/14,146억, ≥25% 경계)"
+  },
+  {
+    "id": "sim-2026-05-20-rat",
+    "date": "2026-05-20",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "SHORT",
+    "decision": "듀레이션 축소 (VALKYRIE 압력 규칙) (국고10Y 매도 · 국고3Y 매수)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 +30.9bp (충격 +0.0 · UST 20일 +31.0 · 갭 +20.0) → 상승 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2026-06-19-eq",
+    "date": "2026-06-19",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "SELECTIVE",
+    "decision": "흑자 IPO 선별 청약",
+    "source": "SIMULATED",
+    "rationale": "CB 차환 유출 압력 50% (15,700억/31,346억, ≥25% 경계) / 코스닥 할인율 20일 −2.7bp (>+15bp 경계)"
+  },
+  {
+    "id": "sim-2026-07-20-rat",
+    "date": "2026-07-20",
+    "asset": "국고채",
+    "domain": "rat",
+    "dir": "SHORT",
+    "decision": "듀레이션 축소 (VALKYRIE 압력 규칙) (국고10Y 매도 · 국고3Y 매수)",
+    "source": "SIMULATED",
+    "rationale": "8511 듀레이션 데이터 없음 → VALKYRIE 금리 압력 규칙만 사용 / VALKYRIE 금리 방향 압력 +24.9bp (충격 +0.0 · UST 20일 +14.0 · 갭 +20.0) → 상승 압력 — 방향 참고, 사이징은 8511"
+  },
+  {
+    "id": "sim-2026-08-18-eq",
+    "date": "2026-08-18",
+    "asset": "코스닥",
+    "domain": "eq",
+    "dir": "AVOID",
+    "decision": "코스닥 IPO 청약 보류 · 비중 축소",
+    "source": "SIMULATED",
+    "rationale": "크레딧 70bp (≥65 경계) / CB 차환 유출 압력 61% (26,660억/43,840억, ≥25% 경계)"
+  }
+]

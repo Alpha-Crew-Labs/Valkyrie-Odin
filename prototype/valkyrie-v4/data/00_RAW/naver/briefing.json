@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "type": "RATE_UP_TOP",
+      "nation": "KOR",
+      "rank": 1,
+      "code": "023790",
+      "name": "동일스틸럭스",
+      "price": 1764.0,
+      "changeRate": 29.99,
+      "tradeValue": 5578452000.0,
+      "updatedAt": "2026-09-30T16:49:26.588"
+    },
+    {
+      "type": "TRADING_AMOUNT_TOP",
+      "nation": "KOR",
+      "rank": 1,
+      "code": "000660",
+      "name": "SK하이닉스",
+      "price": 1786000.0,
+      "changeRate": 1.19,
+      "tradeValue": 5255268000000.0,
+      "updatedAt": "2026-09-30T16:49:26.547"
+    },
+    {
+      "type": "OPEN_TALK_JOIN_TOP",
+      "nation": "KOR",
+      "rank": 1,
+      "code": "012330",
+      "name": "현대모비스",
+      "price": 384500.0,
+      "changeRate": 4.77,
+      "tradeValue": 122162000000.0,
+      "updatedAt": "2026-09-30T16:20:00"
+    },
+    {
+      "type": "END_HIT_TOP",
+      "nation": "KOR",
+      "rank": 1,
+      "code": "005930",
+      "name": "삼성전자",
+      "price": 269500.0,
+      "changeRate": -1.1,
+      "tradeValue": 4158579000000.0,
+      "updatedAt": "2026-09-30T16:02:00"
+    },
+    {
+      "type": "DISCUSSION_HIT_TOP",
+      "nation": "KOR",
+      "rank": 1,
+      "code": "486510",
+      "name": "글로벌테크놀로지",
+      "price": 19150.0,
+      "changeRate": 5.1,
+      "tradeValue": 631957688000.0,
+      "updatedAt": "2026-09-30T16:00:00"
+    }
+  ]
+}

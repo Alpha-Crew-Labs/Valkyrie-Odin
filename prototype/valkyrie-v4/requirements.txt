@@ -1,0 +1,18 @@
+# VALKYRIE v4 — server.py and pipeline/ need only the standard library (+ anthropic for the AI assistant).
+# The owner apps (macro 8501 / bond 8511 / equity 8512) need the scientific stack below.
+anthropic>=0.40
+streamlit>=1.40
+pandas>=2.2
+numpy>=2.0
+scipy>=1.14
+plotly>=5.24
+matplotlib>=3.9
+requests>=2.32
+pyarrow>=17
+beautifulsoup4>=4.12
+lxml>=5
+pillow>=10
+Jinja2>=3.1
+fredapi>=0.5
+# demo/ (video recording only)
+websockets>=13
