@@ -5,8 +5,9 @@ on:
     branches:
       - main
     paths:
-      - 'prototype/valkyrie-v2.5/**'
+      - 'prototype/valkyrie-v4/web/**'
       - 'prototype/valkyrie-v3/**'
+      - 'prototype/valkyrie-v2.5/**'
       - 'scripts/update_equity_snapshot.mjs'
       - 'scripts/update_theme_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
@@ -114,15 +115,28 @@ jobs:
       - name: Assemble Pages site
         run: |
           rm -rf _site
-          mkdir -p _site/v3
-          cp -R prototype/valkyrie-v2.5/. _site/
+          mkdir -p _site/v2.5 _site/v3 _site/v4
+
+          # VALKYRIE v4 is the canonical public build. GitHub Pages has no Python
+          # server, so v4/web automatically falls back to its committed OFFLINE BUNDLE.
+          cp -R prototype/valkyrie-v4/web/. _site/
+          cp -R prototype/valkyrie-v4/web/. _site/v4/
+
+          # Preserve legacy builds for regression/comparison.
+          cp -R prototype/valkyrie-v2.5/. _site/v2.5/
           cp -R prototype/valkyrie-v3/. _site/v3/
+
           BUILD_REV="${GITHUB_SHA::12}"
           sed -i "s/__BUILD_REV__/${BUILD_REV}/g" _site/v3/index.html
           if grep -q '__BUILD_REV__' _site/v3/index.html; then
             echo 'ERROR: unresolved VALKYRIE render revision placeholder'
             exit 1
           fi
+
+          # Guard the canonical root: fail rather than silently publishing a legacy build.
+          test -f _site/index.html
+          grep -q 'VALKYRIE v4' _site/index.html
+          test -f _site/data/bundle.js
           touch _site/.nojekyll
 
       - name: Upload VALKYRIE site artifact
