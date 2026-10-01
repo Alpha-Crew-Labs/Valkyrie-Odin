@@ -57,6 +57,8 @@ jobs:
       # The 10-minute market-hours schedule only refreshes NAVER market data for v4; the slower public
       # sources (CB Zero Finder / 38 / ECOS / FRED) are refreshed hourly and on pushes.
       V4_FULL_REFRESH: ${{ github.event_name != 'schedule' || github.event.schedule == '7 * * * *' }}
+      # v4 timestamps (collector fetchedAt, snapshot built_at) are read as Korean time on screen.
+      TZ: Asia/Seoul
     steps:
       - name: Checkout
         uses: actions/checkout@v4

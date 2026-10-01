@@ -30,10 +30,10 @@ VK.market = (function () {
     return comma(it.price, it.price < 10 ? 3 : 2);
   }
   function ago(sec) { return sec < 60 ? sec + "s" : sec < 3600 ? Math.round(sec / 60) + "m" : Math.round(sec / 3600) + "h"; }
-  function tstr(s) {   // 20260930092510 or ISO -> 09:25
+  function tstr(s) {   // 20260930092510 or ISO 2026-09-30T09:25:10 -> 09:25
     if (!s) return "";
-    var m = String(s).match(/T?(\d{2}):?(\d{2})/);
-    var c = String(s).match(/^\d{8}(\d{2})(\d{2})/);
+    var c = String(s).match(/^\d{8}(\d{2})(\d{2})/);          // compact NAVER stamp
+    var m = String(s).match(/T(\d{2}):(\d{2})/);              // ISO (the year must not be read as HH:MM)
     return c ? c[1] + ":" + c[2] : m ? m[1] + ":" + m[2] : "";
   }
 
