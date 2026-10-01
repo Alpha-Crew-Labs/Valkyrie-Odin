@@ -198,6 +198,7 @@ jobs:
           echo "v4 research samples:  ${{ steps.v4_research.outcome }} (full refresh: ${{ env.V4_FULL_REFRESH }})"
           echo "v4 daily series:      ${{ steps.v4_series.outcome }}"
           echo "v4 bundle rebuild:    ${{ steps.v4_bundle.outcome }}"
+          echo "v4 persist to main:   ${{ env.V4_PERSIST }} (event: ${{ github.event_name }} ${{ github.event.schedule }})"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
