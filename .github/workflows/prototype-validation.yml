@@ -6,6 +6,10 @@ on:
       - 'prototype/valkyrie-v2/**'
       - 'prototype/valkyrie-v2.5/**'
       - 'prototype/valkyrie-v3/**'
+      - 'prototype/valkyrie-v4/web/**'
+      - 'prototype/valkyrie-v4/valkyrie/**'
+      - 'prototype/valkyrie-v4/pipeline/**'
+      - 'prototype/valkyrie-v4/server.py'
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
       - 'scripts/validate_v3.mjs'
@@ -24,6 +28,10 @@ on:
       - 'prototype/valkyrie-v2/**'
       - 'prototype/valkyrie-v2.5/**'
       - 'prototype/valkyrie-v3/**'
+      - 'prototype/valkyrie-v4/web/**'
+      - 'prototype/valkyrie-v4/valkyrie/**'
+      - 'prototype/valkyrie-v4/pipeline/**'
+      - 'prototype/valkyrie-v4/server.py'
       - 'scripts/validate_prototype.mjs'
       - 'scripts/validate_v25.mjs'
       - 'scripts/validate_v3.mjs'
@@ -100,3 +108,20 @@ jobs:
 
       - name: Validate web/download render parity
         run: node scripts/validate_render_parity.mjs
+
+      - name: v4 web JavaScript syntax check
+        run: |
+          for f in prototype/valkyrie-v4/web/js/*.js; do node --check "$f"; done
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: v4 engine acceptance checks (deterministic, committed data, no network)
+        working-directory: prototype/valkyrie-v4
+        env:
+          PYTHONIOENCODING: utf-8
+        run: |
+          python -m compileall -q valkyrie pipeline server.py
+          python pipeline/check.py

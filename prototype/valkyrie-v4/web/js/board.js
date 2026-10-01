@@ -179,7 +179,7 @@ VK.board = (function () {
   function header() {
     var st = getState && getState(), sg3 = st && st.signals;
     var m = sets().market_board;
-    return '<div class="gb-h"><span class="gb-t">GLOBAL <span>MARKET</span> BOARD</span><span class="gb-s">NAVER 증권 · ' + esc(m ? m.source : "—") + (m && m.ageSec !== undefined ? " · " + m.ageSec + "s" : "") + "</span>" +
+    return '<div class="gb-h"><span class="gb-t">GLOBAL <span>MARKET</span> BOARD</span><span class="gb-s">REAL-TIME · ' + esc(m ? m.source : "—") + (m && m.ageSec !== undefined ? " · " + m.ageSec + "s" : "") + "</span>" +
       '<span class="grow"></span>' + (sg3 ? '<span class="gb-vk">VALKYRIE <b>' + esc(sg3.macro.call) + "</b> · <b>" + esc(sg3.rates.call) + "</b> · <b>" + esc(sg3.equity.call) + "</b></span>" : "") +
       '<button class="gb-x" data-act="close" title="닫기 (Esc · G)">✕ CLOSE</button></div>';
   }

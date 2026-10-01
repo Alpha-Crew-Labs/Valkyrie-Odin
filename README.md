@@ -13,6 +13,20 @@ VALKYRIE는 매크로·금리·채권·주식/IPO 리서치를 하나의 온톨�
 
 현재 활성 버전은 **`prototype/valkyrie-v4`** 입니다. 실데이터 파이프라인(ECOS · FRED · NAVER · DART · 38)과 로컬 서버, 담당자 모델(8501 · 8511 · 8512) 결합, AI 어시스턴트가 들어 있습니다.
 
+**온라인 정본: https://alpha-crew-labs.github.io/Valkyrie-Odin/**
+
+GitHub Pages가 공개 데이터로 스냅샷 번들을 다시 계산해 배포합니다 (한국 장중 10분, 그 외 매시간, main 푸시 때). 인텔리전스 체인 · SHOCK 프리셋 What-If · 판단 로그 · 리플레이 · 브리핑 · 소개 페이지(`/intro/`)가 서버 없이 동작합니다. 자연어 AI 어시스턴트와 실시간 시세 폴링, 담당자 Streamlit 앱은 로컬 실행(`run.ps1`)에서만 켜집니다.
+
+| 경로 | 내용 |
+|---|---|
+| `/` | VALKYRIE v4 — 정본 (공개 스냅샷 번들) |
+| `/v4/` | 같은 v4 빌드의 고정 별칭 |
+| `/intro/` | v4 소개 페이지 |
+| `/v3/` | v3 정적 기준본 |
+| `/v2.5/` | v2.5 정적 폴백 |
+
+로컬 실행:
+
 ```powershell
 git clone https://github.com/Alpha-Crew-Labs/Valkyrie-Odin.git
 cd Valkyrie-Odin/prototype/valkyrie-v4
@@ -33,7 +47,7 @@ v4 build:
 
 자세한 실행/구조는 [`prototype/valkyrie-v4/README.md`](./prototype/valkyrie-v4/README.md), 금융 로직 변경 이력은 [`prototype/valkyrie-v4/docs/DECISIONS.md`](./prototype/valkyrie-v4/docs/DECISIONS.md)를 참고하세요.
 
-GitHub Pages의 **정본은 v4 정적 오프라인 번들(`/`)** 입니다. 같은 빌드를 `/v4/`에도 고정 배포하며, 이전 v3(`/v3/`)와 v2.5(`/v2.5/`)는 회귀·비교용으로 보존합니다. v4의 서버 전용 기능(`/api/*`, Claude 질의 저장/발간 등)은 로컬 `run.ps1` 실행 시 활성화되고, Pages에서는 스냅샷 기반 OFFLINE BUNDLE 모드로 안전하게 동작합니다.
+GitHub Pages의 **정본은 v4(`/`)** 이며 같은 빌드를 `/v4/`에도 고정 배포합니다. 이전 v3(`/v3/`)와 v2.5(`/v2.5/`)는 회귀·비교용으로 보존합니다. v4의 서버 전용 기능(`/api/*`, Claude 자연어 질의, 판단 기록·발간 등)은 로컬 `run.ps1` 실행 시 활성화되고, Pages에서는 CI가 다시 계산한 스냅샷 번들로 WEB 모드로 동작합니다.
 
 ```bash
 cd Valkyrie-Odin/prototype/valkyrie-v3

@@ -4,29 +4,33 @@
 (function () {
   var host = location.hostname && location.hostname !== "" ? location.hostname : "localhost";
   function local(port, path) { return "http://" + (host === "127.0.0.1" ? "localhost" : host) + ":" + port + (path || "/"); }
+  // Public web build (GitHub Pages): the owners' Streamlit apps live on a teammate's PC, not on the web host.
+  var WEB = location.protocol !== "file:" && !/^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\]|0\.0\.0\.0|$)/.test(host);
 
   var TOOLS = [
     { owner: "정희강", domain: "MACRO", items: [
-      { mark: "M", name: "Quant Macro Terminal", tag: "STREAMLIT", url: local(8501), probe: true, primary: true,
+      { mark: "M", name: "Quant Macro Terminal", tag: "STREAMLIT", url: local(8501), probe: true, primary: true, local: true,
         hint: ":8501 · macro\\run_macro.ps1" },
-      { mark: "W", name: "Weekly Updates 보고서", tag: "PDF", url: "/reports/latest", probe: true,
+      { mark: "W", name: "Weekly Updates 보고서", tag: "PDF", url: "/reports/latest", probe: true, local: true, hideOnWeb: true,
         hint: "주간 시황 + 인텔리전스 체인 2쪽 · 최신본" }
     ] },
     { owner: "정훈", domain: "RATES", items: [
-      { mark: "채권", name: "채권 위기 진단 · 액션 플랜", tag: "STREAMLIT", url: local(8511), probe: true,
+      { mark: "채권", name: "채권 위기 진단 · 액션 플랜", tag: "STREAMLIT", url: local(8511), probe: true, local: true,
         hint: ":8511 · bond\\explainer_app.py" }
     ] },
     { owner: "김유찬", domain: "EQUITY", items: [
-      { mark: "주식", name: "주식 시장 진단 · 액션 플랜", tag: "STREAMLIT", url: local(8512), probe: true,
+      { mark: "주식", name: "주식 시장 진단 · 액션 플랜", tag: "STREAMLIT", url: local(8512), probe: true, local: true,
         hint: ":8512 · equity\\explainer_app.py" },
       { mark: "IPO", name: "IPO Market Report", tag: "VERCEL", url: "https://ipo-market-report.vercel.app/", probe: true, hint: "공개 도구 · vercel" },
       { mark: "CB", name: "CB Zero Finder", tag: "VERCEL", url: "https://cb-zero-finder.vercel.app/", probe: true, hint: "공개 도구 · vercel" }
     ] },
     { owner: "SYSTEM", domain: "BASELINE", items: [
-      { mark: "v3", name: "VALKYRIE v3 기준본", tag: "PROTOTYPE", url: local(8765, "/valkyrie-v3/"), probe: true,
-        hint: ":8765 · 읽기 전용 폴백" }
+      WEB ? { mark: "v3", name: "VALKYRIE v3 기준본", tag: "PROTOTYPE", url: "v3/", probe: true, hint: "/v3/ · 정적 기준본" }
+          : { mark: "v3", name: "VALKYRIE v3 기준본", tag: "PROTOTYPE", url: local(8765, "/valkyrie-v3/"), probe: true,
+              hint: ":8765 · 읽기 전용 폴백" }
     ] }
   ];
+  if (WEB) TOOLS.forEach(function (g) { g.items = g.items.filter(function (it) { return !it.hideOnWeb; }); });
   var state = {};   // url -> "live" | "down"
   var info = {};    // port -> {text, tone} : owner-model verdict pushed by main.js (VK.rail.setInfo)
   var brief = {};   // {label, isNew} : hourly briefing edition pushed by brief.js (VK.rail.setBrief)
@@ -38,6 +42,13 @@
   function portOf(it) { var m = String(it.url).match(/:(\d{4})\//); return m ? m[1] : null; }
 
   function itemHTML(it) {
+    if (WEB && it.local) {   // not reachable from the public web: shown, not probed, not a link
+      return '<a class="rrail-item local' + (it.primary ? " primary" : "") + '" title="' + esc(it.name) + " · 로컬 PC에서 run.ps1 실행 시 " + esc(it.url) + '">' +
+        '<span class="rrail-mark">' + esc(it.mark) + "<i></i></span>" +
+        '<span class="rrail-body"><span class="rrail-nm">' + esc(it.name) + "<em>" + esc(it.tag) + "</em></span>" +
+        '<span class="rrail-met"><b>LOCAL</b>' + (portOf(it) && info[portOf(it)] ? '<b class="rv-' + esc(info[portOf(it)].tone) + '">' + esc(info[portOf(it)].text) + "</b>" : "<span>" + esc(it.hint) + "</span>") +
+        "</span></span></a>";
+    }
     var st = it.probe ? (state[it.url] || "") : "ext";
     var label = st === "live" ? "LIVE" : st === "down" ? "OFFLINE" : st === "ext" ? "EXTERNAL" : "CHECKING";
     return '<a class="rrail-item ' + st + (it.primary ? " primary" : "") + '" href="' + esc(it.url) + '" target="_blank" rel="noopener noreferrer" title="' +
@@ -59,7 +70,8 @@
       h += '<div class="rrail-sec">' + esc(g.owner) + " · " + esc(g.domain) + "</div>";
       g.items.forEach(function (it) { h += itemHTML(it); });
     });
-    return h + '<div class="rrail-foot">VALKYRIE = 판단 레이어 · 도구 = 심화 분석<br>도구 접속 상태 15초마다 확인</div>';
+    return h + '<div class="rrail-foot">VALKYRIE = 판단 레이어 · 도구 = 심화 분석<br>' +
+      (WEB ? "공개 웹: STREAMLIT 도구는 로컬 PC에서만 열립니다" : "도구 접속 상태 15초마다 확인") + "</div>";
   }
 
   var el, last = "";
@@ -81,7 +93,7 @@
   }
   function check() {
     var ps = [];
-    TOOLS.forEach(function (g) { g.items.forEach(function (it) { if (it.probe) ps.push(probe(it.url)); }); });
+    TOOLS.forEach(function (g) { g.items.forEach(function (it) { if (it.probe && !(WEB && it.local)) ps.push(probe(it.url)); }); });
     Promise.all(ps).then(render);
   }
 

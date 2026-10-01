@@ -8,7 +8,9 @@ Outputs
   web/data/bundle.js                      offline bundle: the whole demo without the server (file://)
 """
 import json
+import os
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -100,8 +102,12 @@ def main():
 
 
 def meta(e):
+    kst = timezone(timedelta(hours=9))
     return {"first": e.dates[0], "last": e.dates[-1], "rows": len(e.dates), "snapshot_dates": SNAPSHOT_DATES,
-            "manifest": e.manifest, "model": e.model_meta}
+            "manifest": e.manifest, "model": e.model_meta,
+            # where/when this bundle was frozen: shown in the web build's Mode tooltip
+            "built_at": datetime.now(kst).strftime("%Y-%m-%d %H:%M KST"),
+            "built_on": "github-actions" if os.environ.get("GITHUB_ACTIONS") else "local"}
 
 
 if __name__ == "__main__":

@@ -25,6 +25,22 @@ copy .env.example .env        # 키를 채운다 (없어도 스냅샷으로 동�
 
 서버 없이 `web/index.html`을 직접 열면 `web/data/bundle.js` 오프라인 번들로 동작합니다.
 
+## 온라인 (GitHub Pages)
+
+정본 주소: **https://alpha-crew-labs.github.io/Valkyrie-Odin/** (소개 페이지 `/intro/`)
+
+- `.github/workflows/pages.yml`이 `web/`을 사이트 루트로 배포합니다. 배포 때마다 GitHub Actions에서 `pipeline/collect_naver.py` → (매시간) `collect_research.py` → `model.py` → `snapshot.py` → `check.py`를 다시 돌려 `web/data/bundle.js`를 새로 만듭니다. 어느 단계든 실패하면 커밋된 번들을 그대로 배포합니다 (값을 지어내지 않음).
+- 갱신 주기: 한국 장중(평일 KST 09–16시) 10분, 그 외 매시간, 그리고 main 푸시 때.
+- ECOS · FRED 일별 시계열은 저장소 시크릿 `ECOS_API_KEY` / `FRED_API_KEY`가 있을 때만 갱신됩니다. 없으면 커밋된 CSV를 그대로 씁니다.
+- 화면 상단 Mode가 `WEB · …`이면 웹 스냅샷, `LOCAL SERVER`면 로컬 서버입니다. Mode에 마우스를 올리면 번들 빌드 시각이 보입니다.
+
+| 웹 스냅샷에서 되는 것 | 로컬 서버(run.ps1)에서만 |
+|---|---|
+| 인텔리전스 체인 · 노드 인사이트 · 수준 게이지 · 온도계 | 임의 충격 What-If (`/api/state`) |
+| SHOCK 프리셋 What-If · 유사 국면 · 판단 로그 · 리플레이 5개 시점 | 판단 기록 · 보유 기록 · ODIN 발간 승인 |
+| 준비 질문 3개 · 브리핑 플레이어 · 주목 섹터 · 시장 보드(마지막 수집) | 자연어 AI 어시스턴트(Claude) · 실시간 시세 폴링 · 자산별 뉴스 |
+| 담당 모델 판정 (8501 · 8511 · 8512 산출물 반영) | 담당자 Streamlit 앱 링크 · Weekly 보고서 |
+
 담당자 모델(연구 스택)은 별도 Streamlit 앱입니다. v4는 이 앱들의 산출물을 **입력**으로 읽습니다.
 
 | 포트 | 앱 | 담당 | 실행 |

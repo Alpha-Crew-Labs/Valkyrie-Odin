@@ -87,6 +87,23 @@ Each VALKYRIE terminal signal is shown next to the owner's own model for the sam
 - **Kept as expert priors** (labelled on screen): US CPI→Fed 0.71, KR CPI→BOK 0.58, GDP→BOK 0.30, BOK→KTB 0.35, 적자비중→할인율 0.28, 할인율→IPO 0.44 (theory; the 2024–26 sample shows no significant relation, R² 0.04), all evidence weights, CB model couplings.
 - **`EDGE_META`** in `valkyrie/ontology.py` now carries `meaning` (what the relation means for a decision, with a worked example) and `basis` (where β comes from). Tooltips, the inspector, node insight and the AI system prompt show them. Ontology size unchanged (17/24).
 
+## D-017 · 2026-09-30 · Forecast-style questions get conditional paths, never "엔진에 없다"; no vendor names on screen
+- **Why (user):** "코스피 한달 뒤 전망?" was answered "1개월 점 전망은 엔진에 없다". The PM wants VALKYRIE logic + market state
+  combined into a real answer even without a direct data point — for any asset, not just KOSPI. Separately: "NAVER LIVE" on
+  screen looks cheap; vendor names are removed from every surface and from the AI's source tags.
+- **Rule (ai.py system prompt):** numbers still only from the engine; but for N-month / target / probability / off-engine
+  questions the assistant must (1) run 2–3 scenarios (base / up / down) and quote the engine levels per path, (2) weigh the
+  paths with 1y percentiles, 20d moves, owner models, flows/money, watch list and news and state a direction with a
+  confidence, (3) give numeric triggers, (4) note the limit in one line. Section tags PATHS / JUDGEMENT.
+  A target→node/scenario/model map covers KOSPI, KOSDAQ·IPO·CB, KTB/duration/curve, credit, BOK/KR CPI, US rates/Fed,
+  off-engine assets (FX, oil, gold, foreign indices → live market + transmission links) and sectors/themes (watch list).
+- **Scenario sizing from data:** `Engine.ranges(d)` → per key (ust10, ktb3, ktb10, credit_bp, curve_bp, bok, fed, kospi, kosdaq,
+  ipo_demand, kr_cpi, us_cpi): current, 1y min/max/percentile, 20d change and the realised 20d / 60d forward-change
+  distribution (p10/p50/p90) over the trailing year. Served in the state as `ranges` and to the AI as `ranges_1y`, so "1개월"
+  paths use shocks that actually happened in the last year (e.g. UST 20d p10/p90 = −11/+27bp) instead of round numbers.
+- Verified: "코스피 한달 뒤 전망?" → base 6,871 / UST −25bp 6,933 / UST +50bp·크레딧 80bp 6,747, down-path 6:4, PATHS + JUDGEMENT,
+  no "엔진에 없다".
+
 ## D-016 · 2026-09-30 · The kick: VALKYRIE starts as a question box; the three conclusions are gold
 - **Why (mentor via user):** "기능이 너무 많아서 킥이 눈에 안 보인다". The product is an autopilot for PM decisions: the PM asks,
   the chain computes, the desks get an action plan. So the first screen is the question, not the dashboard.

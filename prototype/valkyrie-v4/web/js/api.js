@@ -1,4 +1,5 @@
-/* Data layer. ONLINE: local Python server (/api/*). OFFLINE: window.VK_BUNDLE (file:// or server down).
+/* Data layer. ONLINE: local Python server (/api/*). OFFLINE: window.VK_BUNDLE — either the public web build
+   (GitHub Pages: "web", the bundle is rebuilt by CI) or a file:// / server-down session ("file").
    Neither mode calls an external API. */
 "use strict";
 var VK = window.VK || {};
@@ -7,6 +8,8 @@ window.VK = VK;
 VK.api = (function () {
   var B = window.VK_BUNDLE || null;
   var online = false;
+  var mode = "file";     // "server" | "web" | "file" — decided by init()
+  function web() { return mode === "web"; }
 
   function qs(o) {
     var p = [];
@@ -44,17 +47,23 @@ VK.api = (function () {
     var sd = snapDate(d), pk = presetKey(shock);
     var st = JSON.parse(JSON.stringify(B.snapshots[sd][pk || "base"]));
     st.offline = true;
-    st.offlineNote = pk ? null : "OFFLINE 번들: 프리셋 외 충격은 서버 실행 시에만 계산됩니다";
+    st.offlineNote = pk ? null : web() ? "웹 스냅샷: 프리셋 외 충격은 로컬 서버(run.ps1)에서 계산됩니다"
+                                        : "OFFLINE 번들: 프리셋 외 충격은 서버 실행 시에만 계산됩니다";
     return st;
   }
 
   return {
     get online() { return online; },
+    get mode() { return mode; },
+    get offlineTag() { return web() ? "WEB" : "OFFLINE"; },           // short mode label (header, chips)
+    get offlineName() { return web() ? "웹 스냅샷" : "OFFLINE 번들"; }, // sentence label (notes, banners)
     bundle: B,
     init: function () {
-      var probe = location.protocol === "file:" ? Promise.reject(new Error("file://")) : get("/api/meta");
-      return probe.then(function (m) { online = true; return m; }).catch(function () {
+      var isFile = location.protocol === "file:";
+      var probe = isFile ? Promise.reject(new Error("file://")) : get("/api/meta");
+      return probe.then(function (m) { online = true; mode = "server"; return m; }).catch(function () {
         online = false;
+        mode = isFile ? "file" : "web";
         if (!B) throw new Error("서버에 연결할 수 없고 오프라인 번들도 없습니다");
         var m = JSON.parse(JSON.stringify(B.meta));
         m.ontology = B.ontology; m.presets = B.presets; m.questions = B.questions;
@@ -92,8 +101,9 @@ VK.api = (function () {
     command: function (d, q) {
       if (!online) {
         var c = B.commands[snapDate(d)] || {};
-        return Promise.resolve(c[q] || { mode: "OFFLINE", question: q, path: [], shock: {},
-          answer: ["OFFLINE 번들 모드: 준비 질문 3개만 응답합니다."] });
+        return Promise.resolve(c[q] || { mode: web() ? "WEB" : "OFFLINE", question: q, path: [], shock: {},
+          answer: [web() ? "웹 스냅샷: 준비 질문 3개와 SHOCK 프리셋에 답합니다. 자연어 AI 질문은 로컬 서버(run.ps1 + ANTHROPIC_API_KEY)에서 켜집니다."
+                         : "OFFLINE 번들 모드: 준비 질문 3개만 응답합니다."] });
       }
       return get("/api/command", { date: d, q: q });
     },
@@ -105,7 +115,7 @@ VK.api = (function () {
         var n = B && B.live && B.live.news && B.live.news.data;
         return { key: key, query: null, items: n ? n.items.slice(0, 9).map(function (x) {
           var s = String(x.publishedAt || ""); return { title: x.title, source: x.press, url: x.url, publishedAt: s.slice(0, 4) + "-" + s.slice(4, 6) + "-" + s.slice(6, 8) + "T" + s.slice(8, 10) + ":" + s.slice(10, 12) };
-        }) : [], source: "OFFLINE 번들 · 국내 주요 뉴스 (자산별 검색은 서버 실행 시)" };
+        }) : [], source: (web() ? "웹 스냅샷" : "OFFLINE 번들") + " · 국내 주요 뉴스 (자산별 검색은 로컬 서버 실행 시)" };
       };
       if (!online) return Promise.resolve(offline());
       return get("/api/news", { key: key, q: q }).catch(function () { return offline(); });

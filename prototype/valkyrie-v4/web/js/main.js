@@ -11,13 +11,13 @@
   var TAB_NOTE = {
     signals: "현재 수준(온도계)은 전망이 아님 · 대응은 판단 신호와 액션 플랜 · 담당 모델 반영 (8501 · 8511 · 8512)",
     impact: "24개 사전 정의 관계를 따라 재계산",
-    cb: "크레딧 → CB 크로스에셋 브리지 · CB Zero Finder · 38커뮤니케이션 · NAVER (REAL)",
+    cb: "크레딧 → CB 크로스에셋 브리지 · CB Zero Finder · 38커뮤니케이션 · 시세·재무 (REAL)",
     log: "벤치마크 대비 상대성과 · 적중률 대신 Decision Log",
     similar: "z-score 6차원 · 코사인 유사도",
     publish: "준비 질문 CACHED · 승인 후 발간",
     node: "선택 노드 인사이트 · 수준 = 지난 1년 분포 내 현재 위치(전망 아님) · 대응은 액션 플랜",
     ask: "자연어 질문 → 엔진 시나리오 계산 → AI 해석·액션 (수치는 엔진값만)",
-    market: "NAVER 증권 · 10초 폴링 · LIVE / SNAPSHOT / STALE 표시"
+    market: "실시간 시세 · 10초 폴링 · LIVE / SNAPSHOT / STALE 표시"
   };
   var S = { meta: null, dates: [], date: null, shock: {}, st: null, sel: null, tab: "signals", series: null,
             logs: null, logFilter: "ALL", similar: null, cmd: null, pubs: [], req: 0, replaying: false };
@@ -48,7 +48,7 @@
     var bootP = boot();
     A.init().then(function (meta) {
       S.meta = meta;
-      $("b3v").textContent = (A.online ? "LOCAL SERVER · " : "OFFLINE BUNDLE · ") + meta.rows + " DAYS";
+      $("b3v").textContent = (A.online ? "LOCAL SERVER · " : A.mode === "web" ? "PUBLIC WEB · SNAPSHOT · " : "OFFLINE BUNDLE · ") + meta.rows + " DAYS";
       var nO = Object.keys(meta.ontology.nodes).length, nR = meta.ontology.edges.length;
       $("b1v").textContent = nO + " / " + nO; $("b2v").textContent = nR + " / " + nR;
       C.build(meta.ontology);
@@ -121,6 +121,8 @@
       }).then(function (info) {
         var pr = $("cpr"), box = $("askbox");
         if (info && info.enabled) { pr.textContent = "AI ▸"; pr.classList.add("ai"); pr.title = info.model + " · 자연어 질문"; box.classList.remove("off"); }
+        else if (A.mode === "web") { pr.textContent = "규칙 ▸"; pr.title = "공개 웹 스냅샷 · 준비 질문 3개 + SHOCK 프리셋 · 자연어 AI는 로컬 서버(run.ps1)에서"; box.classList.add("off");
+               $("cin").placeholder = "웹 스냅샷 — 준비 질문: 커브 포지션 / UST 50bp / 크레딧 52→68bp · 자연어 AI 질문은 로컬 서버에서"; }
         else { pr.textContent = "규칙 ▸"; pr.title = (info && info.reason) || "AI 비활성 · 준비 질문 3개 + 키워드 라우팅"; box.classList.add("off");
                $("cin").placeholder = "AI 비활성 (" + ((info && info.reason) || "오프라인") + ") — 준비 질문: 커브 포지션 / UST 50bp / 크레딧 52→68bp"; }
         chips();
@@ -156,8 +158,10 @@
   function header() {
     var st = S.st;
     $("asof").textContent = st.date;
-    var mode = st.offline ? "OFFLINE · " + st.mode : st.mode;
+    var mode = st.offline ? A.offlineTag + " · " + st.mode : st.mode;
     $("mode").innerHTML = '<i class="dot' + (st.offline ? " off" : st.mode === "WHAT-IF" ? " wi" : "") + '"></i><span>' + mode + "</span>";
+    $("mode").title = st.offline ? A.offlineName + (S.meta.built_at ? " · 빌드 " + S.meta.built_at : "") +
+      (A.mode === "web" ? "\nGitHub Actions가 공개 데이터로 다시 계산한 스냅샷 · 자연어 AI·실시간 폴링은 로컬 서버(run.ps1)에서" : "") : "";
     if (VK.market) VK.market.refreshStatus();
     kpis(st);
     homeStat();
@@ -212,7 +216,7 @@
     var src = st && st.offline ? "SNAPSHOT" : (mb ? mb.source : "—"), age = stat.ageSec !== undefined ? stat.ageSec : (mb && mb.ageSec);
     var cls = src === "LIVE" ? "live" : src === "STALE" ? "stale" : "snap";
     var ago = age === undefined || age === null ? "" : age < 60 ? age + "s" : age < 3600 ? Math.round(age / 60) + "m" : Math.round(age / 3600) + "h";
-    $("kpFresh").innerHTML = "<span class='fs " + cls + "'><i></i>NAVER " + src + (ago ? " · " + ago : "") + "</span>" +
+    $("kpFresh").innerHTML = "<span class='fs " + cls + "'><i></i>MARKET " + src + (ago ? " · " + ago : "") + "</span>" +
       "<span class='fs snap' title='ECOS · FRED 일별 데이터 기준일'><i></i>EOD " + ((st && st.date) || "").slice(5) + "</span>";
   }
 
@@ -448,7 +452,7 @@
     var sg = st.signals, T = st.tools || {};
     $("homeCalls").innerHTML = [["매크로 · " + sg.macro.owner, sg.macro.call, "signals"], ["채권 · " + sg.rates.owner, sg.rates.call, "impact"], ["주식 · " + sg.equity.owner, sg.equity.call, "cb"]]
       .map(function (x) { return '<div class="hm-call" data-go="' + x[2] + '" title="오늘의 결론 · 클릭: 체인과 근거"><em>' + esc(x[0]) + "</em><b>" + esc(x[1]) + "</b></div>"; }).join("");
-    $("homeStat").textContent = "EOD " + st.date + " · 담당 모델 반영 " + (T.agree || 0) + "/3 · " + (st.offline ? "OFFLINE 번들" : "NAVER LIVE") + " · 질문하면 체인이 판단합니다";
+    $("homeStat").textContent = "EOD " + st.date + " · 담당 모델 반영 " + (T.agree || 0) + "/3 · " + (st.offline ? A.offlineName : "MARKET LIVE") + " · 질문하면 체인이 판단합니다";
   }
   function homeSubmit(q) {
     q = (q || $("homeQ").value || "").trim();

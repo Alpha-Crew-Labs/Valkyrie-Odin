@@ -8,14 +8,18 @@ VALKYRIE now has four deliberately separated prototype lines:
 
 ```text
 prototype/valkyrie-v2/      regression / behavior reference
-prototype/valkyrie-v2.5/    stable GitHub Pages fallback at /
+prototype/valkyrie-v2.5/    static fallback at /v2.5/
 prototype/valkyrie-v3/      static baseline at /v3/
-prototype/valkyrie-v4/      ACTIVE — local server, real-data pipeline, owner-model fusion, AI assistant
+prototype/valkyrie-v4/      ACTIVE — GitHub Pages root (/), local server, real-data pipeline, owner-model fusion, AI assistant
 ```
 
-## v4 (2026-09-30)
+## v4 (2026-09-30 · Pages 2026-10-01)
 
-`prototype/valkyrie-v4` runs locally (`run.ps1` → http://127.0.0.1:4134/) and is the hackathon demo build.
+`prototype/valkyrie-v4` is the hackathon build. It runs locally (`run.ps1` → http://127.0.0.1:4134/) and is the canonical
+public build at https://alpha-crew-labs.github.io/Valkyrie-Odin/ — the Pages workflow recomputes the snapshot bundle from
+public data (NAVER every 10 min in KR market hours; research samples and ECOS/FRED hourly, the latter only with repository
+secrets) and falls back to the committed bundle when a step fails. The web build runs in "WEB" mode: engine snapshots,
+preset what-ifs, replay and briefing work; the Claude assistant, live polling and the owners' Streamlit apps are local only.
 
 - 17 objects / 24 relations (KOSPI added); every β carries a data basis or an explicit expert prior
 - Real public data: ECOS, FRED, NAVER Finance, DART (CB Zero Finder), 38커뮤니케이션 — snapshot fallback on every fetch

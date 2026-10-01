@@ -167,8 +167,8 @@ VK.views = (function () {
     if (m) h += kv("원천", esc(m.source) + " · " + esc(m.label)) + kv("최종 관측", esc(m.last) + (m.stale ? " (STALE)" : ""));
     else if (/^eq_(fin|cb|ipo)$/.test(id)) {
       var real = ctx.meta.model && ctx.meta.model.equity_sample === "REAL";
-      h += kv("원천", real ? chip("REAL", "REAL") + " " + esc({ eq_fin: "38커뮤니케이션 수요예측 × NAVER 재무(직전 FY 순이익)", eq_ipo: "38커뮤니케이션 수요예측 결과 (기관 경쟁률)",
-        eq_cb: "CB Zero Finder (DART 공시) × NAVER 시세·재무" }[id]) : chip("DEMO", "DEMO 가상 표본"));
+      h += kv("원천", real ? chip("REAL", "REAL") + " " + esc({ eq_fin: "38커뮤니케이션 수요예측 × 재무(직전 FY 순이익)", eq_ipo: "38커뮤니케이션 수요예측 결과 (기관 경쟁률)",
+        eq_cb: "CB Zero Finder (DART 공시) × 시세·재무" }[id]) : chip("DEMO", "DEMO 가상 표본"));
     }
     if (/cpi/.test(id)) h += kv("반영 CPI 월", esc(id === "mac_uscpi" ? st.vintage.us_cpi_month : st.vintage.kr_cpi_month));
     h += '<div class="note">' + esc(st.vintage.rule) + "</div></div>";
@@ -196,7 +196,7 @@ VK.views = (function () {
   function overview(ctx) {
     var st = ctx.st, m = ctx.meta, sg = st.signals;
     var h = '<div class="ih"><div><div class="it">SYSTEM · 현재 결론</div><div class="io">' + esc(st.date) + " · " + esc(st.shock_label) + "</div></div>" +
-      chip(st.offline ? "DEMO" : st.mode === "WHAT-IF" ? "SHOCK" : "NORMAL", st.offline ? "OFFLINE" : st.mode) + "</div>";
+      chip(st.offline ? "DEMO" : st.mode === "WHAT-IF" ? "SHOCK" : "NORMAL", st.offline ? VK.api.offlineTag : st.mode) + "</div>";
     h += '<div class="fx">' + esc(st.briefing.trigger) + "\n→ " + esc(st.briefing.transmission) + '\n→ <span class="hl">' + esc(st.briefing.decision) + "</span></div>";
     h += '<div class="sec"><div class="sec-t">TERMINAL SIGNALS</div>';
     [["sig_macro", "macro"], ["sig_rates", "rates"], ["sig_equity", "equity"]].forEach(function (p) {
@@ -290,10 +290,10 @@ VK.views = (function () {
     };
     var secs = (w.sectors || []).slice(0, 5), ths = (w.themes || []).slice(0, 5);
     var asof = String(w.asOf || "").replace(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2}).*/, "$2-$3 $4:$5");
-    h += '<div class="cd"><div class="cdh"><span class="cdt">주목 섹터 · 테마</span><span class="cdo">' + chip("REAL", "자동 선정 · NAVER " + asof) + "</span></div>" +
+    h += '<div class="cd"><div class="cdh"><span class="cdt">주목 섹터 · 테마</span><span class="cdo">' + chip("REAL", "자동 선정 · LIVE " + asof) + "</span></div>" +
       '<div class="note" style="margin:0 0 5px">등락 · 폭 · 회전율 순위에 VALKYRIE 기준 태그' + (w.tilt_active && w.tilt_active.length ? " (" + esc(w.tilt_active.join(" · ")) + ")" : "") + " · 태그에 마우스를 올리면 이유</div>" +
       (secs.length || ths.length ? '<table class="tb"><thead><tr><th>섹터 · 테마</th><th class="n">등락</th><th class="n">3일</th><th class="n">폭</th><th>주도주</th><th>왜 보나</th></tr></thead><tbody>' +
-        secs.map(rowS).join("") + ths.map(rowS).join("") + "</tbody></table>" : '<div class="note">NAVER 업종·테마 대기 중</div>') + "</div>";
+        secs.map(rowS).join("") + ths.map(rowS).join("") + "</tbody></table>" : '<div class="note">업종·테마 데이터 대기 중</div>') + "</div>";
     // 2. stocks / events to watch + the credit → CB transmission in three numbers
     var K = { "거래대금 1위": "cy", "거래량 1위": "cy", "상승률 1위": "gr", "하락률 1위": "rd", "관심 1위": "am", "검색 1위": "am", "주도주": "cy", "IPO 청약": "am", "IPO 상장": "am", "CB 희석 주의": "rd", "Put 임박": "rd" };
     h += '<div class="cd"><div class="cdh"><span class="cdt">주목 종목 · 이벤트</span><span class="cdo">' + chip("REAL", "브리핑 · IPO 일정 · CB 공시") + "</span></div>" +
@@ -314,7 +314,7 @@ VK.views = (function () {
         return "<tr><td>" + esc(c.name) + "</td><td>" + esc(c.sector) + '</td><td class="n">' + c.score + '/5</td><td class="n">' + f2(c.months_to_put, 1) + "개월</td><td>" +
           (c.put_risk ? "<span class='dw'>PUT 위험</span>" : c.refixed ? "<span class='am'>리픽싱</span>" : "<span class='mu'>정상</span>") + "</td></tr>";
       }).join("") + "</tbody></table>" +
-      (isReal ? '<div class="note">발행조건: <b>CB Zero Finder</b>(DART 공시, 코스닥) · 주가·재무: <b>NAVER</b>(최근 확정 FY) · 가정: Put = 발행 12개월 후, 리픽싱 하한 미공시 = 리픽싱 없음 · 해당 날짜까지 발행분만 반영(PIT)</div></div>'
+      (isReal ? '<div class="note">발행조건: <b>CB Zero Finder</b>(DART 공시, 코스닥) · 주가·재무: <b>실시간 시세·재무</b>(최근 확정 FY) · 가정: Put = 발행 12개월 후, 리픽싱 하한 미공시 = 리픽싱 없음 · 해당 날짜까지 발행분만 반영(PIT)</div></div>'
         : '<div class="note">발행조건·재무는 <b>가상 DEMO 표본</b>입니다.</div></div>');
     return h + "</div>";
   }
@@ -392,7 +392,7 @@ VK.views = (function () {
           '<div class="pub-h">컨피던스 ' + p.confidence + " · " + p.history.map(function (x) { return esc(x.status) + " " + esc(x.at.slice(5, 16)) + " " + esc(x.by); }).join(" → ") + "</div></div>";
       });
     } else {
-      h += '<div class="banner">OFFLINE 번들: 발간 승인은 서버 실행 시에만 동작합니다. 아래는 스냅샷 기준 ODIN 피드 목업입니다.</div>';
+      h += '<div class="banner">' + esc(VK.api.offlineName) + ': 발간 승인은 로컬 서버 실행 시에만 동작합니다. 아래는 스냅샷 기준 ODIN 피드 목업입니다.</div>';
       (ctx.feed || []).filter(function (f) { return f["발간일"] <= ctx.st.date; }).slice(-6).reverse().forEach(function (f) {
         h += '<div class="pub"><div class="pub-t"><span>' + esc(f["제목"]) + "</span>" + chip("PUBLISHED", f["판단 방향"]) + '</div><div class="pub-b">' + esc(f["한 줄 결론"]) + "</div></div>";
       });

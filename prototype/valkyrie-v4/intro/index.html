@@ -21,16 +21,7 @@
   --f-mono:"IBM Plex Mono",Consolas,"D2Coding",ui-monospace,monospace;
   color-scheme:dark;
 }
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){
-    --bg:#F3F5F8; --panel:#FFFFFF; --panel-2:#EDF0F4; --line:#D9DFE7; --line-2:#C3CBD7;
-    --fg:#0E141D; --fg-2:#2F3948; --mut:#566174; --dim:#7A8494;
-    --cyan:#0B7C8E; --amber:#A86500; --gold:#8A6612; --green:#1D7A4C; --red:#C2343A;
-    --cyan-wash:rgba(11,124,142,.08); --gold-wash:rgba(138,102,18,.07); --amber-wash:rgba(168,101,0,.08);
-    --bar:#B5DDE3; --grid:#E3E8EE;
-    color-scheme:light;
-  }
-}
+/* Dark is the page's default regardless of the OS setting; the toggle switches to light. */
 :root[data-theme="light"]{
   --bg:#F3F5F8; --panel:#FFFFFF; --panel-2:#EDF0F4; --line:#D9DFE7; --line-2:#C3CBD7;
   --fg:#0E141D; --fg-2:#2F3948; --mut:#566174; --dim:#7A8494;
@@ -173,13 +164,40 @@ td .was{color:var(--mut);text-decoration:line-through;text-decoration-color:colo
 .tbl.wide table{min-width:760px}
 
 /* ---------- use cases ---------- */
-.uses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.uses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .use{padding:20px;border:1px solid var(--line);border-radius:5px;background:var(--panel);display:flex;flex-direction:column;gap:10px;min-width:0}
 .use .who{font:500 11.5px var(--f-mono);letter-spacing:.1em;color:var(--cyan);text-transform:uppercase}
 .use p{font-size:15px;color:var(--fg-2)}
 .spread{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14.5px}
 .spread span{padding:6px 10px;border:1px solid var(--line-2);border-radius:4px;background:var(--panel)}
 .spread i{color:var(--amber);font-style:normal;font-family:var(--f-mono)}
+
+/* ---------- why now: AI-style mandates ---------- */
+.why{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);margin-top:34px;border:1px solid color-mix(in srgb,var(--amber) 42%,transparent);border-radius:5px;background:var(--amber-wash);overflow:hidden}
+.why > div{padding:24px 26px 26px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.why > div + div{border-left:1px solid color-mix(in srgb,var(--amber) 30%,transparent)}
+.why .eyebrow{color:var(--amber)}
+.why h3{font-size:20px}
+.why p{font-size:15px;color:var(--fg-2)}
+.case{border:1px solid var(--line-2);border-radius:4px;background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:6px;margin-top:auto}
+.case span{font:500 11.5px var(--f-mono);letter-spacing:.08em;color:var(--mut)}
+.case strong{font-size:15.5px;font-weight:600;line-height:1.45}
+.case ul{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 8px}
+.case li{font-size:13px;color:var(--fg-2);padding:3px 8px;border:1px solid var(--line-2);border-radius:3px;background:var(--panel-2)}
+.need{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.need li{display:grid;grid-template-columns:16px auto minmax(0,1fr);gap:0 10px;align-items:baseline;font-size:14.5px;color:var(--fg-2)}
+.need li::before{content:"✓";color:var(--green);font:600 13px var(--f-mono)}
+.need li b{color:var(--fg);font-weight:600;white-space:nowrap}
+.sub .rows{margin-top:0}
+@media (max-width:820px){
+  .why{grid-template-columns:minmax(0,1fr)}
+  .why > div + div{border-left:0;border-top:1px solid color-mix(in srgb,var(--amber) 30%,transparent)}
+}
+@media (max-width:560px){
+  .need li{grid-template-columns:16px minmax(0,1fr)}
+  .need li span{grid-column:2}
+  .need li b{white-space:normal}
+}
 
 /* ---------- system map ---------- */
 .map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:5px;background:var(--panel);overflow:hidden}
@@ -361,7 +379,7 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
       <div class="eyebrow">한화자산운용 AI PLUSthon 2026 <span>·</span> 본선 <span>·</span> 7팀 RAVENS</div>
       <div class="word" aria-label="VALKYRIE">VAL<b>KYRIE</b></div>
       <h1>매크로·채권·코스닥 주식 투자판단 인텔리전스 체인</h1>
-      <p class="lead">매크로, 채권, 코스닥 주식을 맡은 세 사람의 분석을 하나의 연결 지도로 묶었습니다. 금리 충격 하나가 들어오면 채권과 주식에서 무엇을 얼마나 해야 하는지까지 계산식과 근거를 붙여 바로 보여 줍니다. 운용역은 질문 한 줄로 시작하고, 답은 데스크별 액션 플랜으로 받습니다.</p>
+      <p class="lead">매크로·채권·코스닥 주식 담당자 세 명의 분석을 하나의 연결 지도로 묶은 리서치 시스템입니다. 금리 충격이 들어오면 채권과 주식 데스크가 무엇을 얼마나 해야 하는지를 계산식과 근거와 함께 즉시 제시합니다. 운용역은 질문 한 줄로 시작하고, 데스크별 액션 플랜으로 답을 받습니다. 기관 자금이 AI 운용 유형의 펀드를 따로 집행하기 시작한 지금, 한화자산운용이 이 수요에 먼저 대응하기 위해 만든 도구입니다.</p>
       <div class="team">
         <span><b>정희강</b>팀장 · 매크로/퀀트</span>
         <span><b>정훈</b>채권 · 국내채권운용팀</span>
@@ -381,72 +399,99 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
 
   <figure class="fig-hero">
     <button class="shot" type="button"><img src="img/home.jpg" alt="VALKYRIE 첫 화면. 가운데 질문창과 예시 질문 6개, 그 아래 금색 결론 3칸" width="1160" height="500"></button>
-    <figcaption><b>첫 화면.</b> 구글처럼 질문창 하나로 시작합니다. 질문을 넣으면 인텔리전스 체인이 계산하고 데스크별 액션 플랜으로 답합니다. 아래 금색 세 칸이 오늘의 결론이고, 누르면 해당 데스크 화면으로 갑니다.</figcaption>
+    <figcaption><b>첫 화면.</b> 구글 첫 화면처럼 질문창 하나로 시작합니다. 질문을 입력하면 인텔리전스 체인이 계산하고 데스크별 액션 플랜으로 답합니다. 아래 금색 세 칸은 오늘의 결론이며, 누르면 해당 데스크 화면으로 이동합니다.</figcaption>
   </figure>
 
   <div class="kpis" role="list" aria-label="핵심 수치">
-    <div class="kpi" role="listitem"><div class="v num">17<small>지표</small> 24<small>연결</small></div><div class="l">매크로 → 채권 → 주식을 잇는 고정 온톨로지</div><span class="tag impl">구현</span></div>
-    <div class="kpi" role="listitem"><div class="v">1<small>초</small></div><div class="l">금리 충격 1건의 전 체인 재계산 (기존 반나절)</div><span class="tag meas">시연 실측</span></div>
-    <div class="kpi" role="listitem"><div class="v">6<small>ms</small></div><div class="l">과거 유사 국면 Top 3 검색 (목표 10초)</div><span class="tag meas">실측</span></div>
-    <div class="kpi" role="listitem"><div class="v">+215.5<small>bp</small></div><div class="l">5/4 실제 판단의 D+60 성과, 국고 3년 대비</div><span class="tag meas">FINAL</span></div>
-    <div class="kpi" role="listitem"><div class="v">3/3</div><div class="l">담당자 모델(8501·8511·8512) 반영, 충돌 0</div><span class="tag impl">구현</span></div>
-    <div class="kpi" role="listitem"><div class="v">$0.05</div><div class="l">AI 질문 1건 비용, 응답 16초 (Sonnet 5.5)</div><span class="tag meas">실측</span></div>
+    <div class="kpi" role="listitem"><div class="v num">17<small>지표</small> 24<small>연결</small></div><div class="l">매크로→채권→주식을 잇는 고정 온톨로지</div><span class="tag impl">구현</span></div>
+    <div class="kpi" role="listitem"><div class="v">1<small>초</small></div><div class="l">금리 충격 1건의 전체 체인 재계산 (기존 반나절)</div><span class="tag meas">시연 실측</span></div>
+    <div class="kpi" role="listitem"><div class="v">6<small>ms</small></div><div class="l">유사 국면 상위 3개 검색 (목표 10초 이내)</div><span class="tag meas">실측</span></div>
+    <div class="kpi" role="listitem"><div class="v">+215.5<small>bp</small></div><div class="l">5월 4일 실제 판단의 D+60 성과 (국고 3년 대비)</div><span class="tag meas">FINAL</span></div>
+    <div class="kpi" role="listitem"><div class="v">3/3</div><div class="l">담당 모델 3개(8501·8511·8512) 반영, 충돌 없음</div><span class="tag impl">구현</span></div>
+    <div class="kpi" role="listitem"><div class="v">$0.05</div><div class="l">AI 질의 1건 비용 · 응답 16초 (Claude Sonnet 5.5)</div><span class="tag meas">실측</span></div>
   </div>
 
   <!-- ================= 1. RESULTS ================= -->
   <section id="results">
     <div class="eyebrow">심사 항목 <span>·</span> 문제 해결 성과</div>
-    <h2>사람이 손으로 잇던 연결을 엔진이 잇습니다</h2>
-    <p class="lead">도입 전에는 세 담당자의 분석이 각자의 파일과 웹서비스에 흩어져 있었습니다. "이 금리 충격이 채권과 주식에 어떤 영향인가"라는 질문 하나에도 세 자료를 찾아 이어 붙여야 했습니다. 기획서에서 정의한 다섯 가지 문제를 VALKYRIE가 어떻게 풀었는지 정리했습니다.</p>
+    <h2>손으로 이어 붙이던 분석을 엔진이 연결합니다</h2>
+    <p class="lead">시장에서는 기관 자금이 AI 운용 유형의 채권·주식 펀드를 따로 집행하기 시작했습니다. 회사 안에서는 담당자 세 명의 분석이 각자의 파일과 웹서비스에 흩어져 있어, "이 금리 충격이 채권과 주식에 어떤 영향을 주는가"라는 질문 하나에도 자료 세 개를 찾아 이어 붙여야 했습니다. 이 시장 요구와 기획서에서 정의한 다섯 가지 문제를 VALKYRIE가 어떻게 해결했는지 정리합니다.</p>
 
+    <div class="why">
+      <div>
+        <div class="eyebrow">왜 지금인가 <span>·</span> 시장 배경</div>
+        <h3>기관 자금이 'AI 운용 스타일' 펀드를 별도 유형으로 집행하기 시작했습니다</h3>
+        <p>연기금·공적 기금 등 기관 자금이 채권·주식 운용을 위탁하면서 AI를 활용하는 운용 유형을 따로 두고 자금을 배정하는 흐름이 나타났습니다. 당사에도 이 유형의 위탁이 실제로 들어와 있습니다.</p>
+        <div class="case">
+          <span>실제 사례 · 사내 안내 2026-09-23</span>
+          <strong>국토교통부 주택도시기금(미래주택) 국내채권 AI운용 스타일 펀드</strong>
+          <ul><li>설정금액 500억 원</li><li>설정일 2026-10-01 이후 예정</li><li>운용 유형 국내채권 · AI 운용 스타일</li></ul>
+        </div>
+      </div>
+      <div>
+        <h3>한화자산운용은 VALKYRIE로 이 유형에 선제 대응합니다</h3>
+        <p>AI 운용 스타일 펀드를 위탁받으려면 위탁자에게 AI가 어떻게 판단했는지, 그 판단의 성과는 어땠는지, 사람은 어느 단계에서 개입하는지를 설명해야 합니다. VALKYRIE는 이 요건을 처음부터 갖추고 설계했습니다.</p>
+        <ul class="need">
+          <li><b>설명 가능한 판단</b><span>모든 수치에 계산식과 전이계수 근거 표기, 담당 모델 반영 내역 표시</span></li>
+          <li><b>기록되는 성과</b><span>판단 로그가 D+5·D+20·D+60 성과를 국고 3년 대비로 자동 계산</span></li>
+          <li><b>운용역 승인 구조</b><span>AI는 초안까지만 작성, 판단 기록과 게시는 운용역이 결정</span></li>
+          <li><b>매일 갱신되는 실데이터</b><span>ECOS·FRED·NAVER 자동 수집, 화면마다 데이터 신선도 표시</span></li>
+        </ul>
+        <p class="note">국내채권 AI 운용 펀드에는 8511의 변동성 타깃팅 듀레이션 규칙과 크레딧 비중 규칙(2017~2026년 백테스트), VALKYRIE 판단 로그를 그대로 적용할 수 있습니다.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-h"><h3>기획서에서 정의한 다섯 가지 문제</h3><span class="mono">과제기획서 01 · 해결하려는 업무 문제</span></div>
     <div class="rows">
-      <div class="rows-h"><div>문제</div><div>도입 전</div><div>VALKYRIE가 하는 일</div><div class="r">결과</div></div>
+      <div class="rows-h"><div>문제</div><div>도입 전</div><div>해결 방식</div><div class="r">결과</div></div>
 
       <div class="row">
         <h3>분석 분산</h3>
-        <div class="c"><div class="lbl">도입 전</div>매크로·채권·주식 분석이 3인의 개별 파일에 흩어져 질문 1건을 조합하는 데 약 30분</div>
-        <div class="c"><div class="lbl">VALKYRIE가 하는 일</div>17개 지표와 24개 연결을 고정된 관계도로 한 화면에 놓고, 담당자 모델 3개를 입력으로 결합</div>
-        <div class="c r"><div class="lbl">결과</div>체인 화면 한 번으로 세 데스크의 판단 확인. <b>담당 모델 반영 3/3</b></div>
+        <div class="c"><div class="lbl">도입 전</div>매크로·채권·주식 분석이 담당자 세 명의 개별 파일에 흩어져 있어 질문 1건에 답하는 데 약 30분 소요</div>
+        <div class="c"><div class="lbl">해결 방식</div>지표 17개와 연결 24개를 고정된 관계도로 한 화면에 배치하고, 담당 모델 3개의 결과를 입력으로 결합</div>
+        <div class="c r"><div class="lbl">결과</div>체인 화면 한 번으로 세 데스크의 판단 확인 · <b>담당 모델 반영 3/3</b></div>
       </div>
 
       <div class="row">
         <h3>영향 재계산 수작업</h3>
-        <div class="c"><div class="lbl">도입 전</div>금리·크레딧이 움직이면 할인율 → IPO 수요 → CB Put 위험까지 엑셀로 다시 계산. 시나리오 1건에 반나절</div>
-        <div class="c"><div class="lbl">VALKYRIE가 하는 일</div>충격을 넣으면 전이계수(β)로 하류 지표를 차례로 다시 계산하고, 값마다 계산식을 표시</div>
-        <div class="c r"><div class="lbl">결과</div>UST +50bp → 국고 3년 <b class="num">4.08% <span class="arrow">→</span> 4.25%</b>, 공모주 경쟁률 <b class="num">983 <span class="arrow">→</span> 745:1</b>, Put 위험 CB <b class="num">200 <span class="arrow">→</span> 214곳</b>. 재계산 <b>1초</b></div>
+        <div class="c"><div class="lbl">도입 전</div>금리·크레딧 스프레드가 움직일 때마다 할인율 → IPO 수요 → CB 풋(조기상환청구) 위험까지 엑셀로 재계산, 시나리오 1건에 반나절 소요</div>
+        <div class="c"><div class="lbl">해결 방식</div>충격을 입력하면 전이계수(β)로 하류 지표를 순서대로 재계산하고 값마다 계산식 표시</div>
+        <div class="c r"><div class="lbl">결과</div>UST +50bp 입력 시 국고 3년 <b class="num">4.08% <span class="arrow">→</span> 4.25%</b>, 공모주 경쟁률 <b class="num">983:1 <span class="arrow">→</span> 745:1</b>, 풋 위험 CB <b class="num">200곳 <span class="arrow">→</span> 214곳</b> · 재계산 <b>1초</b></div>
       </div>
 
       <div class="row">
         <h3>담당자 의존</h3>
-        <div class="c"><div class="lbl">도입 전</div>데이터 수집과 표 갱신이 1인 하루 약 2시간(3인 약 6시간). 담당자가 없으면 자료가 멈춤</div>
-        <div class="c"><div class="lbl">VALKYRIE가 하는 일</div>ECOS·FRED는 매시 자동 갱신, NAVER 시세는 10분마다 수집. 실패하면 저장된 스냅샷으로 대체하고 LIVE·FILE·SNAPSHOT·STALE로 표시</div>
-        <div class="c r"><div class="lbl">결과</div>사람은 검수만 합니다. 주간 보고서 <b>Weekly Updates</b>도 버튼 한 번에 A4 가로 PDF 2쪽</div>
+        <div class="c"><div class="lbl">도입 전</div>데이터 수집과 표 갱신에 1인당 하루 약 2시간(3인 합계 약 6시간) 소요, 담당자 부재 시 자료 갱신 중단</div>
+        <div class="c"><div class="lbl">해결 방식</div>ECOS·FRED는 매시간, NAVER 시세는 10분마다 자동 수집. 수집 실패 시 저장된 스냅샷으로 대체하고 상태(LIVE·FILE·SNAPSHOT·STALE) 표시</div>
+        <div class="c r"><div class="lbl">결과</div>담당자는 검수만 수행 · 주간 보고서 <b>Weekly Updates</b>도 버튼 한 번으로 A4 가로 2쪽 PDF 생성</div>
       </div>
 
       <div class="row">
         <h3>판단 휘발</h3>
-        <div class="c"><div class="lbl">도입 전</div>성과가 좋았던 2026-05-04 "장기채 축소·단기채 확대"도 근거와 사후 성과가 남지 않음</div>
-        <div class="c"><div class="lbl">VALKYRIE가 하는 일</div>판단 로그가 D+5·D+20·D+60 성과를 국고 3년 대비로 자동 계산. 실제(REAL)·연습(SIMULATED)·미확정(PENDING) 구분</div>
-        <div class="c r"><div class="lbl">결과</div>5/4 판단 <b class="num">+82.0 / +166.9 / +215.5bp</b> (FINAL). 그날 알 수 있던 데이터만으로 당시 화면 재현</div>
+        <div class="c"><div class="lbl">도입 전</div>성과가 좋았던 2026-05-04 '장기채 축소·단기채 확대' 판단조차 근거와 사후 성과가 기록되지 않음</div>
+        <div class="c"><div class="lbl">해결 방식</div>판단 로그가 D+5·D+20·D+60 성과를 국고 3년 대비로 자동 계산, 실제(REAL)·가상(SIMULATED)·미확정(PENDING) 구분</div>
+        <div class="c r"><div class="lbl">결과</div>5월 4일 판단 <b class="num">+82.0 / +166.9 / +215.5bp</b> (FINAL) · 당일 공표 데이터만으로 당시 화면 재현</div>
       </div>
 
       <div class="row">
         <h3>과거 사례 탐색</h3>
-        <div class="c"><div class="lbl">도입 전</div>비슷했던 과거 국면을 차트로 손수 비교. 약 1시간</div>
-        <div class="c"><div class="lbl">VALKYRIE가 하는 일</div>현재 상태를 표준화 벡터로 만들어 과거 일별 벡터와 코사인 유사도로 비교</div>
-        <div class="c r"><div class="lbl">결과</div><b>6ms</b>에 Top 3 제시 (1위 2026-07-02, 유사도 0.97)와 그 뒤 20일 채권·코스닥 성과</div>
+        <div class="c"><div class="lbl">도입 전</div>유사한 과거 국면을 차트로 직접 비교, 약 1시간 소요</div>
+        <div class="c"><div class="lbl">해결 방식</div>현재 국면을 표준화 벡터로 변환해 과거 일별 벡터와 코사인 유사도로 비교</div>
+        <div class="c r"><div class="lbl">결과</div><b>6ms</b>에 상위 3개 국면(1위 2026-07-02, 유사도 0.97)과 이후 20일 채권·코스닥 성과 제시</div>
       </div>
     </div>
-    <p class="note" style="margin-top:14px">도입 전 소요 시간은 팀 자체 추정입니다. 결과 칸의 수치는 2026-09-30 15:20 KST 시연 녹화 시점의 실데이터 엔진 값입니다(엔진 기준일 2026-09-29).</p>
+    <p class="note">도입 전 소요 시간은 팀 자체 추정치입니다. 결과 칸의 수치는 2026-09-30 15:20(KST) 시연 녹화 시점의 실데이터 엔진 값이며, 엔진 기준일은 2026-09-29입니다.</p>
+    </div>
 
     <div class="sub">
       <div class="sub-h"><h3>기획서 성공 기준 5개 점검</h3><span class="mono">과제기획서 04 · 성공 기준</span></div>
       <div class="checks">
-        <div class="check"><div class="st ok">달성</div><div><p><b>UST +50bp</b>를 넣으면 하류 지표가 전이계수로 다시 계산되고, 값마다 계산식이 화면에 나온다.</p><p>예: Δ국고 3Y = 0.35 × Δ기준금리 + 0.35 × ΔUST 10Y = +17.5bp. 계산은 엔진 코드(valkyrie/engine.py)에서 하며 하드코딩이 아닙니다.</p></div></div>
-        <div class="check"><div class="st ok">달성 · 방향 변경</div><div><p>크레딧 스프레드를 바꾸면 같은 코스닥 기업의 재무점수가 바뀌고, CB Put 위험이 IPO 청약 판단의 근거에 나타난다.</p><p>실데이터 크레딧이 5월 이후 63~71bp라 52bp인 날이 없어서, 68 → 52bp 축소로 시연했습니다. 아리바이오홀딩스 1/5 → 3/5, 코스닥 판단 '청약 보류' → '선별 청약 · 흑자 우선', Put 위험 CB 200 → 139곳.</p></div></div>
+        <div class="check"><div class="st ok">달성</div><div><p><b>UST +50bp</b>를 입력하면 하류 지표가 전이계수로 재계산되고, 각 값의 계산식이 화면에 표시된다.</p><p>예: Δ국고 3Y = 0.35 × Δ기준금리 + 0.35 × ΔUST 10Y = +17.5bp. 계산은 엔진 코드(valkyrie/engine.py)에서 수행되며 하드코딩된 값이 아닙니다.</p></div></div>
+        <div class="check"><div class="st ok">달성 · 방향 변경</div><div><p>크레딧 스프레드를 바꾸면 같은 코스닥 기업의 재무점수가 달라지고, CB 풋 위험이 IPO 청약 판단의 근거에 나타난다.</p><p>실데이터 크레딧 스프레드가 5월 이후 63~71bp 범위여서 52bp인 날이 없었기 때문에, 기획서의 52→68bp 확대 대신 68→52bp 축소로 시연했습니다. 아리바이오홀딩스 재무점수 1/5 → 3/5, 코스닥 판단 '청약 보류' → '선별 청약 · 흑자 우선', 풋 위험 CB 200곳 → 139곳.</p></div></div>
         <div class="check"><div class="st ok">달성</div><div><p>2026-05-04 판단이 D+5·D+20·D+60 국고 3년 대비 성과로 표시되고, 미확정은 PENDING, 가상 로그는 SIMULATED로 구분된다.</p></div></div>
-        <div class="check"><div class="st chg">정책 변경</div><div><p>네트워크를 끊어도 스냅샷만으로 데모가 끝까지 돈다(외부 호출 0건).</p><p>본선 중 팀 결정으로 실시간 수집이 기본이 됐습니다. 대신 수집이 실패하면 스냅샷으로 대체하고, 서버 없이 여는 오프라인 번들과 시연용 -Offline 모드를 유지했습니다. AI 자유 질의만 네트워크가 필요합니다.</p></div></div>
-        <div class="check"><div class="st ok">달성</div><div><p>(Lv2) 현재 국면을 넣으면 유사한 과거 국면 3개와 이후 성과가 10초 안에 나온다.</p><p>실측 약 0.006초(6ms).</p></div></div>
+        <div class="check"><div class="st chg">정책 변경</div><div><p>네트워크를 차단한 상태에서도 스냅샷만으로 데모가 끝까지 실행된다(외부 API 호출 0건).</p><p>본선 과정에서 팀 결정으로 실시간 수집을 기본으로 바꿨습니다. 대신 수집 실패 시 스냅샷으로 대체하고, 서버 없이 열 수 있는 오프라인 번들과 시연용 오프라인 모드를 유지했습니다. 네트워크가 반드시 필요한 기능은 AI 자유 질의만입니다.</p></div></div>
+        <div class="check"><div class="st ok">달성</div><div><p>(Lv2) 현재 국면을 입력하면 유사한 과거 국면 3개와 이후 성과가 10초 안에 표시된다.</p><p>실측 약 6ms(0.006초).</p></div></div>
       </div>
     </div>
 
@@ -454,17 +499,17 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
       <div class="sub-h"><h3>화면으로 보는 성과</h3><span class="mono">시연 녹화 2026-09-30 15:20 KST</span></div>
       <div class="grid2">
         <figure><button class="shot" type="button"><img src="img/shock_chain.jpg" alt="UST +50bp 충격이 관계도를 따라 주황색으로 전파된 화면" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>충격 전파.</b> 미국 10년 금리 +50bp를 넣으면 매크로 → 채권 → 코스닥 순서로 다시 계산되고, 충격이 닿은 지표가 주황색으로 바뀝니다.</figcaption></figure>
+          <figcaption><b>충격 전파.</b> 미국 10년물 +50bp를 입력하면 매크로 → 채권 → 코스닥 순서로 재계산되고, 충격이 전달된 지표는 주황색으로 표시됩니다.</figcaption></figure>
         <figure><button class="shot" type="button"><img src="img/shock_table.jpg" alt="충격 영향표와 전이 경로 계산식" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>충격 영향표와 계산식.</b> 지표별 기준값·충격 후·변화, 그리고 오른쪽에 대입식이 함께 나옵니다. 운용역이 숫자를 직접 검증할 수 있습니다.</figcaption></figure>
-        <figure><button class="shot" type="button"><img src="img/cb_bridge.jpg" alt="크레딧 52bp 시나리오의 코스닥 CB 재무점수와 Put 위험 표" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>크레딧 → CB 연결.</b> 크레딧이 68 → 52bp로 좁혀지면 자금 조달 접근성이 23% → 74%로 오르고, CB 발행사 재무점수가 1/5 → 3/5로 올라 Put 위험이 사라집니다.</figcaption></figure>
+          <figcaption><b>충격 영향표와 계산식.</b> 지표별 기준값, 충격 후 값, 변화폭을 표로 보여 주고 오른쪽에 대입식을 함께 표시합니다. 운용역이 수치를 직접 검증할 수 있습니다.</figcaption></figure>
+        <figure><button class="shot" type="button"><img src="img/cb_bridge.jpg" alt="크레딧 52bp 시나리오의 코스닥 CB 재무점수와 풋 위험 표" width="1600" height="900" loading="lazy"></button>
+          <figcaption><b>크레딧 → CB 연결.</b> 크레딧 스프레드가 68bp에서 52bp로 축소되면 차환 접근성이 23%에서 74%로 높아지고, CB 발행사 재무점수가 1/5에서 3/5로 올라 풋 위험이 해소됩니다.</figcaption></figure>
         <figure><button class="shot" type="button"><img src="img/decision_log.jpg" alt="판단 로그 표. REAL 1건, SIMULATED 30건, USER 3건" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>판단 로그.</b> 발신일·판단·근거·D+5/20/60·국고 3년 대비 성과·상태·출처가 한 줄에 남습니다. 연습용 SIMULATED 30건의 평균(−21.1bp)도 숨기지 않고 보여 줍니다.</figcaption></figure>
+          <figcaption><b>판단 로그.</b> 발신일, 판단, 근거, D+5/20/60 성과, 국고 3년 대비, 상태, 출처가 한 줄로 기록됩니다. 가상 판단(SIMULATED) 30건의 평균 성과(−21.1bp)도 그대로 표시합니다.</figcaption></figure>
         <figure><button class="shot" type="button"><img src="img/replay.jpg" alt="타임라인에서 2026-05-04를 선택해 당시 화면을 재현한 모습" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>시간 재생.</b> 5월 4일을 누르면 그날 알 수 있던 데이터만으로 화면을 다시 만듭니다. 당시 채권 판단도 '듀레이션 축소 · 위험 축소 (3.80년)'였습니다.</figcaption></figure>
-        <figure><button class="shot" type="button"><img src="img/similar.jpg" alt="유사 국면 Top 3 목록" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>유사 국면 Top 3.</b> 지금과 가장 비슷했던 날(1위 2026-07-02, 유사도 0.97)과 그 뒤 20일 동안의 채권·코스닥 움직임을 보여 줍니다.</figcaption></figure>
+          <figcaption><b>시점 재현.</b> 타임라인에서 5월 4일을 선택하면 당일 공표된 데이터만으로 화면을 다시 구성합니다. 당시 채권 판단은 '듀레이션 축소 · 위험 축소 (3.80년)'였습니다.</figcaption></figure>
+        <figure><button class="shot" type="button"><img src="img/similar.jpg" alt="유사 국면 상위 3개 목록" width="1600" height="900" loading="lazy"></button>
+          <figcaption><b>유사 국면 상위 3개.</b> 현재와 가장 비슷했던 과거 국면(1위 2026-07-02, 유사도 0.97)과 이후 20일간 채권·코스닥 움직임을 보여 줍니다.</figcaption></figure>
       </div>
     </div>
   </section>
@@ -472,19 +517,19 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
   <!-- ================= 2. IMPACT ================= -->
   <section id="impact">
     <div class="eyebrow">심사 항목 <span>·</span> 비즈니스 임팩트</div>
-    <h2>반복 작업을 덜고, 제안 현장에서 바로 답합니다</h2>
-    <p class="lead">운용역과 애널리스트가 매일 되풀이하던 조합·재계산·기록 작업을 엔진이 맡습니다. 절약한 시간은 판단과 고객 대응으로 돌아갑니다.</p>
+    <h2>반복 작업을 줄이고, 제안 현장에서 바로 답합니다</h2>
+    <p class="lead">운용역과 애널리스트가 매일 반복하던 자료 조합, 재계산, 기록 작업을 엔진이 대신합니다. 절약한 시간은 판단과 고객 대응에 쓸 수 있습니다.</p>
 
     <div class="sub">
-      <div class="sub-h"><h3>도입 전후 비교</h3><span class="mono">추정은 본선에서 같은 과제로 실측해 보정</span></div>
+      <div class="sub-h"><h3>도입 전후 비교</h3><span class="mono">추정치는 같은 과제로 실측해 보정 예정</span></div>
       <div class="tbl wide">
         <table>
           <thead><tr><th>업무</th><th>도입 전</th><th>도입 후</th><th>연간 효과</th><th>근거</th></tr></thead>
           <tbody>
             <tr><td><b>데이터 수집·표 갱신</b></td><td class="n">3인 합계 하루 약 6시간</td><td class="n">약 1시간 (검수만)</td><td class="n"><b>약 1,250시간</b></td><td><span class="tag est">팀 추정</span></td></tr>
-            <tr><td><b>크로스에셋 질문 조합</b></td><td class="n">건당 약 30분</td><td class="n">5분 이내</td><td class="n"><b>약 65시간</b> (주 3회)</td><td><span class="tag est">팀 추정</span></td></tr>
-            <tr><td><b>금리 충격 영향 재계산</b></td><td class="n">시나리오당 반나절</td><td class="n">1초</td><td>시나리오를 여러 개 바로 비교</td><td><span class="tag meas">시연 실측</span></td></tr>
-            <tr><td><b>과거 유사 국면 찾기</b></td><td class="n">약 1시간</td><td class="n">6ms</td><td>질문할 때마다 자동 제시</td><td><span class="tag meas">실측</span></td></tr>
+            <tr><td><b>크로스에셋 전망 조합</b></td><td class="n">건당 약 30분</td><td class="n">5분 이내</td><td class="n"><b>약 65시간</b> (주 3회 기준)</td><td><span class="tag est">팀 추정</span></td></tr>
+            <tr><td><b>금리 충격 영향 재계산</b></td><td class="n">시나리오당 반나절</td><td class="n">1초</td><td>시나리오 여러 개를 즉시 비교</td><td><span class="tag meas">시연 실측</span></td></tr>
+            <tr><td><b>유사 국면 탐색</b></td><td class="n">약 1시간</td><td class="n">6ms</td><td>질의마다 자동 제시</td><td><span class="tag meas">실측</span></td></tr>
             <tr><td><b>판단 성과 기록</b></td><td class="n">사후 성과 기록 0건</td><td>발신 판단 100% 기록, D+5/20/60 자동 계산</td><td>운용 역량의 근거 자료로 축적</td><td><span class="tag impl">구현</span></td></tr>
             <tr><td><b>AI 질의 1건</b></td><td>—</td><td class="n">상태 질문 약 $0.05 (16초)<br>시나리오 2개 약 $0.09 (31초)</td><td>시스템 프롬프트 캐시 적용</td><td><span class="tag meas">실측</span></td></tr>
           </tbody>
@@ -493,103 +538,104 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
     </div>
 
     <div class="sub">
-      <div class="sub-h"><h3>어디에 쓰나</h3></div>
+      <div class="sub-h"><h3>활용 장면</h3></div>
       <div class="uses">
-        <div class="use"><div class="who">기관 제안 · 국민연금 등</div><p>기관이 제시한 금리·크레딧 시나리오를 제안 현장에서 바로 넣고, 채권·주식 영향과 액션 플랜을 보여 줍니다. 판단 로그의 국고 3년 대비 성과는 운용 역량을 보여 주는 근거가 됩니다. 일반 제안서의 시장 진단·전망 파트도 같은 화면에서 만듭니다.</p></div>
-        <div class="use"><div class="who">운용 의사결정</div><p>매일 데스크별 액션 플랜(목표 듀레이션, 국채선물 계약 수, 주식 비중, 청약·CB 스탠스)을 받고, 매시 정각 마켓 브리핑 영상으로 시황을 확인합니다. 궁금한 점은 질문하면 체인이 계산해 답합니다.</p></div>
-        <div class="use"><div class="who">리서치 · 세일즈 · 리스크</div><p>주간 보고서를 버튼으로 만들고, 고객 질문("지금 시장 전체를 어떻게 보나")에 근거 화면으로 답합니다. 리스크관리는 금리·크레딧 충격 시나리오를 같은 엔진으로 점검합니다.</p></div>
+        <div class="use"><div class="who">AI 운용 스타일 펀드 · 기관 위탁</div><p>국내채권·주식의 AI 운용 유형 위탁에 VALKYRIE를 리서치·판단 엔진으로 제안합니다. 판단 근거와 계산식, 판단 로그의 사후 성과, 운용역 승인 구조를 화면 그대로 보여 줄 수 있어 '어떤 AI로 어떻게 운용하는가'라는 위탁자의 질문에 답할 수 있습니다. 이 유형의 위탁은 이미 진행 중입니다(국토교통부 주택도시기금 국내채권 AI운용 스타일 펀드, 500억 원, 10월 1일 이후 설정 예정).</p></div>
+        <div class="use"><div class="who">기관 제안 · 국민연금 등</div><p>기관이 제시한 금리·크레딧 시나리오를 제안 현장에서 바로 입력해 채권·주식 영향과 액션 플랜을 제시합니다. 판단 로그의 국고 3년 대비 성과는 운용 역량을 입증하는 근거가 됩니다. 일반 제안서의 시장 진단·전망 부분도 같은 화면에서 작성합니다.</p></div>
+        <div class="use"><div class="who">운용 의사결정</div><p>매일 데스크별 액션 플랜(목표 듀레이션, 국채선물 계약 수, 주식 비중, IPO 청약·CB 스탠스)을 받고, 매시 정각 마켓 브리핑으로 시황을 확인합니다. 궁금한 점은 질문창에 입력하면 체인이 계산해 답합니다.</p></div>
+        <div class="use"><div class="who">리서치 · 세일즈 · 리스크</div><p>주간 보고서를 버튼 한 번으로 만들고, 고객 질문('지금 시장 전체를 어떻게 보는가')에 근거 화면으로 답합니다. 리스크관리 부서는 금리·크레딧 충격 시나리오를 같은 엔진으로 점검합니다.</p></div>
       </div>
     </div>
 
     <div class="sub">
-      <div class="sub-h"><h3>확산 경로</h3><span class="mono">공통 JSON 스키마 · 노드 추가로 확장</span></div>
+      <div class="sub-h"><h3>확산 경로</h3><span class="mono">공통 JSON 스키마 · 지표 추가로 확장</span></div>
       <div class="spread">
-        <span>멀티에셋·자산배분</span><i>→</i><span>채권운용 전 팀 (판단 로그 공유)</span><i>→</i><span>주식운용·IPO 참여 펀드</span><i>→</i><span>리스크관리</span><i>→</i><span>세일즈·마케팅</span>
+        <span>AI 운용 스타일 펀드</span><i>→</i><span>멀티에셋·자산배분</span><i>→</i><span>채권운용 전 팀 (판단 로그 공유)</span><i>→</i><span>주식운용·IPO 참여 펀드</span><i>→</i><span>리스크관리</span><i>→</i><span>세일즈·마케팅</span>
       </div>
-      <p class="note">사내 포털 오딘에 탑재하면 "쓸 만한 콘텐츠가 없다"는 오딘 저사용 원인을 직접 해결합니다. 환율·원자재 같은 새 자산도 지표와 연결을 추가하는 방식으로 붙습니다.</p>
+      <p class="note">사내 포털 오딘에 탑재하면 '쓸 만한 콘텐츠가 없다'는 오딘 저사용 원인을 직접 해소합니다. 환율·원자재 등 새 자산군도 지표와 연결을 추가하는 방식으로 확장할 수 있습니다.</p>
     </div>
   </section>
 
   <!-- ================= 3. READINESS ================= -->
   <section id="readiness">
     <div class="eyebrow">심사 항목 <span>·</span> 완성도와 업무 적용성</div>
-    <h2>네 개의 앱이 하나의 판단으로 이어져 실제로 돌아갑니다</h2>
-    <p class="lead">담당자 세 명이 각자 만든 진단 앱이 그대로 살아 있고, VALKYRIE는 그 결과를 입력으로 받아 하나의 판단으로 묶습니다. 모든 화면은 실데이터로 돌고, 운용역이 검증할 수 있도록 숫자마다 출처와 계산식을 붙였습니다.</p>
+    <h2>앱 네 개가 하나의 판단으로 이어져 실제로 작동합니다</h2>
+    <p class="lead">담당자 세 명이 각자 만든 진단 앱은 그대로 운영되고, VALKYRIE가 그 결과를 입력으로 받아 하나의 판단으로 통합합니다. 모든 화면은 실데이터로 작동하며, 운용역이 검증할 수 있도록 수치마다 출처와 계산식을 붙였습니다.</p>
 
     <div class="sub">
       <div class="sub-h"><h3>시스템 구성</h3><span class="mono">로컬 실행 · run.ps1 → 127.0.0.1:4134</span></div>
       <div class="map">
-        <div class="col"><h4>데이터 · 실시간 + 스냅샷</h4>
-          <ul><li><b>ECOS</b> 금리·물가·회사채</li><li><b>FRED</b> 미국 금리·물가·유동성</li><li><b>NAVER 금융</b> 시세·업종·수급·일정·뉴스</li><li><b>CB Zero Finder</b> DART CB 공시</li><li><b>38커뮤니케이션</b> IPO 수요예측</li><li><b>Google News RSS</b> 자산별 뉴스</li></ul></div>
-        <div class="col"><h4>담당자 모델</h4>
+        <div class="col"><h4>데이터 · 실시간 수집 + 스냅샷</h4>
+          <ul><li><b>ECOS</b> 국고채·회사채 금리, 물가</li><li><b>FRED</b> 미국 금리·물가·유동성</li><li><b>NAVER 금융</b> 시세·업종·수급·일정·뉴스</li><li><b>CB Zero Finder</b> CB 발행 공시(DART)</li><li><b>38커뮤니케이션</b> IPO 수요예측</li><li><b>Google News RSS</b> 자산별 뉴스</li></ul></div>
+        <div class="col"><h4>담당 모델 (Streamlit)</h4>
           <ul><li><span class="mono">8501</span><br><b>매크로 퀀트 터미널</b> · 정희강</li><li><span class="mono">8511</span><br><b>채권 위기 진단 &amp; 액션 플랜</b> · 정훈</li><li><span class="mono">8512</span><br><b>주식 시장 진단 &amp; 액션 플랜</b> · 김유찬</li></ul></div>
         <div class="col core"><h4>VALKYRIE 엔진 · 4134</h4>
-          <ul><li><b>온톨로지</b> 17 지표 · 24 연결</li><li><b>What-if</b> 충격 전파 · 계산식</li><li><b>판단 로그</b> · 시점 재현</li><li><b>유사 국면</b> 코사인 유사도</li><li><b>AI 어시스턴트</b> Claude Sonnet 5.5</li></ul></div>
-        <div class="col"><h4>산출</h4>
-          <ul><li><b>데스크별 액션 플랜</b></li><li><b>매시 마켓 브리핑</b> 음성+자막</li><li><b>Weekly Updates</b> A4 PDF</li><li><b>오딘 게시</b> 초안 → 승인 → 게시</li><li><b>시연 영상</b> 자동 녹화·자막</li></ul></div>
+          <ul><li><b>온톨로지</b> 지표 17 · 연결 24</li><li><b>가상 충격(What-if)</b> 전파 · 계산식</li><li><b>판단 로그</b> · 과거 시점 재현</li><li><b>유사 국면 탐색</b> 코사인 유사도</li><li><b>AI 어시스턴트</b> Claude Sonnet 5.5</li></ul></div>
+        <div class="col"><h4>산출물</h4>
+          <ul><li><b>데스크별 액션 플랜</b></li><li><b>매시 정각 마켓 브리핑</b> 음성·자막</li><li><b>Weekly Updates 보고서</b> A4 PDF</li><li><b>오딘 게시</b> 초안 → 승인 → 게시</li><li><b>시연 영상</b> 자동 녹화·자막</li></ul></div>
       </div>
     </div>
 
     <div class="sub">
-      <div class="sub-h"><h3>담당자 앱 3개</h3><span class="mono">화면 캡처 2026-09-30 오후 · 실데이터</span></div>
+      <div class="sub-h"><h3>담당 모델 앱 3개</h3><span class="mono">화면 캡처 2026-09-30 오후 · 실데이터</span></div>
       <div class="grid3">
         <figure><button class="shot" type="button"><img src="img/app_8501.jpg" alt="매크로 퀀트 터미널 화면. 현재 매크로 국면 과열, 3단계 확률 네트워크와 목표 자산 비중" width="1300" height="1000" loading="lazy"></button>
-          <figcaption><b>8501 매크로 퀀트 터미널 · 정희강.</b> FRED 실데이터로 미국 거시 지표를 읽고, 3단계 확률 네트워크로 목표 자산 비중을 정합니다. 테일러 준칙·연준 유동성·수익률 곡선·스트레스 VaR 탭과 주간 보고서 버튼이 있습니다. 오늘 국면: <b>과열</b> (근원 PCE 3.34%, 성장 2.10%).</figcaption></figure>
-        <figure><button class="shot" type="button"><img src="img/app_8511.jpg" alt="채권 위기 진단 앤 액션 플랜 화면. 오늘의 종합 판정 주의, 위기 점수 0.44" width="1300" height="960" loading="lazy"></button>
-          <figcaption><b>8511 채권 위기 진단 &amp; 액션 플랜 · 정훈.</b> 국고채 9개 만기와 회사채·CD·CP 금리로 금리 위기(모형 2개)와 신용 위험을 진단하고, 목표 듀레이션과 선물 헤지로 바꿉니다. 오늘 판정: <b>주의 0.44</b>, 권장 듀레이션 3.4년.</figcaption></figure>
-        <figure><button class="shot" type="button"><img src="img/app_8512.jpg" alt="주식 시장 진단 앤 액션 플랜 화면. 종합 판정 경계, 위험 점수 0.46, 권장 주식 비중 55%" width="1300" height="960" loading="lazy"></button>
-          <figcaption><b>8512 주식 시장 진단 &amp; 액션 플랜 · 김유찬.</b> 가격·변동성·빚투·증시자금으로 코스피 위험을 진단하고 주식 비중과 선물 계약 수로 바꿉니다. 10분마다 자동 수집합니다. 오늘 판정: <b>경계 0.46</b>, 권장 주식 비중 55%.</figcaption></figure>
+          <figcaption><b>8501 매크로 퀀트 터미널 · 정희강.</b> FRED 실데이터로 미국 거시 지표를 읽고, 3단계 확률 네트워크로 목표 자산 비중을 산출합니다. 테일러 준칙, 연준 유동성, 수익률 곡선, 스트레스·VaR 탭과 주간 보고서 생성 버튼을 갖췼습니다. 오늘 국면: <b>과열</b> (근원 PCE 3.34%, 성장률 2.10%).</figcaption></figure>
+        <figure><button class="shot" type="button"><img src="img/app_8511.jpg" alt="채권 위기 진단 &amp; 액션 플랜 화면. 오늘의 종합 판정 주의, 위기 점수 0.44" width="1300" height="960" loading="lazy"></button>
+          <figcaption><b>8511 채권 위기 진단 &amp; 액션 플랜 · 정훈.</b> 국고채 9개 만기와 회사채·CD·CP 금리로 금리 위기(모형 2개)와 신용 위험을 진단하고, 그 결과를 목표 듀레이션과 선물 헤지 수량으로 변환합니다. 오늘 판정: <b>주의 0.44</b>, 권장 듀레이션 3.4년.</figcaption></figure>
+        <figure><button class="shot" type="button"><img src="img/app_8512.jpg" alt="주식 시장 진단 &amp; 액션 플랜 화면. 종합 판정 경계, 위험 점수 0.46, 권장 주식 비중 55%" width="1300" height="960" loading="lazy"></button>
+          <figcaption><b>8512 주식 시장 진단 &amp; 액션 플랜 · 김유찬.</b> 가격, 변동성, 신용융자(빚투), 증시 자금으로 코스피 위험을 진단하고 주식 비중과 선물 계약 수로 변환합니다. 데이터는 10분마다 자동 수집합니다. 오늘 판정: <b>경계 0.46</b>, 권장 주식 비중 55%.</figcaption></figure>
       </div>
     </div>
 
     <div class="sub">
-      <div class="sub-h"><h3>판단은 "오늘 무엇을 얼마나"로 끝납니다</h3><span class="mono">녹화 시점 액션 플랜 · 정해진 규칙으로 계산</span></div>
+      <div class="sub-h"><h3>판단은 '오늘 무엇을 얼마나 할지'로 끝납니다</h3><span class="mono">녹화 시점 액션 플랜 · 규칙 기반 계산</span></div>
       <div class="plan">
-        <div><span>채권 · 정훈</span><strong>목표 듀레이션 3.37년 · 3년 국채선물 725계약 매도</strong><p>BM 5.39년 × 0.62 (기준 변동성 3.5 ÷ 최근 20일 5.6bp/일). 금리 방향 예측이 아니라 변동성에 맞춘 위험 조절입니다.</p></div>
-        <div><span>주식 · 김유찬</span><strong>코스피 비중 55% · 코스피200 선물 167계약 매도</strong><p>보유 100% 가정. 선물 계약 수는 8512의 장중 잠정값이라 시점에 따라 달라집니다.</p></div>
-        <div><span>매크로 · 정희강</span><strong>인상 사이클 지속 · 추가 인상</strong><p>미국 국면 '과열'을 반영. 한국 판단과 미국 국면이 달라도 충돌이 아니라 정보로 표시합니다.</p></div>
+        <div><span>채권 · 정훈</span><strong>목표 듀레이션 3.37년 · 3년 국채선물 725계약 매도</strong><p>벤치마크 5.39년 × 0.62 (기준 변동성 3.5 ÷ 최근 20일 변동성 5.6bp/일). 금리 방향 전망과 무관하게 변동성 수준에 맞춰 위험을 조절한 값입니다.</p></div>
+        <div><span>주식 · 김유찬</span><strong>코스피 비중 55% · 코스피200 선물 167계약 매도</strong><p>주식 보유 100% 가정. 선물 계약 수는 8512 모델의 장중 잠정값으로 시점에 따라 달라집니다.</p></div>
+        <div><span>매크로 · 정희강</span><strong>인상 사이클 지속 · 추가 인상</strong><p>미국 매크로 국면 '과열'을 반영했습니다. 한국 판단과 미국 국면이 다를 때는 충돌로 처리하지 않고 참고 정보로 표시합니다.</p></div>
       </div>
-      <p class="note">'보유 기록'에 실제 주식 비중과 듀레이션을 넣으면 그 기준으로 매매 라인을 다시 계산하고, 담당자 모델의 밴드(±10%p, 0.5년)를 벗어날 때만 매매를 권합니다.</p>
+      <p class="note">'보유 기록'에 실제 주식 비중과 듀레이션을 입력하면 그 값을 기준으로 매매 지시를 다시 계산하고, 담당 모델의 허용 범위(±10%p, 0.5년)를 벗어날 때만 매매를 제안합니다.</p>
       <div class="grid2">
         <figure><button class="shot" type="button"><img src="img/action_plan.jpg" alt="판단·온도계 탭과 오늘의 액션 플랜" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>판단 탭.</b> 현재 스트레스 수준(지난 1년 중 위치), 영역별 수준, 데스크별 액션 플랜이 한 화면에 있습니다.</figcaption></figure>
+          <figcaption><b>판단 탭.</b> 현재 스트레스 수준(최근 1년 내 위치), 영역별 수준, 데스크별 액션 플랜을 한 화면에 모았습니다.</figcaption></figure>
         <figure><button class="shot" type="button"><img src="img/ai_answer.jpg" alt="AI 어시스턴트 답변. 상황, 인과 경로, 근거, 교차 점검 섹션" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>AI 답변.</b> "지금 커브 포지션 어떻게 가져가나?"에 상황·인과 경로·근거·교차 점검 순서로 답합니다. 숫자마다 출처 태그가 붙고, 참고한 경로는 체인에 자동으로 표시됩니다.</figcaption></figure>
+          <figcaption><b>AI 답변.</b> '지금 커브 포지션 어떻게 가져가나?'라는 질문에 상황, 인과 경로, 근거, 교차 점검 순서로 답합니다. 수치마다 출처 태그가 붙고, 참고한 경로는 체인에 자동 표시됩니다.</figcaption></figure>
         <figure><button class="shot" type="button"><img src="img/overview.jpg" alt="인텔리전스 체인 전체 화면. 매크로, 채권, 주식 세 레인과 오른쪽 결론 노드" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>인텔리전스 체인.</b> 매크로·채권·주식 세 줄에 지표가 놓이고, 오른쪽 끝이 결론입니다. 각 칸에 담당자 이름이 붙어 있어 누구의 분석인지 보입니다.</figcaption></figure>
+          <figcaption><b>인텔리전스 체인.</b> 매크로·채권·주식 세 레인에 지표를 배치하고 오른쪽 끝에 결론을 둡니다. 각 지표에 담당자 이름이 붙어 있어 누구의 분석인지 바로 알 수 있습니다.</figcaption></figure>
         <figure><button class="shot" type="button"><img src="img/published.jpg" alt="발간 초안이 승인을 거쳐 PUBLISHED 상태가 된 화면" width="1600" height="900" loading="lazy"></button>
-          <figcaption><b>승인형 발간.</b> 코멘트 초안 → 담당자 승인 → 오딘 게시까지 클릭 몇 번이면 되고, 누가 언제 승인했는지 기록이 남습니다.</figcaption></figure>
+          <figcaption><b>승인형 발간.</b> 코멘트 초안 작성 → 담당자 승인 → 오딘 게시가 클릭 몇 번으로 끝나고, 승인자와 승인 시각이 기록됩니다.</figcaption></figure>
       </div>
     </div>
 
     <div class="sub">
-      <div class="sub-h"><h3>운용역이 믿고 쓸 수 있게 만든 장치</h3></div>
+      <div class="sub-h"><h3>운용역이 신뢰하고 쓸 수 있도록 갖춘 장치</h3></div>
       <div class="trust">
-        <div class="tr"><h3>모든 숫자에 계산식</h3><p>변화량 옆에 항상 대입식이 붙습니다. 운용역이 손으로 다시 계산해 볼 수 있습니다.</p>
+        <div class="tr"><h3>모든 수치에 계산식</h3><p>변화량 옆에 항상 대입식을 표시합니다. 운용역이 직접 다시 계산해 확인할 수 있습니다.</p>
           <div class="formula">Δ국고 3Y = 0.35×Δ기준금리 + 0.35×ΔUST 10Y <em>= +17.5bp</em></div></div>
-        <div class="tr"><h3>전이계수는 데이터로 검증</h3><p>사전에 정했던 β를 2017~2026년 데이터 회귀로 다시 추정했습니다. 회귀로 뒷받침되지 않는 관계는 '전문가 사전값'으로 화면에 따로 표시합니다. 아래 표를 참고하세요.</p></div>
-        <div class="tr"><h3>그날 알 수 있던 것만 사용</h3><p>수요예측 결과는 발표 다음 날부터, CB는 발행일부터, 거시 지표는 공표 시차를 적용해 씁니다. 과거 화면을 재현할 때 미래 정보가 섞이지 않습니다.</p></div>
-        <div class="tr"><h3>성과를 과장하지 않는 로그</h3><p>실제 판단(REAL), 연습 판단(SIMULATED), 미확정(PENDING)을 나눠 집계합니다. 미확정 값을 0으로 채우지 않고, 성과가 나쁜 연습 로그도 그대로 보여 줍니다.</p></div>
-        <div class="tr"><h3>현재 수준과 전망을 구분</h3><p>게이지 숫자는 지난 1년 중 오늘 값의 위치(백분위)이며 전망이 아닙니다. "어떻게 대응할지"는 판단 신호와 액션 플랜이 맡습니다.</p></div>
-        <div class="tr"><h3>AI는 설명만, 숫자는 엔진이</h3><p>Claude는 질문 해석·시나리오 선택·설명 작성만 합니다. 숫자는 엔진과 담당자 모델의 계산값만 쓰고, 답은 정해진 형식(결론·데스크별 액션·위험·점검 항목)으로 제출됩니다. 체인 적용·판단 기록·게시는 사람이 누릅니다.</p></div>
-        <div class="tr"><h3>데이터 신선도를 항상 표시</h3><p>모든 화면에 LIVE·FILE·SNAPSHOT·STALE 표시가 붙습니다. 수집이 실패하면 저장된 스냅샷으로 대체하고, 장중 잠정값은 잠정이라고 적습니다.</p></div>
-        <div class="tr"><h3>채권 규칙은 백테스트로 선택</h3><p>2017-03~2026-09 검증. 변동성 타깃팅 듀레이션은 연수익이 벤치마크와 비슷하면서(0.95% vs 0.99%) 변동성은 31% 낮고, 최대 손실폭은 −14.3%에서 −10.6%로 줄었습니다. 크레딧 비중 규칙은 고정 20% 대비 연 +5.8bp이고 2020·2022·2023 위기 해에 모두 앞섰습니다.</p></div>
+        <div class="tr"><h3>전이계수는 데이터로 검증</h3><p>사전에 정한 β를 2017~2026년 데이터 회귀로 다시 추정했습니다. 회귀로 뒷받침되지 않는 관계는 '전문가 사전값'으로 화면에 구분 표시합니다(아래 표 참조).</p></div>
+        <div class="tr"><h3>당일 공표된 정보만 사용</h3><p>수요예측 결과는 발표 다음 날부터, CB는 발행일부터 반영하고, 거시 지표에는 공표 시차를 적용합니다. 과거 화면을 재현할 때 미래 정보가 섞이지 않습니다.</p></div>
+        <div class="tr"><h3>성과를 과장하지 않는 판단 로그</h3><p>실제 판단(REAL), 가상 판단(SIMULATED), 미확정(PENDING)을 구분해 집계합니다. 미확정 값을 0으로 채우지 않고, 성과가 나쁜 가상 판단도 그대로 표시합니다.</p></div>
+        <div class="tr"><h3>현재 수준과 전망을 구분</h3><p>게이지 수치는 최근 1년 분포에서 오늘 값이 놓인 위치(백분위)를 나타내며 전망이 아닙니다. 대응 방향은 판단 신호와 액션 플랜이 제시합니다.</p></div>
+        <div class="tr"><h3>AI는 설명, 수치는 엔진</h3><p>Claude는 질문 해석, 시나리오 선택, 설명 작성만 담당합니다. 수치는 엔진과 담당 모델의 계산값만 사용하고, 답변은 정해진 형식(결론, 데스크별 액션, 위험, 점검 항목)으로 제출됩니다. 체인 적용, 판단 기록, 게시는 사람이 실행합니다.</p></div>
+        <div class="tr"><h3>데이터 신선도 상시 표시</h3><p>모든 화면에 LIVE·FILE·SNAPSHOT·STALE 상태를 표시합니다. 수집에 실패하면 저장된 스냅샷으로 대체하고, 장중 잠정값에는 잠정 표시를 붙입니다.</p></div>
+        <div class="tr"><h3>채권 규칙은 백테스트로 선정</h3><p>2017년 3월~2026년 9월 구간에서 검증했습니다. 변동성 타깃팅 듀레이션은 연수익률이 벤치마크와 비슷한 수준(0.95% vs 0.99%)에서 변동성을 31% 낮추고 최대 손실폭을 −14.3%에서 −10.6%로 줄였습니다. 크레딧 비중 규칙은 고정 20% 대비 연 +5.8bp이며 2020년, 2022년, 2023년 위기 국면에서 모두 우위였습니다.</p></div>
       </div>
     </div>
 
     <div class="sub">
-      <div class="sub-h"><h3>전이계수 재추정 결과</h3><span class="mono">DECISIONS D-012 · h일 변화 회귀(5/20/60 영업일)</span></div>
+      <div class="sub-h"><h3>전이계수 재추정 결과</h3><span class="mono">DECISIONS D-012 · 5/20/60영업일 변화량 회귀</span></div>
       <div class="tbl wide">
         <table>
           <thead><tr><th>연결</th><th>기존 β</th><th>변경 β</th><th>근거</th></tr></thead>
           <tbody>
-            <tr><td>UST 10Y → 국고 3Y</td><td class="n"><span class="was">0.62</span></td><td class="n"><b>0.35</b></td><td>5~20일 회귀 0.33, R² 0.18~0.22</td></tr>
-            <tr><td>국고 3Y → 코스닥 할인율</td><td class="n"><span class="was">0.57</span></td><td class="n"><b>0.90</b></td><td>국고 3Y→10Y 0.93, R² 0.79~0.94</td></tr>
-            <tr><td>국고 3Y → 크레딧</td><td class="n"><span class="was">0.33</span></td><td class="n"><b>0.20</b></td><td>스트레스 구간 60일 +0.23, R² 0.11 (충격 전파용으로 유지)</td></tr>
-            <tr><td>국고 3Y → 커브</td><td class="n"><span class="was">−0.58</span></td><td class="n"><b>−0.10</b></td><td>2022~23 스트레스 −0.10~−0.15, 평시 ≈ 0</td></tr>
+            <tr><td>UST 10Y → 국고 3Y</td><td class="n"><span class="was">0.62</span></td><td class="n"><b>0.35</b></td><td>5~20영업일 회귀 0.33, R² 0.18~0.22</td></tr>
+            <tr><td>국고 3Y → 코스닥 할인율</td><td class="n"><span class="was">0.57</span></td><td class="n"><b>0.90</b></td><td>국고 3Y→10Y 회귀 0.93, R² 0.79~0.94</td></tr>
+            <tr><td>국고 3Y → 크레딧</td><td class="n"><span class="was">0.33</span></td><td class="n"><b>0.20</b></td><td>스트레스 구간 60영업일 +0.23, R² 0.11 (가상 충격 전파용으로 유지)</td></tr>
+            <tr><td>국고 3Y → 커브</td><td class="n"><span class="was">−0.58</span></td><td class="n"><b>−0.10</b></td><td>2022~23년 스트레스 구간 −0.10~−0.15, 평시 ≈ 0</td></tr>
             <tr><td>UST 10Y → KOSPI</td><td class="n"><span class="was">0.45</span></td><td class="n"><b>0.30</b></td><td>2024~26년 100bp당 −3.3%</td></tr>
-            <tr><td>연준 → UST 10Y</td><td class="n"><span class="was">0.74</span></td><td class="n"><b>0.45</b></td><td>전문가 판단: 정책금리는 계단형이라 일별 회귀가 맞지 않음</td></tr>
-            <tr><td>할인율 → IPO 수요</td><td class="n">0.44</td><td class="n">0.44</td><td>이론값 유지, 전문가 사전값으로 표시 (2024~26 표본 R² 0.04)</td></tr>
+            <tr><td>연준 → UST 10Y</td><td class="n"><span class="was">0.74</span></td><td class="n"><b>0.45</b></td><td>전문가 판단 (정책금리는 계단형으로 움직여 일별 회귀에 부적합)</td></tr>
+            <tr><td>할인율 → IPO 수요</td><td class="n">0.44</td><td class="n">0.44</td><td>이론값 유지, 전문가 사전값으로 표시 (2024~26년 표본 R² 0.04)</td></tr>
           </tbody>
         </table>
       </div>
@@ -597,23 +643,23 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
 
     <div class="sub">
       <div class="limits">
-        <div><h3>알려 둘 한계</h3>
+        <div><h3>한계</h3>
           <ul>
             <li>규칙 기반 참고안이며 투자 권유가 아닙니다.</li>
-            <li>크레딧은 부도 손실을 반영하지 않고, AA- 3년 금리 하나로 회사채 전체를 대신합니다.</li>
-            <li>8511 Kim Filter 이력은 전체 표본으로 다시 적합해서 시점 재현이 아닙니다. 화면에 그렇게 적혀 있습니다.</li>
-            <li>변동성 타깃팅은 위기 직후 반등장에서 뒤처집니다.</li>
-            <li>스왑레이트·CDS는 무료 공개 출처가 없어 주간 보고서에서 N/A로 둡니다.</li>
-            <li>시간 절감 수치는 팀 추정이고, 펀드의 실제 포지션은 아직 연결하지 않았습니다(보유 기록은 수동 입력).</li>
+            <li>크레딧 모형은 부도 손실을 반영하지 않으며, 회사채 AA- 3년 금리 하나로 회사채 전체를 대표합니다.</li>
+            <li>8511의 Kim Filter 이력은 전체 표본으로 재적합한 값이어서 엄밀한 과거 시점 재현이 아니며, 화면에 이를 명시했습니다.</li>
+            <li>변동성 타깃팅 규칙은 위기 직후 반등 국면에서 벤치마크에 뒤처집니다.</li>
+            <li>스왑레이트와 CDS는 공개 무료 출처가 없어 주간 보고서에서 N/A로 표시합니다.</li>
+            <li>시간 절감 수치는 팀 추정치이며, 펀드의 실제 포지션은 아직 연동하지 않았습니다(보유 기록은 수동 입력).</li>
           </ul></div>
-        <div><h3>현업 적용 조건</h3>
+        <div><h3>현업 적용을 위한 조건</h3>
           <ul>
-            <li>스냅샷 자동 생성 스케줄러를 사내 승인 환경으로 옮깁니다.</li>
-            <li>지표·연결·전이계수를 분기 1회 담당자가 검수합니다.</li>
-            <li>판단 로그 입력 책임자를 지정합니다.</li>
-            <li>인포맥스·블룸버그 등 사내 데이터 연동 승인을 받습니다.</li>
-            <li>오딘 정식 탑재를 IT와 협의합니다.</li>
-            <li>사내 DB(펀드 포지션·듀레이션·보유 종목)를 붙이면 펀드별 운용 전략까지 같은 체인에서 나옵니다.</li>
+            <li>스냅샷 자동 생성 스케줄러를 사내 승인 환경으로 이관</li>
+            <li>지표·연결·전이계수(온톨로지)를 분기 1회 담당자가 검수</li>
+            <li>판단 로그 입력 책임자 지정</li>
+            <li>인포맥스·블룸버그 등 사내 데이터 연동 승인</li>
+            <li>오딘 정식 탑재를 위한 IT 협의</li>
+            <li>사내 DB(펀드 포지션·듀레이션·보유 종목) 연계 시 펀드별 운용 전략까지 같은 체인에서 도출 가능</li>
           </ul></div>
       </div>
     </div>
@@ -622,98 +668,98 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
   <!-- ================= 4. INTENT ================= -->
   <section id="intent">
     <div class="eyebrow">심사 항목 <span>·</span> 개발 의도</div>
-    <h2>무엇을 골랐고, 무엇을 버렸나</h2>
-    <p class="lead">VALKYRIE의 목표는 운용역 의사결정의 오토파일럿입니다. 운용역이 질문하면 체인이 계산하고, 데스크는 액션 플랜을 받습니다. 그 목표에 맞춰 내린 선택들입니다.</p>
+    <h2>무엇을 선택하고 무엇을 버렸는가</h2>
+    <p class="lead">VALKYRIE가 지향하는 것은 운용역 의사결정의 오토파일럿입니다. 운용역이 질문하면 체인이 계산하고, 데스크는 액션 플랜을 받습니다. 이 목표에 맞춰 내린 설계 선택을 정리합니다.</p>
 
     <div class="intent" style="margin-top:30px">
       <div class="it"><div><h3>자산군을 하나의 체인으로</h3><p class="alt">버린 대안: <s>자산군별 개별 대시보드</s></p></div>
-        <p class="why">실제 운용에서는 하나의 금리 충격이 채권과 코스닥 주식에 같은 듀레이션 논리로 동시에 번집니다. 따로 보면 판단이 어긋납니다. 연결은 리서치 논리로 고정하고 값만 데이터로 바뀌게 해서, 운용역이 대입식으로 검증할 수 있게 했습니다.</p></div>
-      <div class="it"><div><h3>담당자 모델은 경쟁자가 아니라 입력</h3><p class="alt">버린 대안: <s>사후 비교로 '충돌' 표시</s></p></div>
-        <p class="why">서로 다른 질문을 비교하면 가짜 충돌이 생깁니다. 세 담당자의 모델 결과를 VALKYRIE의 입력으로 받게 바꿨고, 새 모델도 이 경로로만 들어오게 해서 충돌이 구조적으로 생기지 않습니다.</p></div>
-      <div class="it"><div><h3>시니어 운용역 × AI로 만드는 주니어 리서치</h3><p class="alt">사람: 연결·전이계수·판단 로직 설계와 검수 · AI: 파이프라인·모델·화면 구현</p></div>
-        <p class="why">어떤 지표가 어떤 가격에 전이되는지는 실무 경험에서 나오고, 구현 속도는 AI에서 나옵니다. 둘을 합쳐 짧은 기간에 실제 운용 판단 수준의 로직을 만들었습니다. 예를 들어 채권 모델이 금리 경로를 '인하 지연'으로 표시했을 때 담당자가 "지금은 인상 사이클"이라고 짚어 '인상 사이클 지속'으로 바로잡았습니다.</p></div>
+        <p class="why">실제 운용에서는 하나의 금리 충격이 채권과 코스닥 주식에 같은 듀레이션 논리로 동시에 전달됩니다. 자산군을 따로 보면 판단이 서로 어긋납니다. 관계는 리서치 논리로 고정하고 지표 값만 데이터에 따라 바뀌게 해, 운용역이 대입식으로 검증할 수 있도록 했습니다.</p></div>
+      <div class="it"><div><h3>담당 모델은 비교 대상이 아닌 입력</h3><p class="alt">버린 대안: <s>사후 비교로 '충돌' 표시</s></p></div>
+        <p class="why">서로 다른 질문에 대한 답을 나란히 비교하면 실제로는 없는 충돌이 생깁니다. 담당자 세 명의 모델 결과를 VALKYRIE의 입력으로 받도록 바꾸고, 새 모델도 이 경로로만 들어오게 해 구조적으로 충돌이 발생하지 않게 했습니다.</p></div>
+      <div class="it"><div><h3>시니어 운용역의 설계 × AI를 쓰는 주니어의 구현</h3><p class="alt">역할: 시니어 운용역은 관계·전이계수·판단 로직 설계와 검수, 주니어 리서치는 Claude Code로 파이프라인·모델·화면 구현</p></div>
+        <p class="why">어떤 지표가 어떤 가격에 전이되는지는 실무 경험에서, 구현 속도는 AI에서 나옵니다. 둘을 결합해 짧은 기간에 실제 운용 판단 수준의 로직을 구현했습니다. 예를 들어 채권 모델이 금리 경로를 '인하 지연'으로 표시했을 때 담당 운용역이 현재 국면은 인상 사이클임을 지적해 '인상 사이클 지속'으로 수정했습니다.</p></div>
       <div class="it"><div><h3>방향 예측 대신 위험 크기 조절</h3><p class="alt">버린 대안: <s>위기 점수로 금리 방향에 베팅</s></p></div>
-        <p class="why">검증해 보니 위기 신호는 금리 방향을 맞히지 못했고(상관 ±0.06) 변동성은 잘 맞혔습니다(0.62~0.72). 그래서 듀레이션은 방향이 아니라 변동성에 맞춰 줄이거나 늘립니다. 방향 베팅형 규칙은 백테스트에서 벤치마크보다 연수익이 낮았습니다(0.53% vs 0.99%).</p></div>
-      <div class="it"><div><h3>LLM은 설명, 숫자는 엔진</h3><p class="alt">버린 대안: <s>LLM 단독 전망·수치 생성</s></p></div>
-        <p class="why">운용 Copilot으로 쓰려면 "왜 이 액션인가"를 숫자와 계산식까지 따라갈 수 있어야 합니다. 수치 출처를 엔진으로 고정해 환각을 막고, AI가 어떤 시나리오를 계산했는지 과정을 화면에 공개합니다.</p></div>
-      <div class="it"><div><h3>승인형 Copilot</h3><p class="alt">버린 대안: <s>판단 자동 게시·자동 실행</s></p></div>
-        <p class="why">최종 책임은 운용역에게 있습니다. AI는 근거와 액션 초안을 내고, 판단 기록과 게시는 사람이 누릅니다. 사내 펀드 DB는 새 지표로 붙일 수 있게 스키마를 열어 두었습니다.</p></div>
+        <p class="why">검증 결과 위기 신호는 이후 금리 방향과 상관이 거의 없었고(±0.06) 변동성과는 상관이 높았습니다(0.62~0.72). 그래서 듀레이션을 금리 방향이 아닌 변동성 수준에 맞춰 조절합니다. 방향 베팅형 규칙은 백테스트에서 벤치마크보다 연수익률이 낮았습니다(0.53% vs 0.99%).</p></div>
+      <div class="it"><div><h3>LLM은 설명, 수치는 엔진</h3><p class="alt">버린 대안: <s>LLM 단독 전망·수치 생성</s></p></div>
+        <p class="why">운용 보조 도구로 쓰려면 '왜 이 액션인가'를 수치와 계산식까지 추적할 수 있어야 합니다. 수치의 출처를 엔진으로 고정해 환각을 차단하고, AI가 어떤 시나리오를 계산했는지 그 과정을 화면에 공개합니다.</p></div>
+      <div class="it"><div><h3>승인형 코파일럿</h3><p class="alt">버린 대안: <s>판단 자동 게시·자동 실행</s></p></div>
+        <p class="why">최종 책임은 운용역에게 있습니다. AI는 근거와 액션 초안을 제시하고, 판단 기록과 게시는 사람이 실행합니다. 사내 펀드 DB를 새 지표로 연결할 수 있도록 스키마를 열어 두었습니다.</p></div>
     </div>
   </section>
 
   <!-- ================= 5. PROCESS ================= -->
   <section id="process">
     <div class="eyebrow">심사 항목 <span>·</span> 개발 과정</div>
-    <h2>본선 당일, 여섯 갈래로 나눠 동시에 만들었습니다</h2>
-    <p class="lead">2026-09-30 하루 동안 Claude Code 세션 6개가 영역을 나눠 병렬로 개발했습니다. 원천 폴더(주식·매크로·채권)는 읽기 전용으로 두고 결과물은 대시보드 폴더에만 만들었습니다. 각 세션은 맡은 파일만 고치고, 다른 세션이 읽는 파일(예: 채권 액션 플랜 JSON의 키)을 바꿀 때는 먼저 알렸습니다.</p>
+    <h2>본선 당일, 여섯 영역으로 나눠 동시에 개발했습니다</h2>
+    <p class="lead">2026년 9월 30일 하루 동안 Claude Code 세션 6개가 영역을 나눠 병렬로 개발했습니다. 원천 데이터 폴더(주식·매크로·채권)는 읽기 전용으로 두고 결과물은 대시보드 폴더에만 생성했습니다. 각 세션은 담당 파일만 수정하고, 다른 세션이 읽는 파일(예: 채권 액션 플랜 JSON의 키)을 바꿀 때는 사전에 알렸습니다.</p>
 
     <div class="sub">
       <div class="gantt-wrap" id="ganttWrap">
         <div class="gantt-scroll">
-          <div class="gantt" id="gantt" role="img" aria-label="2026-09-30 세션별 작업 구간과 주요 요청 시점. 08시 46분 준비 세션 시작, 16시 15분 시연 영상 세션 마지막 기록. 자세한 목록은 아래 시간순 목록에 있습니다."></div>
+          <div class="gantt" id="gantt" role="img" aria-label="2026년 9월 30일 세션별 작업 구간과 주요 요청 시점. 08시 46분 준비 세션 시작, 16시 15분 시연 영상 세션 마지막 기록. 상세 내용은 아래 시간순 목록에 있습니다."></div>
         </div>
-        <div class="g-legend"><span><i class="b"></i>세션 작업 구간 (첫 요청 ~ 마지막 기록)</span><span><i></i>사용자 요청</span><span><i class="k"></i>방향을 바꾼 요청</span></div>
+        <div class="g-legend"><span><i class="b"></i>세션 작업 구간 (첫 요청 ~ 마지막 기록)</span><span><i></i>작업 요청</span><span><i class="k"></i>방향을 바꾼 결정</span></div>
         <div class="g-tip" id="gTip" hidden></div>
       </div>
       <details class="chron" id="chron"><summary>시간순 목록으로 보기</summary><ol id="chronList"></ol></details>
     </div>
 
     <div class="sub">
-      <div class="sub-h"><h3>시도 → 막힌 지점 → 해결 → 결과</h3><span class="mono">결정 기록은 docs/DECISIONS.md</span></div>
+      <div class="sub-h"><h3>시도 → 막힌 지점 → 해결 → 결과</h3><span class="mono">결정 기록: docs/DECISIONS.md</span></div>
       <div class="steps">
         <div class="step"><div class="step-h"><h3>세 분야를 하나의 체인으로 통합</h3><span class="mono">워크시트 03 · D-004</span></div><div class="step-b">
-          <div><span>시도</span>매크로·채권·주식 담당이 각자 모델과 화면을 따로 만든 뒤 하나의 체인으로 합쳤습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>같은 "UST +50bp" 충격에도 분야마다 국고·할인율 값이 달랐습니다. 데이터 형식과 계산식이 각자 코드에 흩어져 있었습니다.</div>
-          <div><span>해결</span>공통 JSON 스키마(노드·관계·판단·로그)로 데이터 계약을 맞추고, 연결을 전이계수 목록으로 분리해 엔진 하나가 상류에서 하류로 계산하게 했습니다.</div>
-          <div class="res"><span>결과</span>모든 분야가 같은 충격에 같은 값을 공유합니다. β만 바꾸면 전 지표가 즉시 다시 계산됩니다. 이후 KOSPI를 더해 17 지표·24 연결.</div></div></div>
+          <div><span>시도</span>매크로·채권·주식 담당자가 각자 모델과 화면을 따로 개발한 뒤 하나의 체인으로 통합했습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>같은 'UST +50bp' 충격에도 분야마다 국고채·할인율 값이 달랐습니다. 데이터 형식과 계산식이 각자의 코드에 흩어져 있었기 때문입니다.</div>
+          <div><span>해결</span>공통 JSON 스키마(노드·관계·판단·로그)로 데이터 계약을 통일하고, 관계를 전이계수 목록으로 분리해 엔진 하나가 상류에서 하류 순서로 계산하도록 했습니다.</div>
+          <div class="res"><span>결과</span>모든 분야가 같은 충격에 같은 값을 공유합니다. β만 바꾸면 전체 지표가 즉시 재계산됩니다. 이후 KOSPI를 추가해 지표 17개·연결 24개가 됐습니다.</div></div></div>
 
         <div class="step"><div class="step-h"><h3>과거 재현에 미래 정보가 섞이는 문제</h3><span class="mono">워크시트 03 · D-001</span></div><div class="step-b">
-          <div><span>시도</span>CPI·GDP 나우캐스팅 결과를 날짜별 지표 값으로 그대로 썼습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>기준월과 공표일이 달라, 과거 시점을 재현하면 그때 아직 발표되지 않은 값이 보였습니다.</div>
-          <div><span>해결</span>값마다 공표 시점 가정을 붙이고, 수요예측은 다음 날부터·CB는 발행일부터 쓰는 규칙을 만들었습니다. 모델 산출값에는 버전과 MAE를 함께 저장했습니다.</div>
-          <div class="res"><span>결과</span>2026-05-04 당시 알 수 있던 정보만으로 판단을 재현합니다. 그날 판단의 D+60 성과는 국고 3년 대비 +215.5bp.</div></div></div>
+          <div><span>시도</span>CPI·GDP 나우캐스팅 결과를 날짜별 지표 값으로 그대로 사용했습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>기준월과 공표일이 달라, 과거 시점을 재현하면 당시 아직 발표되지 않은 값이 화면에 나타났습니다.</div>
+          <div><span>해결</span>값마다 공표 시점 가정을 붙이고, 수요예측은 발표 다음 날부터, CB는 발행일부터 반영하는 규칙을 정했습니다. 모델 산출값에는 버전과 MAE를 함께 저장했습니다.</div>
+          <div class="res"><span>결과</span>2026-05-04 당시 알 수 있던 정보만으로 판단을 재현합니다. 해당 판단의 D+60 성과는 국고 3년 대비 +215.5bp입니다.</div></div></div>
 
-        <div class="step"><div class="step-h"><h3>가짜 표본을 실데이터로 바꾸자 신호가 늘 켜짐</h3><span class="mono">D-001 · D-002</span></div><div class="step-b">
-          <div><span>시도</span>가상 IPO 100건·CB 50건을 38커뮤니케이션·CB Zero Finder(DART)·NAVER 실데이터로 바꿨습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>가상 데이터에 맞춘 기준값이 실데이터에서는 거의 항상 켜졌습니다. 실제 코스닥 CB의 68%가 전환가 아래에 있고, 수요예측 경쟁률 중앙값은 300이 아니라 약 900이었습니다.</div>
-          <div><span>해결</span>고정 기준 대신 변화, 자기 과거 분포(하위 20%), 크레딧 경로로 반응하게 바꿨습니다. 크레딧 → CB 자금 유출 압력은 52bp에서 14%, 68bp에서 54%.</div>
-          <div class="res"><span>결과</span>스냅샷 5개 시점에서 IPO 판단이 보류와 선별을 오가며, 크레딧을 52bp로 옮기면 '선별 청약'으로 바뀝니다.</div></div></div>
+        <div class="step"><div class="step-h"><h3>가상 표본을 실데이터로 바꾸자 신호가 항상 켜진 문제</h3><span class="mono">D-001 · D-002</span></div><div class="step-b">
+          <div><span>시도</span>가상 IPO 100건·CB 50건을 38커뮤니케이션, CB Zero Finder(DART), NAVER의 실데이터로 교체했습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>가상 데이터에 맞춰 둔 기준값이 실데이터에서는 거의 항상 발동했습니다. 실제 코스닥 CB의 68%가 전환가 아래에서 거래되고, 수요예측 경쟁률 중앙값은 300이 아닌 약 900이었습니다.</div>
+          <div><span>해결</span>고정 기준값 대신 변화량, 자체 과거 분포(하위 20%), 크레딧 경로에 반응하도록 바꿨습니다. 크레딧 → CB 차환 유출 압력은 52bp에서 14%, 68bp에서 54%로 계산됩니다.</div>
+          <div class="res"><span>결과</span>스냅샷 5개 시점에서 IPO 판단이 보류와 선별 사이를 오가고, 크레딧을 52bp로 바꾸면 '선별 청약'으로 전환됩니다.</div></div></div>
 
-        <div class="step"><div class="step-h"><h3>"모델 일치 2/3 · 충돌 1"</h3><span class="mono">D-011</span></div><div class="step-b">
-          <div><span>시도</span>VALKYRIE 판단과 담당자 모델 판단을 나란히 놓고 일치 여부를 표시했습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>8512의 코스닥 가격 위험과 VALKYRIE의 IPO 자금 판단처럼 서로 다른 질문을 비교해 '충돌'이라고 불렀습니다.</div>
-          <div><span>해결</span>담당자 모델을 비교 대상이 아니라 엔진의 입력으로 결합했습니다. 채권은 8511 목표 듀레이션, 주식 비중·헤지는 8512, 미국 국면은 8501에서 받습니다.</div>
-          <div class="res"><span>결과</span>헤더 표시가 '모델 반영 3/3'이 됐고, 앞으로 붙는 모델도 같은 경로로만 들어옵니다.</div></div></div>
+        <div class="step"><div class="step-h"><h3>'모델 일치 2/3 · 충돌 1' 표시 문제</h3><span class="mono">D-011</span></div><div class="step-b">
+          <div><span>시도</span>VALKYRIE 판단과 담당 모델 판단을 나란히 놓고 일치 여부를 표시했습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>8512의 코스닥 가격 위험과 VALKYRIE의 IPO 자금 조달 판단처럼 서로 다른 질문의 답을 비교해 '충돌'로 표시하고 있었습니다.</div>
+          <div><span>해결</span>담당 모델을 비교 대상이 아닌 엔진 입력으로 결합했습니다. 채권은 8511의 목표 듀레이션, 주식 비중과 헤지는 8512, 미국 국면은 8501에서 받습니다.</div>
+          <div class="res"><span>결과</span>헤더 표시가 '모델 반영 3/3'으로 바뀌었고, 이후 추가되는 모델도 같은 경로로만 들어옵니다.</div></div></div>
 
-        <div class="step"><div class="step-h"><h3>채권 듀레이션 규칙을 검증으로 다시 고름</h3><span class="mono">D-009 · D-013</span></div><div class="step-b">
-          <div><span>시도</span>위기 점수가 높으면 듀레이션을 줄이는 직관적 규칙을 먼저 만들었습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>백테스트에서 벤치마크보다 연수익이 낮았습니다(0.53% vs 0.99%). 위기 신호와 이후 금리 방향의 상관은 ±0.06에 그쳤습니다.</div>
-          <div><span>해결</span>위기 신호가 잘 맞히는 변동성(상관 0.62~0.72)에 맞춰 듀레이션을 조절하는 변동성 타깃팅으로 바꿨습니다. 금리 방향은 참고 의견으로 따로 표시합니다.</div>
-          <div class="res"><span>결과</span>연수익 0.95% vs 0.99%로 비슷하면서 변동성 −31%, 최대 손실폭 −14.3% → −10.6%.</div></div></div>
+        <div class="step"><div class="step-h"><h3>채권 듀레이션 규칙을 검증으로 재선정</h3><span class="mono">D-009 · D-013</span></div><div class="step-b">
+          <div><span>시도</span>위기 점수가 높으면 듀레이션을 줄이는 직관적인 규칙을 먼저 만들었습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>백테스트에서 벤치마크보다 연수익률이 낮았습니다(0.53% vs 0.99%). 위기 신호와 이후 금리 방향의 상관은 ±0.06에 그쳤습니다.</div>
+          <div><span>해결</span>위기 신호가 잘 예측하는 변동성(상관 0.62~0.72)에 맞춰 듀레이션을 조절하는 변동성 타깃팅으로 바꿨습니다. 금리 방향은 참고 의견으로 별도 표시합니다.</div>
+          <div class="res"><span>결과</span>연수익률 0.95% vs 0.99%로 비슷한 수준을 유지하면서 변동성 −31%, 최대 손실폭 −14.3% → −10.6%.</div></div></div>
 
-        <div class="step"><div class="step-h"><h3>금리 점수가 코로나 신용경색을 놓침</h3><span class="mono">D-009</span></div><div class="step-b">
+        <div class="step"><div class="step-h"><h3>금리 점수가 코로나 신용경색을 놓친 문제</h3><span class="mono">D-009</span></div><div class="step-b">
           <div><span>시도</span>금리 기반 위기 점수로만 채권 시장을 진단했습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>2020년 3~6월 금리 위기 점수는 최고 0.27(정상)이었지만, 실제로는 AA- 스프레드가 59 → 141bp, CP−CD가 26 → 114bp로 벌어졌습니다.</div>
-          <div><span>해결</span>AA- 스프레드와 CP−CD 스프레드의 수준·20일 확대폭으로 신용 스트레스(모형 C)를 만들고, 종합 판정을 금리와 신용 중 더 나쁜 쪽으로 정했습니다.</div>
-          <div class="res"><span>결과</span>신용 위기 구간을 정확히 두 번(2020-03~09 코로나, 2022-10~2023-01 레고랜드) 잡습니다. 크레딧 비중 규칙은 연 +5.8bp.</div></div></div>
+          <div class="stuck"><span>막힌 지점</span>2020년 3~6월 금리 위기 점수는 최고 0.27(정상)에 그쳤지만, 실제로는 AA- 스프레드가 59bp에서 141bp로, CP−CD 스프레드가 26bp에서 114bp로 확대됐습니다.</div>
+          <div><span>해결</span>AA- 스프레드와 CP−CD 스프레드의 수준과 20일 확대폭으로 신용 스트레스 지표(모형 C)를 만들고, 종합 판정은 금리와 신용 중 더 나쁜 쪽을 따르도록 했습니다.</div>
+          <div class="res"><span>결과</span>신용 위기 구간을 정확히 두 번(2020년 3~9월 코로나, 2022년 10월~2023년 1월 레고랜드 사태) 포착합니다. 크레딧 비중 규칙은 고정 비중 대비 연 +5.8bp입니다.</div></div></div>
 
-        <div class="step"><div class="step-h"><h3>전이계수가 운용역에게 의미 없던 문제</h3><span class="mono">D-012</span></div><div class="step-b">
-          <div><span>시도</span>연결 설명에 "β 0.68 · 판단 규칙의 입력 · 사전 정의 관계"처럼 시스템 용어를 썼습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>운용역에게는 의미가 없었고, β 값 자체도 데이터 근거가 없었습니다.</div>
-          <div><span>해결</span>2017~2026 데이터로 β를 다시 추정하고, 연결마다 "의사결정에서 무슨 뜻인지"와 "β의 근거"를 예시와 함께 적었습니다.</div>
-          <div class="res"><span>결과</span>UST → 국고 3년 0.62 → 0.35 등 8개 β를 수정했고, 툴팁·AI 답변이 같은 설명을 씁니다.</div></div></div>
+        <div class="step"><div class="step-h"><h3>전이계수 설명이 운용역에게 와닿지 않은 문제</h3><span class="mono">D-012</span></div><div class="step-b">
+          <div><span>시도</span>관계 설명에 'β 0.68 · 판단 규칙의 입력 · 사전 정의 관계'처럼 시스템 용어를 사용했습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>운용역에게는 의미가 없는 설명이었고, β 값 자체에도 데이터 근거가 없었습니다.</div>
+          <div><span>해결</span>2017~2026년 데이터로 β를 재추정하고, 관계마다 의사결정에서의 의미와 β의 근거를 예시와 함께 기록했습니다.</div>
+          <div class="res"><span>결과</span>UST → 국고 3년 0.62 → 0.35 등 β 8개를 수정했고, 툴팁과 AI 답변이 같은 설명을 사용합니다.</div></div></div>
 
-        <div class="step"><div class="step-h"><h3>LLM이 숫자를 지어내는 문제</h3><span class="mono">워크시트 03 · D-008</span></div><div class="step-b">
-          <div><span>시도</span>시장 데이터를 LLM에 넣고 전망과 액션 플랜을 바로 쓰게 했습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>수치를 임의로 만들거나 같은 질문에도 답이 달라져 운용역이 검증·재현할 수 없었습니다.</div>
-          <div><span>해결</span>Claude가 엔진 도구(시나리오 계산·뉴스 검색)를 직접 호출하고, 답은 정해진 형식으로만 제출하게 했습니다. 숫자는 도구 결과에서만 가져오고 출처 태그를 붙입니다.</div>
-          <div class="res"><span>결과</span>질문 1건 약 $0.05·16초. AI가 참고한 경로가 체인에 자동으로 표시되고, API 키가 없으면 규칙 기반 라우터가 답합니다.</div></div></div>
+        <div class="step"><div class="step-h"><h3>LLM이 수치를 만들어 내는 문제</h3><span class="mono">워크시트 03 · D-008</span></div><div class="step-b">
+          <div><span>시도</span>시장 데이터를 LLM에 입력해 전망과 액션 플랜을 직접 작성하게 했습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>LLM이 수치를 임의로 만들거나 같은 질문에도 다른 답을 내놓아 운용역이 검증하거나 재현할 수 없었습니다.</div>
+          <div><span>해결</span>Claude가 엔진 도구(시나리오 계산, 뉴스 검색)를 직접 호출하고 답변은 정해진 형식으로만 제출하도록 했습니다. 수치는 도구 결과에서만 가져오고 출처 태그를 붙입니다.</div>
+          <div class="res"><span>결과</span>질의 1건당 약 $0.05, 16초. AI가 참고한 경로가 체인에 자동 표시되고, API 키가 없는 환경에서는 규칙 기반 라우터가 답합니다.</div></div></div>
 
-        <div class="step"><div class="step-h"><h3>"기능이 너무 많아서 킥이 안 보인다"</h3><span class="mono">멘토 피드백 · D-016</span></div><div class="step-b">
-          <div><span>시도</span>체인, 충격표, 판단 로그, 브리핑 영상, 마켓 보드를 첫 화면에 모두 보여 줬습니다.</div>
-          <div class="stuck"><span>막힌 지점</span>멘토가 "기능이 너무 많아서 킥이 눈에 안 보인다"고 했습니다.</div>
-          <div><span>해결</span>첫 화면을 구글처럼 질문창 하나로 바꾸고, 체인 오른쪽 끝의 결론 노드를 금색으로 강조했습니다.</div>
-          <div class="res"><span>결과</span>운용역은 질문으로 시작하고, 오늘의 결론 3종이 첫눈에 들어옵니다.</div></div></div>
+        <div class="step"><div class="step-h"><h3>'기능이 너무 많아서 킥이 안 보인다'</h3><span class="mono">멘토 피드백 · D-016</span></div><div class="step-b">
+          <div><span>시도</span>체인, 충격 영향표, 판단 로그, 브리핑 영상, 마켓 보드를 첫 화면에 모두 노출했습니다.</div>
+          <div class="stuck"><span>막힌 지점</span>멘토링에서 '기능이 너무 많아서 킥(핵심 한 방)이 눈에 안 보인다'는 지적을 받았습니다.</div>
+          <div><span>해결</span>첫 화면을 구글 첫 화면처럼 질문창 하나로 바꾸고, 체인 오른쪽 끝의 결론 노드를 금색으로 강조했습니다.</div>
+          <div class="res"><span>결과</span>운용역은 질문으로 시작하고, 오늘의 결론 3종이 한눈에 들어옵니다.</div></div></div>
       </div>
     </div>
   </section>
@@ -722,22 +768,22 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
   <section id="changes">
     <div class="eyebrow">부록 <span>·</span> 기획 대비 변경</div>
     <h2>기획서에서 달라진 점과 이유</h2>
-    <p class="lead">실데이터와 멘토 피드백을 반영하면서 기획서의 예시 수치와 설계 일부가 바뀌었습니다. 이 페이지의 수치는 모두 오른쪽 '실제 구현' 기준입니다.</p>
+    <p class="lead">실데이터와 멘토 피드백을 반영하는 과정에서 기획서의 예시 수치와 설계 일부가 바뀌었습니다. 이 문서의 수치는 모두 '실제 구현' 기준입니다.</p>
     <div class="sub">
       <div class="tbl wide">
         <table>
           <thead><tr><th>항목</th><th>기획서</th><th>실제 구현</th><th>이유</th></tr></thead>
           <tbody>
-            <tr><td><b>온톨로지 규모</b></td><td>노드 16 · 관계 22</td><td>지표 17 · 연결 24</td><td>시장 전체 주식 위험(KOSPI)이 운용역에게 필요해 추가 (D-004)</td></tr>
-            <tr><td><b>국고 전이식</b></td><td>국고 = 0.62×UST10Y + 0.35×BOK</td><td>Δ국고 3Y = 0.35×ΔBOK + 0.35×ΔUST 10Y</td><td>2017~2026 데이터 회귀로 재추정 (D-012)</td></tr>
-            <tr><td><b>크레딧 → 재무점수</b></td><td>52 → 68bp 확대 시 4/5 → 2/5</td><td>68 → 52bp 축소 시 1/5 → 3/5 (아리바이오홀딩스)</td><td>실데이터 크레딧이 5월 이후 63~71bp라 52bp인 날이 없음</td></tr>
-            <tr><td><b>재무점수 항목</b></td><td>ΔGPM·발생액·자산회전율·희석·런웨이</td><td>ΔOPM·부채비율·당좌비율·희석·Put 유출</td><td>실제 재무 데이터로 계산할 수 있는 항목으로 교체 (D-001)</td></tr>
-            <tr><td><b>IPO·CB 표본</b></td><td>가상 IPO 약 100건 · CB 약 50건</td><td>38커뮤니케이션 · CB Zero Finder(DART) · NAVER 실데이터</td><td>실제 판단에 쓰려면 실표본 필요 (D-001)</td></tr>
-            <tr><td><b>채권 판단 표기</b></td><td>SHORT DURATION</td><td>듀레이션 축소 · 위험 축소 (3.37년)</td><td>8511 듀레이션은 방향 예측이 아니라 변동성 기반 위험 조절 (D-013)</td></tr>
-            <tr><td><b>외부 호출</b></td><td>시연 중 0건, 9/29 동결</td><td>실시간 수집 + 실패 시 스냅샷 대체, -Offline 모드</td><td>투자 데이터는 최신이어야 한다는 팀 결정 (D-007)</td></tr>
-            <tr><td><b>명령창</b></td><td>준비 질문 3개 캐시 + 자유 입력만 LLM</td><td>모든 질문을 Claude Sonnet 5.5가 도구 호출로 답변, 규칙 라우터는 대체용</td><td>자유 질의에 즉답하는 운용 의사결정 도구 (D-008)</td></tr>
-            <tr><td><b>실행 형태</b></td><td>로컬 단일 HTML</td><td>로컬 서버(run.ps1, 127.0.0.1:4134) + 오프라인 번들</td><td>실시간 데이터와 AI 연결</td></tr>
-            <tr><td><b>첫 화면</b></td><td>오딘 목업의 VALKYRIE 탭</td><td>질문창 홈 → 체인, 결론 3종 금색</td><td>멘토 피드백 "킥이 안 보인다" (D-016)</td></tr>
+            <tr><td><b>온톨로지 규모</b></td><td>노드 16 · 관계 22</td><td>노드 17 · 관계 24</td><td>시장 전체 주식 위험(KOSPI) 노드가 운용역에게 필요해 추가 (D-004)</td></tr>
+            <tr><td><b>국고 전이식</b></td><td>국고 = 0.62×UST10Y + 0.35×BOK</td><td>Δ국고 3Y = 0.35×ΔBOK + 0.35×ΔUST 10Y</td><td>2017~2026년 데이터 회귀로 재추정 (D-012)</td></tr>
+            <tr><td><b>크레딧 → 재무점수</b></td><td>52 → 68bp 확대 시 4/5 → 2/5</td><td>68 → 52bp 축소 시 1/5 → 3/5 (아리바이오홀딩스)</td><td>실데이터 크레딧 스프레드가 5월 이후 63~71bp로 52bp인 날이 없음</td></tr>
+            <tr><td><b>재무점수 항목</b></td><td>ΔGPM·발생액·자산회전율·희석·런웨이</td><td>ΔOPM·부채비율·당좌비율·희석·풋 유출</td><td>실제 재무 데이터로 계산 가능한 항목으로 교체 (D-001)</td></tr>
+            <tr><td><b>IPO·CB 표본</b></td><td>가상 IPO 약 100건 · CB 약 50건</td><td>38커뮤니케이션 · CB Zero Finder(DART) · NAVER 실데이터</td><td>실제 판단에 쓰려면 실제 표본 필요 (D-001)</td></tr>
+            <tr><td><b>채권 판단 표기</b></td><td>SHORT DURATION</td><td>듀레이션 축소 · 위험 축소 (3.37년)</td><td>8511 듀레이션은 방향 예측이 아닌 변동성 기반 위험 조절 (D-013)</td></tr>
+            <tr><td><b>외부 호출</b></td><td>시연 중 0건, 9/29 동결</td><td>실시간 수집 + 실패 시 스냅샷 대체, 오프라인 모드</td><td>투자 데이터는 최신이어야 한다는 팀 결정 (D-007)</td></tr>
+            <tr><td><b>명령창</b></td><td>준비 질문 3개 캐시 + 자유 입력만 LLM</td><td>모든 질문을 Claude Sonnet 5.5가 도구 호출로 답변, 규칙 라우터는 대체용</td><td>자유 질의에 즉답하는 운용 의사결정 도구로 확장 (D-008)</td></tr>
+            <tr><td><b>실행 형태</b></td><td>로컬 단일 HTML</td><td>로컬 서버(run.ps1, 127.0.0.1:4134) + 오프라인 번들</td><td>실시간 데이터와 AI 연결을 위해</td></tr>
+            <tr><td><b>첫 화면</b></td><td>오딘 목업의 VALKYRIE 탭</td><td>질문창 첫 화면 → 체인, 결론 3종 금색 강조</td><td>멘토 피드백 '킥이 안 보인다' 반영 (D-016)</td></tr>
             <tr><td><b>유사 국면 검색</b></td><td>10초 이내</td><td>약 6ms</td><td>실측</td></tr>
           </tbody>
         </table>
@@ -746,8 +792,8 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
   </section>
 
   <footer>
-    <div><b>7팀 RAVENS · VALKYRIE</b> — 한화자산운용 AI PLUSthon 2026 본선</div>
-    <div>수치 기준: 엔진 기준일 2026-09-29 EOD, 시연 녹화 2026-09-30 15:20 KST, 담당자 앱 캡처 2026-09-30 오후. 선물 계약 수는 장중 잠정값입니다.</div>
+    <div><b>7팀 RAVENS · VALKYRIE</b> · 한화자산운용 AI PLUSthon 2026 본선</div>
+    <div>수치 기준: 엔진 기준일 2026-09-29(EOD), 시연 녹화 2026-09-30 15:20(KST), 담당 모델 앱 캡처 2026-09-30 오후. 선물 계약 수는 장중 잠정값입니다. AI 운용 스타일 펀드 사례는 사내 안내 메일(2026-09-23) 기준입니다.</div>
     <div>데이터 출처: 한국은행 ECOS, FRED, NAVER 금융, CB Zero Finder(DART), 38커뮤니케이션, Google News RSS.</div>
     <div>규칙 기반 참고안이며 투자 권유가 아닙니다.</div>
   </footer>
@@ -765,9 +811,7 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
   /* ---------- theme toggle (per-viewer convenience) ---------- */
   var root = document.documentElement, btn = document.getElementById("themeBtn");
   function current() {
-    var t = root.getAttribute("data-theme");
-    if (t) return t;
-    return window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    return root.getAttribute("data-theme") || "dark";
   }
   function label() { btn.textContent = current() === "dark" ? "라이트" : "다크"; }
   try { var saved = localStorage.getItem("vk-intro-theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
@@ -813,39 +857,39 @@ dialog.lb button{position:absolute;right:0;top:-2px;font:500 12px var(--f-mono);
     { name: "준비", sub: "폴더 구성", start: "08:46", end: "09:23", ev: [
       ["08:46", "작업 폴더 구성 시작"],
       ["08:53", "Valkyrie-Odin 저장소(v3 기준본) 로컬 복사"],
-      ["09:01", "역할 분리 결정: 대시보드 = 결과물, 주식·매크로·채권 = 데이터 참조 전용", 1]] },
+      ["09:01", "폴더 역할 결정: 대시보드는 결과물, 주식·매크로·채권은 데이터 참조 전용", 1]] },
     { name: "VALKYRIE 통합", sub: "v4 · 4134", start: "09:10", end: "16:12", ev: [
       ["09:15", "v3를 기준본으로 두고 버전을 올려 가며 개발하기로 결정", 1],
-      ["10:47", "대시보드 v4 첫 확인"],
-      ["10:50", "사이드바에서 8501 매크로 앱 열기"],
-      ["11:02", "외부 데이터 실시간 연결 (NAVER·ECOS·FRED)", 1],
-      ["11:44", "8511·8512 연동, 글로벌 마켓 보드"],
-      ["13:18", "AI 질문창 연결 (Claude): 질문하면 해석하고 액션 플랜 제시", 1],
+      ["10:47", "대시보드 v4 첫 동작 확인"],
+      ["10:50", "사이드바에서 8501 매크로 앱 연동"],
+      ["11:02", "외부 데이터 실시간 연결(NAVER·ECOS·FRED)", 1],
+      ["11:44", "8511·8512 연동, 글로벌 마켓 보드 추가"],
+      ["13:18", "AI 질문창 연결(Claude): 자연어 질문을 해석해 액션 플랜 제시", 1],
       ["13:42", "AI 답변이 참고한 경로를 체인에 자동 표시"],
-      ["14:18", "움직이는 시황 요약(SITREP)·자산군별 순환 티커"],
-      ["15:32", "마켓 브리핑 영상을 실시간·인터랙티브로"],
-      ["16:06", "멘토 피드백 반영: 질문창 홈, 금색 결론 노드", 1]] },
+      ["14:18", "시황 요약(SITREP)과 자산군별 순환 티커 추가"],
+      ["15:32", "마켓 브리핑을 실시간·인터랙티브 방식으로 개편"],
+      ["16:06", "멘토 피드백 반영: 질문창 첫 화면, 금색 결론 노드", 1]] },
     { name: "주식", sub: "8512 · 김유찬", start: "09:18", end: "15:08", ev: [
-      ["09:18", "NAVER 금융 데이터 수집 (지수·수급·업종·IPO 일정)"],
-      ["10:49", "글로벌 마켓 보드를 팝업으로"],
-      ["10:56", "8511과 같은 형식의 주식 진단 앱 착수", 1],
-      ["11:16", "자율 개선"]] },
+      ["09:18", "NAVER 금융 데이터 수집(지수·수급·업종·IPO 일정)"],
+      ["10:49", "글로벌 마켓 보드 팝업 구현"],
+      ["10:56", "8511과 같은 형식의 주식 진단 앱 개발 착수", 1],
+      ["11:16", "세부 기능 자율 개선"]] },
     { name: "채권", sub: "8511 · 정훈", start: "09:26", end: "15:14", ev: [
-      ["09:28", "채권 위기 진단 설계 문서 실행 (Kim Filter)"],
-      ["09:40", "위기 진단에 액션 플랜 추가 (듀레이션·만기·헤지)", 1],
-      ["09:47", "금리 경로를 '인상 사이클 지속'으로 바로잡음"],
-      ["10:26", "다른 사람에게 설명하는 앱(8511)"],
+      ["09:28", "채권 위기 진단 설계 문서 구현(Kim Filter)"],
+      ["09:40", "위기 진단에 액션 플랜 추가(듀레이션·만기·헤지)", 1],
+      ["09:47", "금리 경로 판단을 '인상 사이클 지속'으로 수정"],
+      ["10:26", "설명용 Streamlit 앱(8511) 제작"],
       ["10:33", "시각화·애니메이션 고도화"],
-      ["13:25", "크레딧 스프레드 분석 추가 (모형 C)", 1]] },
+      ["13:25", "크레딧 스프레드 분석 추가(모형 C)", 1]] },
     { name: "매크로", sub: "8501 · 정희강", start: "09:56", end: "15:54", ev: [
-      ["10:01", "재구축 매뉴얼대로 매크로 앱(8501) 작성", 1],
-      ["10:59", "8511 디자인 언어 적용"],
-      ["11:34", "자율 개선 (What-If·시나리오 비교 등)"],
-      ["15:13", "Weekly Updates 보고서 PDF 버튼", 1]] },
+      ["10:01", "재구축 매뉴얼에 따라 매크로 앱(8501) 작성", 1],
+      ["10:59", "8511과 같은 디자인 적용"],
+      ["11:34", "세부 기능 자율 개선(가상 충격·시나리오 비교 등)"],
+      ["15:13", "Weekly Updates 보고서 PDF 생성 버튼 추가", 1]] },
     { name: "시연 영상", sub: "발표 자료", start: "14:38", end: "16:15", ev: [
-      ["14:42", "대시보드를 클릭하며 시연하는 영상 착수"],
-      ["14:46", "발표 구성·기획서 반영, 한글 자막과 스크립트", 1],
-      ["15:41", "4분 확장, 사이드바 도구 설명, 아나운서풍 음성 해설"]] }
+      ["14:42", "대시보드 시연 영상 제작 착수"],
+      ["14:46", "발표 구성과 기획서 반영, 한글 자막·스크립트 작성", 1],
+      ["15:41", "4분으로 확장, 사이드바 도구 설명과 음성 해설 추가"]] }
   ];
   function mins(s) { var p = s.split(":"); return +p[0] * 60 + +p[1]; }
   function pct(s) { return ((mins(s) - T0) / (T1 - T0) * 100).toFixed(3) + "%"; }

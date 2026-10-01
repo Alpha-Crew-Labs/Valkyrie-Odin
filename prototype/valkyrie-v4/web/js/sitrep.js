@@ -52,13 +52,13 @@ VK.sitrep = (function () {
     if (wt && wt.sectors && wt.sectors.length) prio(5.5, "주목 섹터", "cy",
       wt.sectors.slice(0, 3).map(function (s) { return s.name + " " + sg(s.changeRate) + "%" + (s.tags && s.tags.length ? " (" + s.tags[0].t + ")" : ""); }).join(" · ") +
         (wt.themes && wt.themes.length ? " · 테마 " + wt.themes[0].name + " " + sg(wt.themes[0].changeRate) + "%" : ""),
-      "NAVER 업종·테마 · VALKYRIE 기준 태그 · 자동 선정", "cb");
+      "업종·테마 실시간 · VALKYRIE 기준 태그 · 자동 선정", "cb");
     // 6. live market movers
     var b = live("market_board");
     if (b && b.items) {
       var mv = b.items.filter(function (x) { return x.changeRate !== null && x.changeRate !== undefined; }).sort(function (a, c) { return Math.abs(c.changeRate) - Math.abs(a.changeRate); }).slice(0, 4);
       if (mv.length) prio(6, "LIVE 마켓", "cy", mv.map(function (x) { return x.label + " " + sg(x.changeRate) + "%"; }).join(" · "),
-        "NAVER · " + (b.asOf || "").replace("T", " ").slice(5, 16) + " · 큰 움직임 순", "market");
+        "LIVE · " + (b.asOf || "").replace("T", " ").slice(5, 16) + " · 큰 움직임 순", "market");
       var u = b.items.filter(function (x) { return x.code === "US10YT=RR"; })[0];
       var n = VK.market && VK.market.nowcast();
       if (u && n && Math.abs(n.bp) >= 1) prio(6.5, "NOWCAST", "am", "장중 미10년물 " + u.price.toFixed(3) + "% · 엔진 EOD 대비 " + sg(n.bp, 1) + "bp", "상단 NOWCAST 버튼으로 체인 전이", "impact");
@@ -68,20 +68,20 @@ VK.sitrep = (function () {
     if (fl && fl.markets && fl.markets.KOSPI) {
       var rows = fl.markets.KOSPI.slice(-20), sum = function (k) { return rows.reduce(function (s, r) { return s + (r[k] || 0); }, 0); };
       prio(7, "수급", (sum("foreign") < 0 ? "rd" : "gr"), "코스피 20일 외국인 " + jo(sum("foreign")) + " · 기관 " + jo(sum("institution")) + " · 개인 " + jo(sum("individual")),
-        "NAVER 투자자별 매매동향 · 당일 " + esc(rows[rows.length - 1].date), "market");
+        "투자자별 매매동향 · 당일 " + esc(rows[rows.length - 1].date), "market");
     }
     var lq = live("liquidity");
     if (lq && lq.rows && lq.rows.length > 21) {
       var l = lq.rows[lq.rows.length - 1], p = lq.rows[lq.rows.length - 21];
       prio(7.5, "증시자금", "mu", "고객예탁금 " + (l.customer_deposit / 1e4).toFixed(1) + "조 (20일 " + sg((l.customer_deposit / p.customer_deposit - 1) * 100, 1) + "%) · 신용잔고 " + (l.credit_loan / 1e4).toFixed(1) + "조 (" + sg((l.credit_loan / p.credit_loan - 1) * 100, 1) + "%)",
-        "NAVER 증시자금동향 · " + esc(l.date), "market");
+        "증시자금동향 · " + esc(l.date), "market");
     }
     // 8. calendar
     var cal = live("calendar");
     if (cal && cal.items) {
       var today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
       var ev = cal.items.filter(function (x) { return x.category === "economicIndicators" && x.date >= today; }).slice(0, 3);
-      if (ev.length) prio(8, "캘린더", "mu", ev.map(function (x) { return x.date.slice(5) + " " + ({ KOR: "KR", USA: "US" }[x.nation] || x.nation || "") + " " + x.title; }).join(" · "), "예정 지표 · NAVER", "market");
+      if (ev.length) prio(8, "캘린더", "mu", ev.map(function (x) { return x.date.slice(5) + " " + ({ KOR: "KR", USA: "US" }[x.nation] || x.nation || "") + " " + x.title; }).join(" · "), "예정 지표", "market");
     }
     // 9. news
     var nw = live("news");

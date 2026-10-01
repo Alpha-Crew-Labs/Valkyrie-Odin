@@ -227,7 +227,7 @@ VK.brief = (function () {
   function frame() {
     var ed = B.edition || {};
     return '<div class="bp"><div class="bp-top"><span class="bp-logo">▶ VALKYRIE <b>BRIEFING</b></span><span class="bp-ed">' + esc(ed.label || "") + " · " + esc(ed.at || "") +
-      " · 데이터 " + esc(B.date || "") + '</span><span class="bp-len" id="bpLen">≈ ' + mmss(total()) + '</span><span class="bp-live snap" id="bpLive"><i></i>NAVER</span><span class="bp-clock num" id="bpClock"></span><span class="grow"></span><span class="bp-note">' + esc(B.note || "") + '</span><button class="bp-x" data-bp="close" title="닫기 (Esc)">✕</button></div>' +
+      " · 데이터 " + esc(B.date || "") + '</span><span class="bp-len" id="bpLen">≈ ' + mmss(total()) + '</span><span class="bp-live snap" id="bpLive"><i></i>MARKET</span><span class="bp-clock num" id="bpClock"></span><span class="grow"></span><span class="bp-note">' + esc(B.note || "") + '</span><button class="bp-x" data-bp="close" title="닫기 (Esc)">✕</button></div>' +
       '<div class="bp-strip" id="bpStrip"></div>' +
       '<div class="bp-stage" id="bpStage"></div><div class="bp-prog"><i id="bpProg"></i></div><div class="bp-sub" id="bpSub"></div>' +
       '<div class="bp-ctl"><button data-bp="prev" title="이전 장면 (←)">⏮</button><button data-bp="play" id="bpPlay" title="재생/일시정지 (Space)">❚❚</button><button data-bp="next" title="다음 장면 (→)">⏭</button>' +
@@ -343,7 +343,7 @@ VK.brief = (function () {
     if (!b) return;
     var src = a ? a.source : "—";
     b.className = "bp-live " + (src === "LIVE" ? "live" : src === "STALE" ? "stale" : "snap");
-    b.innerHTML = "<i></i>NAVER " + esc(src) + (a && a.sec !== null ? " · " + (a.sec < 60 ? a.sec + "s" : Math.round(a.sec / 60) + "m") : "");
+    b.innerHTML = "<i></i>MARKET " + esc(src) + (a && a.sec !== null ? " · " + (a.sec < 60 ? a.sec + "s" : Math.round(a.sec / 60) + "m") : "");
   }
   function clock() {
     var c = document.getElementById("bpClock"); if (!c) return;

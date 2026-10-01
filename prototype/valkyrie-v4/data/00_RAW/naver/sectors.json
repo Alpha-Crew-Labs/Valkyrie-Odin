@@ -1,505 +1,589 @@
 {
-  "asOf": "20260930164912",
+  "asOf": "20261001092512",
   "units": {
     "marketCap": "백만원",
     "tradeAmount": "백만원"
   },
   "items": [
     {
-      "no": "334",
-      "name": "무역회사와판매업체",
-      "changeRate": 4.27,
-      "change3d": -1.04,
-      "rise": 4.0,
-      "fall": 3.0,
-      "steady": 1.0,
-      "total": 8.0,
-      "marketCap": 14239526.0,
-      "tradeAmount": 47628000.0,
-      "leaders": [
-        {
-          "code": "001250",
-          "name": "GS글로벌"
-        },
-        {
-          "code": "001120",
-          "name": "LX인터내셔널"
-        }
-      ]
-    },
-    {
-      "no": "295",
-      "name": "에너지장비및서비스",
-      "changeRate": 3.34,
-      "change3d": 1.63,
-      "rise": 23.0,
-      "fall": 9.0,
-      "steady": 2.0,
-      "total": 34.0,
-      "marketCap": 23094451.0,
-      "tradeAmount": 351218875.0,
-      "leaders": [
-        {
-          "code": "136150",
-          "name": "원일티엔아이"
-        },
-        {
-          "code": "322000",
-          "name": "HD현대에너지솔루션"
-        }
-      ]
-    },
-    {
-      "no": "310",
-      "name": "광고",
-      "changeRate": 2.85,
-      "change3d": 0.46,
-      "rise": 9.0,
-      "fall": 10.0,
-      "steady": 0.0,
-      "total": 19.0,
-      "marketCap": 3840886.0,
-      "tradeAmount": 40084083.0,
-      "leaders": [
-        {
-          "code": "050090",
-          "name": "비케이홀딩스"
-        },
-        {
-          "code": "030000",
-          "name": "제일기획"
-        }
-      ]
-    },
-    {
-      "no": "262",
-      "name": "생명과학도구및서비스",
-      "changeRate": 2.63,
-      "change3d": 0.61,
-      "rise": 21.0,
-      "fall": 12.0,
-      "steady": 8.0,
-      "total": 41.0,
-      "marketCap": 9117775.0,
-      "tradeAmount": 60987334.0,
-      "leaders": [
-        {
-          "code": "291650",
-          "name": "츌립앤사이언스"
-        },
-        {
-          "code": "494120",
-          "name": "큐리오시스"
-        }
-      ]
-    },
-    {
       "no": "270",
       "name": "자동차부품",
-      "changeRate": 2.4,
-      "change3d": -0.15,
-      "rise": 70.0,
-      "fall": 76.0,
-      "steady": 8.0,
+      "changeRate": 2.31,
+      "change3d": 1.03,
+      "rise": 69.0,
+      "fall": 56.0,
+      "steady": 29.0,
       "total": 154.0,
-      "marketCap": 76921846.0,
-      "tradeAmount": 324361654.0,
+      "marketCap": 77041039.0,
+      "tradeAmount": 119693301.0,
       "leaders": [
         {
           "code": "005030",
           "name": "부산주공"
         },
         {
-          "code": "900070",
-          "name": "글로벌에스엠"
+          "code": "018880",
+          "name": "한온시스템"
         }
       ]
     },
     {
-      "no": "272",
-      "name": "화학",
-      "changeRate": 1.95,
-      "change3d": 0.27,
-      "rise": 73.0,
-      "fall": 43.0,
+      "no": "263",
+      "name": "게임엔터테인먼트",
+      "changeRate": 2.22,
+      "change3d": -0.51,
+      "rise": 21.0,
+      "fall": 7.0,
       "steady": 6.0,
-      "total": 122.0,
-      "marketCap": 94160151.0,
-      "tradeAmount": 574093327.0,
+      "total": 34.0,
+      "marketCap": 27291610.0,
+      "tradeAmount": 25122122.0,
       "leaders": [
         {
-          "code": "457190",
-          "name": "이수스페셜티케미컬"
+          "code": "036570",
+          "name": "NC"
         },
         {
-          "code": "217910",
-          "name": "에스제이켐"
+          "code": "067000",
+          "name": "조이시티"
         }
       ]
     },
     {
-      "no": "304",
-      "name": "철강",
-      "changeRate": 1.38,
-      "change3d": -1.68,
-      "rise": 40.0,
-      "fall": 13.0,
-      "steady": 2.0,
-      "total": 55.0,
-      "marketCap": 38088865.0,
-      "tradeAmount": 340701369.0,
-      "leaders": [
-        {
-          "code": "023790",
-          "name": "동일스틸럭스"
-        },
-        {
-          "code": "008970",
-          "name": "KBI동양철관"
-        }
-      ]
-    },
-    {
-      "no": "320",
-      "name": "건축제품",
-      "changeRate": 1.16,
-      "change3d": 0.13,
-      "rise": 6.0,
-      "fall": 4.0,
+      "no": "271",
+      "name": "레저용장비와제품",
+      "changeRate": 1.34,
+      "change3d": 0.41,
+      "rise": 4.0,
+      "fall": 8.0,
       "steady": 1.0,
-      "total": 11.0,
-      "marketCap": 606314.0,
-      "tradeAmount": 12772627.0,
+      "total": 13.0,
+      "marketCap": 947087.0,
+      "tradeAmount": 254762.0,
       "leaders": [
         {
-          "code": "014285",
-          "name": "금강공업우"
+          "code": "206950",
+          "name": "볼빅"
         },
         {
-          "code": "014280",
-          "name": "금강공업"
+          "code": "039830",
+          "name": "오로라"
+        }
+      ]
+    },
+    {
+      "no": "269",
+      "name": "디스플레이장비및부품",
+      "changeRate": 0.91,
+      "change3d": 0.24,
+      "rise": 37.0,
+      "fall": 27.0,
+      "steady": 7.0,
+      "total": 71.0,
+      "marketCap": 8512567.0,
+      "tradeAmount": 8399462.0,
+      "leaders": [
+        {
+          "code": "351320",
+          "name": "넥사다이내믹스"
+        },
+        {
+          "code": "068790",
+          "name": "DMS"
+        }
+      ]
+    },
+    {
+      "no": "324",
+      "name": "상업서비스와공급품",
+      "changeRate": 0.83,
+      "change3d": -0.09,
+      "rise": 13.0,
+      "fall": 11.0,
+      "steady": 7.0,
+      "total": 31.0,
+      "marketCap": 8483878.0,
+      "tradeAmount": 1953875.0,
+      "leaders": [
+        {
+          "code": "276240",
+          "name": "엘리비젼"
+        },
+        {
+          "code": "012750",
+          "name": "에스원"
+        }
+      ]
+    },
+    {
+      "no": "274",
+      "name": "섬유,의류,신발,호화품",
+      "changeRate": 0.73,
+      "change3d": 0.04,
+      "rise": 44.0,
+      "fall": 25.0,
+      "steady": 12.0,
+      "total": 81.0,
+      "marketCap": 18861254.0,
+      "tradeAmount": 10337922.0,
+      "leaders": [
+        {
+          "code": "109670",
+          "name": "씨싸이트"
+        },
+        {
+          "code": "093050",
+          "name": "LF"
+        }
+      ]
+    },
+    {
+      "no": "261",
+      "name": "제약",
+      "changeRate": 0.72,
+      "change3d": 0.18,
+      "rise": 69.0,
+      "fall": 82.0,
+      "steady": 24.0,
+      "total": 175.0,
+      "marketCap": 187990257.0,
+      "tradeAmount": 51209246.0,
+      "leaders": [
+        {
+          "code": "115180",
+          "name": "큐리언트"
+        },
+        {
+          "code": "003120",
+          "name": "일성아이에스"
+        }
+      ]
+    },
+    {
+      "no": "325",
+      "name": "전기유틸리티",
+      "changeRate": 0.71,
+      "change3d": -0.62,
+      "rise": 5.0,
+      "fall": 0.0,
+      "steady": 0.0,
+      "total": 5.0,
+      "marketCap": 26557658.0,
+      "tradeAmount": 19894670.0,
+      "leaders": [
+        {
+          "code": "052690",
+          "name": "한전기술"
+        },
+        {
+          "code": "051600",
+          "name": "한전KPS"
+        }
+      ]
+    },
+    {
+      "no": "275",
+      "name": "담배",
+      "changeRate": 0.68,
+      "change3d": 0.06,
+      "rise": 1.0,
+      "fall": 0.0,
+      "steady": 0.0,
+      "total": 1.0,
+      "marketCap": 18415974.0,
+      "tradeAmount": 2224000.0,
+      "leaders": [
+        {
+          "code": "033780",
+          "name": "KT&G"
+        }
+      ]
+    },
+    {
+      "no": "326",
+      "name": "항공화물운송과물류",
+      "changeRate": 0.61,
+      "change3d": 0.0,
+      "rise": 6.0,
+      "fall": 6.0,
+      "steady": 1.0,
+      "total": 13.0,
+      "marketCap": 17593056.0,
+      "tradeAmount": 3656497.0,
+      "leaders": [
+        {
+          "code": "223220",
+          "name": "로지스몬"
+        },
+        {
+          "code": "014130",
+          "name": "한익스프레스"
+        }
+      ]
+    },
+    {
+      "no": "323",
+      "name": "해운사",
+      "changeRate": 0.54,
+      "change3d": 0.38,
+      "rise": 6.0,
+      "fall": 5.0,
+      "steady": 0.0,
+      "total": 11.0,
+      "marketCap": 24652069.0,
+      "tradeAmount": 10562461.0,
+      "leaders": [
+        {
+          "code": "109070",
+          "name": "주성코퍼레이션"
+        },
+        {
+          "code": "028670",
+          "name": "팬오션"
+        }
+      ]
+    },
+    {
+      "no": "319",
+      "name": "기타금융",
+      "changeRate": 0.54,
+      "change3d": -0.04,
+      "rise": 2.0,
+      "fall": 4.0,
+      "steady": 0.0,
+      "total": 6.0,
+      "marketCap": 926877.0,
+      "tradeAmount": 280038.0,
+      "leaders": [
+        {
+          "code": "204620",
+          "name": "글로벌텍스프리"
+        },
+        {
+          "code": "038540",
+          "name": "상상인"
+        }
+      ]
+    },
+    {
+      "no": "309",
+      "name": "음료",
+      "changeRate": 0.46,
+      "change3d": -0.34,
+      "rise": 6.0,
+      "fall": 6.0,
+      "steady": 4.0,
+      "total": 16.0,
+      "marketCap": 2802733.0,
+      "tradeAmount": 258566.0,
+      "leaders": [
+        {
+          "code": "000140",
+          "name": "하이트진로홀딩스"
+        },
+        {
+          "code": "000080",
+          "name": "하이트진로"
         }
       ]
     },
     {
       "no": "299",
       "name": "기계",
-      "changeRate": 1.16,
-      "change3d": -1.62,
-      "rise": 58.0,
-      "fall": 33.0,
-      "steady": 13.0,
-      "total": 104.0,
-      "marketCap": 104421894.0,
-      "tradeAmount": 415877628.0,
-      "leaders": [
-        {
-          "code": "039610",
-          "name": "화성밸브"
-        },
-        {
-          "code": "452280",
-          "name": "한선엔지니어링"
-        }
-      ]
-    },
-    {
-      "no": "283",
-      "name": "전기제품",
-      "changeRate": 1.09,
-      "change3d": -0.12,
-      "rise": 40.0,
-      "fall": 21.0,
-      "steady": 8.0,
-      "total": 69.0,
-      "marketCap": 161465653.0,
-      "tradeAmount": 764455123.0,
-      "leaders": [
-        {
-          "code": "043260",
-          "name": "성호전자"
-        },
-        {
-          "code": "257370",
-          "name": "피엔티엠에스"
-        }
-      ]
-    },
-    {
-      "no": "281",
-      "name": "건강관리장비와용품",
-      "changeRate": 1.05,
-      "change3d": 2.9,
-      "rise": 51.0,
-      "fall": 34.0,
-      "steady": 19.0,
-      "total": 104.0,
-      "marketCap": 26098589.0,
-      "tradeAmount": 259645521.0,
-      "leaders": [
-        {
-          "code": "390110",
-          "name": "애니메디솔루션"
-        },
-        {
-          "code": "199290",
-          "name": "바이오프로테크"
-        }
-      ]
-    },
-    {
-      "no": "291",
-      "name": "조선",
-      "changeRate": 1.0,
-      "change3d": -1.18,
-      "rise": 24.0,
-      "fall": 4.0,
-      "steady": 2.0,
-      "total": 30.0,
-      "marketCap": 149215815.0,
-      "tradeAmount": 357568869.0,
-      "leaders": [
-        {
-          "code": "082740",
-          "name": "한화엔진"
-        },
-        {
-          "code": "054540",
-          "name": "삼영엠텍"
-        }
-      ]
-    },
-    {
-      "no": "328",
-      "name": "전문소매",
-      "changeRate": 0.9,
+      "changeRate": 0.45,
       "change3d": -0.28,
-      "rise": 2.0,
+      "rise": 38.0,
+      "fall": 57.0,
+      "steady": 10.0,
+      "total": 105.0,
+      "marketCap": 104545904.0,
+      "tradeAmount": 324486602.0,
+      "leaders": [
+        {
+          "code": "468670",
+          "name": "브릴스"
+        },
+        {
+          "code": "439960",
+          "name": "코스모로보틱스"
+        }
+      ]
+    },
+    {
+      "no": "303",
+      "name": "가구",
+      "changeRate": 0.4,
+      "change3d": -0.66,
+      "rise": 5.0,
       "fall": 3.0,
-      "steady": 0.0,
-      "total": 5.0,
-      "marketCap": 431488.0,
-      "tradeAmount": 227669.0,
+      "steady": 3.0,
+      "total": 11.0,
+      "marketCap": 1962338.0,
+      "tradeAmount": 90538.0,
       "leaders": [
         {
-          "code": "080420",
-          "name": "모다이노칩"
+          "code": "309930",
+          "name": "조이웍스앤코"
         },
         {
-          "code": "064240",
-          "name": "홈캐스트"
+          "code": "134790",
+          "name": "시디즈"
         }
       ]
     },
     {
-      "no": "313",
-      "name": "석유와가스",
-      "changeRate": 0.85,
-      "change3d": 0.65,
-      "rise": 14.0,
-      "fall": 4.0,
-      "steady": 1.0,
-      "total": 19.0,
-      "marketCap": 98852077.0,
-      "tradeAmount": 256155190.0,
-      "leaders": [
-        {
-          "code": "126880",
-          "name": "제이엔케이글로벌"
-        },
-        {
-          "code": "006120",
-          "name": "SK디스커버리"
-        }
-      ]
-    },
-    {
-      "no": "293",
-      "name": "컴퓨터와주변기기",
-      "changeRate": 0.82,
-      "change3d": 0.03,
-      "rise": 12.0,
-      "fall": 4.0,
-      "steady": 5.0,
-      "total": 21.0,
-      "marketCap": 1332273.0,
-      "tradeAmount": 11141848.0,
-      "leaders": [
-        {
-          "code": "131180",
-          "name": "딜리"
-        },
-        {
-          "code": "054800",
-          "name": "아이디스홀딩스"
-        }
-      ]
-    },
-    {
-      "no": "279",
-      "name": "건설",
-      "changeRate": 0.8,
-      "change3d": -2.03,
-      "rise": 42.0,
-      "fall": 24.0,
-      "steady": 12.0,
-      "total": 78.0,
-      "marketCap": 49529212.0,
-      "tradeAmount": 269301241.0,
-      "leaders": [
-        {
-          "code": "224810",
-          "name": "엄지하우스"
-        },
-        {
-          "code": "011370",
-          "name": "서한"
-        }
-      ]
-    },
-    {
-      "no": "294",
-      "name": "통신장비",
-      "changeRate": 0.66,
-      "change3d": -0.04,
-      "rise": 27.0,
-      "fall": 19.0,
-      "steady": 9.0,
-      "total": 55.0,
-      "marketCap": 14664524.0,
-      "tradeAmount": 236409655.0,
-      "leaders": [
-        {
-          "code": "189350",
-          "name": "코셋"
-        },
-        {
-          "code": "039010",
-          "name": "현대에이치티"
-        }
-      ]
-    },
-    {
-      "no": "267",
-      "name": "IT서비스",
-      "changeRate": 0.65,
-      "change3d": -0.74,
-      "rise": 51.0,
-      "fall": 59.0,
-      "steady": 9.0,
-      "total": 119.0,
-      "marketCap": 57280765.0,
-      "tradeAmount": 597785830.0,
-      "leaders": [
-        {
-          "code": "0035S0",
-          "name": "빅웨이브로보틱스"
-        },
-        {
-          "code": "010280",
-          "name": "아이티센엔텍"
-        }
-      ]
-    },
-    {
-      "no": "322",
-      "name": "비철금속",
-      "changeRate": 0.58,
-      "change3d": -0.79,
-      "rise": 26.0,
-      "fall": 12.0,
-      "steady": 2.0,
-      "total": 40.0,
-      "marketCap": 30080351.0,
-      "tradeAmount": 42493099.0,
-      "leaders": [
-        {
-          "code": "079170",
-          "name": "한창산업"
-        },
-        {
-          "code": "001560",
-          "name": "제일연마"
-        }
-      ]
-    },
-    {
-      "no": "286",
-      "name": "생물공학",
-      "changeRate": 0.51,
-      "change3d": 0.09,
-      "rise": 33.0,
-      "fall": 21.0,
-      "steady": 5.0,
-      "total": 59.0,
-      "marketCap": 40526524.0,
-      "tradeAmount": 193712802.0,
-      "leaders": [
-        {
-          "code": "084990",
-          "name": "헬릭스미스"
-        },
-        {
-          "code": "446440",
-          "name": "에피바이오텍"
-        }
-      ]
-    },
-    {
-      "no": "329",
-      "name": "도로와철도운송",
-      "changeRate": 0.51,
-      "change3d": -0.26,
-      "rise": 3.0,
-      "fall": 4.0,
-      "steady": 1.0,
-      "total": 8.0,
-      "marketCap": 3223857.0,
-      "tradeAmount": 6423921.0,
-      "leaders": [
-        {
-          "code": "045390",
-          "name": "대아티아이"
-        },
-        {
-          "code": "089860",
-          "name": "롯데렌탈"
-        }
-      ]
-    },
-    {
-      "no": "307",
-      "name": "전자제품",
-      "changeRate": 0.46,
-      "change3d": 0.21,
+      "no": "273",
+      "name": "자동차",
+      "changeRate": 0.35,
+      "change3d": -0.57,
       "rise": 8.0,
-      "fall": 7.0,
+      "fall": 3.0,
       "steady": 1.0,
-      "total": 16.0,
-      "marketCap": 36837633.0,
-      "tradeAmount": 146877263.0,
+      "total": 12.0,
+      "marketCap": 126752401.0,
+      "tradeAmount": 48520661.0,
       "leaders": [
         {
-          "code": "032540",
-          "name": "TJ미디어"
+          "code": "000270",
+          "name": "기아"
         },
         {
-          "code": "115160",
-          "name": "휴맥스"
+          "code": "067990",
+          "name": "도이치모터스"
+        }
+      ]
+    },
+    {
+      "no": "310",
+      "name": "광고",
+      "changeRate": 0.34,
+      "change3d": 1.3,
+      "rise": 10.0,
+      "fall": 9.0,
+      "steady": 0.0,
+      "total": 19.0,
+      "marketCap": 3850959.0,
+      "tradeAmount": 4627668.0,
+      "leaders": [
+        {
+          "code": "363260",
+          "name": "모비데이즈"
+        },
+        {
+          "code": "237820",
+          "name": "플레이디"
+        }
+      ]
+    },
+    {
+      "no": "317",
+      "name": "호텔,레스토랑,레저",
+      "changeRate": 0.34,
+      "change3d": -0.14,
+      "rise": 8.0,
+      "fall": 11.0,
+      "steady": 0.0,
+      "total": 19.0,
+      "marketCap": 9034380.0,
+      "tradeAmount": 2794649.0,
+      "leaders": [
+        {
+          "code": "006730",
+          "name": "서부T&D"
+        },
+        {
+          "code": "499790",
+          "name": "GS피앤엘"
+        }
+      ]
+    },
+    {
+      "no": "298",
+      "name": "가정용기기와용품",
+      "changeRate": 0.29,
+      "change3d": -0.39,
+      "rise": 8.0,
+      "fall": 10.0,
+      "steady": 2.0,
+      "total": 20.0,
+      "marketCap": 11320829.0,
+      "tradeAmount": 1199493.0,
+      "leaders": [
+        {
+          "code": "284740",
+          "name": "쿠쿠홈시스"
+        },
+        {
+          "code": "256150",
+          "name": "한독크린텍"
+        }
+      ]
+    },
+    {
+      "no": "304",
+      "name": "철강",
+      "changeRate": 0.21,
+      "change3d": -0.12,
+      "rise": 23.0,
+      "fall": 24.0,
+      "steady": 8.0,
+      "total": 55.0,
+      "marketCap": 38098358.0,
+      "tradeAmount": 151329904.0,
+      "leaders": [
+        {
+          "code": "084010",
+          "name": "대한제강"
+        },
+        {
+          "code": "460860",
+          "name": "동국제강"
+        }
+      ]
+    },
+    {
+      "no": "268",
+      "name": "식품",
+      "changeRate": 0.18,
+      "change3d": -0.32,
+      "rise": 30.0,
+      "fall": 42.0,
+      "steady": 20.0,
+      "total": 92.0,
+      "marketCap": 40109059.0,
+      "tradeAmount": 7172959.0,
+      "leaders": [
+        {
+          "code": "0013V0",
+          "name": "삼진식품"
+        },
+        {
+          "code": "229500",
+          "name": "노브메타파마"
+        }
+      ]
+    },
+    {
+      "no": "311",
+      "name": "포장재",
+      "changeRate": 0.15,
+      "change3d": 0.29,
+      "rise": 8.0,
+      "fall": 10.0,
+      "steady": 9.0,
+      "total": 27.0,
+      "marketCap": 3735968.0,
+      "tradeAmount": 591046.0,
+      "leaders": [
+        {
+          "code": "002870",
+          "name": "신풍"
+        },
+        {
+          "code": "251970",
+          "name": "펌텍코리아"
+        }
+      ]
+    },
+    {
+      "no": "327",
+      "name": "디스플레이패널",
+      "changeRate": 0.09,
+      "change3d": -0.63,
+      "rise": 1.0,
+      "fall": 3.0,
+      "steady": 2.0,
+      "total": 6.0,
+      "marketCap": 4711824.0,
+      "tradeAmount": 2378992.0,
+      "leaders": [
+        {
+          "code": "034220",
+          "name": "LG디스플레이"
+        },
+        {
+          "code": "121800",
+          "name": "비덴트"
+        }
+      ]
+    },
+    {
+      "no": "287",
+      "name": "소프트웨어",
+      "changeRate": 0.07,
+      "change3d": -0.2,
+      "rise": 34.0,
+      "fall": 29.0,
+      "steady": 11.0,
+      "total": 74.0,
+      "marketCap": 6285056.0,
+      "tradeAmount": 19964644.0,
+      "leaders": [
+        {
+          "code": "417860",
+          "name": "오브젠"
+        },
+        {
+          "code": "288980",
+          "name": "모아데이타"
+        }
+      ]
+    },
+    {
+      "no": "312",
+      "name": "가스유틸리티",
+      "changeRate": 0.04,
+      "change3d": -0.49,
+      "rise": 5.0,
+      "fall": 6.0,
+      "steady": 1.0,
+      "total": 12.0,
+      "marketCap": 7925146.0,
+      "tradeAmount": 615013.0,
+      "leaders": [
+        {
+          "code": "034590",
+          "name": "인천도시가스"
+        },
+        {
+          "code": "036460",
+          "name": "한국가스공사"
+        }
+      ]
+    },
+    {
+      "no": "333",
+      "name": "무선통신서비스",
+      "changeRate": 0.02,
+      "change3d": -0.58,
+      "rise": 2.0,
+      "fall": 2.0,
+      "steady": 0.0,
+      "total": 4.0,
+      "marketCap": 24595365.0,
+      "tradeAmount": 3319005.0,
+      "leaders": [
+        {
+          "code": "006490",
+          "name": "프리티"
+        },
+        {
+          "code": "017670",
+          "name": "SK텔레콤"
         }
       ]
     },
     {
       "no": "284",
       "name": "우주항공과국방",
-      "changeRate": 0.39,
-      "change3d": -0.98,
-      "rise": 16.0,
+      "changeRate": 0.01,
+      "change3d": -0.16,
+      "rise": 15.0,
       "fall": 18.0,
-      "steady": 1.0,
+      "steady": 2.0,
       "total": 35.0,
-      "marketCap": 115077251.0,
-      "tradeAmount": 1321834422.0,
+      "marketCap": 114938915.0,
+      "tradeAmount": 138821982.0,
       "leaders": [
         {
           "code": "266690",
@@ -512,404 +596,78 @@
       ]
     },
     {
-      "no": "302",
-      "name": "식품과기본식료품소매",
-      "changeRate": 0.37,
-      "change3d": 0.14,
-      "rise": 2.0,
-      "fall": 5.0,
-      "steady": 0.0,
-      "total": 7.0,
-      "marketCap": 575654.0,
-      "tradeAmount": 445975.0,
+      "no": "329",
+      "name": "도로와철도운송",
+      "changeRate": 0.0,
+      "change3d": 0.02,
+      "rise": 3.0,
+      "fall": 3.0,
+      "steady": 2.0,
+      "total": 8.0,
+      "marketCap": 3239983.0,
+      "tradeAmount": 1427914.0,
       "leaders": [
         {
-          "code": "051500",
-          "name": "CJ프레시웨이"
+          "code": "403550",
+          "name": "쏘카"
         },
         {
-          "code": "227840",
-          "name": "현대코퍼레이션홀딩스"
+          "code": "038390",
+          "name": "레드캡투어"
         }
       ]
     },
     {
       "no": "314",
       "name": "출판",
-      "changeRate": 0.35,
-      "change3d": 0.59,
-      "rise": 5.0,
+      "changeRate": 0.0,
+      "change3d": 0.06,
+      "rise": 2.0,
       "fall": 3.0,
-      "steady": 0.0,
-      "total": 8.0,
-      "marketCap": 531930.0,
-      "tradeAmount": 1348415.0,
+      "steady": 2.0,
+      "total": 7.0,
+      "marketCap": 524972.0,
+      "tradeAmount": 34267.0,
       "leaders": [
+        {
+          "code": "418470",
+          "name": "KT밀리의서재"
+        },
         {
           "code": "127710",
           "name": "아시아경제"
-        },
-        {
-          "code": "432430",
-          "name": "와이랩"
         }
       ]
     },
     {
-      "no": "261",
-      "name": "제약",
-      "changeRate": 0.35,
-      "change3d": 0.0,
-      "rise": 86.0,
-      "fall": 70.0,
-      "steady": 19.0,
-      "total": 175.0,
-      "marketCap": 187004106.0,
-      "tradeAmount": 440274416.0,
-      "leaders": [
-        {
-          "code": "314130",
-          "name": "지놈앤컴퍼니"
-        },
-        {
-          "code": "389470",
-          "name": "인벤티지랩"
-        }
-      ]
-    },
-    {
-      "no": "308",
-      "name": "인터넷과카탈로그소매",
-      "changeRate": 0.23,
-      "change3d": -0.91,
-      "rise": 4.0,
-      "fall": 2.0,
-      "steady": 0.0,
-      "total": 6.0,
-      "marketCap": 3055353.0,
-      "tradeAmount": 18477070.0,
-      "leaders": [
-        {
-          "code": "475460",
-          "name": "미트박스"
-        },
-        {
-          "code": "053280",
-          "name": "예스24"
-        }
-      ]
-    },
-    {
-      "no": "327",
-      "name": "디스플레이패널",
-      "changeRate": 0.04,
-      "change3d": -0.58,
-      "rise": 1.0,
-      "fall": 2.0,
-      "steady": 3.0,
-      "total": 6.0,
-      "marketCap": 4712556.0,
-      "tradeAmount": 19605346.0,
-      "leaders": [
-        {
-          "code": "191410",
-          "name": "육일씨엔에쓰"
-        },
-        {
-          "code": "034220",
-          "name": "LG디스플레이"
-        }
-      ]
-    },
-    {
-      "no": "25",
-      "name": "기타",
-      "changeRate": 0.02,
-      "change3d": -0.28,
-      "rise": 733.0,
-      "fall": 695.0,
-      "steady": 112.0,
-      "total": 1540.0,
-      "marketCap": 477676367.0,
-      "tradeAmount": 16706015000.0,
-      "leaders": [
-        {
-          "code": "700030",
-          "name": "하나 S&P 인버스 2X WTI원유 선물 ETN B"
-        },
-        {
-          "code": "580069",
-          "name": "KB S&P 인버스 2X WTI원유 선물 ETN B"
-        }
-      ]
-    },
-    {
-      "no": "331",
-      "name": "복합유틸리티",
+      "no": "338",
+      "name": "사무용전자제품",
       "changeRate": 0.0,
-      "change3d": 0.38,
+      "change3d": -0.88,
       "rise": 0.0,
       "fall": 0.0,
       "steady": 1.0,
       "total": 1.0,
-      "marketCap": 918194.0,
-      "tradeAmount": 1405000.0,
+      "marketCap": 371626.0,
+      "tradeAmount": 6000.0,
       "leaders": [
         {
-          "code": "071320",
-          "name": "지역난방공사"
-        }
-      ]
-    },
-    {
-      "no": "305",
-      "name": "항공사",
-      "changeRate": -0.01,
-      "change3d": -0.78,
-      "rise": 7.0,
-      "fall": 2.0,
-      "steady": 0.0,
-      "total": 9.0,
-      "marketCap": 23591199.0,
-      "tradeAmount": 94370000.0,
-      "leaders": [
-        {
-          "code": "18064K",
-          "name": "한진칼우"
-        },
-        {
-          "code": "020560",
-          "name": "아시아나항공"
-        }
-      ]
-    },
-    {
-      "no": "326",
-      "name": "항공화물운송과물류",
-      "changeRate": -0.01,
-      "change3d": -0.8,
-      "rise": 8.0,
-      "fall": 5.0,
-      "steady": 0.0,
-      "total": 13.0,
-      "marketCap": 17541615.0,
-      "tradeAmount": 29633099.0,
-      "leaders": [
-        {
-          "code": "004140",
-          "name": "동방"
-        },
-        {
-          "code": "009180",
-          "name": "한솔로지스틱스"
-        }
-      ]
-    },
-    {
-      "no": "287",
-      "name": "소프트웨어",
-      "changeRate": -0.05,
-      "change3d": 0.21,
-      "rise": 33.0,
-      "fall": 31.0,
-      "steady": 10.0,
-      "total": 74.0,
-      "marketCap": 6309715.0,
-      "tradeAmount": 113875996.0,
-      "leaders": [
-        {
-          "code": "290270",
-          "name": "휴네시온"
-        },
-        {
-          "code": "197140",
-          "name": "디지캡"
-        }
-      ]
-    },
-    {
-      "no": "325",
-      "name": "전기유틸리티",
-      "changeRate": -0.05,
-      "change3d": -1.38,
-      "rise": 3.0,
-      "fall": 2.0,
-      "steady": 0.0,
-      "total": 5.0,
-      "marketCap": 26460787.0,
-      "tradeAmount": 55705176.0,
-      "leaders": [
-        {
-          "code": "453450",
-          "name": "그리드위즈"
-        },
-        {
-          "code": "052690",
-          "name": "한전기술"
-        }
-      ]
-    },
-    {
-      "no": "271",
-      "name": "레저용장비와제품",
-      "changeRate": -0.06,
-      "change3d": 0.64,
-      "rise": 4.0,
-      "fall": 7.0,
-      "steady": 2.0,
-      "total": 13.0,
-      "marketCap": 937084.0,
-      "tradeAmount": 1149827.0,
-      "leaders": [
-        {
-          "code": "121440",
-          "name": "골프존홀딩스"
-        },
-        {
-          "code": "024950",
-          "name": "삼천리자전거"
-        }
-      ]
-    },
-    {
-      "no": "278",
-      "name": "반도체와반도체장비",
-      "changeRate": -0.09,
-      "change3d": -0.25,
-      "rise": 107.0,
-      "fall": 62.0,
-      "steady": 3.0,
-      "total": 172.0,
-      "marketCap": 3360426667.0,
-      "tradeAmount": 13733331569.0,
-      "leaders": [
-        {
-          "code": "097800",
-          "name": "윈팩"
-        },
-        {
-          "code": "112290",
-          "name": "와이씨켐"
-        }
-      ]
-    },
-    {
-      "no": "337",
-      "name": "카드",
-      "changeRate": -0.12,
-      "change3d": -0.1,
-      "rise": 0.0,
-      "fall": 1.0,
-      "steady": 0.0,
-      "total": 1.0,
-      "marketCap": 4918209.0,
-      "tradeAmount": 4262000.0,
-      "leaders": [
-        {
-          "code": "029780",
-          "name": "삼성카드"
-        }
-      ]
-    },
-    {
-      "no": "289",
-      "name": "건축자재",
-      "changeRate": -0.15,
-      "change3d": 0.08,
-      "rise": 27.0,
-      "fall": 21.0,
-      "steady": 3.0,
-      "total": 51.0,
-      "marketCap": 11321555.0,
-      "tradeAmount": 26694522.0,
-      "leaders": [
-        {
-          "code": "001525",
-          "name": "동양우"
-        },
-        {
-          "code": "000910",
-          "name": "유니온"
-        }
-      ]
-    },
-    {
-      "no": "306",
-      "name": "전기장비",
-      "changeRate": -0.22,
-      "change3d": -0.54,
-      "rise": 21.0,
-      "fall": 9.0,
-      "steady": 5.0,
-      "total": 35.0,
-      "marketCap": 126657189.0,
-      "tradeAmount": 777800965.0,
-      "leaders": [
-        {
-          "code": "126340",
-          "name": "비나텍"
-        },
-        {
-          "code": "178320",
-          "name": "서진시스템"
-        }
-      ]
-    },
-    {
-      "no": "290",
-      "name": "교육서비스",
-      "changeRate": -0.3,
-      "change3d": 0.38,
-      "rise": 11.0,
-      "fall": 10.0,
-      "steady": 3.0,
-      "total": 24.0,
-      "marketCap": 2137765.0,
-      "tradeAmount": 4031980.0,
-      "leaders": [
-        {
-          "code": "373160",
-          "name": "데이원컴퍼니"
-        },
-        {
-          "code": "057030",
-          "name": "YBM넷"
-        }
-      ]
-    },
-    {
-      "no": "269",
-      "name": "디스플레이장비및부품",
-      "changeRate": -0.33,
-      "change3d": 0.57,
-      "rise": 30.0,
-      "fall": 35.0,
-      "steady": 6.0,
-      "total": 71.0,
-      "marketCap": 8448786.0,
-      "tradeAmount": 65205027.0,
-      "leaders": [
-        {
-          "code": "141000",
-          "name": "비아트론"
-        },
-        {
-          "code": "187870",
-          "name": "디바이스"
+          "code": "029530",
+          "name": "신도리코"
         }
       ]
     },
     {
       "no": "296",
       "name": "운송인프라",
-      "changeRate": -0.38,
-      "change3d": 0.09,
+      "changeRate": -0.01,
+      "change3d": -0.02,
       "rise": 4.0,
-      "fall": 4.0,
-      "steady": 0.0,
+      "fall": 1.0,
+      "steady": 3.0,
       "total": 8.0,
-      "marketCap": 6694865.0,
-      "tradeAmount": 7968609.0,
+      "marketCap": 6686666.0,
+      "tradeAmount": 826634.0,
       "leaders": [
         {
           "code": "005430",
@@ -922,452 +680,572 @@
       ]
     },
     {
-      "no": "318",
-      "name": "종이와목재",
-      "changeRate": -0.4,
-      "change3d": -0.39,
-      "rise": 6.0,
-      "fall": 8.0,
-      "steady": 0.0,
-      "total": 14.0,
-      "marketCap": 1286450.0,
-      "tradeAmount": 1223350.0,
-      "leaders": [
-        {
-          "code": "004545",
-          "name": "깨끗한나라우"
-        },
-        {
-          "code": "001020",
-          "name": "페이퍼코리아"
-        }
-      ]
-    },
-    {
-      "no": "275",
-      "name": "담배",
-      "changeRate": -0.4,
-      "change3d": -0.33,
-      "rise": 0.0,
-      "fall": 1.0,
-      "steady": 0.0,
-      "total": 1.0,
-      "marketCap": 18322545.0,
-      "tradeAmount": 45967000.0,
-      "leaders": [
-        {
-          "code": "033780",
-          "name": "KT&G"
-        }
-      ]
-    },
-    {
-      "no": "300",
-      "name": "양방향미디어와서비스",
-      "changeRate": -0.5,
-      "change3d": -0.66,
-      "rise": 9.0,
-      "fall": 7.0,
-      "steady": 0.0,
-      "total": 16.0,
-      "marketCap": 46233353.0,
-      "tradeAmount": 131364689.0,
-      "leaders": [
-        {
-          "code": "202960",
-          "name": "판도라티비"
-        },
-        {
-          "code": "020120",
-          "name": "키다리스튜디오"
-        }
-      ]
-    },
-    {
-      "no": "323",
-      "name": "해운사",
-      "changeRate": -0.52,
-      "change3d": -0.08,
-      "rise": 8.0,
-      "fall": 3.0,
-      "steady": 0.0,
-      "total": 11.0,
-      "marketCap": 24484244.0,
-      "tradeAmount": 31050486.0,
-      "leaders": [
-        {
-          "code": "054300",
-          "name": "팬스타엔터프라이즈"
-        },
-        {
-          "code": "109070",
-          "name": "주성코퍼레이션"
-        }
-      ]
-    },
-    {
-      "no": "282",
-      "name": "전자장비와기기",
-      "changeRate": -0.52,
-      "change3d": 1.56,
-      "rise": 53.0,
-      "fall": 44.0,
-      "steady": 8.0,
-      "total": 105.0,
-      "marketCap": 164544845.0,
-      "tradeAmount": 1443284644.0,
-      "leaders": [
-        {
-          "code": "360350",
-          "name": "코셈"
-        },
-        {
-          "code": "191600",
-          "name": "블루탑"
-        }
-      ]
-    },
-    {
-      "no": "324",
-      "name": "상업서비스와공급품",
-      "changeRate": -0.53,
-      "change3d": 0.08,
-      "rise": 13.0,
-      "fall": 12.0,
-      "steady": 6.0,
-      "total": 31.0,
-      "marketCap": 8421091.0,
-      "tradeAmount": 14863075.0,
-      "leaders": [
-        {
-          "code": "185190",
-          "name": "수프로"
-        },
-        {
-          "code": "043910",
-          "name": "자연과환경"
-        }
-      ]
-    },
-    {
-      "no": "276",
-      "name": "복합기업",
-      "changeRate": -0.7,
-      "change3d": -1.35,
-      "rise": 7.0,
-      "fall": 16.0,
-      "steady": 1.0,
-      "total": 24.0,
-      "marketCap": 119097251.0,
-      "tradeAmount": 229365748.0,
-      "leaders": [
-        {
-          "code": "487570",
-          "name": "HS효성"
-        },
-        {
-          "code": "005440",
-          "name": "현대지에프홀딩스"
-        }
-      ]
-    },
-    {
-      "no": "333",
-      "name": "무선통신서비스",
-      "changeRate": -0.76,
-      "change3d": -0.36,
-      "rise": 2.0,
-      "fall": 2.0,
-      "steady": 0.0,
-      "total": 4.0,
-      "marketCap": 24690381.0,
-      "tradeAmount": 52892638.0,
-      "leaders": [
-        {
-          "code": "006490",
-          "name": "프리티"
-        },
-        {
-          "code": "065530",
-          "name": "와이어블"
-        }
-      ]
-    },
-    {
-      "no": "277",
-      "name": "창업투자",
-      "changeRate": -0.82,
-      "change3d": -0.11,
-      "rise": 48.0,
-      "fall": 24.0,
-      "steady": 18.0,
-      "total": 90.0,
-      "marketCap": 4201616.0,
-      "tradeAmount": 23420986.0,
-      "leaders": [
-        {
-          "code": "0088D0",
-          "name": "메리츠제1호스팩"
-        },
-        {
-          "code": "0041L0",
-          "name": "하나35호스팩"
-        }
-      ]
-    },
-    {
-      "no": "316",
-      "name": "건강관리업체및서비스",
-      "changeRate": -0.82,
-      "change3d": 1.45,
-      "rise": 14.0,
-      "fall": 14.0,
-      "steady": 2.0,
-      "total": 30.0,
-      "marketCap": 5532300.0,
-      "tradeAmount": 35563102.0,
-      "leaders": [
-        {
-          "code": "086220",
-          "name": "광동헬스바이오"
-        },
-        {
-          "code": "439580",
-          "name": "블루엠텍"
-        }
-      ]
-    },
-    {
-      "no": "292",
-      "name": "핸드셋",
-      "changeRate": -0.88,
-      "change3d": -0.1,
-      "rise": 24.0,
-      "fall": 27.0,
-      "steady": 6.0,
-      "total": 57.0,
-      "marketCap": 9146524.0,
-      "tradeAmount": 103963477.0,
-      "leaders": [
-        {
-          "code": "373200",
-          "name": "엑스플러스"
-        },
-        {
-          "code": "123010",
-          "name": "MSDI"
-        }
-      ]
-    },
-    {
       "no": "280",
       "name": "부동산",
-      "changeRate": -0.9,
-      "change3d": 0.02,
-      "rise": 5.0,
-      "fall": 21.0,
-      "steady": 5.0,
+      "changeRate": -0.07,
+      "change3d": -0.38,
+      "rise": 15.0,
+      "fall": 10.0,
+      "steady": 6.0,
       "total": 31.0,
-      "marketCap": 9736664.0,
-      "tradeAmount": 6721335.0,
+      "marketCap": 9750145.0,
+      "tradeAmount": 375545.0,
       "leaders": [
         {
           "code": "033560",
           "name": "블루콤"
         },
         {
-          "code": "338100",
-          "name": "NH프라임리츠"
+          "code": "417310",
+          "name": "코람코더원리츠"
         }
       ]
     },
     {
-      "no": "274",
-      "name": "섬유,의류,신발,호화품",
-      "changeRate": -0.93,
-      "change3d": 0.14,
-      "rise": 32.0,
-      "fall": 41.0,
-      "steady": 8.0,
-      "total": 81.0,
-      "marketCap": 18803042.0,
-      "tradeAmount": 60614065.0,
+      "no": "290",
+      "name": "교육서비스",
+      "changeRate": -0.1,
+      "change3d": -0.18,
+      "rise": 7.0,
+      "fall": 12.0,
+      "steady": 5.0,
+      "total": 24.0,
+      "marketCap": 2122701.0,
+      "tradeAmount": 411956.0,
       "leaders": [
         {
-          "code": "145170",
-          "name": "노브랜드"
+          "code": "068930",
+          "name": "디지털대성"
         },
         {
-          "code": "227420",
-          "name": "도부"
+          "code": "457600",
+          "name": "벡트"
         }
       ]
     },
     {
-      "no": "317",
-      "name": "호텔,레스토랑,레저",
-      "changeRate": -0.93,
-      "change3d": 0.12,
-      "rise": 2.0,
-      "fall": 14.0,
-      "steady": 3.0,
-      "total": 19.0,
-      "marketCap": 9026788.0,
-      "tradeAmount": 21800209.0,
+      "no": "266",
+      "name": "화장품",
+      "changeRate": -0.1,
+      "change3d": -0.7,
+      "rise": 20.0,
+      "fall": 39.0,
+      "steady": 5.0,
+      "total": 64.0,
+      "marketCap": 45501078.0,
+      "tradeAmount": 24872393.0,
       "leaders": [
         {
-          "code": "025980",
-          "name": "아난티"
+          "code": "226340",
+          "name": "본느"
         },
         {
-          "code": "36328K",
-          "name": "티와이홀딩스우"
+          "code": "003350",
+          "name": "한국화장품제조"
         }
       ]
     },
     {
-      "no": "309",
-      "name": "음료",
-      "changeRate": -1.0,
-      "change3d": -0.05,
-      "rise": 4.0,
-      "fall": 8.0,
-      "steady": 4.0,
-      "total": 16.0,
-      "marketCap": 2794243.0,
-      "tradeAmount": 3894000.0,
+      "no": "289",
+      "name": "건축자재",
+      "changeRate": -0.2,
+      "change3d": -0.29,
+      "rise": 21.0,
+      "fall": 25.0,
+      "steady": 5.0,
+      "total": 51.0,
+      "marketCap": 11289618.0,
+      "tradeAmount": 8100912.0,
       "leaders": [
         {
-          "code": "405920",
-          "name": "나라셀라"
+          "code": "365330",
+          "name": "에스와이스틸텍"
         },
         {
-          "code": "023150",
-          "name": "MH에탄올"
+          "code": "004985",
+          "name": "성신양회우"
         }
       ]
     },
     {
-      "no": "311",
-      "name": "포장재",
-      "changeRate": -1.01,
-      "change3d": 0.44,
-      "rise": 10.0,
-      "fall": 11.0,
+      "no": "292",
+      "name": "핸드셋",
+      "changeRate": -0.21,
+      "change3d": -0.4,
+      "rise": 22.0,
+      "fall": 29.0,
       "steady": 6.0,
-      "total": 27.0,
-      "marketCap": 3717026.0,
-      "tradeAmount": 5938012.0,
+      "total": 57.0,
+      "marketCap": 9092684.0,
+      "tradeAmount": 15957651.0,
       "leaders": [
         {
-          "code": "016100",
-          "name": "리더스코스메틱"
+          "code": "192650",
+          "name": "드림텍"
         },
         {
-          "code": "037230",
-          "name": "한국팩키지"
+          "code": "052710",
+          "name": "아모텍"
         }
       ]
     },
     {
-      "no": "264",
-      "name": "백화점과일반상점",
-      "changeRate": -1.03,
-      "change3d": -1.23,
+      "no": "318",
+      "name": "종이와목재",
+      "changeRate": -0.27,
+      "change3d": -0.34,
       "rise": 5.0,
+      "fall": 7.0,
+      "steady": 2.0,
+      "total": 14.0,
+      "marketCap": 1281719.0,
+      "tradeAmount": 136116.0,
+      "leaders": [
+        {
+          "code": "006740",
+          "name": "블루산업개발"
+        },
+        {
+          "code": "001810",
+          "name": "무림SP"
+        }
+      ]
+    },
+    {
+      "no": "308",
+      "name": "인터넷과카탈로그소매",
+      "changeRate": -0.29,
+      "change3d": -0.23,
+      "rise": 2.0,
+      "fall": 4.0,
+      "steady": 0.0,
+      "total": 6.0,
+      "marketCap": 3036837.0,
+      "tradeAmount": 2137860.0,
+      "leaders": [
+        {
+          "code": "036030",
+          "name": "케이티알파"
+        },
+        {
+          "code": "035080",
+          "name": "그래디언트"
+        }
+      ]
+    },
+    {
+      "no": "272",
+      "name": "화학",
+      "changeRate": -0.29,
+      "change3d": 0.84,
+      "rise": 43.0,
+      "fall": 70.0,
+      "steady": 9.0,
+      "total": 122.0,
+      "marketCap": 93950009.0,
+      "tradeAmount": 73011074.0,
+      "leaders": [
+        {
+          "code": "217910",
+          "name": "에스제이켐"
+        },
+        {
+          "code": "900290",
+          "name": "GRT"
+        }
+      ]
+    },
+    {
+      "no": "267",
+      "name": "IT서비스",
+      "changeRate": -0.31,
+      "change3d": -0.13,
+      "rise": 38.0,
+      "fall": 70.0,
+      "steady": 11.0,
+      "total": 119.0,
+      "marketCap": 56927452.0,
+      "tradeAmount": 112105809.0,
+      "leaders": [
+        {
+          "code": "217880",
+          "name": "틸론"
+        },
+        {
+          "code": "042000",
+          "name": "카페24"
+        }
+      ]
+    },
+    {
+      "no": "315",
+      "name": "손해보험",
+      "changeRate": -0.31,
+      "change3d": -0.44,
+      "rise": 5.0,
+      "fall": 6.0,
+      "steady": 1.0,
+      "total": 12.0,
+      "marketCap": 53496665.0,
+      "tradeAmount": 6415694.0,
+      "leaders": [
+        {
+          "code": "001450",
+          "name": "현대해상"
+        },
+        {
+          "code": "000400",
+          "name": "롯데손해보험"
+        }
+      ]
+    },
+    {
+      "no": "25",
+      "name": "기타",
+      "changeRate": -0.34,
+      "change3d": -0.52,
+      "rise": 576.0,
+      "fall": 700.0,
+      "steady": 264.0,
+      "total": 1540.0,
+      "marketCap": 476626864.0,
+      "tradeAmount": 2250232000.0,
+      "leaders": [
+        {
+          "code": "700012",
+          "name": "하나 인버스 2X 옥수수 선물 ETN(H)"
+        },
+        {
+          "code": "520047",
+          "name": "미래에셋 인버스 2X 옥수수 선물 ETN"
+        }
+      ]
+    },
+    {
+      "no": "331",
+      "name": "복합유틸리티",
+      "changeRate": -0.38,
+      "change3d": 0.21,
+      "rise": 0.0,
+      "fall": 1.0,
+      "steady": 0.0,
+      "total": 1.0,
+      "marketCap": 905457.0,
+      "tradeAmount": 131000.0,
+      "leaders": [
+        {
+          "code": "071320",
+          "name": "지역난방공사"
+        }
+      ]
+    },
+    {
+      "no": "321",
+      "name": "증권",
+      "changeRate": -0.43,
+      "change3d": -0.8,
+      "rise": 12.0,
+      "fall": 22.0,
+      "steady": 5.0,
+      "total": 39.0,
+      "marketCap": 87968473.0,
+      "tradeAmount": 10697396.0,
+      "leaders": [
+        {
+          "code": "005940",
+          "name": "NH투자증권"
+        },
+        {
+          "code": "000680",
+          "name": "LS네트웍스"
+        }
+      ]
+    },
+    {
+      "no": "276",
+      "name": "복합기업",
+      "changeRate": -0.51,
+      "change3d": -1.73,
+      "rise": 4.0,
+      "fall": 19.0,
+      "steady": 1.0,
+      "total": 24.0,
+      "marketCap": 118219336.0,
+      "tradeAmount": 22799682.0,
+      "leaders": [
+        {
+          "code": "000150",
+          "name": "두산"
+        },
+        {
+          "code": "000155",
+          "name": "두산우"
+        }
+      ]
+    },
+    {
+      "no": "286",
+      "name": "생물공학",
+      "changeRate": -0.54,
+      "change3d": -0.09,
+      "rise": 19.0,
+      "fall": 32.0,
+      "steady": 8.0,
+      "total": 59.0,
+      "marketCap": 40210166.0,
+      "tradeAmount": 24949110.0,
+      "leaders": [
+        {
+          "code": "358570",
+          "name": "지아이이노베이션"
+        },
+        {
+          "code": "191420",
+          "name": "테고사이언스"
+        }
+      ]
+    },
+    {
+      "no": "277",
+      "name": "창업투자",
+      "changeRate": -0.65,
+      "change3d": -0.84,
+      "rise": 23.0,
+      "fall": 29.0,
+      "steady": 38.0,
+      "total": 90.0,
+      "marketCap": 4171359.0,
+      "tradeAmount": 2421808.0,
+      "leaders": [
+        {
+          "code": "277070",
+          "name": "린드먼아시아"
+        },
+        {
+          "code": "0093G0",
+          "name": "미래에셋비전스팩8호"
+        }
+      ]
+    },
+    {
+      "no": "301",
+      "name": "은행",
+      "changeRate": -0.69,
+      "change3d": -0.78,
+      "rise": 2.0,
       "fall": 9.0,
       "steady": 0.0,
-      "total": 14.0,
-      "marketCap": 16808013.0,
-      "tradeAmount": 64323526.0,
+      "total": 11.0,
+      "marketCap": 210430996.0,
+      "tradeAmount": 97307000.0,
       "leaders": [
         {
-          "code": "45226K",
-          "name": "한화갤러리아우"
+          "code": "105560",
+          "name": "KB금융"
         },
         {
-          "code": "452260",
-          "name": "한화갤러리아"
+          "code": "086790",
+          "name": "하나금융지주"
         }
       ]
     },
     {
-      "no": "263",
-      "name": "게임엔터테인먼트",
-      "changeRate": -1.07,
-      "change3d": -0.62,
-      "rise": 13.0,
-      "fall": 18.0,
+      "no": "316",
+      "name": "건강관리업체및서비스",
+      "changeRate": -0.76,
+      "change3d": 0.8,
+      "rise": 10.0,
+      "fall": 17.0,
       "steady": 3.0,
-      "total": 34.0,
-      "marketCap": 26796181.0,
-      "tradeAmount": 75459720.0,
+      "total": 30.0,
+      "marketCap": 5485680.0,
+      "tradeAmount": 2198984.0,
       "leaders": [
         {
-          "code": "123420",
-          "name": "위메이드플레이"
+          "code": "180400",
+          "name": "DXVX"
         },
         {
-          "code": "205500",
-          "name": "넥써쓰"
+          "code": "044820",
+          "name": "코스맥스비티아이"
         }
       ]
     },
     {
-      "no": "298",
-      "name": "가정용기기와용품",
-      "changeRate": -1.08,
-      "change3d": 0.08,
-      "rise": 11.0,
-      "fall": 6.0,
-      "steady": 3.0,
-      "total": 20.0,
-      "marketCap": 11318260.0,
-      "tradeAmount": 23791582.0,
+      "no": "262",
+      "name": "생명과학도구및서비스",
+      "changeRate": -0.78,
+      "change3d": 1.37,
+      "rise": 12.0,
+      "fall": 21.0,
+      "steady": 8.0,
+      "total": 41.0,
+      "marketCap": 9059928.0,
+      "tradeAmount": 6898554.0,
       "leaders": [
         {
-          "code": "317870",
-          "name": "엔바이오니아"
+          "code": "199730",
+          "name": "바이오인프라"
         },
         {
-          "code": "042600",
-          "name": "새로닉스"
+          "code": "311690",
+          "name": "CJ 바이오사이언스"
         }
       ]
     },
     {
-      "no": "312",
-      "name": "가스유틸리티",
-      "changeRate": -1.11,
-      "change3d": -0.41,
+      "no": "332",
+      "name": "문구류",
+      "changeRate": -0.8,
+      "change3d": -2.21,
+      "rise": 0.0,
+      "fall": 1.0,
+      "steady": 0.0,
+      "total": 1.0,
+      "marketCap": 21164.0,
+      "tradeAmount": 47000.0,
+      "leaders": [
+        {
+          "code": "005360",
+          "name": "모나미"
+        }
+      ]
+    },
+    {
+      "no": "265",
+      "name": "판매업체",
+      "changeRate": -0.81,
+      "change3d": -0.27,
       "rise": 2.0,
-      "fall": 7.0,
+      "fall": 8.0,
       "steady": 3.0,
-      "total": 12.0,
-      "marketCap": 7933149.0,
-      "tradeAmount": 7791788.0,
+      "total": 13.0,
+      "marketCap": 1160547.0,
+      "tradeAmount": 592610.0,
       "leaders": [
         {
-          "code": "053050",
-          "name": "지에스이"
+          "code": "051160",
+          "name": "지어소프트"
         },
         {
-          "code": "015360",
-          "name": "INVENI"
+          "code": "051390",
+          "name": "YW"
+        }
+      ]
+    },
+    {
+      "no": "339",
+      "name": "다각화된소비자서비스",
+      "changeRate": -0.81,
+      "change3d": -0.43,
+      "rise": 0.0,
+      "fall": 1.0,
+      "steady": 0.0,
+      "total": 1.0,
+      "marketCap": 72287.0,
+      "tradeAmount": 14.0,
+      "leaders": [
+        {
+          "code": "080010",
+          "name": "이상네트웍스"
+        }
+      ]
+    },
+    {
+      "no": "278",
+      "name": "반도체와반도체장비",
+      "changeRate": -0.81,
+      "change3d": -1.29,
+      "rise": 131.0,
+      "fall": 37.0,
+      "steady": 4.0,
+      "total": 172.0,
+      "marketCap": 3319411576.0,
+      "tradeAmount": 1641880105.0,
+      "leaders": [
+        {
+          "code": "097800",
+          "name": "윈팩"
+        },
+        {
+          "code": "429270",
+          "name": "시지트로닉스"
+        }
+      ]
+    },
+    {
+      "no": "337",
+      "name": "카드",
+      "changeRate": -0.83,
+      "change3d": -0.1,
+      "rise": 0.0,
+      "fall": 1.0,
+      "steady": 0.0,
+      "total": 1.0,
+      "marketCap": 4854487.0,
+      "tradeAmount": 202000.0,
+      "leaders": [
+        {
+          "code": "029780",
+          "name": "삼성카드"
+        }
+      ]
+    },
+    {
+      "no": "300",
+      "name": "양방향미디어와서비스",
+      "changeRate": -0.89,
+      "change3d": -0.21,
+      "rise": 6.0,
+      "fall": 10.0,
+      "steady": 0.0,
+      "total": 16.0,
+      "marketCap": 45827645.0,
+      "tradeAmount": 15917137.0,
+      "leaders": [
+        {
+          "code": "289220",
+          "name": "자이언트스텝"
+        },
+        {
+          "code": "214270",
+          "name": "FSN"
+        }
+      ]
+    },
+    {
+      "no": "285",
+      "name": "방송과엔터테인먼트",
+      "changeRate": -0.89,
+      "change3d": 0.03,
+      "rise": 16.0,
+      "fall": 34.0,
+      "steady": 7.0,
+      "total": 57.0,
+      "marketCap": 15969063.0,
+      "tradeAmount": 5510654.0,
+      "leaders": [
+        {
+          "code": "078860",
+          "name": "아이오케이이엔엠"
+        },
+        {
+          "code": "322780",
+          "name": "코퍼스코리아"
         }
       ]
     },
     {
       "no": "336",
       "name": "다각화된통신서비스",
-      "changeRate": -1.12,
-      "change3d": -0.26,
+      "changeRate": -0.94,
+      "change3d": -0.56,
       "rise": 1.0,
       "fall": 2.0,
       "steady": 0.0,
       "total": 3.0,
-      "marketCap": 13329721.0,
-      "tradeAmount": 13414697.0,
+      "marketCap": 13204689.0,
+      "tradeAmount": 2107038.0,
       "leaders": [
         {
           "code": "122830",
@@ -1380,320 +1258,86 @@
       ]
     },
     {
-      "no": "273",
-      "name": "자동차",
-      "changeRate": -1.17,
-      "change3d": -0.53,
+      "no": "294",
+      "name": "통신장비",
+      "changeRate": -0.97,
+      "change3d": 0.01,
+      "rise": 8.0,
+      "fall": 37.0,
+      "steady": 10.0,
+      "total": 55.0,
+      "marketCap": 14498211.0,
+      "tradeAmount": 29927759.0,
+      "leaders": [
+        {
+          "code": "061090",
+          "name": "세나테크놀로지"
+        },
+        {
+          "code": "148250",
+          "name": "알엔투테크놀로지"
+        }
+      ]
+    },
+    {
+      "no": "264",
+      "name": "백화점과일반상점",
+      "changeRate": -0.99,
+      "change3d": -0.83,
       "rise": 4.0,
       "fall": 8.0,
-      "steady": 0.0,
-      "total": 12.0,
-      "marketCap": 127227527.0,
-      "tradeAmount": 277162441.0,
+      "steady": 2.0,
+      "total": 14.0,
+      "marketCap": 16640323.0,
+      "tradeAmount": 4241227.0,
       "leaders": [
         {
-          "code": "067990",
-          "name": "도이치모터스"
+          "code": "008775",
+          "name": "호텔신라우"
         },
         {
-          "code": "900140",
-          "name": "엘브이엠씨홀딩스"
+          "code": "006370",
+          "name": "대구백화점"
         }
       ]
     },
     {
-      "no": "268",
-      "name": "식품",
-      "changeRate": -1.19,
-      "change3d": -0.02,
-      "rise": 30.0,
-      "fall": 54.0,
-      "steady": 8.0,
-      "total": 92.0,
-      "marketCap": 40072588.0,
-      "tradeAmount": 85716325.0,
-      "leaders": [
-        {
-          "code": "178600",
-          "name": "대동고려삼"
-        },
-        {
-          "code": "051780",
-          "name": "큐로홀딩스"
-        }
-      ]
-    },
-    {
-      "no": "303",
-      "name": "가구",
-      "changeRate": -1.26,
-      "change3d": -0.48,
-      "rise": 3.0,
-      "fall": 7.0,
-      "steady": 1.0,
-      "total": 11.0,
-      "marketCap": 1962425.0,
-      "tradeAmount": 2910598.0,
-      "leaders": [
-        {
-          "code": "309930",
-          "name": "조이웍스앤코"
-        },
-        {
-          "code": "079430",
-          "name": "현대리바트"
-        }
-      ]
-    },
-    {
-      "no": "265",
-      "name": "판매업체",
-      "changeRate": -1.32,
-      "change3d": 0.75,
-      "rise": 4.0,
-      "fall": 8.0,
-      "steady": 1.0,
-      "total": 13.0,
-      "marketCap": 1171325.0,
-      "tradeAmount": 5084213.0,
-      "leaders": [
-        {
-          "code": "009810",
-          "name": "MDS스피어"
-        },
-        {
-          "code": "039740",
-          "name": "한국정보공학"
-        }
-      ]
-    },
-    {
-      "no": "285",
-      "name": "방송과엔터테인먼트",
-      "changeRate": -1.36,
-      "change3d": 0.69,
-      "rise": 23.0,
-      "fall": 30.0,
-      "steady": 4.0,
-      "total": 57.0,
-      "marketCap": 16135092.0,
-      "tradeAmount": 44976789.0,
-      "leaders": [
-        {
-          "code": "302920",
-          "name": "더콘텐츠온"
-        },
-        {
-          "code": "054780",
-          "name": "키이스트"
-        }
-      ]
-    },
-    {
-      "no": "321",
-      "name": "증권",
-      "changeRate": -1.67,
-      "change3d": -0.56,
-      "rise": 13.0,
-      "fall": 25.0,
-      "steady": 1.0,
-      "total": 39.0,
-      "marketCap": 88418894.0,
-      "tradeAmount": 162200505.0,
-      "leaders": [
-        {
-          "code": "003465",
-          "name": "유화증권우"
-        },
-        {
-          "code": "003535",
-          "name": "한화투자증권우"
-        }
-      ]
-    },
-    {
-      "no": "319",
-      "name": "기타금융",
-      "changeRate": -1.7,
-      "change3d": 0.7,
+      "no": "328",
+      "name": "전문소매",
+      "changeRate": -1.02,
+      "change3d": 0.1,
       "rise": 2.0,
-      "fall": 2.0,
-      "steady": 2.0,
-      "total": 6.0,
-      "marketCap": 925220.0,
-      "tradeAmount": 2270029.0,
-      "leaders": [
-        {
-          "code": "007330",
-          "name": "푸른저축은행"
-        },
-        {
-          "code": "021880",
-          "name": "메이슨캐피탈"
-        }
-      ]
-    },
-    {
-      "no": "266",
-      "name": "화장품",
-      "changeRate": -1.89,
-      "change3d": 0.13,
-      "rise": 20.0,
-      "fall": 39.0,
-      "steady": 5.0,
-      "total": 64.0,
-      "marketCap": 45500586.0,
-      "tradeAmount": 333200643.0,
-      "leaders": [
-        {
-          "code": "227610",
-          "name": "아우딘퓨쳐스"
-        },
-        {
-          "code": "083660",
-          "name": "CSA 코스믹"
-        }
-      ]
-    },
-    {
-      "no": "288",
-      "name": "건강관리기술",
-      "changeRate": -2.06,
-      "change3d": 2.29,
-      "rise": 5.0,
-      "fall": 8.0,
+      "fall": 3.0,
       "steady": 0.0,
-      "total": 13.0,
-      "marketCap": 3478160.0,
-      "tradeAmount": 108000572.0,
+      "total": 5.0,
+      "marketCap": 416898.0,
+      "tradeAmount": 75515.0,
       "leaders": [
         {
-          "code": "386380",
-          "name": "스카이랩스"
+          "code": "064240",
+          "name": "홈캐스트"
         },
         {
-          "code": "384470",
-          "name": "코어라인소프트"
-        }
-      ]
-    },
-    {
-      "no": "338",
-      "name": "사무용전자제품",
-      "changeRate": -2.3,
-      "change3d": -0.25,
-      "rise": 0.0,
-      "fall": 1.0,
-      "steady": 0.0,
-      "total": 1.0,
-      "marketCap": 371626.0,
-      "tradeAmount": 85000.0,
-      "leaders": [
-        {
-          "code": "029530",
-          "name": "신도리코"
-        }
-      ]
-    },
-    {
-      "no": "339",
-      "name": "다각화된소비자서비스",
-      "changeRate": -2.37,
-      "change3d": 0.45,
-      "rise": 0.0,
-      "fall": 1.0,
-      "steady": 0.0,
-      "total": 1.0,
-      "marketCap": 72877.0,
-      "tradeAmount": 24309.0,
-      "leaders": [
-        {
-          "code": "080010",
-          "name": "이상네트웍스"
-        }
-      ]
-    },
-    {
-      "no": "301",
-      "name": "은행",
-      "changeRate": -3.07,
-      "change3d": -0.17,
-      "rise": 0.0,
-      "fall": 11.0,
-      "steady": 0.0,
-      "total": 11.0,
-      "marketCap": 212679182.0,
-      "tradeAmount": 668957000.0,
-      "leaders": [
-        {
-          "code": "279570",
-          "name": "케이뱅크"
-        },
-        {
-          "code": "006220",
-          "name": "제주은행"
-        }
-      ]
-    },
-    {
-      "no": "315",
-      "name": "손해보험",
-      "changeRate": -3.15,
-      "change3d": 0.25,
-      "rise": 0.0,
-      "fall": 12.0,
-      "steady": 0.0,
-      "total": 12.0,
-      "marketCap": 53676645.0,
-      "tradeAmount": 128938463.0,
-      "leaders": [
-        {
-          "code": "000540",
-          "name": "흥국화재"
-        },
-        {
-          "code": "000400",
-          "name": "롯데손해보험"
-        }
-      ]
-    },
-    {
-      "no": "297",
-      "name": "가정용품",
-      "changeRate": -3.52,
-      "change3d": 55.75,
-      "rise": 5.0,
-      "fall": 5.0,
-      "steady": 2.0,
-      "total": 12.0,
-      "marketCap": 539740.0,
-      "tradeAmount": 44953894.0,
-      "leaders": [
-        {
-          "code": "110020",
-          "name": "전진바이오팜"
-        },
-        {
-          "code": "299480",
-          "name": "지앤이헬스케어"
+          "code": "064800",
+          "name": "포니링크"
         }
       ]
     },
     {
       "no": "330",
       "name": "생명보험",
-      "changeRate": -3.55,
-      "change3d": -0.15,
+      "changeRate": -1.04,
+      "change3d": -1.5,
       "rise": 0.0,
       "fall": 3.0,
       "steady": 0.0,
       "total": 3.0,
-      "marketCap": 63393426.0,
-      "tradeAmount": 105485000.0,
+      "marketCap": 63158685.0,
+      "tradeAmount": 4945000.0,
       "leaders": [
         {
-          "code": "085620",
-          "name": "미래에셋생명"
+          "code": "088350",
+          "name": "한화생명"
         },
         {
           "code": "032830",
@@ -1702,20 +1346,376 @@
       ]
     },
     {
-      "no": "332",
-      "name": "문구류",
-      "changeRate": -3.67,
-      "change3d": -1.64,
-      "rise": 0.0,
-      "fall": 1.0,
-      "steady": 0.0,
-      "total": 1.0,
-      "marketCap": 21353.0,
-      "tradeAmount": 326000.0,
+      "no": "322",
+      "name": "비철금속",
+      "changeRate": -1.05,
+      "change3d": -0.75,
+      "rise": 16.0,
+      "fall": 19.0,
+      "steady": 5.0,
+      "total": 40.0,
+      "marketCap": 29790785.0,
+      "tradeAmount": 6504238.0,
       "leaders": [
         {
-          "code": "005360",
-          "name": "모나미"
+          "code": "256940",
+          "name": "킵스파마"
+        },
+        {
+          "code": "008355",
+          "name": "남선알미우"
+        }
+      ]
+    },
+    {
+      "no": "305",
+      "name": "항공사",
+      "changeRate": -1.07,
+      "change3d": -0.54,
+      "rise": 1.0,
+      "fall": 7.0,
+      "steady": 1.0,
+      "total": 9.0,
+      "marketCap": 23344527.0,
+      "tradeAmount": 6672000.0,
+      "leaders": [
+        {
+          "code": "091810",
+          "name": "트리니티항공"
+        },
+        {
+          "code": "003495",
+          "name": "대한항공우"
+        }
+      ]
+    },
+    {
+      "no": "293",
+      "name": "컴퓨터와주변기기",
+      "changeRate": -1.08,
+      "change3d": 0.08,
+      "rise": 6.0,
+      "fall": 12.0,
+      "steady": 3.0,
+      "total": 21.0,
+      "marketCap": 1315598.0,
+      "tradeAmount": 1154413.0,
+      "leaders": [
+        {
+          "code": "051380",
+          "name": "피씨디렉트"
+        },
+        {
+          "code": "131180",
+          "name": "딜리"
+        }
+      ]
+    },
+    {
+      "no": "279",
+      "name": "건설",
+      "changeRate": -1.14,
+      "change3d": -0.32,
+      "rise": 28.0,
+      "fall": 34.0,
+      "steady": 16.0,
+      "total": 78.0,
+      "marketCap": 48845833.0,
+      "tradeAmount": 69456344.0,
+      "leaders": [
+        {
+          "code": "224810",
+          "name": "엄지하우스"
+        },
+        {
+          "code": "011560",
+          "name": "세보엠이씨"
+        }
+      ]
+    },
+    {
+      "no": "283",
+      "name": "전기제품",
+      "changeRate": -1.2,
+      "change3d": 0.27,
+      "rise": 25.0,
+      "fall": 36.0,
+      "steady": 8.0,
+      "total": 69.0,
+      "marketCap": 160243334.0,
+      "tradeAmount": 101396134.0,
+      "leaders": [
+        {
+          "code": "196490",
+          "name": "디에이테크놀로지"
+        },
+        {
+          "code": "0070X0",
+          "name": "에스테크엠"
+        }
+      ]
+    },
+    {
+      "no": "302",
+      "name": "식품과기본식료품소매",
+      "changeRate": -1.3,
+      "change3d": 0.27,
+      "rise": 1.0,
+      "fall": 5.0,
+      "steady": 1.0,
+      "total": 7.0,
+      "marketCap": 568193.0,
+      "tradeAmount": 76939.0,
+      "leaders": [
+        {
+          "code": "250000",
+          "name": "보라티알"
+        },
+        {
+          "code": "289170",
+          "name": "바이오텐"
+        }
+      ]
+    },
+    {
+      "no": "291",
+      "name": "조선",
+      "changeRate": -1.31,
+      "change3d": -0.28,
+      "rise": 5.0,
+      "fall": 21.0,
+      "steady": 4.0,
+      "total": 30.0,
+      "marketCap": 147065178.0,
+      "tradeAmount": 46579320.0,
+      "leaders": [
+        {
+          "code": "333430",
+          "name": "일승"
+        },
+        {
+          "code": "217590",
+          "name": "티엠씨"
+        }
+      ]
+    },
+    {
+      "no": "320",
+      "name": "건축제품",
+      "changeRate": -1.36,
+      "change3d": 0.7,
+      "rise": 2.0,
+      "fall": 8.0,
+      "steady": 1.0,
+      "total": 11.0,
+      "marketCap": 593810.0,
+      "tradeAmount": 1757845.0,
+      "leaders": [
+        {
+          "code": "014285",
+          "name": "금강공업우"
+        },
+        {
+          "code": "006570",
+          "name": "대림통상"
+        }
+      ]
+    },
+    {
+      "no": "281",
+      "name": "건강관리장비와용품",
+      "changeRate": -1.44,
+      "change3d": 3.09,
+      "rise": 38.0,
+      "fall": 43.0,
+      "steady": 23.0,
+      "total": 104.0,
+      "marketCap": 25732028.0,
+      "tradeAmount": 26835305.0,
+      "leaders": [
+        {
+          "code": "390110",
+          "name": "애니메디솔루션"
+        },
+        {
+          "code": "402420",
+          "name": "켈스"
+        }
+      ]
+    },
+    {
+      "no": "295",
+      "name": "에너지장비및서비스",
+      "changeRate": -1.6,
+      "change3d": 2.11,
+      "rise": 12.0,
+      "fall": 19.0,
+      "steady": 3.0,
+      "total": 34.0,
+      "marketCap": 22573183.0,
+      "tradeAmount": 65936440.0,
+      "leaders": [
+        {
+          "code": "136150",
+          "name": "원일티엔아이"
+        },
+        {
+          "code": "270520",
+          "name": "앱튼"
+        }
+      ]
+    },
+    {
+      "no": "297",
+      "name": "가정용품",
+      "changeRate": -1.86,
+      "change3d": -10.64,
+      "rise": 2.0,
+      "fall": 7.0,
+      "steady": 3.0,
+      "total": 12.0,
+      "marketCap": 533232.0,
+      "tradeAmount": 3007187.0,
+      "leaders": [
+        {
+          "code": "233990",
+          "name": "질경이"
+        },
+        {
+          "code": "299480",
+          "name": "지앤이헬스케어"
+        }
+      ]
+    },
+    {
+      "no": "288",
+      "name": "건강관리기술",
+      "changeRate": -1.94,
+      "change3d": 1.21,
+      "rise": 2.0,
+      "fall": 11.0,
+      "steady": 0.0,
+      "total": 13.0,
+      "marketCap": 3414412.0,
+      "tradeAmount": 5836003.0,
+      "leaders": [
+        {
+          "code": "338220",
+          "name": "뷰노"
+        },
+        {
+          "code": "322510",
+          "name": "제이엘케이"
+        }
+      ]
+    },
+    {
+      "no": "282",
+      "name": "전자장비와기기",
+      "changeRate": -1.99,
+      "change3d": 0.97,
+      "rise": 41.0,
+      "fall": 52.0,
+      "steady": 12.0,
+      "total": 105.0,
+      "marketCap": 160906308.0,
+      "tradeAmount": 195701415.0,
+      "leaders": [
+        {
+          "code": "225190",
+          "name": "LK삼양"
+        },
+        {
+          "code": "060230",
+          "name": "제이케이시냅스"
+        }
+      ]
+    },
+    {
+      "no": "313",
+      "name": "석유와가스",
+      "changeRate": -2.13,
+      "change3d": -0.05,
+      "rise": 5.0,
+      "fall": 12.0,
+      "steady": 2.0,
+      "total": 19.0,
+      "marketCap": 96805935.0,
+      "tradeAmount": 22173633.0,
+      "leaders": [
+        {
+          "code": "126880",
+          "name": "제이엔케이글로벌"
+        },
+        {
+          "code": "006125",
+          "name": "SK디스커버리우"
+        }
+      ]
+    },
+    {
+      "no": "307",
+      "name": "전자제품",
+      "changeRate": -2.24,
+      "change3d": 1.08,
+      "rise": 5.0,
+      "fall": 8.0,
+      "steady": 3.0,
+      "total": 16.0,
+      "marketCap": 35675545.0,
+      "tradeAmount": 14823265.0,
+      "leaders": [
+        {
+          "code": "154040",
+          "name": "다산솔루에타"
+        },
+        {
+          "code": "084730",
+          "name": "팅크웨어"
+        }
+      ]
+    },
+    {
+      "no": "334",
+      "name": "무역회사와판매업체",
+      "changeRate": -2.27,
+      "change3d": 1.59,
+      "rise": 2.0,
+      "fall": 4.0,
+      "steady": 2.0,
+      "total": 8.0,
+      "marketCap": 13848283.0,
+      "tradeAmount": 13357000.0,
+      "leaders": [
+        {
+          "code": "001250",
+          "name": "GS글로벌"
+        },
+        {
+          "code": "011760",
+          "name": "현대코퍼레이션"
+        }
+      ]
+    },
+    {
+      "no": "306",
+      "name": "전기장비",
+      "changeRate": -2.48,
+      "change3d": -0.4,
+      "rise": 6.0,
+      "fall": 24.0,
+      "steady": 5.0,
+      "total": 35.0,
+      "marketCap": 123270314.0,
+      "tradeAmount": 78031159.0,
+      "leaders": [
+        {
+          "code": "189860",
+          "name": "서전기전"
+        },
+        {
+          "code": "006345",
+          "name": "대원전선우"
         }
       ]
     }

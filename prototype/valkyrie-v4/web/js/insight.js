@@ -223,7 +223,7 @@ VK.insight = (function () {
       var pipe = VK.market && VK.market.state.sets.ipo_pipeline && VK.market.state.sets.ipo_pipeline.data;
       if (!pipe) return h0;
       var up = [].concat(pipe.demandForecastingList || [], pipe.forecastingCompleteList || [], pipe.subscriptionList || []).slice(0, 6);
-      return h0 + '<div class="sec-t">IPO 파이프라인 (NAVER 실데이터)</div>' + up.map(function (x) {
+      return h0 + '<div class="sec-t">IPO 파이프라인 (실데이터)</div>' + up.map(function (x) {
         return kv(esc(x.compName) + " · " + esc(x.ipoStatus || ""), esc((x.dfEndDate || x.poStartDate || "").slice(5)) + (x.fnlCmptRatio ? " · " + Math.round(+x.fnlCmptRatio) + ":1" : ""));
       }).join("");
     }

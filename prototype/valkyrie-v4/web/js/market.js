@@ -78,7 +78,7 @@ VK.market = (function () {
     if (!track) return;
     var codes = [];
     GROUPS.forEach(function (g) { g[1].forEach(function (c) { if (items[c]) codes.push(c); }); });
-    if (!codes.length) { track.innerHTML = '<span class="ml2" style="padding:0 12px">NAVER 시장 데이터 대기 중…</span>'; renderStatus(); return; }
+    if (!codes.length) { track.innerHTML = '<span class="ml2" style="padding:0 12px">시장 데이터 대기 중…</span>'; renderStatus(); return; }
     var sig = codes.join(",");
     if (sig !== builtSig) {   // (re)build the track once per instrument set; values are patched in place afterwards
       var seq = GROUPS.map(function (g) {
@@ -112,7 +112,7 @@ VK.market = (function () {
     var s = it.label + (it.name ? " · " + it.name : "") + "\n현재 " + tilePrice(it) + " (" + sgp(it.change, it.code === "US10YT=RR" ? 3 : 2) + ", " + sgp(it.changeRate) + "%)";
     if (it.high52w) s += "\n52주 " + comma(it.low52w, 2) + " ~ " + comma(it.high52w, 2);
     if (it.code === "BTC" && it.priceKrw) s += "\n₩" + comma(it.priceKrw, 0) + " (업비트, USD = KRW ÷ 원/달러)";
-    s += "\n" + (it.marketStatus || "") + " · " + (it.tradedAt || "") + "\n출처: NAVER 증권 · " + (src("market_board") || "");
+    s += "\n" + (it.marketStatus || "") + " · " + (it.tradedAt || "") + "\n실시간 시세 · " + (src("market_board") || "");
     if (it.code === "US10YT=RR") { var n = nowcast(); if (n) s += "\n엔진 EOD(FRED) " + n.eod.toFixed(3) + "% 대비 " + sgp(n.bp, 1) + "bp"; }
     return s;
   }
@@ -124,12 +124,12 @@ VK.market = (function () {
     var age = stat.ageSec !== undefined ? stat.ageSec : st && st.ageSec;
     var dot = source === "LIVE" ? "gr" : source === "STALE" ? "rd" : "am";
     el.className = "mk-st " + dot;
-    el.innerHTML = '<i></i><b>NAVER ' + esc(L.offline ? "SNAPSHOT" : source) + "</b><span class='num'>" +
+    el.innerHTML = '<i></i><b>MARKET ' + esc(L.offline ? "SNAPSHOT" : source) + "</b><span class='num'>" +
       (L.offline ? esc(tstr(st && st.fetchedAt)) : age !== undefined ? ago(age) + " 전" : "") + "</span>";
     el.title = Object.keys(L.status).map(function (k) {
       var s = L.status[k];
       return k + ": " + s.source + " · " + ago(s.ageSec) + " 전 · " + s.every + "s 주기" + (s.error ? " · 오류 " + s.error : "");
-    }).join("\n") || (L.offline ? "오프라인 번들: 마지막 수집 파일" : "");
+    }).join("\n") || (L.offline ? VK.api.offlineName + ": 마지막 수집 파일" + (VK.api.mode === "web" ? " (GitHub Actions 주기 갱신 · 실시간 폴링은 로컬 서버)" : "") : "");
     if (nb) {
       var n = nowcast(), st2 = getState && getState();
       var latest = st2 && st2.nowcastable;

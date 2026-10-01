@@ -1,41 +1,17 @@
 {
-  "from": "2026-09-29",
-  "to": "2026-10-07",
+  "from": "2026-09-30",
+  "to": "2026-10-08",
   "items": [
-    {
-      "date": "2026-09-29",
-      "category": "economicIndicators",
-      "nation": "KOR",
-      "title": "기업심리지수",
-      "subtitle": "06:00 발표 · 시장 영향력 매우 높음",
-      "code": "KRCBSI=ECIX",
-      "info": {
-        "발표": "99.10",
-        "이전 대비": null
-      }
-    },
-    {
-      "date": "2026-09-29",
-      "category": "economicIndicators",
-      "nation": "USA",
-      "title": "CB 소비자신뢰지수",
-      "subtitle": "23:00 발표 · 시장 영향력 높음",
-      "code": "USCONC=ECIX",
-      "info": {
-        "발표": "81.90",
-        "이전 대비": null
-      }
-    },
     {
       "date": "2026-09-30",
       "category": "economicIndicators",
       "nation": "KOR",
       "title": "광공업생산 전월비(계절조정)",
-      "subtitle": "08:00 예정 · 시장 영향력 매우 높음",
+      "subtitle": "08:00 발표 · 시장 영향력 매우 높음",
       "code": "KRIO=ECIX",
       "info": {
-        "이전": "0.20%",
-        "발표": "-"
+        "발표": "-4.80%",
+        "이전 대비": null
       }
     },
     {
@@ -43,11 +19,11 @@
       "category": "economicIndicators",
       "nation": "KOR",
       "title": "서비스업생산지수 전월비(계절조정)",
-      "subtitle": "08:00 예정 · 시장 영향력 매우 높음",
+      "subtitle": "08:00 발표 · 시장 영향력 매우 높음",
       "code": "KRSVSO=ECIX",
       "info": {
-        "이전": "-1.30%",
-        "발표": "-"
+        "발표": "0.50%",
+        "이전 대비": null
       }
     },
     {
@@ -55,11 +31,11 @@
       "category": "economicIndicators",
       "nation": "USA",
       "title": "개인지출 전월대비",
-      "subtitle": "21:30 예정 · 시장 영향력 높음",
+      "subtitle": "21:30 발표 · 시장 영향력 높음",
       "code": "USGPCS=ECIX",
       "info": {
-        "이전": "0.20%",
-        "발표": "-"
+        "발표": "0.90%",
+        "이전 대비": null
       }
     },
     {
@@ -67,11 +43,11 @@
       "category": "economicIndicators",
       "nation": "USA",
       "title": "근원 소비지출물가지수 전월대비",
-      "subtitle": "21:30 예정 · 시장 영향력 보통",
+      "subtitle": "21:30 발표 · 시장 영향력 보통",
       "code": "USPCEM=ECIX",
       "info": {
-        "이전": "0.20%",
-        "발표": "-"
+        "발표": "0.20%",
+        "이전 대비": null
       }
     },
     {
@@ -219,12 +195,33 @@
       }
     },
     {
+      "date": "2026-10-08",
+      "category": "economicIndicators",
+      "nation": "KOR",
+      "title": "경상수지",
+      "subtitle": "08:00 예정 · 시장 영향력 매우 높음",
+      "code": "KRCURA=ECIX",
+      "info": {
+        "이전": "42.08B",
+        "발표": "-"
+      }
+    },
+    {
       "date": "2026-10-01",
       "category": "earnings",
       "nation": "USA",
       "title": "마이크론 테크놀로지 4분기 실적 발표",
       "subtitle": null,
       "code": "MU.O",
+      "info": {}
+    },
+    {
+      "date": "2026-10-08",
+      "category": "earnings",
+      "nation": "USA",
+      "title": "펩시코 3분기 실적 발표",
+      "subtitle": null,
+      "code": "PEP.O",
       "info": {}
     },
     {

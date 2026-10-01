@@ -107,6 +107,7 @@ def state_with_context(date, shock):
     st["plan"] = PL.build(st, calendar_lines())
     st["market"] = market_summary()
     st["watch"] = WATCH.build(st, {k: (v or {}).get("data") for k, v in LIVE.sets.items()})   # 주목 섹터·테마·종목
+    st["ranges"] = ENGINE.ranges(st["date"])                                                  # 1y realised ranges (AI scenario sizing)
     return st
 
 

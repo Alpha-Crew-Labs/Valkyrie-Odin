@@ -1,13 +1,22 @@
 name: Deploy VALKYRIE to GitHub Pages
 
+# Site layout (https://alpha-crew-labs.github.io/Valkyrie-Odin/)
+#   /        VALKYRIE v4 — canonical public build (prototype/valkyrie-v4/web, snapshot bundle rebuilt here)
+#   /v4/     the same v4 build, pinned alias
+#   /intro/  v4 introduction page
+#   /v3/     v3 static baseline
+#   /v2.5/   v2.5 static fallback
+# The v4 bundle is recomputed from public data on every deploy; if any step fails the committed bundle ships
+# instead (no fabricated values). Natural-language AI and real-time polling need the local server (run.ps1).
+
 on:
   push:
     branches:
       - main
     paths:
-      - 'prototype/valkyrie-v4/web/**'
-      - 'prototype/valkyrie-v3/**'
+      - 'prototype/valkyrie-v4/**'
       - 'prototype/valkyrie-v2.5/**'
+      - 'prototype/valkyrie-v3/**'
       - 'scripts/update_equity_snapshot.mjs'
       - 'scripts/update_theme_snapshot.mjs'
       - 'scripts/update_market_strip_snapshot.mjs'
@@ -44,6 +53,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      # The 10-minute market-hours schedule only refreshes NAVER market data for v4; the slower public
+      # sources (CB Zero Finder / 38 / ECOS / FRED) are refreshed hourly and on pushes.
+      V4_FULL_REFRESH: ${{ github.event_name != 'schedule' || github.event.schedule == '7 * * * *' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -109,18 +122,93 @@ jobs:
         if: steps.market_strip_snapshot.outcome != 'success'
         run: echo 'Public Naver/Npay indicator refresh failed. Market tape will use direct public browser fetch, last-good public snapshot, or DATA PENDING.'
 
+      # ---------------------------------------------------------------- VALKYRIE v4 (site root)
+      - name: Set up Python for the v4 engine
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install v4 owner-model dependencies (8512 equity model)
+        run: python -m pip install --quiet --disable-pip-version-check pandas numpy
+
+      - name: Refresh v4 public market data (NAVER)
+        id: v4_naver
+        continue-on-error: true
+        timeout-minutes: 12
+        working-directory: prototype/valkyrie-v4
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python pipeline/collect_naver.py
+
+      - name: Refresh v4 research samples (CB Zero Finder / 38 / NAVER financials)
+        id: v4_research
+        if: env.V4_FULL_REFRESH == 'true'
+        continue-on-error: true
+        timeout-minutes: 10
+        working-directory: prototype/valkyrie-v4
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python pipeline/collect_research.py
+
+      - name: Refresh v4 ECOS / FRED series (only when repository secrets are set)
+        id: v4_series
+        if: env.V4_FULL_REFRESH == 'true'
+        continue-on-error: true
+        timeout-minutes: 10
+        working-directory: prototype/valkyrie-v4
+        env:
+          PYTHONIOENCODING: utf-8
+          ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: |
+          if [ -z "$ECOS_API_KEY" ] && [ -z "$FRED_API_KEY" ]; then
+            echo 'No ECOS_API_KEY / FRED_API_KEY repository secrets: keeping the committed daily series.'
+            exit 0
+          fi
+          printf 'ECOS_API_KEY=%s\nFRED_API_KEY=%s\n' "$ECOS_API_KEY" "$FRED_API_KEY" > .env
+          python pipeline/collect.py; status=$?
+          rm -f .env
+          exit $status
+
+      - name: Rebuild v4 model, snapshots and public bundle
+        id: v4_bundle
+        continue-on-error: true
+        timeout-minutes: 15
+        working-directory: prototype/valkyrie-v4
+        env:
+          PYTHONIOENCODING: utf-8
+        run: |
+          python pipeline/model.py
+          python pipeline/snapshot.py
+          python pipeline/check.py
+
+      - name: Report v4 bundle fallback
+        if: steps.v4_bundle.outcome != 'success'
+        run: |
+          echo 'v4 rebuild failed; deploying the committed snapshot bundle (no fabricated values).'
+          git checkout -- prototype/valkyrie-v4/web/data/bundle.js prototype/valkyrie-v4/data
+
+      - name: Report v4 refresh outcomes
+        run: |
+          echo "v4 NAVER market data: ${{ steps.v4_naver.outcome }}"
+          echo "v4 research samples:  ${{ steps.v4_research.outcome }} (full refresh: ${{ env.V4_FULL_REFRESH }})"
+          echo "v4 ECOS/FRED series:  ${{ steps.v4_series.outcome }}"
+          echo "v4 bundle rebuild:    ${{ steps.v4_bundle.outcome }}"
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Assemble Pages site
         run: |
           rm -rf _site
-          mkdir -p _site/v2.5 _site/v3 _site/v4
+          mkdir -p _site/v4 _site/v3 _site/v2.5 _site/intro
 
-          # VALKYRIE v4 is the canonical public build. GitHub Pages has no Python
-          # server, so v4/web automatically falls back to its committed OFFLINE BUNDLE.
+          # VALKYRIE v4 is the canonical public build (root) and is pinned at /v4/ as well.
+          # GitHub Pages has no Python server, so the page runs in WEB mode from the bundle rebuilt above.
           cp -R prototype/valkyrie-v4/web/. _site/
           cp -R prototype/valkyrie-v4/web/. _site/v4/
+          cp -R prototype/valkyrie-v4/intro/. _site/intro/
+          rm -f _site/intro/build_intro.py _site/intro/VALKYRIE_intro.html
 
           # Preserve legacy builds for regression/comparison.
           cp -R prototype/valkyrie-v2.5/. _site/v2.5/
@@ -136,8 +224,9 @@ jobs:
           # Guard the canonical root: fail rather than silently publishing a legacy build.
           test -f _site/index.html
           grep -q 'VALKYRIE v4' _site/index.html
-          test -f _site/data/bundle.js
+          test -f _site/data/bundle.js && test -f _site/js/main.js
           touch _site/.nojekyll
+          du -sh _site
 
       - name: Upload VALKYRIE site artifact
         uses: actions/upload-pages-artifact@v3

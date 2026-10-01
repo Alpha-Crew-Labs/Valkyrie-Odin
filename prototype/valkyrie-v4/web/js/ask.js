@@ -21,7 +21,8 @@ VK.ask = (function () {
       if (inList && !isLi) { out.push("</ul>"); inList = false; }
       if (!t) return;
       t = t.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>")
-           .replace(/\[(VALKYRIE|8511[^\]]*|8512[^\]]*|8501[^\]]*|NAVER[^\]]*|NEWS|뉴스|잠정)\]/g, '<span class="src">$1</span>');
+           .replace(/\[(VALKYRIE|8511[^\]]*|8512[^\]]*|8501[^\]]*|LIVE[^\]]*|MARKET[^\]]*|NEWS|뉴스|잠정)\]/g, '<span class="src">$1</span>')
+           .replace(/\[NAVER[^\]]*\]/g, '<span class="src">LIVE</span>');
       if (/^(SITUATION|CAUSAL PATH|EVIDENCE|CROSS-CHECK|PATHS|JUDGEMENT|ACTION|RISK|TRIGGER|VERDICT)\s*:?$/.test(t)) out.push('<div class="ai-h tag">' + t.replace(/:$/, "") + "</div>");
       else if (/^#{1,3}\s+/.test(t)) out.push('<div class="ai-h">' + t.replace(/^#{1,3}\s+/, "") + "</div>");
       else if (isLi) { if (!inList) { out.push("<ul>"); inList = true; } out.push("<li>" + t.replace(/^[-*•]\s+/, "") + "</li>"); }
@@ -77,8 +78,11 @@ VK.ask = (function () {
 
   function pane(ctx) {
     if (!info.enabled) {
-      return '<div class="cd"><div class="cdh"><span class="cdt">AI 어시스턴트</span><span class="cdo">' + esc(info.reason || "비활성") + "</span></div>" +
-        '<div class="note">Claude API 연결이 없어 준비 질문 3개와 키워드 라우팅(규칙)으로 답합니다. 서버의 .env에 ANTHROPIC_API_KEY를 넣고 재시작하면 자연어 질문이 켜집니다.</div></div>';
+      var webNote = VK.api.mode === "web";
+      return '<div class="cd"><div class="cdh"><span class="cdt">AI 어시스턴트</span><span class="cdo">' + esc(webNote ? "공개 웹 · 비활성" : info.reason || "비활성") + "</span></div>" +
+        '<div class="note">' + (webNote
+          ? "공개 웹(GitHub Pages)에서는 AI 어시스턴트가 꺼져 있습니다. 준비 질문 3개와 SHOCK 프리셋은 엔진 스냅샷으로 답합니다. 자연어 질문은 로컬에서 run.ps1로 서버를 띄우고 .env에 ANTHROPIC_API_KEY를 넣으면 켜집니다."
+          : "Claude API 연결이 없어 준비 질문 3개와 키워드 라우팅(규칙)으로 답합니다. 서버의 .env에 ANTHROPIC_API_KEY를 넣고 재시작하면 자연어 질문이 켜집니다.") + "</div></div>";
     }
     var h = '<div class="ai-top"><span class="ml">AI 의사결정 어시스턴트</span><span class="ml2">' + esc(info.model) + " · 숫자는 전부 VALKYRIE 엔진·담당 모델 계산값 · 해석·액션 문구만 AI가 작성</span>" +
       '<span class="ai-sug">' + SUGGEST.map(function (q) { return '<span class="cp" data-ai="ask" data-q="' + esc(q[1]) + '" title="' + esc(q[1]) + '">' + esc(q[0]) + "</span>"; }).join("") + "</span></div>";

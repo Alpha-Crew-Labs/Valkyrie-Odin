@@ -187,4 +187,4 @@ def build(st, plan, live=None, now=None):
         s["ask"] = ASK.get(s["id"])
     return {"edition": ed, "date": st["date"], "scenes": scenes, "presets": presets,
             "generatedAt": datetime.now(KST).isoformat(timespec="seconds"),
-            "note": f"엔진 EOD {st['date']} · 8501 · 8511 · 8512 · NAVER LIVE"}
+            "note": f"엔진 EOD {st['date']} · 8501 · 8511 · 8512 · LIVE MARKET"}

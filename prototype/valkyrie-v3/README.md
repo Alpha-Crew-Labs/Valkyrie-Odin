@@ -42,7 +42,7 @@ The original uploaded prototype embedded large Chart.js/date-adapter bundles tha
 
 ## Deployment policy
 
-- `/` remains the v2.5 stable fallback.
+- `/` is the VALKYRIE v4 public build since 2026-10-01; the v2.5 stable fallback moved to `/v2.5/`.
 - `/v3/` is the current development baseline.
 - GitHub Pages deploys from `main`.
 - Core demo behavior must remain deterministic and local/static; external APIs are not required during the live presentation.

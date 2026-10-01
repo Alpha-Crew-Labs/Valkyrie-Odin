@@ -13,18 +13,20 @@ import csv
 import json
 import os
 import subprocess
+import sys
 import threading
 import time
 from . import book as BK
 from .paths import BOND, RAW, ROOT, STATE
 
-VENV_PY = ROOT / ".venv" / "Scripts" / "python.exe"
+VENV_PY = ROOT / ".venv" / "Scripts" / "python.exe"      # Windows venv (the demo PC)
+VENV_PY_POSIX = ROOT / ".venv" / "bin" / "python"        # POSIX venv
 NAVER_MANIFEST = RAW / "naver" / "_manifest.json"   # written last by collect_naver.py -> a new mtime = complete refresh
 EQUITY_CACHE = STATE / "tools_equity.json"
 EQUITY_EVERY = 600
 EQUITY_SCRIPT = r"""
-import json, sys
-sys.path.insert(0, sys.argv[1]); sys.path.insert(0, sys.argv[1] + r"\equity")
+import json, os, sys
+sys.path.insert(0, sys.argv[1]); sys.path.insert(0, os.path.join(sys.argv[1], "equity"))
 import equity_plan as ep
 d = ep.load()
 cur = float(sys.argv[2]) if len(sys.argv) > 2 else 1.0   # held equity weight (data/state/book.json); 8512's default is 1.0
@@ -115,13 +117,27 @@ class Tools:
         with self.lock:
             self.bond_plan, self.bond_hist, self._bond_mtime = p, h, mt
 
+    @staticmethod
+    def equity_python():
+        """Interpreter that has pandas: the project venv (Windows or POSIX); else this interpreter when it can import
+        pandas itself (GitHub Actions builds the public bundle with a plain Python + pandas)."""
+        for p in (VENV_PY, VENV_PY_POSIX):
+            if p.exists():
+                return str(p)
+        try:
+            import pandas  # noqa: F401
+        except ImportError:
+            return None
+        return sys.executable
+
     def refresh_equity(self, timeout=180):
-        if not VENV_PY.exists():
-            self.equity_error = "project .venv not found"
+        py = self.equity_python()
+        if not py:
+            self.equity_error = "project .venv not found (and this Python has no pandas)"
             return False
         held = BK.equity_weight()                       # D-013: size 8512's trade against the recorded book, not 100%
         try:
-            out = subprocess.run([str(VENV_PY), "-c", EQUITY_SCRIPT, str(ROOT), str(1.0 if held is None else held)],
+            out = subprocess.run([py, "-c", EQUITY_SCRIPT, str(ROOT), str(1.0 if held is None else held)],
                                  capture_output=True, timeout=timeout,
                                  cwd=str(ROOT), env={**os.environ, "PYTHONIOENCODING": "utf-8", "PYTHONDONTWRITEBYTECODE": "1"})
             data = json.loads(out.stdout.decode("utf-8"))

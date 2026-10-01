@@ -79,6 +79,7 @@ class Engine:
         self.model_meta = json.loads((MODEL / "_meta.json").read_text(encoding="utf-8"))
         self.real = self.model_meta.get("equity_sample") == "REAL"
         self._focus_cache = {}
+        self._ranges_cache = {}
 
     # ---------------------------------------------------------------- helpers
     def resolve(self, d):
@@ -328,7 +329,7 @@ class Engine:
                               "P′ = P·exp(−D·Δ할인율 − β_c·Δ크레딧),  CP′ = max(하한, min(CP, P′))",
                               f"크레딧 {r['credit_bp']:.1f} → {spread_after:.1f}bp · 할인율 {d_val:+.1f}bp",
                               f"= {put_base} → {put_after}곳 / {len(pool)}곳" + (" (REAL)" if self.real else " (DEMO 표본)")],
-                              "source": (f"CB Zero Finder(DART) 코스닥 CB {len(pool)}건 ({d}까지 발행) · 가격·재무 NAVER · "
+                              "source": (f"CB Zero Finder(DART) 코스닥 CB {len(pool)}건 ({d}까지 발행) · 가격·재무 시세 데이터 · "
                                          "가정: Put = 발행 12개월 후" if self.real else "DEMO CB 표본 50건 · 발행조건 가상")}}
 
         # ---- signals
@@ -617,6 +618,48 @@ class Engine:
                 "text": f"{trigger} → {trans} → {decide}"}
 
     # ---------------------------------------------------------------- series
+    # key -> (level unit, change type): bp100 = % level → bp change, bp1 = already bp, pct = % change, pp = %-point change
+    RANGE_KEYS = [("ust10", "%", "bp100"), ("ktb3", "%", "bp100"), ("ktb10", "%", "bp100"), ("credit_bp", "bp", "bp1"), ("curve_bp", "bp", "bp1"),
+                  ("bok", "%", "bp100"), ("fed", "%", "bp100"), ("kospi", "pt", "pct"), ("kosdaq", "pt", "pct"), ("ipo_demand", ":1", "pct"),
+                  ("kr_cpi", "%", "pp"), ("us_cpi", "%", "pp")]
+
+    def ranges(self, d=None, window=252):
+        """Trailing-1y distribution facts for forecast-style questions (AI context): current level, 1y min/max/percentile,
+        20d change, and the realised 20d / 60d forward-change distribution (p10/p50/p90) — data-based magnitudes for
+        scenario paths ("1개월 뒤"), not forecasts."""
+        d = self.resolve(d)
+        if d in self._ranges_cache:
+            return self._ranges_cache[d]
+        i = self.idx[d]
+        lo = max(0, i - window)
+        out = {"asof": d, "window_days": i - lo, "note": "지난 1년 실현 분포 (p10/p50/p90 = 실현 20일·60일 변화) · 전망 아님 · 시나리오 크기 선택용"}
+        for key, unit, chg in self.RANGE_KEYS:
+            xs = [r.get(key) for r in self.daily[lo:i + 1] if r.get(key) is not None]
+            if len(xs) < 40:
+                continue
+            cur = xs[-1]
+            cu = "bp" if chg in ("bp100", "bp1") else "%" if chg == "pct" else "%p"
+
+            def diff(a, b):
+                if chg == "bp100":
+                    return (b - a) * 100
+                if chg == "pct":
+                    return (b / a - 1) * 100 if a else 0.0
+                return b - a
+
+            def fwd(h):
+                ds = sorted(diff(xs[j], xs[j + h]) for j in range(len(xs) - h))
+                if len(ds) < 20:
+                    return None
+                q = lambda p: ds[min(len(ds) - 1, int(round(p * (len(ds) - 1))))]
+                return {"p10": round(q(0.1), 2), "p50": round(q(0.5), 2), "p90": round(q(0.9), 2), "unit": cu, "n": len(ds)}
+            out[key] = {"current": cur, "unit": unit, "min_1y": min(xs), "max_1y": max(xs),
+                        "pct_1y": round(100 * sum(1 for v in xs if v <= cur) / len(xs)),
+                        "chg_20d": round(diff(xs[-21], cur), 2) if len(xs) > 21 else None, "chg_unit": cu,
+                        "fwd_20d": fwd(20), "fwd_60d": fwd(60)}
+        self._ranges_cache[d] = out
+        return out
+
     def series(self, keys, start=None, end=None):
         out = {"dates": []}
         for k in keys:

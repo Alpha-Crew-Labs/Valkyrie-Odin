@@ -44,6 +44,11 @@ body{padding-left:var(--rail-w)}
 .rrail-item.live .rrail-met b{color:var(--gr)}
 .rrail-item.down .rrail-met b{color:var(--rd)}
 .rrail-item.ext .rrail-met b{color:#7C8698}
+/* public web build: owners' local apps are listed but not reachable */
+.rrail-item.local{cursor:default;opacity:.62}
+.rrail-item.local:hover{background:transparent;border-color:transparent}
+.rrail-item.local .rrail-mark i{background:#333C48}
+.rrail-item.local .rrail-met b{color:#5A6472}
 .rrail-met span{color:#3A4350;overflow:hidden;text-overflow:ellipsis}
 
 .rrail-foot{margin-top:auto;padding:8px 9px 0;border-top:1px solid #141B24;font-size:7.2px;letter-spacing:.12em;color:#333B46;line-height:1.6}

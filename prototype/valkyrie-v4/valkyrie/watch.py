@@ -100,18 +100,18 @@ def _stocks(sets, st, top, cb_rows):
         if b.get("nation") != "KOR" or b.get("type") not in L or not b.get("name"):
             continue
         out.append({"name": b["name"], "code": b.get("code"), "kind": L[b["type"]],
-                    "value": f"{b.get('changeRate') or 0:+.2f}%", "why": f"거래대금 {(b.get('tradeValue') or 0) / 1e8:,.0f}억", "source": "NAVER 브리핑"})
+                    "value": f"{b.get('changeRate') or 0:+.2f}%", "why": f"거래대금 {(b.get('tradeValue') or 0) / 1e8:,.0f}억", "source": "시장 브리핑"})
     for s in top[:3]:
         for ld in s["leaders"][:1]:
             out.append({"name": ld["name"], "code": ld.get("code"), "kind": "주도주", "value": f"{s['name']} {s['changeRate']:+.2f}%",
-                        "why": " · ".join(t["t"] for t in s["tags"]) or s["why"], "source": f"NAVER {s['kind']}"})
+                        "why": " · ".join(t["t"] for t in s["tags"]) or s["why"], "source": f"{s['kind']} 실시간"})
     ipo = sets.get("ipo_pipeline") or {}
     for key, lab, dk in (("subscriptionList", "IPO 청약", "poStartDate"), ("listingList", "IPO 상장", "lcalDate")):
         for x in (ipo.get(key) or [])[:1]:
             why = (f"경쟁률 {_f(x.get('fnlCmptRatio')):,.0f}:1" if _f(x.get("fnlCmptRatio")) else "") \
                 + (f" · 공모가 {int(_f(x['fixPubPrice'])):,}원" if _f(x.get("fixPubPrice")) else "")
             out.append({"name": x.get("compName"), "code": None, "kind": lab, "value": str(x.get(dk) or "")[5:],
-                        "why": (why.strip(" ·") or (x.get("marketType") or "")), "source": "NAVER IPO 일정"})
+                        "why": (why.strip(" ·") or (x.get("marketType") or "")), "source": "IPO 일정"})
     heavy = sorted([r for r in cb_rows if r.get("market") == "KOSDAQ" and (_f(r.get("dilutionRate")) or 0) >= 15],
                    key=lambda r: -(r.get("amountEok") or 0))[:2]
     for r in heavy:
@@ -146,5 +146,5 @@ def build(st, sets):
     active = [k for k, v in (("금리 압력", tilt["rates_up"]), ("크레딧 ≥65", tilt["credit_hi"]), ("코스피 위험 ≥0.45", tilt["kospi_risk"]), ("환율 상승", tilt["fx_up"])) if v]
     return {"asOf": (sets.get("sectors") or {}).get("asOf"), "sectors": sectors, "themes": themes, "stocks": stocks,
             "tilt": {k: v for k, v in tilt.items() if k != "pressure_kr"}, "tilt_active": active,
-            "basis": "NAVER 업종·테마(등락·폭·회전율 순위) + 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
+            "basis": "업종·테마 실시간(등락·폭·회전율 순위) + 시장 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
             "note": "자동 선정 · 투자 권유 아님"}
