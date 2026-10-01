@@ -1,4 +1,5 @@
-"""Shared paths and secret loading. Secrets never leave .env files."""
+"""Shared paths and secret loading. Secrets never leave .env files (or the CI job's environment)."""
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent          # 대시보드/
@@ -26,4 +27,8 @@ def load_env():
                 continue
             k, v = line.split("=", 1)
             env.setdefault(k.strip(), v.strip().strip("'\""))
+    # GitHub Actions passes repository secrets as environment variables (no .env file is written).
+    for k in ("ECOS_API_KEY", "FRED_API_KEY", "ANTHROPIC_API_KEY"):
+        if os.environ.get(k):
+            env.setdefault(k, os.environ[k])
     return env

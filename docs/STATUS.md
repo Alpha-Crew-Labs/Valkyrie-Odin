@@ -17,8 +17,9 @@ prototype/valkyrie-v4/      ACTIVE — GitHub Pages root (/), local server, real
 
 `prototype/valkyrie-v4` is the hackathon build. It runs locally (`run.ps1` → http://127.0.0.1:4134/) and is the canonical
 public build at https://alpha-crew-labs.github.io/Valkyrie-Odin/ — the Pages workflow recomputes the snapshot bundle from
-public data (NAVER every 10 min in KR market hours; research samples and ECOS/FRED hourly, the latter only with repository
-secrets) and falls back to the committed bundle when a step fails. The web build runs in "WEB" mode: engine snapshots,
+public data (market tiles every 30 min in KR market hours; full refresh at the KR close, every 3 hours in the evening and
+three times a day on weekends) and falls back to the committed bundle when a step fails. The daily series stay continuous
+without API keys (FRED public CSV, public market-rate closes, OHLCV closes); the KR-close run persists them to main. The web build runs in "WEB" mode: engine snapshots,
 preset what-ifs, replay and briefing work; the Claude assistant, live polling and the owners' Streamlit apps are local only.
 
 - 17 objects / 24 relations (KOSPI added); every β carries a data basis or an explicit expert prior

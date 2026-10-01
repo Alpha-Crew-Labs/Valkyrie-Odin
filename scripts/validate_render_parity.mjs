@@ -38,7 +38,7 @@ const collectorText=[coreCollector,bokCollector,tapeCollector,equityCollector,th
 // browser code must never fetch them as a runtime data dependency.
 assert(!/(?:fetchJson|fetch)\s*\(\s*['"]https?:\/\/[^'"]*(?:vercel\.app|vercel\.com)/i.test(browserRuntime),'v3 browser runtime has no Vercel fetch dependency');
 assert(!/(?:process\.env|x-api-key|api[_-]?key\s*[:=]|client[_-]?secret\s*[:=]|access[_-]?token\s*[:=]|authorization\s*[:=]\s*['"`]?bearer)/i.test(collectorText),'public-data collectors require no personal API key, token, or secret');
-assert(pages.includes("cron: '*/10 0-7 * * 1-5'")&&pages.includes("cron: '7 * * * *'"),'public data auto-refreshes every 10 minutes in KR market hours and hourly otherwise');
+assert(pages.includes("cron: '*/30 0-7 * * 1-5'")&&pages.includes("cron: '7 8 * * 1-5'")&&pages.includes("cron: '7 11,14,17,20,23 * * 1-5'"),'public data auto-refreshes every 30 minutes in KR market hours, at the KR close, and a few times a day otherwise (Pages quota-friendly)');
 
 const hasInline=/\sstyle="/i.test(html);
 assert(!hasInline || html.includes("style-src 'self' 'unsafe-inline'"),'CSP preserves inline-style parity with downloadable HTML');

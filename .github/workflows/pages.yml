@@ -2,12 +2,16 @@ name: Deploy VALKYRIE to GitHub Pages
 
 # Site layout (https://alpha-crew-labs.github.io/Valkyrie-Odin/)
 #   /        VALKYRIE v4 — canonical public build (prototype/valkyrie-v4/web, snapshot bundle rebuilt here)
-#   /v4/     the same v4 build, pinned alias
+#   /v4/     redirect to / (pinned alias, no duplicate payload)
 #   /intro/  v4 introduction page
 #   /v3/     v3 static baseline
 #   /v2.5/   v2.5 static fallback
-# The v4 bundle is recomputed from public data on every deploy; if any step fails the committed bundle ships
-# instead (no fabricated values). Natural-language AI and real-time polling need the local server (run.ps1).
+#
+# Quota-friendly cadence (GitHub Pages / Actions): every 30 minutes during KR market hours (market tiles only),
+# a full refresh at the KR close (17:07 KST, also persists the refreshed daily series back to main so the public
+# chain keeps moving without any API key), a few full refreshes in the evening/night, three per day on weekends.
+# The v4 bundle is recomputed from public data; if any step fails the committed bundle ships instead
+# (no fabricated values). Natural-language AI and real-time polling need the local server (run.ps1).
 
 on:
   push:
@@ -30,15 +34,18 @@ on:
     types:
       - completed
   schedule:
-    # Korean market hours: near-live public snapshots every 10 minutes, weekdays.
-    - cron: '*/10 0-7 * * 1-5'
-    # Macro/rates/fundamental public feeds continue refreshing outside Korean market hours.
-    # No personal API keys, private endpoints, Vercel functions, or paid proxy are used.
-    - cron: '7 * * * *'
+    # KR market hours (00-07 UTC = 09-16 KST, weekdays): market tiles every 30 minutes.
+    - cron: '*/30 0-7 * * 1-5'
+    # KR close (17:07 KST): full refresh + persist the daily series (EOD rows) back to main.
+    - cron: '7 8 * * 1-5'
+    # Weekday evening / night (US session, FRED updates): full refresh every 3 hours.
+    - cron: '7 11,14,17,20,23 * * 1-5'
+    # Weekends: three light full refreshes.
+    - cron: '7 1,9,17 * * 0,6'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -54,10 +61,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     env:
-      # The 10-minute market-hours schedule only refreshes NAVER market data for v4; the slower public
-      # sources (CB Zero Finder / 38 / ECOS / FRED) are refreshed hourly and on pushes.
-      V4_FULL_REFRESH: ${{ github.event_name != 'schedule' || github.event.schedule == '7 * * * *' }}
-      # v4 timestamps (collector fetchedAt, snapshot built_at) are read as Korean time on screen.
+      # Market-hours runs only refresh the market tiles; everything else is a full refresh.
+      V4_FULL_REFRESH: ${{ github.event_name != 'schedule' || github.event.schedule != '*/30 0-7 * * 1-5' }}
+      # The KR-close run (and a manual run) commits the refreshed daily series so the public chain stays continuous.
+      V4_PERSIST: ${{ github.event.schedule == '7 8 * * 1-5' || github.event_name == 'workflow_dispatch' }}
+      # v4 timestamps (collector fetchedAt, snapshot built_at, KR close detection) are Korean time.
       TZ: Asia/Seoul
     steps:
       - name: Checkout
@@ -129,6 +137,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: prototype/valkyrie-v4/requirements.txt
 
       - name: Install v4 owner-model dependencies (8512 equity model)
         run: python -m pip install --quiet --disable-pip-version-check pandas numpy
@@ -152,7 +162,7 @@ jobs:
           PYTHONIOENCODING: utf-8
         run: python pipeline/collect_research.py
 
-      - name: Refresh v4 ECOS / FRED series (only when repository secrets are set)
+      - name: Refresh v4 daily series (ECOS/FRED with repository secrets, keyless public sources otherwise)
         id: v4_series
         if: env.V4_FULL_REFRESH == 'true'
         continue-on-error: true
@@ -162,15 +172,7 @@ jobs:
           PYTHONIOENCODING: utf-8
           ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-        run: |
-          if [ -z "$ECOS_API_KEY" ] && [ -z "$FRED_API_KEY" ]; then
-            echo 'No ECOS_API_KEY / FRED_API_KEY repository secrets: keeping the committed daily series.'
-            exit 0
-          fi
-          printf 'ECOS_API_KEY=%s\nFRED_API_KEY=%s\n' "$ECOS_API_KEY" "$FRED_API_KEY" > .env
-          python pipeline/collect.py; status=$?
-          rm -f .env
-          exit $status
+        run: python pipeline/collect.py
 
       - name: Rebuild v4 model, snapshots and public bundle
         id: v4_bundle
@@ -194,7 +196,7 @@ jobs:
         run: |
           echo "v4 NAVER market data: ${{ steps.v4_naver.outcome }}"
           echo "v4 research samples:  ${{ steps.v4_research.outcome }} (full refresh: ${{ env.V4_FULL_REFRESH }})"
-          echo "v4 ECOS/FRED series:  ${{ steps.v4_series.outcome }}"
+          echo "v4 daily series:      ${{ steps.v4_series.outcome }}"
           echo "v4 bundle rebuild:    ${{ steps.v4_bundle.outcome }}"
 
       - name: Configure Pages
@@ -205,10 +207,11 @@ jobs:
           rm -rf _site
           mkdir -p _site/v4 _site/v3 _site/v2.5 _site/intro
 
-          # VALKYRIE v4 is the canonical public build (root) and is pinned at /v4/ as well.
-          # GitHub Pages has no Python server, so the page runs in WEB mode from the bundle rebuilt above.
+          # VALKYRIE v4 is the canonical public build (root). GitHub Pages has no Python server, so the page
+          # runs in WEB mode from the bundle rebuilt above. /v4/ stays a working address as a redirect.
           cp -R prototype/valkyrie-v4/web/. _site/
-          cp -R prototype/valkyrie-v4/web/. _site/v4/
+          printf '%s\n' '<!doctype html>' '<meta charset="utf-8">' '<meta http-equiv="refresh" content="0; url=../">' \
+            '<title>VALKYRIE v4</title>' '<a href="../">VALKYRIE v4 →</a>' > _site/v4/index.html
           cp -R prototype/valkyrie-v4/intro/. _site/intro/
           rm -f _site/intro/build_intro.py _site/intro/VALKYRIE_intro.html
 
@@ -238,3 +241,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # After the deploy: keep the public daily series continuous without API keys. Only the small ECOS/FRED
+      # CSVs (one row per day) and their manifest are committed; the NAVER/research snapshots are rebuilt every
+      # run and never committed. "[skip ci]" prevents this push from re-triggering the deploy.
+      - name: Persist refreshed v4 daily series
+        if: env.V4_PERSIST == 'true' && steps.v4_series.outcome == 'success' && steps.v4_bundle.outcome == 'success'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add prototype/valkyrie-v4/data/00_RAW/*.csv prototype/valkyrie-v4/data/00_RAW/_manifest.json
+          if git diff --cached --quiet; then
+            echo 'No daily-series changes to persist.'
+            exit 0
+          fi
+          git commit -m 'data(v4): persist refreshed public daily series [skip ci]'
+          git stash push -q --include-untracked || true
+          git pull --rebase origin main
+          git push origin HEAD:main
