@@ -34,6 +34,40 @@ VK.api = (function () {
     for (var i = 0; i < ds.length; i++) if (!d || ds[i] <= d) pick = ds[i];
     return d ? pick : ds[ds.length - 1];
   }
+  /* Older snapshot dates live in data/snap_<date>.js (bundle.lazy) and are loaded once, on demand. */
+  var loading = {};
+  function ensure(sd) {
+    if (!B || !B.lazy || B.lazy.indexOf(sd) < 0 || B.snapshots[sd]) return Promise.resolve(true);
+    if (loading[sd]) return loading[sd];
+    loading[sd] = new Promise(function (res) {
+      var s = document.createElement("script");
+      s.src = "data/snap_" + sd + ".js";
+      s.async = true;
+      s.onload = function () {
+        var part = window.VK_SNAP && window.VK_SNAP[sd];
+        if (part) { B.snapshots[sd] = part.snapshots; B.similar[sd] = part.similar; B.commands[sd] = part.commands; B.decisions[sd] = part.decisions; }
+        res(!!part);
+      };
+      s.onerror = function () { delete loading[sd]; res(false); };
+      document.head.appendChild(s);
+    });
+    return loading[sd];
+  }
+  function loadedDate(sd) {   // the requested snapshot, else the nearest earlier one that is in memory
+    if (B.snapshots[sd]) return sd;
+    var have = Object.keys(B.snapshots).sort(), pick = null;
+    for (var i = 0; i < have.length; i++) if (have[i] <= sd) pick = have[i];
+    return pick || have[have.length - 1];
+  }
+  function prefetchLazy() {   // after boot, while idle: make REPLAY instant without delaying the first paint
+    if (!B || !B.lazy || (navigator.connection && navigator.connection.saveData)) return;
+    var i = 0;
+    (function next() {
+      if (i >= B.lazy.length) return;
+      if (document.hidden) { setTimeout(next, 5000); return; }
+      ensure(B.lazy[i++]).then(function () { setTimeout(next, 400); });
+    })();
+  }
   function presetKey(shock) {
     var keys = Object.keys(shock || {});
     if (!keys.length) return "base";
@@ -44,11 +78,12 @@ VK.api = (function () {
     return null;
   }
   function offlineState(d, shock) {
-    var sd = snapDate(d), pk = presetKey(shock);
+    var want = snapDate(d), sd = loadedDate(want), pk = presetKey(shock);
     var st = JSON.parse(JSON.stringify(B.snapshots[sd][pk || "base"]));
     st.offline = true;
     st.offlineNote = pk ? null : web() ? "웹 스냅샷: 프리셋 외 충격은 로컬 서버(run.ps1)에서 계산됩니다"
                                         : "OFFLINE 번들: 프리셋 외 충격은 서버 실행 시에만 계산됩니다";
+    if (sd !== want) st.offlineNote = "스냅샷 " + want + "을(를) 불러오지 못해 " + sd + " 스냅샷을 표시합니다";
     return st;
   }
 
@@ -67,6 +102,7 @@ VK.api = (function () {
         if (!B) throw new Error("서버에 연결할 수 없고 오프라인 번들도 없습니다");
         var m = JSON.parse(JSON.stringify(B.meta));
         m.ontology = B.ontology; m.presets = B.presets; m.questions = B.questions;
+        setTimeout(prefetchLazy, 12000);
         return m;
       });
     },
@@ -75,9 +111,12 @@ VK.api = (function () {
       return Promise.resolve(B.meta.snapshot_dates.slice());
     },
     state: function (d, shock) {
-      if (!online) return Promise.resolve(offlineState(d, shock));
+      if (!online) return ensure(snapDate(d)).then(function () { return offlineState(d, shock); });
       var p = Object.assign({ date: d }, shock || {});
-      return get("/api/state", p).catch(function () { online = false; return offlineState(d, shock); });
+      return get("/api/state", p).catch(function () {
+        online = false;
+        return ensure(snapDate(d)).then(function () { return offlineState(d, shock); });
+      });
     },
     series: function (keys) {
       if (!online) return Promise.resolve(B.series);
@@ -86,24 +125,28 @@ VK.api = (function () {
     decisions: function (asOf) {
       if (!online) {
         var sd = asOf ? snapDate(asOf) : null;
-        return Promise.resolve(sd && B.decisions[sd] ? B.decisions[sd] : B.decisions.latest);
+        if (!sd) return Promise.resolve(B.decisions.latest);
+        return ensure(sd).then(function () { return B.decisions[sd] || B.decisions.latest; });
       }
       return get("/api/decisions", { as_of: asOf });
     },
     addDecision: function (body) { return post("/api/decisions", body); },
     similar: function (d, shock) {
       if (!online) {
-        var sd = snapDate(d), pk = presetKey(shock) || "base";
-        return Promise.resolve(B.similar[sd][pk]);
+        var want = snapDate(d), pk = presetKey(shock) || "base";
+        return ensure(want).then(function () { var sd = loadedDate(want); return (B.similar[sd] || {})[pk] || []; });
       }
       return get("/api/similar", Object.assign({ date: d }, shock || {}));
     },
     command: function (d, q) {
       if (!online) {
-        var c = B.commands[snapDate(d)] || {};
-        return Promise.resolve(c[q] || { mode: web() ? "WEB" : "OFFLINE", question: q, path: [], shock: {},
-          answer: [web() ? "웹 스냅샷: 준비 질문 3개와 SHOCK 프리셋에 답합니다. 자연어 AI 질문은 로컬 서버(run.ps1 + ANTHROPIC_API_KEY)에서 켜집니다."
-                         : "OFFLINE 번들 모드: 준비 질문 3개만 응답합니다."] });
+        var want = snapDate(d);
+        return ensure(want).then(function () {
+          var c = B.commands[loadedDate(want)] || {};
+          return c[q] || { mode: web() ? "WEB" : "OFFLINE", question: q, path: [], shock: {},
+            answer: [web() ? "웹 스냅샷: 준비 질문 3개와 SHOCK 프리셋에 답합니다. 자연어 AI 질문은 로컬 서버(run.ps1 + ANTHROPIC_API_KEY)에서 켜집니다."
+                           : "OFFLINE 번들 모드: 준비 질문 3개만 응답합니다."] };
+        });
       }
       return get("/api/command", { date: d, q: q });
     },

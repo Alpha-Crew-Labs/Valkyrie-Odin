@@ -91,7 +91,11 @@
       .then(function () { state[url] = "live"; }, function () { state[url] = "down"; })
       .then(function () { clearTimeout(t); });
   }
+  var lastCheck = 0;
   function check() {
+    // On the public web the only probed tools are external sites: once at boot, then at most every 5 minutes.
+    if (WEB && Date.now() - lastCheck < 300000) return;
+    lastCheck = Date.now();
     var ps = [];
     TOOLS.forEach(function (g) { g.items.forEach(function (it) { if (it.probe && !(WEB && it.local)) ps.push(probe(it.url)); }); });
     Promise.all(ps).then(render);
@@ -112,7 +116,7 @@
     el.addEventListener("mouseenter", check);
     render();
     check();
-    setInterval(function () { if (!document.hidden) check(); }, 15000);
+    setInterval(function () { if (!document.hidden) check(); }, WEB ? 300000 : 15000);
   }
 
   window.VK = window.VK || {};

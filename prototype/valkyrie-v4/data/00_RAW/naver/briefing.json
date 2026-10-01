@@ -6,43 +6,21 @@
       "rank": 1,
       "code": "468670",
       "name": "브릴스",
-      "price": 47000.0,
-      "changeRate": 141.03,
-      "tradeValue": 155790982000.0,
-      "updatedAt": "2026-10-01T09:25:38.279"
+      "price": 42150.0,
+      "changeRate": 116.15,
+      "tradeValue": 306115092000.0,
+      "updatedAt": "2026-10-01T10:55:15.136"
     },
     {
       "type": "TRADING_AMOUNT_TOP",
       "nation": "KOR",
       "rank": 1,
-      "code": "000660",
-      "name": "SK하이닉스",
-      "price": 1762000.0,
-      "changeRate": -0.79,
-      "tradeValue": 478648000000.0,
-      "updatedAt": "2026-10-01T09:25:38.244"
-    },
-    {
-      "type": "END_HIT_TOP",
-      "nation": "KOR",
-      "rank": 1,
       "code": "005930",
       "name": "삼성전자",
-      "price": 266000.0,
-      "changeRate": -0.93,
-      "tradeValue": 421874000000.0,
-      "updatedAt": "2026-10-01T09:01:00"
-    },
-    {
-      "type": "DISCUSSION_HIT_TOP",
-      "nation": "KOR",
-      "rank": 1,
-      "code": "012330",
-      "name": "현대모비스",
-      "price": 381000.0,
-      "changeRate": 3.81,
-      "tradeValue": 69351000000.0,
-      "updatedAt": "2026-10-01T09:00:00"
+      "price": 267000.0,
+      "changeRate": -0.56,
+      "tradeValue": 1272787000000.0,
+      "updatedAt": "2026-10-01T10:55:15.09"
     },
     {
       "type": "OPEN_TALK_JOIN_TOP",
@@ -50,10 +28,32 @@
       "rank": 1,
       "code": "000660",
       "name": "SK하이닉스",
-      "price": 1761000.0,
-      "changeRate": -0.84,
-      "tradeValue": 487410000000.0,
-      "updatedAt": "2026-10-01T09:00:00"
+      "price": 1770000.0,
+      "changeRate": -0.34,
+      "tradeValue": 1268250000000.0,
+      "updatedAt": "2026-10-01T10:20:00"
+    },
+    {
+      "type": "END_HIT_TOP",
+      "nation": "KOR",
+      "rank": 1,
+      "code": "005930",
+      "name": "삼성전자",
+      "price": 267000.0,
+      "changeRate": -0.56,
+      "tradeValue": 1272787000000.0,
+      "updatedAt": "2026-10-01T10:03:00"
+    },
+    {
+      "type": "DISCUSSION_HIT_TOP",
+      "nation": "KOR",
+      "rank": 1,
+      "code": "439960",
+      "name": "코스모로보틱스",
+      "price": 9150.0,
+      "changeRate": 21.68,
+      "tradeValue": 150220646000.0,
+      "updatedAt": "2026-10-01T10:00:00"
     }
   ]
 }

@@ -94,11 +94,27 @@ def main():
     bundle["feed"] = feed
     (SNAPSHOT / "odin_feed.json").write_text(json.dumps(feed, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    out = WEB / "data" / "bundle.js"
-    out.parent.mkdir(parents=True, exist_ok=True)
+    # The page boots from the latest date only. Older snapshot dates (REPLAY / timeline) are split into
+    # data/snap_<date>.js and loaded on demand by web/js/api.js, so the public first load stays small.
+    out_dir = WEB / "data"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    lazy = {}
+    for d in SNAPSHOT_DATES[:-1]:
+        lazy[d] = {"snapshots": bundle["snapshots"].pop(d), "similar": bundle["similar"].pop(d),
+                   "commands": bundle["commands"].pop(d), "decisions": bundle["decisions"].pop(d)}
+    bundle["lazy"] = sorted(lazy)
+    for old in out_dir.glob("snap_*.js"):
+        if old.stem[5:] not in lazy:
+            old.unlink()
+    for d, part in lazy.items():
+        (out_dir / f"snap_{d}.js").write_text(
+            "window.VK_SNAP=window.VK_SNAP||{};window.VK_SNAP[" + json.dumps(d) + "]="
+            + json.dumps(part, ensure_ascii=False, separators=(",", ":")) + ";\n", encoding="utf-8")
+    out = out_dir / "bundle.js"
     out.write_text("window.VK_BUNDLE=" + json.dumps(bundle, ensure_ascii=False, separators=(",", ":")) + ";\n",
                    encoding="utf-8")
-    print(f"bundle: {out.stat().st_size / 1024:.0f} KB")
+    lazy_kb = sum((out_dir / f"snap_{d}.js").stat().st_size for d in lazy) / 1024
+    print(f"bundle: {out.stat().st_size / 1024:.0f} KB (+ {len(lazy)} lazy snapshot files, {lazy_kb:.0f} KB)")
 
 
 def meta(e):

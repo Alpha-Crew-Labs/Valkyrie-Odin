@@ -734,7 +734,7 @@
        "= 200 → 200곳 / 293곳 (REAL)",
        "차환 유출 압력 = Σ Put위험 잔액×(1−접근성) ÷ Σ잔액 = 54% (≥25% 경계)"
       ],
-      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 NAVER · 가정: Put = 발행 12개월 후"
+      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 시세 데이터 · 가정: Put = 발행 12개월 후"
      },
      "outflow_share": 54.16604887938198,
      "status": "ALERT",
@@ -924,51 +924,29 @@
      "owner": "김유찬",
      "call": "적자 코스닥 청약 보류",
      "dir": "AVOID",
-     "action": "코스피 비중 55% (보유 100% → -45%p · 코스피200 선물 167계약 매도) · 보유 100% 가정 (8512)",
+     "action": "코스피 비중 55% (8512)",
      "market": {
       "w_target": 0.548,
       "score": 0.4563,
       "verdict": "경계",
       "state": "NORMAL",
-      "contracts": -167.2422502888298,
-      "side": "매도",
-      "contract": "코스피200 선물",
-      "driver": "고점 대비 하락",
-      "current": 1.0,
-      "change": -0.45231502801865464,
-      "rebalance": true,
-      "trade_eok": -452.31502801865463,
+      "contracts": null,
+      "side": null,
+      "contract": null,
+      "driver": null,
+      "current": null,
+      "change": null,
+      "rebalance": null,
+      "trade_eok": null,
       "current_src": "100% 가정",
       "provisional": false,
-      "date": "2026-09-30",
+      "date": "2026-09-29",
       "kosdaq": {
        "verdict": "안정",
        "score": 0.2743,
        "w_target": 0.911,
        "provisional": false,
-       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-       "exposure": {
-        "current": 1.0,
-        "target": 0.9111291836582086,
-        "change": -0.08887081634179139,
-        "vol20": 0.22536444589417176,
-        "vol_ref": 0.20533612361314124,
-        "trade_eok": -88.8708163417914,
-        "rebalance": false
-       },
-       "futures": {
-        "contract": "코스피200 선물",
-        "contracts": -32.85974241252386,
-        "side": "매도"
-       },
-       "driver": "고점 대비 하락",
-       "contrib": {
-        "score_vol": 0.02438480128168341,
-        "score_dd": 0.25,
-        "score_trend": 0.0,
-        "score_lev": 0.0,
-        "score_liq": 0.0
-       }
+       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
       }
      },
      "confidence": 90,
@@ -19893,67 +19871,23 @@
       "date": "2026-09-29",
       "dir": "NORMAL",
       "headline": "코스닥 위험점수 0.27 · 권장 주식비중 91% · 코스피 경계 0.46",
-      "action": "주된 원인: 고점 대비 하락",
+      "action": "",
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매",
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험",
       "plan": {
        "kosdaq": {
         "verdict": "안정",
         "score": 0.2743,
         "w_target": 0.911,
         "provisional": false,
-        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.9111291836582086,
-         "change": -0.08887081634179139,
-         "vol20": 0.22536444589417176,
-         "vol_ref": 0.20533612361314124,
-         "trade_eok": -88.8708163417914,
-         "rebalance": false
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -32.85974241252386,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.02438480128168341,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
        },
        "kospi": {
         "verdict": "경계",
         "score": 0.4563,
         "w_target": 0.548,
         "provisional": false,
-        "asof": "2026-09-30",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.5476849719813454,
-         "change": -0.45231502801865464,
-         "vol20": 0.3194734314172154,
-         "vol_ref": 0.17497079733452187,
-         "trade_eok": -452.31502801865463,
-         "rebalance": true
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -167.2422502888298,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.20646678800694795,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "asof": "2026-09-29"
        }
       },
       "provisional": false,
@@ -20084,22 +20018,17 @@
        },
        {
         "src": "8512 김유찬",
-        "text": "코스피 권장 주식비중 55% (보유 100% → −45%p · 보유 100% 가정)",
-        "why": "8512 위험점수 0.46 · 경계 · 주된 원인 고점 대비 하락"
-       },
-       {
-        "src": "8512 김유찬",
-        "text": "헤지: 코스피200 선물 167계약 매도 (보유 100% 가정)",
-        "why": "현물 유지 시 대안 · 비중 차이 −45%p만큼 선물 (1000억 기준)"
+        "text": "코스피 권장 주식비중 55%",
+        "why": "8512 위험점수 0.46 · 경계"
        },
        {
         "src": "8512 김유찬",
         "text": "코스닥 시장 안정 (위험점수 0.27 · 권장 91%)",
-        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
        }
       ],
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
      },
      {
       "desk": "매크로",
@@ -20145,252 +20074,253 @@
      },
      {
       "kind": "EVENT",
-      "text": "09-29 KR 기업심리지수"
-     },
-     {
-      "kind": "EVENT",
-      "text": "09-29 US CB 소비자신뢰지수"
-     },
-     {
-      "kind": "EVENT",
       "text": "09-30 KR 광공업생산 전월비(계절조정)"
      },
      {
       "kind": "EVENT",
       "text": "09-30 KR 서비스업생산지수 전월비(계절조정)"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 개인지출 전월대비"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 근원 소비지출물가지수 전월대비"
      }
     ]
    },
    "watch": {
-    "asOf": "20260930153512",
+    "asOf": "20261001104305",
     "sectors": [
      {
-      "name": "은행",
+      "name": "생물공학",
       "kind": "업종",
-      "changeRate": -3.39,
-      "change3d": -0.17,
-      "rise": 0.0,
-      "fall": 11.0,
-      "total": 11.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.32,
+      "changeRate": 4.35,
+      "change3d": -0.09,
+      "rise": 41.0,
+      "fall": 13.0,
+      "total": 59.0,
+      "breadth": 0.47,
+      "turnover_pct": 0.27,
       "leaders": [
        {
-        "code": "279570",
-        "name": "케이뱅크"
+        "code": "174900",
+        "name": "앱클론"
        },
        {
-        "code": "006220",
-        "name": "제주은행"
+        "code": "358570",
+        "name": "지아이이노베이션"
        }
       ],
-      "score": 88,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.39% · 폭 0↑11↓ · 3일 -0.2%"
-     },
-     {
-      "name": "손해보험",
-      "kind": "업종",
-      "changeRate": -3.26,
-      "change3d": 0.25,
-      "rise": 0.0,
-      "fall": 12.0,
-      "total": 12.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.24,
-      "leaders": [
-       {
-        "code": "000815",
-        "name": "삼성화재우"
-       },
-       {
-        "code": "000400",
-        "name": "롯데손해보험"
-       }
-      ],
-      "score": 85,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.26% · 폭 0↑12↓ · 3일 +0.2%"
-     },
-     {
-      "name": "에너지장비및서비스",
-      "kind": "업종",
-      "changeRate": 2.83,
-      "change3d": 1.63,
-      "rise": 22.0,
-      "fall": 9.0,
-      "total": 34.0,
-      "breadth": 0.38,
-      "turnover_pct": 1.51,
-      "leaders": [
-       {
-        "code": "322000",
-        "name": "HD현대에너지솔루션"
-       },
-       {
-        "code": "098070",
-        "name": "한텍"
-       }
-      ],
-      "score": 67,
-      "tags": [],
-      "why": "상승 주도 +2.83% · 폭 22↑9↓ · 3일 +1.6%"
-     },
-     {
-      "name": "생명과학도구및서비스",
-      "kind": "업종",
-      "changeRate": 2.74,
-      "change3d": 0.61,
-      "rise": 18.0,
-      "fall": 17.0,
-      "total": 41.0,
-      "breadth": 0.02,
-      "turnover_pct": 0.67,
-      "leaders": [
-       {
-        "code": "291650",
-        "name": "츌립앤사이언스"
-       },
-       {
-        "code": "494120",
-        "name": "큐리오시스"
-       }
-      ],
-      "score": 66,
+      "score": 81,
       "tags": [
        {
         "t": "할인율 민감",
         "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +2.74% · 폭 18↑17↓ · 3일 +0.6%"
+      "why": "상승 주도 +4.35% · 폭 41↑13↓ · 3일 -0.1%"
      },
      {
-      "name": "화학",
+      "name": "게임엔터테인먼트",
       "kind": "업종",
-      "changeRate": 2.06,
-      "change3d": 0.27,
-      "rise": 65.0,
-      "fall": 52.0,
-      "total": 122.0,
-      "breadth": 0.11,
-      "turnover_pct": 0.61,
+      "changeRate": 4.23,
+      "change3d": -0.51,
+      "rise": 23.0,
+      "fall": 5.0,
+      "total": 34.0,
+      "breadth": 0.53,
+      "turnover_pct": 0.23,
       "leaders": [
        {
-        "code": "457190",
-        "name": "이수스페셜티케미컬"
+        "code": "036570",
+        "name": "NC"
        },
        {
-        "code": "217910",
-        "name": "에스제이켐"
+        "code": "293490",
+        "name": "카카오게임즈"
        }
       ],
-      "score": 66,
+      "score": 80,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.23% · 폭 23↑5↓ · 3일 -0.5%"
+     },
+     {
+      "name": "우주항공과국방",
+      "kind": "업종",
+      "changeRate": 1.83,
+      "change3d": -0.16,
+      "rise": 27.0,
+      "fall": 7.0,
+      "total": 35.0,
+      "breadth": 0.57,
+      "turnover_pct": 0.27,
+      "leaders": [
+       {
+        "code": "079550",
+        "name": "LIG디펜스앤에어로스페이스"
+       },
+       {
+        "code": "318660",
+        "name": "타임기술"
+       }
+      ],
+      "score": 78,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       },
+       {
+        "t": "크레딧 경계",
+        "why": "AA- 68bp ≥ 65 → 조달 의존 업종 차환 부담"
+       }
+      ],
+      "why": "상승 주도 +1.83% · 폭 27↑7↓ · 3일 -0.2%"
+     },
+     {
+      "name": "생명과학도구및서비스",
+      "kind": "업종",
+      "changeRate": 4.28,
+      "change3d": 1.37,
+      "rise": 22.0,
+      "fall": 13.0,
+      "total": 41.0,
+      "breadth": 0.22,
+      "turnover_pct": 0.33,
+      "leaders": [
+       {
+        "code": "226950",
+        "name": "올릭스"
+       },
+       {
+        "code": "494120",
+        "name": "큐리오시스"
+       }
+      ],
+      "score": 75,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.28% · 폭 22↑13↓ · 3일 +1.4%"
+     },
+     {
+      "name": "기계",
+      "kind": "업종",
+      "changeRate": 1.58,
+      "change3d": -0.28,
+      "rise": 67.0,
+      "fall": 30.0,
+      "total": 105.0,
+      "breadth": 0.35,
+      "turnover_pct": 0.62,
+      "leaders": [
+       {
+        "code": "468670",
+        "name": "브릴스"
+       },
+       {
+        "code": "439960",
+        "name": "코스모로보틱스"
+       }
+      ],
+      "score": 75,
       "tags": [
        {
         "t": "시장 위험 경계",
         "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
        }
       ],
-      "why": "상승 주도 +2.06% · 폭 65↑52↓ · 3일 +0.3%"
+      "why": "상승 주도 +1.58% · 폭 67↑30↓ · 3일 -0.3%"
      },
      {
-      "name": "철강",
+      "name": "제약",
       "kind": "업종",
-      "changeRate": 1.27,
-      "change3d": -1.68,
-      "rise": 34.0,
-      "fall": 16.0,
-      "total": 55.0,
-      "breadth": 0.33,
-      "turnover_pct": 0.87,
+      "changeRate": 3.76,
+      "change3d": 0.18,
+      "rise": 122.0,
+      "fall": 34.0,
+      "total": 175.0,
+      "breadth": 0.5,
+      "turnover_pct": 0.12,
       "leaders": [
        {
-        "code": "023790",
-        "name": "동일스틸럭스"
+        "code": "000250",
+        "name": "삼천당제약"
        },
        {
-        "code": "008970",
-        "name": "KBI동양철관"
+        "code": "456160",
+        "name": "지투지바이오"
        }
       ],
-      "score": 66,
+      "score": 74,
       "tags": [
        {
-        "t": "시장 위험 경계",
-        "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +1.27% · 폭 34↑16↓ · 3일 -1.7%"
+      "why": "상승 주도 +3.76% · 폭 122↑34↓ · 3일 +0.2%"
      }
     ],
     "themes": [],
     "stocks": [
      {
-      "name": "동일스틸럭스",
-      "code": "023790",
+      "name": "브릴스",
+      "code": "468670",
       "kind": "상승률 1위",
-      "value": "+29.99%",
-      "why": "거래대금 56억",
-      "source": "NAVER 브리핑"
-     },
-     {
-      "name": "SK하이닉스",
-      "code": "000660",
-      "kind": "거래대금 1위",
-      "value": "+0.62%",
-      "why": "거래대금 52,368억",
-      "source": "NAVER 브리핑"
+      "value": "+125.38%",
+      "why": "거래대금 2,923억",
+      "source": "시장 브리핑"
      },
      {
       "name": "삼성전자",
       "code": "005930",
-      "kind": "검색 1위",
-      "value": "-1.47%",
-      "why": "거래대금 41,210억",
-      "source": "NAVER 브리핑"
+      "kind": "거래대금 1위",
+      "value": "-0.37%",
+      "why": "거래대금 12,055억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "글로벌테크놀로지",
-      "code": "486510",
+      "name": "코스모로보틱스",
+      "code": "439960",
       "kind": "관심 1위",
-      "value": "+4.83%",
-      "why": "거래대금 6,016억",
-      "source": "NAVER 브리핑"
+      "value": "+18.95%",
+      "why": "거래대금 1,380억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "케이뱅크",
-      "code": "279570",
+      "name": "앱클론",
+      "code": "174900",
       "kind": "주도주",
-      "value": "은행 -3.39%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "생물공학 +4.35%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "삼성화재우",
-      "code": "000815",
+      "name": "NC",
+      "code": "036570",
       "kind": "주도주",
-      "value": "손해보험 -3.26%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "게임엔터테인먼트 +4.23%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "브릴스",
+      "name": "멜콘",
       "code": null,
-      "kind": "IPO 상장",
+      "kind": "IPO 청약",
       "value": "10-01",
-      "why": "경쟁률 1,676:1 · 공모가 19,500원",
-      "source": "NAVER IPO 일정"
+      "why": "공모가 12,300원",
+      "source": "IPO 일정"
      },
      {
       "name": "에이디테크놀로지",
@@ -20415,6 +20345,14 @@
       "value": "3.4개월",
       "why": "재무 2/5 · 잔액 320억",
       "source": "VALKYRIE CB 표본"
+     },
+     {
+      "name": "에르코스",
+      "code": null,
+      "kind": "Put 임박",
+      "value": "3.6개월",
+      "why": "재무 3/5 · 잔액 135억",
+      "source": "VALKYRIE CB 표본"
      }
     ],
     "tilt": {
@@ -20431,7 +20369,7 @@
      "크레딧 ≥65",
      "코스피 위험 ≥0.45"
     ],
-    "basis": "NAVER 업종·테마(등락·폭·회전율 순위) + 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
+    "basis": "업종·테마 실시간(등락·폭·회전율 순위) + 시장 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
     "note": "자동 선정 · 투자 권유 아님"
    }
   },
@@ -20759,7 +20697,7 @@
        "= 200 → 214곳 / 293곳 (REAL)",
        "차환 유출 압력 = Σ Put위험 잔액×(1−접근성) ÷ Σ잔액 = 66% (≥25% 경계)"
       ],
-      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 NAVER · 가정: Put = 발행 12개월 후"
+      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 시세 데이터 · 가정: Put = 발행 12개월 후"
      },
      "outflow_share": 66.36256235822158,
      "status": "SHOCK",
@@ -20949,51 +20887,29 @@
      "owner": "김유찬",
      "call": "적자 코스닥 청약 보류",
      "dir": "AVOID",
-     "action": "코스피 비중 55% (보유 100% → -45%p · 코스피200 선물 167계약 매도) · 보유 100% 가정 (8512)",
+     "action": "코스피 비중 55% (8512)",
      "market": {
       "w_target": 0.548,
       "score": 0.4563,
       "verdict": "경계",
       "state": "NORMAL",
-      "contracts": -167.2422502888298,
-      "side": "매도",
-      "contract": "코스피200 선물",
-      "driver": "고점 대비 하락",
-      "current": 1.0,
-      "change": -0.45231502801865464,
-      "rebalance": true,
-      "trade_eok": -452.31502801865463,
+      "contracts": null,
+      "side": null,
+      "contract": null,
+      "driver": null,
+      "current": null,
+      "change": null,
+      "rebalance": null,
+      "trade_eok": null,
       "current_src": "100% 가정",
       "provisional": false,
-      "date": "2026-09-30",
+      "date": "2026-09-29",
       "kosdaq": {
        "verdict": "안정",
        "score": 0.2743,
        "w_target": 0.911,
        "provisional": false,
-       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-       "exposure": {
-        "current": 1.0,
-        "target": 0.9111291836582086,
-        "change": -0.08887081634179139,
-        "vol20": 0.22536444589417176,
-        "vol_ref": 0.20533612361314124,
-        "trade_eok": -88.8708163417914,
-        "rebalance": false
-       },
-       "futures": {
-        "contract": "코스피200 선물",
-        "contracts": -32.85974241252386,
-        "side": "매도"
-       },
-       "driver": "고점 대비 하락",
-       "contrib": {
-        "score_vol": 0.02438480128168341,
-        "score_dd": 0.25,
-        "score_trend": 0.0,
-        "score_lev": 0.0,
-        "score_liq": 0.0
-       }
+       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
       }
      },
      "confidence": 92,
@@ -39918,67 +39834,23 @@
       "date": "2026-09-29",
       "dir": "NORMAL",
       "headline": "코스닥 위험점수 0.27 · 권장 주식비중 91% · 코스피 경계 0.46",
-      "action": "주된 원인: 고점 대비 하락",
+      "action": "",
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매",
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험",
       "plan": {
        "kosdaq": {
         "verdict": "안정",
         "score": 0.2743,
         "w_target": 0.911,
         "provisional": false,
-        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.9111291836582086,
-         "change": -0.08887081634179139,
-         "vol20": 0.22536444589417176,
-         "vol_ref": 0.20533612361314124,
-         "trade_eok": -88.8708163417914,
-         "rebalance": false
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -32.85974241252386,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.02438480128168341,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
        },
        "kospi": {
         "verdict": "경계",
         "score": 0.4563,
         "w_target": 0.548,
         "provisional": false,
-        "asof": "2026-09-30",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.5476849719813454,
-         "change": -0.45231502801865464,
-         "vol20": 0.3194734314172154,
-         "vol_ref": 0.17497079733452187,
-         "trade_eok": -452.31502801865463,
-         "rebalance": true
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -167.2422502888298,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.20646678800694795,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "asof": "2026-09-29"
        }
       },
       "provisional": false,
@@ -40109,22 +39981,17 @@
        },
        {
         "src": "8512 김유찬",
-        "text": "코스피 권장 주식비중 55% (보유 100% → −45%p · 보유 100% 가정)",
-        "why": "8512 위험점수 0.46 · 경계 · 주된 원인 고점 대비 하락"
-       },
-       {
-        "src": "8512 김유찬",
-        "text": "헤지: 코스피200 선물 167계약 매도 (보유 100% 가정)",
-        "why": "현물 유지 시 대안 · 비중 차이 −45%p만큼 선물 (1000억 기준)"
+        "text": "코스피 권장 주식비중 55%",
+        "why": "8512 위험점수 0.46 · 경계"
        },
        {
         "src": "8512 김유찬",
         "text": "코스닥 시장 안정 (위험점수 0.27 · 권장 91%)",
-        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
        }
       ],
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
      },
      {
       "desk": "매크로",
@@ -40170,252 +40037,253 @@
      },
      {
       "kind": "EVENT",
-      "text": "09-29 KR 기업심리지수"
-     },
-     {
-      "kind": "EVENT",
-      "text": "09-29 US CB 소비자신뢰지수"
-     },
-     {
-      "kind": "EVENT",
       "text": "09-30 KR 광공업생산 전월비(계절조정)"
      },
      {
       "kind": "EVENT",
       "text": "09-30 KR 서비스업생산지수 전월비(계절조정)"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 개인지출 전월대비"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 근원 소비지출물가지수 전월대비"
      }
     ]
    },
    "watch": {
-    "asOf": "20260930153512",
+    "asOf": "20261001104305",
     "sectors": [
      {
-      "name": "은행",
+      "name": "생물공학",
       "kind": "업종",
-      "changeRate": -3.39,
-      "change3d": -0.17,
-      "rise": 0.0,
-      "fall": 11.0,
-      "total": 11.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.32,
+      "changeRate": 4.35,
+      "change3d": -0.09,
+      "rise": 41.0,
+      "fall": 13.0,
+      "total": 59.0,
+      "breadth": 0.47,
+      "turnover_pct": 0.27,
       "leaders": [
        {
-        "code": "279570",
-        "name": "케이뱅크"
+        "code": "174900",
+        "name": "앱클론"
        },
        {
-        "code": "006220",
-        "name": "제주은행"
+        "code": "358570",
+        "name": "지아이이노베이션"
        }
       ],
-      "score": 88,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.39% · 폭 0↑11↓ · 3일 -0.2%"
-     },
-     {
-      "name": "손해보험",
-      "kind": "업종",
-      "changeRate": -3.26,
-      "change3d": 0.25,
-      "rise": 0.0,
-      "fall": 12.0,
-      "total": 12.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.24,
-      "leaders": [
-       {
-        "code": "000815",
-        "name": "삼성화재우"
-       },
-       {
-        "code": "000400",
-        "name": "롯데손해보험"
-       }
-      ],
-      "score": 85,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.26% · 폭 0↑12↓ · 3일 +0.2%"
-     },
-     {
-      "name": "에너지장비및서비스",
-      "kind": "업종",
-      "changeRate": 2.83,
-      "change3d": 1.63,
-      "rise": 22.0,
-      "fall": 9.0,
-      "total": 34.0,
-      "breadth": 0.38,
-      "turnover_pct": 1.51,
-      "leaders": [
-       {
-        "code": "322000",
-        "name": "HD현대에너지솔루션"
-       },
-       {
-        "code": "098070",
-        "name": "한텍"
-       }
-      ],
-      "score": 67,
-      "tags": [],
-      "why": "상승 주도 +2.83% · 폭 22↑9↓ · 3일 +1.6%"
-     },
-     {
-      "name": "생명과학도구및서비스",
-      "kind": "업종",
-      "changeRate": 2.74,
-      "change3d": 0.61,
-      "rise": 18.0,
-      "fall": 17.0,
-      "total": 41.0,
-      "breadth": 0.02,
-      "turnover_pct": 0.67,
-      "leaders": [
-       {
-        "code": "291650",
-        "name": "츌립앤사이언스"
-       },
-       {
-        "code": "494120",
-        "name": "큐리오시스"
-       }
-      ],
-      "score": 66,
+      "score": 81,
       "tags": [
        {
         "t": "할인율 민감",
         "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +2.74% · 폭 18↑17↓ · 3일 +0.6%"
+      "why": "상승 주도 +4.35% · 폭 41↑13↓ · 3일 -0.1%"
      },
      {
-      "name": "화학",
+      "name": "게임엔터테인먼트",
       "kind": "업종",
-      "changeRate": 2.06,
-      "change3d": 0.27,
-      "rise": 65.0,
-      "fall": 52.0,
-      "total": 122.0,
-      "breadth": 0.11,
-      "turnover_pct": 0.61,
+      "changeRate": 4.23,
+      "change3d": -0.51,
+      "rise": 23.0,
+      "fall": 5.0,
+      "total": 34.0,
+      "breadth": 0.53,
+      "turnover_pct": 0.23,
       "leaders": [
        {
-        "code": "457190",
-        "name": "이수스페셜티케미컬"
+        "code": "036570",
+        "name": "NC"
        },
        {
-        "code": "217910",
-        "name": "에스제이켐"
+        "code": "293490",
+        "name": "카카오게임즈"
        }
       ],
-      "score": 66,
+      "score": 80,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.23% · 폭 23↑5↓ · 3일 -0.5%"
+     },
+     {
+      "name": "우주항공과국방",
+      "kind": "업종",
+      "changeRate": 1.83,
+      "change3d": -0.16,
+      "rise": 27.0,
+      "fall": 7.0,
+      "total": 35.0,
+      "breadth": 0.57,
+      "turnover_pct": 0.27,
+      "leaders": [
+       {
+        "code": "079550",
+        "name": "LIG디펜스앤에어로스페이스"
+       },
+       {
+        "code": "318660",
+        "name": "타임기술"
+       }
+      ],
+      "score": 78,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       },
+       {
+        "t": "크레딧 경계",
+        "why": "AA- 71bp ≥ 65 → 조달 의존 업종 차환 부담"
+       }
+      ],
+      "why": "상승 주도 +1.83% · 폭 27↑7↓ · 3일 -0.2%"
+     },
+     {
+      "name": "생명과학도구및서비스",
+      "kind": "업종",
+      "changeRate": 4.28,
+      "change3d": 1.37,
+      "rise": 22.0,
+      "fall": 13.0,
+      "total": 41.0,
+      "breadth": 0.22,
+      "turnover_pct": 0.33,
+      "leaders": [
+       {
+        "code": "226950",
+        "name": "올릭스"
+       },
+       {
+        "code": "494120",
+        "name": "큐리오시스"
+       }
+      ],
+      "score": 75,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.28% · 폭 22↑13↓ · 3일 +1.4%"
+     },
+     {
+      "name": "기계",
+      "kind": "업종",
+      "changeRate": 1.58,
+      "change3d": -0.28,
+      "rise": 67.0,
+      "fall": 30.0,
+      "total": 105.0,
+      "breadth": 0.35,
+      "turnover_pct": 0.62,
+      "leaders": [
+       {
+        "code": "468670",
+        "name": "브릴스"
+       },
+       {
+        "code": "439960",
+        "name": "코스모로보틱스"
+       }
+      ],
+      "score": 75,
       "tags": [
        {
         "t": "시장 위험 경계",
         "why": "8512 코스피 위험 0.53 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
        }
       ],
-      "why": "상승 주도 +2.06% · 폭 65↑52↓ · 3일 +0.3%"
+      "why": "상승 주도 +1.58% · 폭 67↑30↓ · 3일 -0.3%"
      },
      {
-      "name": "철강",
+      "name": "제약",
       "kind": "업종",
-      "changeRate": 1.27,
-      "change3d": -1.68,
-      "rise": 34.0,
-      "fall": 16.0,
-      "total": 55.0,
-      "breadth": 0.33,
-      "turnover_pct": 0.87,
+      "changeRate": 3.76,
+      "change3d": 0.18,
+      "rise": 122.0,
+      "fall": 34.0,
+      "total": 175.0,
+      "breadth": 0.5,
+      "turnover_pct": 0.12,
       "leaders": [
        {
-        "code": "023790",
-        "name": "동일스틸럭스"
+        "code": "000250",
+        "name": "삼천당제약"
        },
        {
-        "code": "008970",
-        "name": "KBI동양철관"
+        "code": "456160",
+        "name": "지투지바이오"
        }
       ],
-      "score": 66,
+      "score": 74,
       "tags": [
        {
-        "t": "시장 위험 경계",
-        "why": "8512 코스피 위험 0.53 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +1.27% · 폭 34↑16↓ · 3일 -1.7%"
+      "why": "상승 주도 +3.76% · 폭 122↑34↓ · 3일 +0.2%"
      }
     ],
     "themes": [],
     "stocks": [
      {
-      "name": "동일스틸럭스",
-      "code": "023790",
+      "name": "브릴스",
+      "code": "468670",
       "kind": "상승률 1위",
-      "value": "+29.99%",
-      "why": "거래대금 56억",
-      "source": "NAVER 브리핑"
-     },
-     {
-      "name": "SK하이닉스",
-      "code": "000660",
-      "kind": "거래대금 1위",
-      "value": "+0.62%",
-      "why": "거래대금 52,368억",
-      "source": "NAVER 브리핑"
+      "value": "+125.38%",
+      "why": "거래대금 2,923억",
+      "source": "시장 브리핑"
      },
      {
       "name": "삼성전자",
       "code": "005930",
-      "kind": "검색 1위",
-      "value": "-1.47%",
-      "why": "거래대금 41,210억",
-      "source": "NAVER 브리핑"
+      "kind": "거래대금 1위",
+      "value": "-0.37%",
+      "why": "거래대금 12,055억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "글로벌테크놀로지",
-      "code": "486510",
+      "name": "코스모로보틱스",
+      "code": "439960",
       "kind": "관심 1위",
-      "value": "+4.83%",
-      "why": "거래대금 6,016억",
-      "source": "NAVER 브리핑"
+      "value": "+18.95%",
+      "why": "거래대금 1,380억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "케이뱅크",
-      "code": "279570",
+      "name": "앱클론",
+      "code": "174900",
       "kind": "주도주",
-      "value": "은행 -3.39%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "생물공학 +4.35%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "삼성화재우",
-      "code": "000815",
+      "name": "NC",
+      "code": "036570",
       "kind": "주도주",
-      "value": "손해보험 -3.26%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "게임엔터테인먼트 +4.23%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "브릴스",
+      "name": "멜콘",
       "code": null,
-      "kind": "IPO 상장",
+      "kind": "IPO 청약",
       "value": "10-01",
-      "why": "경쟁률 1,676:1 · 공모가 19,500원",
-      "source": "NAVER IPO 일정"
+      "why": "공모가 12,300원",
+      "source": "IPO 일정"
      },
      {
       "name": "에이디테크놀로지",
@@ -40440,6 +40308,14 @@
       "value": "3.4개월",
       "why": "재무 2/5 · 잔액 320억",
       "source": "VALKYRIE CB 표본"
+     },
+     {
+      "name": "에르코스",
+      "code": null,
+      "kind": "Put 임박",
+      "value": "3.6개월",
+      "why": "재무 2/5 · 잔액 135억",
+      "source": "VALKYRIE CB 표본"
      }
     ],
     "tilt": {
@@ -40456,7 +40332,7 @@
      "크레딧 ≥65",
      "코스피 위험 ≥0.45"
     ],
-    "basis": "NAVER 업종·테마(등락·폭·회전율 순위) + 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
+    "basis": "업종·테마 실시간(등락·폭·회전율 순위) + 시장 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
     "note": "자동 선정 · 투자 권유 아님"
    }
   },
@@ -40784,7 +40660,7 @@
        "= 200 → 206곳 / 293곳 (REAL)",
        "차환 유출 압력 = Σ Put위험 잔액×(1−접근성) ÷ Σ잔액 = 59% (≥25% 경계)"
       ],
-      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 NAVER · 가정: Put = 발행 12개월 후"
+      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 시세 데이터 · 가정: Put = 발행 12개월 후"
      },
      "outflow_share": 58.87485487858456,
      "status": "SHOCK",
@@ -40974,51 +40850,29 @@
      "owner": "김유찬",
      "call": "적자 코스닥 청약 보류",
      "dir": "AVOID",
-     "action": "코스피 비중 55% (보유 100% → -45%p · 코스피200 선물 167계약 매도) · 보유 100% 가정 (8512)",
+     "action": "코스피 비중 55% (8512)",
      "market": {
       "w_target": 0.548,
       "score": 0.4563,
       "verdict": "경계",
       "state": "NORMAL",
-      "contracts": -167.2422502888298,
-      "side": "매도",
-      "contract": "코스피200 선물",
-      "driver": "고점 대비 하락",
-      "current": 1.0,
-      "change": -0.45231502801865464,
-      "rebalance": true,
-      "trade_eok": -452.31502801865463,
+      "contracts": null,
+      "side": null,
+      "contract": null,
+      "driver": null,
+      "current": null,
+      "change": null,
+      "rebalance": null,
+      "trade_eok": null,
       "current_src": "100% 가정",
       "provisional": false,
-      "date": "2026-09-30",
+      "date": "2026-09-29",
       "kosdaq": {
        "verdict": "안정",
        "score": 0.2743,
        "w_target": 0.911,
        "provisional": false,
-       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-       "exposure": {
-        "current": 1.0,
-        "target": 0.9111291836582086,
-        "change": -0.08887081634179139,
-        "vol20": 0.22536444589417176,
-        "vol_ref": 0.20533612361314124,
-        "trade_eok": -88.8708163417914,
-        "rebalance": false
-       },
-       "futures": {
-        "contract": "코스피200 선물",
-        "contracts": -32.85974241252386,
-        "side": "매도"
-       },
-       "driver": "고점 대비 하락",
-       "contrib": {
-        "score_vol": 0.02438480128168341,
-        "score_dd": 0.25,
-        "score_trend": 0.0,
-        "score_lev": 0.0,
-        "score_liq": 0.0
-       }
+       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
       }
      },
      "confidence": 90,
@@ -59943,67 +59797,23 @@
       "date": "2026-09-29",
       "dir": "NORMAL",
       "headline": "코스닥 위험점수 0.27 · 권장 주식비중 91% · 코스피 경계 0.46",
-      "action": "주된 원인: 고점 대비 하락",
+      "action": "",
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매",
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험",
       "plan": {
        "kosdaq": {
         "verdict": "안정",
         "score": 0.2743,
         "w_target": 0.911,
         "provisional": false,
-        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.9111291836582086,
-         "change": -0.08887081634179139,
-         "vol20": 0.22536444589417176,
-         "vol_ref": 0.20533612361314124,
-         "trade_eok": -88.8708163417914,
-         "rebalance": false
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -32.85974241252386,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.02438480128168341,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
        },
        "kospi": {
         "verdict": "경계",
         "score": 0.4563,
         "w_target": 0.548,
         "provisional": false,
-        "asof": "2026-09-30",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.5476849719813454,
-         "change": -0.45231502801865464,
-         "vol20": 0.3194734314172154,
-         "vol_ref": 0.17497079733452187,
-         "trade_eok": -452.31502801865463,
-         "rebalance": true
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -167.2422502888298,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.20646678800694795,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "asof": "2026-09-29"
        }
       },
       "provisional": false,
@@ -60134,22 +59944,17 @@
        },
        {
         "src": "8512 김유찬",
-        "text": "코스피 권장 주식비중 55% (보유 100% → −45%p · 보유 100% 가정)",
-        "why": "8512 위험점수 0.46 · 경계 · 주된 원인 고점 대비 하락"
-       },
-       {
-        "src": "8512 김유찬",
-        "text": "헤지: 코스피200 선물 167계약 매도 (보유 100% 가정)",
-        "why": "현물 유지 시 대안 · 비중 차이 −45%p만큼 선물 (1000억 기준)"
+        "text": "코스피 권장 주식비중 55%",
+        "why": "8512 위험점수 0.46 · 경계"
        },
        {
         "src": "8512 김유찬",
         "text": "코스닥 시장 안정 (위험점수 0.27 · 권장 91%)",
-        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
        }
       ],
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
      },
      {
       "desk": "매크로",
@@ -60195,252 +60000,253 @@
      },
      {
       "kind": "EVENT",
-      "text": "09-29 KR 기업심리지수"
-     },
-     {
-      "kind": "EVENT",
-      "text": "09-29 US CB 소비자신뢰지수"
-     },
-     {
-      "kind": "EVENT",
       "text": "09-30 KR 광공업생산 전월비(계절조정)"
      },
      {
       "kind": "EVENT",
       "text": "09-30 KR 서비스업생산지수 전월비(계절조정)"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 개인지출 전월대비"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 근원 소비지출물가지수 전월대비"
      }
     ]
    },
    "watch": {
-    "asOf": "20260930153512",
+    "asOf": "20261001104305",
     "sectors": [
      {
-      "name": "은행",
+      "name": "생물공학",
       "kind": "업종",
-      "changeRate": -3.39,
-      "change3d": -0.17,
-      "rise": 0.0,
-      "fall": 11.0,
-      "total": 11.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.32,
+      "changeRate": 4.35,
+      "change3d": -0.09,
+      "rise": 41.0,
+      "fall": 13.0,
+      "total": 59.0,
+      "breadth": 0.47,
+      "turnover_pct": 0.27,
       "leaders": [
        {
-        "code": "279570",
-        "name": "케이뱅크"
+        "code": "174900",
+        "name": "앱클론"
        },
        {
-        "code": "006220",
-        "name": "제주은행"
+        "code": "358570",
+        "name": "지아이이노베이션"
        }
       ],
-      "score": 88,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.39% · 폭 0↑11↓ · 3일 -0.2%"
-     },
-     {
-      "name": "손해보험",
-      "kind": "업종",
-      "changeRate": -3.26,
-      "change3d": 0.25,
-      "rise": 0.0,
-      "fall": 12.0,
-      "total": 12.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.24,
-      "leaders": [
-       {
-        "code": "000815",
-        "name": "삼성화재우"
-       },
-       {
-        "code": "000400",
-        "name": "롯데손해보험"
-       }
-      ],
-      "score": 85,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.26% · 폭 0↑12↓ · 3일 +0.2%"
-     },
-     {
-      "name": "에너지장비및서비스",
-      "kind": "업종",
-      "changeRate": 2.83,
-      "change3d": 1.63,
-      "rise": 22.0,
-      "fall": 9.0,
-      "total": 34.0,
-      "breadth": 0.38,
-      "turnover_pct": 1.51,
-      "leaders": [
-       {
-        "code": "322000",
-        "name": "HD현대에너지솔루션"
-       },
-       {
-        "code": "098070",
-        "name": "한텍"
-       }
-      ],
-      "score": 67,
-      "tags": [],
-      "why": "상승 주도 +2.83% · 폭 22↑9↓ · 3일 +1.6%"
-     },
-     {
-      "name": "생명과학도구및서비스",
-      "kind": "업종",
-      "changeRate": 2.74,
-      "change3d": 0.61,
-      "rise": 18.0,
-      "fall": 17.0,
-      "total": 41.0,
-      "breadth": 0.02,
-      "turnover_pct": 0.67,
-      "leaders": [
-       {
-        "code": "291650",
-        "name": "츌립앤사이언스"
-       },
-       {
-        "code": "494120",
-        "name": "큐리오시스"
-       }
-      ],
-      "score": 66,
+      "score": 81,
       "tags": [
        {
         "t": "할인율 민감",
         "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +2.74% · 폭 18↑17↓ · 3일 +0.6%"
+      "why": "상승 주도 +4.35% · 폭 41↑13↓ · 3일 -0.1%"
      },
      {
-      "name": "화학",
+      "name": "게임엔터테인먼트",
       "kind": "업종",
-      "changeRate": 2.06,
-      "change3d": 0.27,
-      "rise": 65.0,
-      "fall": 52.0,
-      "total": 122.0,
-      "breadth": 0.11,
-      "turnover_pct": 0.61,
+      "changeRate": 4.23,
+      "change3d": -0.51,
+      "rise": 23.0,
+      "fall": 5.0,
+      "total": 34.0,
+      "breadth": 0.53,
+      "turnover_pct": 0.23,
       "leaders": [
        {
-        "code": "457190",
-        "name": "이수스페셜티케미컬"
+        "code": "036570",
+        "name": "NC"
        },
        {
-        "code": "217910",
-        "name": "에스제이켐"
+        "code": "293490",
+        "name": "카카오게임즈"
        }
       ],
-      "score": 66,
+      "score": 80,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.23% · 폭 23↑5↓ · 3일 -0.5%"
+     },
+     {
+      "name": "우주항공과국방",
+      "kind": "업종",
+      "changeRate": 1.83,
+      "change3d": -0.16,
+      "rise": 27.0,
+      "fall": 7.0,
+      "total": 35.0,
+      "breadth": 0.57,
+      "turnover_pct": 0.27,
+      "leaders": [
+       {
+        "code": "079550",
+        "name": "LIG디펜스앤에어로스페이스"
+       },
+       {
+        "code": "318660",
+        "name": "타임기술"
+       }
+      ],
+      "score": 78,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       },
+       {
+        "t": "크레딧 경계",
+        "why": "AA- 69bp ≥ 65 → 조달 의존 업종 차환 부담"
+       }
+      ],
+      "why": "상승 주도 +1.83% · 폭 27↑7↓ · 3일 -0.2%"
+     },
+     {
+      "name": "생명과학도구및서비스",
+      "kind": "업종",
+      "changeRate": 4.28,
+      "change3d": 1.37,
+      "rise": 22.0,
+      "fall": 13.0,
+      "total": 41.0,
+      "breadth": 0.22,
+      "turnover_pct": 0.33,
+      "leaders": [
+       {
+        "code": "226950",
+        "name": "올릭스"
+       },
+       {
+        "code": "494120",
+        "name": "큐리오시스"
+       }
+      ],
+      "score": 75,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.28% · 폭 22↑13↓ · 3일 +1.4%"
+     },
+     {
+      "name": "기계",
+      "kind": "업종",
+      "changeRate": 1.58,
+      "change3d": -0.28,
+      "rise": 67.0,
+      "fall": 30.0,
+      "total": 105.0,
+      "breadth": 0.35,
+      "turnover_pct": 0.62,
+      "leaders": [
+       {
+        "code": "468670",
+        "name": "브릴스"
+       },
+       {
+        "code": "439960",
+        "name": "코스모로보틱스"
+       }
+      ],
+      "score": 75,
       "tags": [
        {
         "t": "시장 위험 경계",
         "why": "8512 코스피 위험 0.47 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
        }
       ],
-      "why": "상승 주도 +2.06% · 폭 65↑52↓ · 3일 +0.3%"
+      "why": "상승 주도 +1.58% · 폭 67↑30↓ · 3일 -0.3%"
      },
      {
-      "name": "철강",
+      "name": "제약",
       "kind": "업종",
-      "changeRate": 1.27,
-      "change3d": -1.68,
-      "rise": 34.0,
-      "fall": 16.0,
-      "total": 55.0,
-      "breadth": 0.33,
-      "turnover_pct": 0.87,
+      "changeRate": 3.76,
+      "change3d": 0.18,
+      "rise": 122.0,
+      "fall": 34.0,
+      "total": 175.0,
+      "breadth": 0.5,
+      "turnover_pct": 0.12,
       "leaders": [
        {
-        "code": "023790",
-        "name": "동일스틸럭스"
+        "code": "000250",
+        "name": "삼천당제약"
        },
        {
-        "code": "008970",
-        "name": "KBI동양철관"
+        "code": "456160",
+        "name": "지투지바이오"
        }
       ],
-      "score": 66,
+      "score": 74,
       "tags": [
        {
-        "t": "시장 위험 경계",
-        "why": "8512 코스피 위험 0.47 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +1.27% · 폭 34↑16↓ · 3일 -1.7%"
+      "why": "상승 주도 +3.76% · 폭 122↑34↓ · 3일 +0.2%"
      }
     ],
     "themes": [],
     "stocks": [
      {
-      "name": "동일스틸럭스",
-      "code": "023790",
+      "name": "브릴스",
+      "code": "468670",
       "kind": "상승률 1위",
-      "value": "+29.99%",
-      "why": "거래대금 56억",
-      "source": "NAVER 브리핑"
-     },
-     {
-      "name": "SK하이닉스",
-      "code": "000660",
-      "kind": "거래대금 1위",
-      "value": "+0.62%",
-      "why": "거래대금 52,368억",
-      "source": "NAVER 브리핑"
+      "value": "+125.38%",
+      "why": "거래대금 2,923억",
+      "source": "시장 브리핑"
      },
      {
       "name": "삼성전자",
       "code": "005930",
-      "kind": "검색 1위",
-      "value": "-1.47%",
-      "why": "거래대금 41,210억",
-      "source": "NAVER 브리핑"
+      "kind": "거래대금 1위",
+      "value": "-0.37%",
+      "why": "거래대금 12,055억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "글로벌테크놀로지",
-      "code": "486510",
+      "name": "코스모로보틱스",
+      "code": "439960",
       "kind": "관심 1위",
-      "value": "+4.83%",
-      "why": "거래대금 6,016억",
-      "source": "NAVER 브리핑"
+      "value": "+18.95%",
+      "why": "거래대금 1,380억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "케이뱅크",
-      "code": "279570",
+      "name": "앱클론",
+      "code": "174900",
       "kind": "주도주",
-      "value": "은행 -3.39%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "생물공학 +4.35%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "삼성화재우",
-      "code": "000815",
+      "name": "NC",
+      "code": "036570",
       "kind": "주도주",
-      "value": "손해보험 -3.26%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "게임엔터테인먼트 +4.23%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "브릴스",
+      "name": "멜콘",
       "code": null,
-      "kind": "IPO 상장",
+      "kind": "IPO 청약",
       "value": "10-01",
-      "why": "경쟁률 1,676:1 · 공모가 19,500원",
-      "source": "NAVER IPO 일정"
+      "why": "공모가 12,300원",
+      "source": "IPO 일정"
      },
      {
       "name": "에이디테크놀로지",
@@ -60465,6 +60271,14 @@
       "value": "3.4개월",
       "why": "재무 2/5 · 잔액 320억",
       "source": "VALKYRIE CB 표본"
+     },
+     {
+      "name": "에르코스",
+      "code": null,
+      "kind": "Put 임박",
+      "value": "3.6개월",
+      "why": "재무 2/5 · 잔액 135억",
+      "source": "VALKYRIE CB 표본"
      }
     ],
     "tilt": {
@@ -60481,7 +60295,7 @@
      "크레딧 ≥65",
      "코스피 위험 ≥0.45"
     ],
-    "basis": "NAVER 업종·테마(등락·폭·회전율 순위) + 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
+    "basis": "업종·테마 실시간(등락·폭·회전율 순위) + 시장 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
     "note": "자동 선정 · 투자 권유 아님"
    }
   },
@@ -60809,7 +60623,7 @@
        "= 200 → 139곳 / 293곳 (REAL)",
        "차환 유출 압력 = Σ Put위험 잔액×(1−접근성) ÷ Σ잔액 = 14% (≥25% 경계)"
       ],
-      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 NAVER · 가정: Put = 발행 12개월 후"
+      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 시세 데이터 · 가정: Put = 발행 12개월 후"
      },
      "outflow_share": 14.300019937738945,
      "status": "SHOCK",
@@ -60999,51 +60813,29 @@
      "owner": "김유찬",
      "call": "선별 청약 · 흑자 우선",
      "dir": "SELECTIVE",
-     "action": "코스피 비중 55% (보유 100% → -45%p · 코스피200 선물 167계약 매도) · 보유 100% 가정 (8512)",
+     "action": "코스피 비중 55% (8512)",
      "market": {
       "w_target": 0.548,
       "score": 0.4563,
       "verdict": "경계",
       "state": "NORMAL",
-      "contracts": -167.2422502888298,
-      "side": "매도",
-      "contract": "코스피200 선물",
-      "driver": "고점 대비 하락",
-      "current": 1.0,
-      "change": -0.45231502801865464,
-      "rebalance": true,
-      "trade_eok": -452.31502801865463,
+      "contracts": null,
+      "side": null,
+      "contract": null,
+      "driver": null,
+      "current": null,
+      "change": null,
+      "rebalance": null,
+      "trade_eok": null,
       "current_src": "100% 가정",
       "provisional": false,
-      "date": "2026-09-30",
+      "date": "2026-09-29",
       "kosdaq": {
        "verdict": "안정",
        "score": 0.2743,
        "w_target": 0.911,
        "provisional": false,
-       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-       "exposure": {
-        "current": 1.0,
-        "target": 0.9111291836582086,
-        "change": -0.08887081634179139,
-        "vol20": 0.22536444589417176,
-        "vol_ref": 0.20533612361314124,
-        "trade_eok": -88.8708163417914,
-        "rebalance": false
-       },
-       "futures": {
-        "contract": "코스피200 선물",
-        "contracts": -32.85974241252386,
-        "side": "매도"
-       },
-       "driver": "고점 대비 하락",
-       "contrib": {
-        "score_vol": 0.02438480128168341,
-        "score_dd": 0.25,
-        "score_trend": 0.0,
-        "score_lev": 0.0,
-        "score_liq": 0.0
-       }
+       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
       }
      },
      "confidence": 74,
@@ -79976,67 +79768,23 @@
       "date": "2026-09-29",
       "dir": "NORMAL",
       "headline": "코스닥 위험점수 0.27 · 권장 주식비중 91% · 코스피 경계 0.46",
-      "action": "주된 원인: 고점 대비 하락",
+      "action": "",
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매",
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험",
       "plan": {
        "kosdaq": {
         "verdict": "안정",
         "score": 0.2743,
         "w_target": 0.911,
         "provisional": false,
-        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.9111291836582086,
-         "change": -0.08887081634179139,
-         "vol20": 0.22536444589417176,
-         "vol_ref": 0.20533612361314124,
-         "trade_eok": -88.8708163417914,
-         "rebalance": false
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -32.85974241252386,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.02438480128168341,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
        },
        "kospi": {
         "verdict": "경계",
         "score": 0.4563,
         "w_target": 0.548,
         "provisional": false,
-        "asof": "2026-09-30",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.5476849719813454,
-         "change": -0.45231502801865464,
-         "vol20": 0.3194734314172154,
-         "vol_ref": 0.17497079733452187,
-         "trade_eok": -452.31502801865463,
-         "rebalance": true
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -167.2422502888298,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.20646678800694795,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "asof": "2026-09-29"
        }
       },
       "provisional": false,
@@ -80167,22 +79915,17 @@
        },
        {
         "src": "8512 김유찬",
-        "text": "코스피 권장 주식비중 55% (보유 100% → −45%p · 보유 100% 가정)",
-        "why": "8512 위험점수 0.46 · 경계 · 주된 원인 고점 대비 하락"
-       },
-       {
-        "src": "8512 김유찬",
-        "text": "헤지: 코스피200 선물 167계약 매도 (보유 100% 가정)",
-        "why": "현물 유지 시 대안 · 비중 차이 −45%p만큼 선물 (1000억 기준)"
+        "text": "코스피 권장 주식비중 55%",
+        "why": "8512 위험점수 0.46 · 경계"
        },
        {
         "src": "8512 김유찬",
         "text": "코스닥 시장 안정 (위험점수 0.27 · 권장 91%)",
-        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
        }
       ],
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
      },
      {
       "desk": "매크로",
@@ -80228,252 +79971,249 @@
      },
      {
       "kind": "EVENT",
-      "text": "09-29 KR 기업심리지수"
-     },
-     {
-      "kind": "EVENT",
-      "text": "09-29 US CB 소비자신뢰지수"
-     },
-     {
-      "kind": "EVENT",
       "text": "09-30 KR 광공업생산 전월비(계절조정)"
      },
      {
       "kind": "EVENT",
       "text": "09-30 KR 서비스업생산지수 전월비(계절조정)"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 개인지출 전월대비"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 근원 소비지출물가지수 전월대비"
      }
     ]
    },
    "watch": {
-    "asOf": "20260930153512",
+    "asOf": "20261001104305",
     "sectors": [
      {
-      "name": "은행",
+      "name": "생물공학",
       "kind": "업종",
-      "changeRate": -3.39,
-      "change3d": -0.17,
-      "rise": 0.0,
-      "fall": 11.0,
-      "total": 11.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.32,
+      "changeRate": 4.35,
+      "change3d": -0.09,
+      "rise": 41.0,
+      "fall": 13.0,
+      "total": 59.0,
+      "breadth": 0.47,
+      "turnover_pct": 0.27,
       "leaders": [
        {
-        "code": "279570",
-        "name": "케이뱅크"
+        "code": "174900",
+        "name": "앱클론"
        },
        {
-        "code": "006220",
-        "name": "제주은행"
+        "code": "358570",
+        "name": "지아이이노베이션"
        }
       ],
-      "score": 88,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.39% · 폭 0↑11↓ · 3일 -0.2%"
-     },
-     {
-      "name": "손해보험",
-      "kind": "업종",
-      "changeRate": -3.26,
-      "change3d": 0.25,
-      "rise": 0.0,
-      "fall": 12.0,
-      "total": 12.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.24,
-      "leaders": [
-       {
-        "code": "000815",
-        "name": "삼성화재우"
-       },
-       {
-        "code": "000400",
-        "name": "롯데손해보험"
-       }
-      ],
-      "score": 85,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.26% · 폭 0↑12↓ · 3일 +0.2%"
-     },
-     {
-      "name": "에너지장비및서비스",
-      "kind": "업종",
-      "changeRate": 2.83,
-      "change3d": 1.63,
-      "rise": 22.0,
-      "fall": 9.0,
-      "total": 34.0,
-      "breadth": 0.38,
-      "turnover_pct": 1.51,
-      "leaders": [
-       {
-        "code": "322000",
-        "name": "HD현대에너지솔루션"
-       },
-       {
-        "code": "098070",
-        "name": "한텍"
-       }
-      ],
-      "score": 67,
-      "tags": [],
-      "why": "상승 주도 +2.83% · 폭 22↑9↓ · 3일 +1.6%"
-     },
-     {
-      "name": "생명과학도구및서비스",
-      "kind": "업종",
-      "changeRate": 2.74,
-      "change3d": 0.61,
-      "rise": 18.0,
-      "fall": 17.0,
-      "total": 41.0,
-      "breadth": 0.02,
-      "turnover_pct": 0.67,
-      "leaders": [
-       {
-        "code": "291650",
-        "name": "츌립앤사이언스"
-       },
-       {
-        "code": "494120",
-        "name": "큐리오시스"
-       }
-      ],
-      "score": 66,
+      "score": 81,
       "tags": [
        {
         "t": "할인율 민감",
         "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +2.74% · 폭 18↑17↓ · 3일 +0.6%"
+      "why": "상승 주도 +4.35% · 폭 41↑13↓ · 3일 -0.1%"
      },
      {
-      "name": "화학",
+      "name": "게임엔터테인먼트",
       "kind": "업종",
-      "changeRate": 2.06,
-      "change3d": 0.27,
-      "rise": 65.0,
-      "fall": 52.0,
-      "total": 122.0,
-      "breadth": 0.11,
-      "turnover_pct": 0.61,
+      "changeRate": 4.23,
+      "change3d": -0.51,
+      "rise": 23.0,
+      "fall": 5.0,
+      "total": 34.0,
+      "breadth": 0.53,
+      "turnover_pct": 0.23,
       "leaders": [
        {
-        "code": "457190",
-        "name": "이수스페셜티케미컬"
+        "code": "036570",
+        "name": "NC"
        },
        {
-        "code": "217910",
-        "name": "에스제이켐"
+        "code": "293490",
+        "name": "카카오게임즈"
        }
       ],
-      "score": 66,
+      "score": 80,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.23% · 폭 23↑5↓ · 3일 -0.5%"
+     },
+     {
+      "name": "우주항공과국방",
+      "kind": "업종",
+      "changeRate": 1.83,
+      "change3d": -0.16,
+      "rise": 27.0,
+      "fall": 7.0,
+      "total": 35.0,
+      "breadth": 0.57,
+      "turnover_pct": 0.27,
+      "leaders": [
+       {
+        "code": "079550",
+        "name": "LIG디펜스앤에어로스페이스"
+       },
+       {
+        "code": "318660",
+        "name": "타임기술"
+       }
+      ],
+      "score": 78,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +1.83% · 폭 27↑7↓ · 3일 -0.2%"
+     },
+     {
+      "name": "생명과학도구및서비스",
+      "kind": "업종",
+      "changeRate": 4.28,
+      "change3d": 1.37,
+      "rise": 22.0,
+      "fall": 13.0,
+      "total": 41.0,
+      "breadth": 0.22,
+      "turnover_pct": 0.33,
+      "leaders": [
+       {
+        "code": "226950",
+        "name": "올릭스"
+       },
+       {
+        "code": "494120",
+        "name": "큐리오시스"
+       }
+      ],
+      "score": 75,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.28% · 폭 22↑13↓ · 3일 +1.4%"
+     },
+     {
+      "name": "기계",
+      "kind": "업종",
+      "changeRate": 1.58,
+      "change3d": -0.28,
+      "rise": 67.0,
+      "fall": 30.0,
+      "total": 105.0,
+      "breadth": 0.35,
+      "turnover_pct": 0.62,
+      "leaders": [
+       {
+        "code": "468670",
+        "name": "브릴스"
+       },
+       {
+        "code": "439960",
+        "name": "코스모로보틱스"
+       }
+      ],
+      "score": 75,
       "tags": [
        {
         "t": "시장 위험 경계",
         "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
        }
       ],
-      "why": "상승 주도 +2.06% · 폭 65↑52↓ · 3일 +0.3%"
+      "why": "상승 주도 +1.58% · 폭 67↑30↓ · 3일 -0.3%"
      },
      {
-      "name": "철강",
+      "name": "제약",
       "kind": "업종",
-      "changeRate": 1.27,
-      "change3d": -1.68,
-      "rise": 34.0,
-      "fall": 16.0,
-      "total": 55.0,
-      "breadth": 0.33,
-      "turnover_pct": 0.87,
+      "changeRate": 3.76,
+      "change3d": 0.18,
+      "rise": 122.0,
+      "fall": 34.0,
+      "total": 175.0,
+      "breadth": 0.5,
+      "turnover_pct": 0.12,
       "leaders": [
        {
-        "code": "023790",
-        "name": "동일스틸럭스"
+        "code": "000250",
+        "name": "삼천당제약"
        },
        {
-        "code": "008970",
-        "name": "KBI동양철관"
+        "code": "456160",
+        "name": "지투지바이오"
        }
       ],
-      "score": 66,
+      "score": 74,
       "tags": [
        {
-        "t": "시장 위험 경계",
-        "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +1.27% · 폭 34↑16↓ · 3일 -1.7%"
+      "why": "상승 주도 +3.76% · 폭 122↑34↓ · 3일 +0.2%"
      }
     ],
     "themes": [],
     "stocks": [
      {
-      "name": "동일스틸럭스",
-      "code": "023790",
+      "name": "브릴스",
+      "code": "468670",
       "kind": "상승률 1위",
-      "value": "+29.99%",
-      "why": "거래대금 56억",
-      "source": "NAVER 브리핑"
-     },
-     {
-      "name": "SK하이닉스",
-      "code": "000660",
-      "kind": "거래대금 1위",
-      "value": "+0.62%",
-      "why": "거래대금 52,368억",
-      "source": "NAVER 브리핑"
+      "value": "+125.38%",
+      "why": "거래대금 2,923억",
+      "source": "시장 브리핑"
      },
      {
       "name": "삼성전자",
       "code": "005930",
-      "kind": "검색 1위",
-      "value": "-1.47%",
-      "why": "거래대금 41,210억",
-      "source": "NAVER 브리핑"
+      "kind": "거래대금 1위",
+      "value": "-0.37%",
+      "why": "거래대금 12,055억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "글로벌테크놀로지",
-      "code": "486510",
+      "name": "코스모로보틱스",
+      "code": "439960",
       "kind": "관심 1위",
-      "value": "+4.83%",
-      "why": "거래대금 6,016억",
-      "source": "NAVER 브리핑"
+      "value": "+18.95%",
+      "why": "거래대금 1,380억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "케이뱅크",
-      "code": "279570",
+      "name": "앱클론",
+      "code": "174900",
       "kind": "주도주",
-      "value": "은행 -3.39%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "생물공학 +4.35%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "삼성화재우",
-      "code": "000815",
+      "name": "NC",
+      "code": "036570",
       "kind": "주도주",
-      "value": "손해보험 -3.26%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "게임엔터테인먼트 +4.23%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "브릴스",
+      "name": "멜콘",
       "code": null,
-      "kind": "IPO 상장",
+      "kind": "IPO 청약",
       "value": "10-01",
-      "why": "경쟁률 1,676:1 · 공모가 19,500원",
-      "source": "NAVER IPO 일정"
+      "why": "공모가 12,300원",
+      "source": "IPO 일정"
      },
      {
       "name": "에이디테크놀로지",
@@ -80498,6 +80238,14 @@
       "value": "3.4개월",
       "why": "재무 3/5 · 잔액 320억",
       "source": "VALKYRIE CB 표본"
+     },
+     {
+      "name": "에르코스",
+      "code": null,
+      "kind": "Put 임박",
+      "value": "3.6개월",
+      "why": "재무 3/5 · 잔액 135억",
+      "source": "VALKYRIE CB 표본"
      }
     ],
     "tilt": {
@@ -80513,7 +80261,7 @@
      "금리 압력",
      "코스피 위험 ≥0.45"
     ],
-    "basis": "NAVER 업종·테마(등락·폭·회전율 순위) + 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
+    "basis": "업종·테마 실시간(등락·폭·회전율 순위) + 시장 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
     "note": "자동 선정 · 투자 권유 아님"
    }
   },
@@ -80841,7 +80589,7 @@
        "= 200 → 200곳 / 293곳 (REAL)",
        "차환 유출 압력 = Σ Put위험 잔액×(1−접근성) ÷ Σ잔액 = 54% (≥25% 경계)"
       ],
-      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 NAVER · 가정: Put = 발행 12개월 후"
+      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 시세 데이터 · 가정: Put = 발행 12개월 후"
      },
      "outflow_share": 54.391322466611605,
      "status": "ALERT",
@@ -81031,51 +80779,29 @@
      "owner": "김유찬",
      "call": "적자 코스닥 청약 보류",
      "dir": "AVOID",
-     "action": "코스피 비중 55% (보유 100% → -45%p · 코스피200 선물 167계약 매도) · 보유 100% 가정 (8512)",
+     "action": "코스피 비중 55% (8512)",
      "market": {
       "w_target": 0.548,
       "score": 0.4563,
       "verdict": "경계",
       "state": "NORMAL",
-      "contracts": -167.2422502888298,
-      "side": "매도",
-      "contract": "코스피200 선물",
-      "driver": "고점 대비 하락",
-      "current": 1.0,
-      "change": -0.45231502801865464,
-      "rebalance": true,
-      "trade_eok": -452.31502801865463,
+      "contracts": null,
+      "side": null,
+      "contract": null,
+      "driver": null,
+      "current": null,
+      "change": null,
+      "rebalance": null,
+      "trade_eok": null,
       "current_src": "100% 가정",
       "provisional": false,
-      "date": "2026-09-30",
+      "date": "2026-09-29",
       "kosdaq": {
        "verdict": "안정",
        "score": 0.2743,
        "w_target": 0.911,
        "provisional": false,
-       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-       "exposure": {
-        "current": 1.0,
-        "target": 0.9111291836582086,
-        "change": -0.08887081634179139,
-        "vol20": 0.22536444589417176,
-        "vol_ref": 0.20533612361314124,
-        "trade_eok": -88.8708163417914,
-        "rebalance": false
-       },
-       "futures": {
-        "contract": "코스피200 선물",
-        "contracts": -32.85974241252386,
-        "side": "매도"
-       },
-       "driver": "고점 대비 하락",
-       "contrib": {
-        "score_vol": 0.02438480128168341,
-        "score_dd": 0.25,
-        "score_trend": 0.0,
-        "score_lev": 0.0,
-        "score_liq": 0.0
-       }
+       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
       }
      },
      "confidence": 90,
@@ -100000,67 +99726,23 @@
       "date": "2026-09-29",
       "dir": "NORMAL",
       "headline": "코스닥 위험점수 0.27 · 권장 주식비중 91% · 코스피 경계 0.46",
-      "action": "주된 원인: 고점 대비 하락",
+      "action": "",
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매",
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험",
       "plan": {
        "kosdaq": {
         "verdict": "안정",
         "score": 0.2743,
         "w_target": 0.911,
         "provisional": false,
-        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.9111291836582086,
-         "change": -0.08887081634179139,
-         "vol20": 0.22536444589417176,
-         "vol_ref": 0.20533612361314124,
-         "trade_eok": -88.8708163417914,
-         "rebalance": false
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -32.85974241252386,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.02438480128168341,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
        },
        "kospi": {
         "verdict": "경계",
         "score": 0.4563,
         "w_target": 0.548,
         "provisional": false,
-        "asof": "2026-09-30",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.5476849719813454,
-         "change": -0.45231502801865464,
-         "vol20": 0.3194734314172154,
-         "vol_ref": 0.17497079733452187,
-         "trade_eok": -452.31502801865463,
-         "rebalance": true
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -167.2422502888298,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.20646678800694795,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "asof": "2026-09-29"
        }
       },
       "provisional": false,
@@ -100191,22 +99873,17 @@
        },
        {
         "src": "8512 김유찬",
-        "text": "코스피 권장 주식비중 55% (보유 100% → −45%p · 보유 100% 가정)",
-        "why": "8512 위험점수 0.46 · 경계 · 주된 원인 고점 대비 하락"
-       },
-       {
-        "src": "8512 김유찬",
-        "text": "헤지: 코스피200 선물 167계약 매도 (보유 100% 가정)",
-        "why": "현물 유지 시 대안 · 비중 차이 −45%p만큼 선물 (1000억 기준)"
+        "text": "코스피 권장 주식비중 55%",
+        "why": "8512 위험점수 0.46 · 경계"
        },
        {
         "src": "8512 김유찬",
         "text": "코스닥 시장 안정 (위험점수 0.27 · 권장 91%)",
-        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
        }
       ],
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
      },
      {
       "desk": "매크로",
@@ -100252,252 +99929,253 @@
      },
      {
       "kind": "EVENT",
-      "text": "09-29 KR 기업심리지수"
-     },
-     {
-      "kind": "EVENT",
-      "text": "09-29 US CB 소비자신뢰지수"
-     },
-     {
-      "kind": "EVENT",
       "text": "09-30 KR 광공업생산 전월비(계절조정)"
      },
      {
       "kind": "EVENT",
       "text": "09-30 KR 서비스업생산지수 전월비(계절조정)"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 개인지출 전월대비"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 근원 소비지출물가지수 전월대비"
      }
     ]
    },
    "watch": {
-    "asOf": "20260930153512",
+    "asOf": "20261001104305",
     "sectors": [
      {
-      "name": "은행",
+      "name": "생물공학",
       "kind": "업종",
-      "changeRate": -3.39,
-      "change3d": -0.17,
-      "rise": 0.0,
-      "fall": 11.0,
-      "total": 11.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.32,
+      "changeRate": 4.35,
+      "change3d": -0.09,
+      "rise": 41.0,
+      "fall": 13.0,
+      "total": 59.0,
+      "breadth": 0.47,
+      "turnover_pct": 0.27,
       "leaders": [
        {
-        "code": "279570",
-        "name": "케이뱅크"
+        "code": "174900",
+        "name": "앱클론"
        },
        {
-        "code": "006220",
-        "name": "제주은행"
+        "code": "358570",
+        "name": "지아이이노베이션"
        }
       ],
-      "score": 88,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.39% · 폭 0↑11↓ · 3일 -0.2%"
-     },
-     {
-      "name": "손해보험",
-      "kind": "업종",
-      "changeRate": -3.26,
-      "change3d": 0.25,
-      "rise": 0.0,
-      "fall": 12.0,
-      "total": 12.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.24,
-      "leaders": [
-       {
-        "code": "000815",
-        "name": "삼성화재우"
-       },
-       {
-        "code": "000400",
-        "name": "롯데손해보험"
-       }
-      ],
-      "score": 85,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.26% · 폭 0↑12↓ · 3일 +0.2%"
-     },
-     {
-      "name": "에너지장비및서비스",
-      "kind": "업종",
-      "changeRate": 2.83,
-      "change3d": 1.63,
-      "rise": 22.0,
-      "fall": 9.0,
-      "total": 34.0,
-      "breadth": 0.38,
-      "turnover_pct": 1.51,
-      "leaders": [
-       {
-        "code": "322000",
-        "name": "HD현대에너지솔루션"
-       },
-       {
-        "code": "098070",
-        "name": "한텍"
-       }
-      ],
-      "score": 67,
-      "tags": [],
-      "why": "상승 주도 +2.83% · 폭 22↑9↓ · 3일 +1.6%"
-     },
-     {
-      "name": "생명과학도구및서비스",
-      "kind": "업종",
-      "changeRate": 2.74,
-      "change3d": 0.61,
-      "rise": 18.0,
-      "fall": 17.0,
-      "total": 41.0,
-      "breadth": 0.02,
-      "turnover_pct": 0.67,
-      "leaders": [
-       {
-        "code": "291650",
-        "name": "츌립앤사이언스"
-       },
-       {
-        "code": "494120",
-        "name": "큐리오시스"
-       }
-      ],
-      "score": 66,
+      "score": 81,
       "tags": [
        {
         "t": "할인율 민감",
         "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +2.74% · 폭 18↑17↓ · 3일 +0.6%"
+      "why": "상승 주도 +4.35% · 폭 41↑13↓ · 3일 -0.1%"
      },
      {
-      "name": "화학",
+      "name": "게임엔터테인먼트",
       "kind": "업종",
-      "changeRate": 2.06,
-      "change3d": 0.27,
-      "rise": 65.0,
-      "fall": 52.0,
-      "total": 122.0,
-      "breadth": 0.11,
-      "turnover_pct": 0.61,
+      "changeRate": 4.23,
+      "change3d": -0.51,
+      "rise": 23.0,
+      "fall": 5.0,
+      "total": 34.0,
+      "breadth": 0.53,
+      "turnover_pct": 0.23,
       "leaders": [
        {
-        "code": "457190",
-        "name": "이수스페셜티케미컬"
+        "code": "036570",
+        "name": "NC"
        },
        {
-        "code": "217910",
-        "name": "에스제이켐"
+        "code": "293490",
+        "name": "카카오게임즈"
        }
       ],
-      "score": 66,
+      "score": 80,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.23% · 폭 23↑5↓ · 3일 -0.5%"
+     },
+     {
+      "name": "우주항공과국방",
+      "kind": "업종",
+      "changeRate": 1.83,
+      "change3d": -0.16,
+      "rise": 27.0,
+      "fall": 7.0,
+      "total": 35.0,
+      "breadth": 0.57,
+      "turnover_pct": 0.27,
+      "leaders": [
+       {
+        "code": "079550",
+        "name": "LIG디펜스앤에어로스페이스"
+       },
+       {
+        "code": "318660",
+        "name": "타임기술"
+       }
+      ],
+      "score": 78,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       },
+       {
+        "t": "크레딧 경계",
+        "why": "AA- 68bp ≥ 65 → 조달 의존 업종 차환 부담"
+       }
+      ],
+      "why": "상승 주도 +1.83% · 폭 27↑7↓ · 3일 -0.2%"
+     },
+     {
+      "name": "생명과학도구및서비스",
+      "kind": "업종",
+      "changeRate": 4.28,
+      "change3d": 1.37,
+      "rise": 22.0,
+      "fall": 13.0,
+      "total": 41.0,
+      "breadth": 0.22,
+      "turnover_pct": 0.33,
+      "leaders": [
+       {
+        "code": "226950",
+        "name": "올릭스"
+       },
+       {
+        "code": "494120",
+        "name": "큐리오시스"
+       }
+      ],
+      "score": 75,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.28% · 폭 22↑13↓ · 3일 +1.4%"
+     },
+     {
+      "name": "기계",
+      "kind": "업종",
+      "changeRate": 1.58,
+      "change3d": -0.28,
+      "rise": 67.0,
+      "fall": 30.0,
+      "total": 105.0,
+      "breadth": 0.35,
+      "turnover_pct": 0.62,
+      "leaders": [
+       {
+        "code": "468670",
+        "name": "브릴스"
+       },
+       {
+        "code": "439960",
+        "name": "코스모로보틱스"
+       }
+      ],
+      "score": 75,
       "tags": [
        {
         "t": "시장 위험 경계",
         "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
        }
       ],
-      "why": "상승 주도 +2.06% · 폭 65↑52↓ · 3일 +0.3%"
+      "why": "상승 주도 +1.58% · 폭 67↑30↓ · 3일 -0.3%"
      },
      {
-      "name": "철강",
+      "name": "제약",
       "kind": "업종",
-      "changeRate": 1.27,
-      "change3d": -1.68,
-      "rise": 34.0,
-      "fall": 16.0,
-      "total": 55.0,
-      "breadth": 0.33,
-      "turnover_pct": 0.87,
+      "changeRate": 3.76,
+      "change3d": 0.18,
+      "rise": 122.0,
+      "fall": 34.0,
+      "total": 175.0,
+      "breadth": 0.5,
+      "turnover_pct": 0.12,
       "leaders": [
        {
-        "code": "023790",
-        "name": "동일스틸럭스"
+        "code": "000250",
+        "name": "삼천당제약"
        },
        {
-        "code": "008970",
-        "name": "KBI동양철관"
+        "code": "456160",
+        "name": "지투지바이오"
        }
       ],
-      "score": 66,
+      "score": 74,
       "tags": [
        {
-        "t": "시장 위험 경계",
-        "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +1.27% · 폭 34↑16↓ · 3일 -1.7%"
+      "why": "상승 주도 +3.76% · 폭 122↑34↓ · 3일 +0.2%"
      }
     ],
     "themes": [],
     "stocks": [
      {
-      "name": "동일스틸럭스",
-      "code": "023790",
+      "name": "브릴스",
+      "code": "468670",
       "kind": "상승률 1위",
-      "value": "+29.99%",
-      "why": "거래대금 56억",
-      "source": "NAVER 브리핑"
-     },
-     {
-      "name": "SK하이닉스",
-      "code": "000660",
-      "kind": "거래대금 1위",
-      "value": "+0.62%",
-      "why": "거래대금 52,368억",
-      "source": "NAVER 브리핑"
+      "value": "+125.38%",
+      "why": "거래대금 2,923억",
+      "source": "시장 브리핑"
      },
      {
       "name": "삼성전자",
       "code": "005930",
-      "kind": "검색 1위",
-      "value": "-1.47%",
-      "why": "거래대금 41,210억",
-      "source": "NAVER 브리핑"
+      "kind": "거래대금 1위",
+      "value": "-0.37%",
+      "why": "거래대금 12,055억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "글로벌테크놀로지",
-      "code": "486510",
+      "name": "코스모로보틱스",
+      "code": "439960",
       "kind": "관심 1위",
-      "value": "+4.83%",
-      "why": "거래대금 6,016억",
-      "source": "NAVER 브리핑"
+      "value": "+18.95%",
+      "why": "거래대금 1,380억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "케이뱅크",
-      "code": "279570",
+      "name": "앱클론",
+      "code": "174900",
       "kind": "주도주",
-      "value": "은행 -3.39%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "생물공학 +4.35%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "삼성화재우",
-      "code": "000815",
+      "name": "NC",
+      "code": "036570",
       "kind": "주도주",
-      "value": "손해보험 -3.26%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "게임엔터테인먼트 +4.23%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "브릴스",
+      "name": "멜콘",
       "code": null,
-      "kind": "IPO 상장",
+      "kind": "IPO 청약",
       "value": "10-01",
-      "why": "경쟁률 1,676:1 · 공모가 19,500원",
-      "source": "NAVER IPO 일정"
+      "why": "공모가 12,300원",
+      "source": "IPO 일정"
      },
      {
       "name": "에이디테크놀로지",
@@ -100522,6 +100200,14 @@
       "value": "3.4개월",
       "why": "재무 2/5 · 잔액 320억",
       "source": "VALKYRIE CB 표본"
+     },
+     {
+      "name": "에르코스",
+      "code": null,
+      "kind": "Put 임박",
+      "value": "3.6개월",
+      "why": "재무 3/5 · 잔액 135억",
+      "source": "VALKYRIE CB 표본"
      }
     ],
     "tilt": {
@@ -100538,7 +100224,7 @@
      "크레딧 ≥65",
      "코스피 위험 ≥0.45"
     ],
-    "basis": "NAVER 업종·테마(등락·폭·회전율 순위) + 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
+    "basis": "업종·테마 실시간(등락·폭·회전율 순위) + 시장 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
     "note": "자동 선정 · 투자 권유 아님"
    }
   },
@@ -100866,7 +100552,7 @@
        "= 200 → 191곳 / 293곳 (REAL)",
        "차환 유출 압력 = Σ Put위험 잔액×(1−접근성) ÷ Σ잔액 = 49% (≥25% 경계)"
       ],
-      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 NAVER · 가정: Put = 발행 12개월 후"
+      "source": "CB Zero Finder(DART) 코스닥 CB 293건 (2026-09-29까지 발행) · 가격·재무 시세 데이터 · 가정: Put = 발행 12개월 후"
      },
      "outflow_share": 49.14698827676834,
      "status": "SHOCK",
@@ -101056,51 +100742,29 @@
      "owner": "김유찬",
      "call": "적자 코스닥 청약 보류",
      "dir": "AVOID",
-     "action": "코스피 비중 55% (보유 100% → -45%p · 코스피200 선물 167계약 매도) · 보유 100% 가정 (8512)",
+     "action": "코스피 비중 55% (8512)",
      "market": {
       "w_target": 0.548,
       "score": 0.4563,
       "verdict": "경계",
       "state": "NORMAL",
-      "contracts": -167.2422502888298,
-      "side": "매도",
-      "contract": "코스피200 선물",
-      "driver": "고점 대비 하락",
-      "current": 1.0,
-      "change": -0.45231502801865464,
-      "rebalance": true,
-      "trade_eok": -452.31502801865463,
+      "contracts": null,
+      "side": null,
+      "contract": null,
+      "driver": null,
+      "current": null,
+      "change": null,
+      "rebalance": null,
+      "trade_eok": null,
       "current_src": "100% 가정",
       "provisional": false,
-      "date": "2026-09-30",
+      "date": "2026-09-29",
       "kosdaq": {
        "verdict": "안정",
        "score": 0.2743,
        "w_target": 0.911,
        "provisional": false,
-       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-       "exposure": {
-        "current": 1.0,
-        "target": 0.9111291836582086,
-        "change": -0.08887081634179139,
-        "vol20": 0.22536444589417176,
-        "vol_ref": 0.20533612361314124,
-        "trade_eok": -88.8708163417914,
-        "rebalance": false
-       },
-       "futures": {
-        "contract": "코스피200 선물",
-        "contracts": -32.85974241252386,
-        "side": "매도"
-       },
-       "driver": "고점 대비 하락",
-       "contrib": {
-        "score_vol": 0.02438480128168341,
-        "score_dd": 0.25,
-        "score_trend": 0.0,
-        "score_lev": 0.0,
-        "score_liq": 0.0
-       }
+       "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
       }
      },
      "confidence": 82,
@@ -120025,67 +119689,23 @@
       "date": "2026-09-29",
       "dir": "NORMAL",
       "headline": "코스닥 위험점수 0.27 · 권장 주식비중 91% · 코스피 경계 0.46",
-      "action": "주된 원인: 고점 대비 하락",
+      "action": "",
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매",
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험",
       "plan": {
        "kosdaq": {
         "verdict": "안정",
         "score": 0.2743,
         "w_target": 0.911,
         "provisional": false,
-        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.9111291836582086,
-         "change": -0.08887081634179139,
-         "vol20": 0.22536444589417176,
-         "vol_ref": 0.20533612361314124,
-         "trade_eok": -88.8708163417914,
-         "rebalance": false
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -32.85974241252386,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.02438480128168341,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "futures_proxy": "코스피200 선물로 근사 (KOSDAQ150 데이터 없음)"
        },
        "kospi": {
         "verdict": "경계",
         "score": 0.4563,
         "w_target": 0.548,
         "provisional": false,
-        "asof": "2026-09-30",
-        "exposure": {
-         "current": 1.0,
-         "target": 0.5476849719813454,
-         "change": -0.45231502801865464,
-         "vol20": 0.3194734314172154,
-         "vol_ref": 0.17497079733452187,
-         "trade_eok": -452.31502801865463,
-         "rebalance": true
-        },
-        "futures": {
-         "contract": "코스피200 선물",
-         "contracts": -167.2422502888298,
-         "side": "매도"
-        },
-        "driver": "고점 대비 하락",
-        "contrib": {
-         "score_vol": 0.20646678800694795,
-         "score_dd": 0.25,
-         "score_trend": 0.0,
-         "score_lev": 0.0,
-         "score_liq": 0.0
-        }
+        "asof": "2026-09-29"
        }
       },
       "provisional": false,
@@ -120216,22 +119836,17 @@
        },
        {
         "src": "8512 김유찬",
-        "text": "코스피 권장 주식비중 55% (보유 100% → −45%p · 보유 100% 가정)",
-        "why": "8512 위험점수 0.46 · 경계 · 주된 원인 고점 대비 하락"
-       },
-       {
-        "src": "8512 김유찬",
-        "text": "헤지: 코스피200 선물 167계약 매도 (보유 100% 가정)",
-        "why": "현물 유지 시 대안 · 비중 차이 −45%p만큼 선물 (1000억 기준)"
+        "text": "코스피 권장 주식비중 55%",
+        "why": "8512 위험점수 0.46 · 경계"
        },
        {
         "src": "8512 김유찬",
         "text": "코스닥 시장 안정 (위험점수 0.27 · 권장 91%)",
-        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+        "why": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
        }
       ],
       "match": "AGREE",
-      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험 · 보유 100%(100% 가정) 대비 매매"
+      "matchText": "반영: 코스피 위험 0.46 (경계) → 권장 비중 55% · IPO 5요소 중 시장 위험"
      },
      {
       "desk": "매크로",
@@ -120277,252 +119892,253 @@
      },
      {
       "kind": "EVENT",
-      "text": "09-29 KR 기업심리지수"
-     },
-     {
-      "kind": "EVENT",
-      "text": "09-29 US CB 소비자신뢰지수"
-     },
-     {
-      "kind": "EVENT",
       "text": "09-30 KR 광공업생산 전월비(계절조정)"
      },
      {
       "kind": "EVENT",
       "text": "09-30 KR 서비스업생산지수 전월비(계절조정)"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 개인지출 전월대비"
+     },
+     {
+      "kind": "EVENT",
+      "text": "09-30 US 근원 소비지출물가지수 전월대비"
      }
     ]
    },
    "watch": {
-    "asOf": "20260930153512",
+    "asOf": "20261001104305",
     "sectors": [
      {
-      "name": "은행",
+      "name": "생물공학",
       "kind": "업종",
-      "changeRate": -3.39,
-      "change3d": -0.17,
-      "rise": 0.0,
-      "fall": 11.0,
-      "total": 11.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.32,
+      "changeRate": 4.35,
+      "change3d": -0.09,
+      "rise": 41.0,
+      "fall": 13.0,
+      "total": 59.0,
+      "breadth": 0.47,
+      "turnover_pct": 0.27,
       "leaders": [
        {
-        "code": "279570",
-        "name": "케이뱅크"
+        "code": "174900",
+        "name": "앱클론"
        },
        {
-        "code": "006220",
-        "name": "제주은행"
+        "code": "358570",
+        "name": "지아이이노베이션"
        }
       ],
-      "score": 88,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.39% · 폭 0↑11↓ · 3일 -0.2%"
-     },
-     {
-      "name": "손해보험",
-      "kind": "업종",
-      "changeRate": -3.26,
-      "change3d": 0.25,
-      "rise": 0.0,
-      "fall": 12.0,
-      "total": 12.0,
-      "breadth": -1.0,
-      "turnover_pct": 0.24,
-      "leaders": [
-       {
-        "code": "000815",
-        "name": "삼성화재우"
-       },
-       {
-        "code": "000400",
-        "name": "롯데손해보험"
-       }
-      ],
-      "score": 85,
-      "tags": [
-       {
-        "t": "금리 상승 수혜",
-        "why": "금리 상승 압력 → 예대마진·운용수익 개선 검토"
-       }
-      ],
-      "why": "하락 주도 -3.26% · 폭 0↑12↓ · 3일 +0.2%"
-     },
-     {
-      "name": "에너지장비및서비스",
-      "kind": "업종",
-      "changeRate": 2.83,
-      "change3d": 1.63,
-      "rise": 22.0,
-      "fall": 9.0,
-      "total": 34.0,
-      "breadth": 0.38,
-      "turnover_pct": 1.51,
-      "leaders": [
-       {
-        "code": "322000",
-        "name": "HD현대에너지솔루션"
-       },
-       {
-        "code": "098070",
-        "name": "한텍"
-       }
-      ],
-      "score": 67,
-      "tags": [],
-      "why": "상승 주도 +2.83% · 폭 22↑9↓ · 3일 +1.6%"
-     },
-     {
-      "name": "생명과학도구및서비스",
-      "kind": "업종",
-      "changeRate": 2.74,
-      "change3d": 0.61,
-      "rise": 18.0,
-      "fall": 17.0,
-      "total": 41.0,
-      "breadth": 0.02,
-      "turnover_pct": 0.67,
-      "leaders": [
-       {
-        "code": "291650",
-        "name": "츌립앤사이언스"
-       },
-       {
-        "code": "494120",
-        "name": "큐리오시스"
-       }
-      ],
-      "score": 66,
+      "score": 81,
       "tags": [
        {
         "t": "할인율 민감",
         "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +2.74% · 폭 18↑17↓ · 3일 +0.6%"
+      "why": "상승 주도 +4.35% · 폭 41↑13↓ · 3일 -0.1%"
      },
      {
-      "name": "화학",
+      "name": "게임엔터테인먼트",
       "kind": "업종",
-      "changeRate": 2.06,
-      "change3d": 0.27,
-      "rise": 65.0,
-      "fall": 52.0,
-      "total": 122.0,
-      "breadth": 0.11,
-      "turnover_pct": 0.61,
+      "changeRate": 4.23,
+      "change3d": -0.51,
+      "rise": 23.0,
+      "fall": 5.0,
+      "total": 34.0,
+      "breadth": 0.53,
+      "turnover_pct": 0.23,
       "leaders": [
        {
-        "code": "457190",
-        "name": "이수스페셜티케미컬"
+        "code": "036570",
+        "name": "NC"
        },
        {
-        "code": "217910",
-        "name": "에스제이켐"
+        "code": "293490",
+        "name": "카카오게임즈"
        }
       ],
-      "score": 66,
+      "score": 80,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.23% · 폭 23↑5↓ · 3일 -0.5%"
+     },
+     {
+      "name": "우주항공과국방",
+      "kind": "업종",
+      "changeRate": 1.83,
+      "change3d": -0.16,
+      "rise": 27.0,
+      "fall": 7.0,
+      "total": 35.0,
+      "breadth": 0.57,
+      "turnover_pct": 0.27,
+      "leaders": [
+       {
+        "code": "079550",
+        "name": "LIG디펜스앤에어로스페이스"
+       },
+       {
+        "code": "318660",
+        "name": "타임기술"
+       }
+      ],
+      "score": 78,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       },
+       {
+        "t": "크레딧 경계",
+        "why": "AA- 66bp ≥ 65 → 조달 의존 업종 차환 부담"
+       }
+      ],
+      "why": "상승 주도 +1.83% · 폭 27↑7↓ · 3일 -0.2%"
+     },
+     {
+      "name": "생명과학도구및서비스",
+      "kind": "업종",
+      "changeRate": 4.28,
+      "change3d": 1.37,
+      "rise": 22.0,
+      "fall": 13.0,
+      "total": 41.0,
+      "breadth": 0.22,
+      "turnover_pct": 0.33,
+      "leaders": [
+       {
+        "code": "226950",
+        "name": "올릭스"
+       },
+       {
+        "code": "494120",
+        "name": "큐리오시스"
+       }
+      ],
+      "score": 75,
+      "tags": [
+       {
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
+       }
+      ],
+      "why": "상승 주도 +4.28% · 폭 22↑13↓ · 3일 +1.4%"
+     },
+     {
+      "name": "기계",
+      "kind": "업종",
+      "changeRate": 1.58,
+      "change3d": -0.28,
+      "rise": 67.0,
+      "fall": 30.0,
+      "total": 105.0,
+      "breadth": 0.35,
+      "turnover_pct": 0.62,
+      "leaders": [
+       {
+        "code": "468670",
+        "name": "브릴스"
+       },
+       {
+        "code": "439960",
+        "name": "코스모로보틱스"
+       }
+      ],
+      "score": 75,
       "tags": [
        {
         "t": "시장 위험 경계",
         "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
        }
       ],
-      "why": "상승 주도 +2.06% · 폭 65↑52↓ · 3일 +0.3%"
+      "why": "상승 주도 +1.58% · 폭 67↑30↓ · 3일 -0.3%"
      },
      {
-      "name": "철강",
+      "name": "제약",
       "kind": "업종",
-      "changeRate": 1.27,
-      "change3d": -1.68,
-      "rise": 34.0,
-      "fall": 16.0,
-      "total": 55.0,
-      "breadth": 0.33,
-      "turnover_pct": 0.87,
+      "changeRate": 3.76,
+      "change3d": 0.18,
+      "rise": 122.0,
+      "fall": 34.0,
+      "total": 175.0,
+      "breadth": 0.5,
+      "turnover_pct": 0.12,
       "leaders": [
        {
-        "code": "023790",
-        "name": "동일스틸럭스"
+        "code": "000250",
+        "name": "삼천당제약"
        },
        {
-        "code": "008970",
-        "name": "KBI동양철관"
+        "code": "456160",
+        "name": "지투지바이오"
        }
       ],
-      "score": 66,
+      "score": 74,
       "tags": [
        {
-        "t": "시장 위험 경계",
-        "why": "8512 코스피 위험 0.46 ≥ 0.45 → 경기민감 비중은 권장 비중 안에서"
+        "t": "할인율 민감",
+        "why": "VALKYRIE 금리 상승 압력 → 성장주 할인율 부담 (국고10Y+ERP)"
        }
       ],
-      "why": "상승 주도 +1.27% · 폭 34↑16↓ · 3일 -1.7%"
+      "why": "상승 주도 +3.76% · 폭 122↑34↓ · 3일 +0.2%"
      }
     ],
     "themes": [],
     "stocks": [
      {
-      "name": "동일스틸럭스",
-      "code": "023790",
+      "name": "브릴스",
+      "code": "468670",
       "kind": "상승률 1위",
-      "value": "+29.99%",
-      "why": "거래대금 56억",
-      "source": "NAVER 브리핑"
-     },
-     {
-      "name": "SK하이닉스",
-      "code": "000660",
-      "kind": "거래대금 1위",
-      "value": "+0.62%",
-      "why": "거래대금 52,368억",
-      "source": "NAVER 브리핑"
+      "value": "+125.38%",
+      "why": "거래대금 2,923억",
+      "source": "시장 브리핑"
      },
      {
       "name": "삼성전자",
       "code": "005930",
-      "kind": "검색 1위",
-      "value": "-1.47%",
-      "why": "거래대금 41,210억",
-      "source": "NAVER 브리핑"
+      "kind": "거래대금 1위",
+      "value": "-0.37%",
+      "why": "거래대금 12,055억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "글로벌테크놀로지",
-      "code": "486510",
+      "name": "코스모로보틱스",
+      "code": "439960",
       "kind": "관심 1위",
-      "value": "+4.83%",
-      "why": "거래대금 6,016억",
-      "source": "NAVER 브리핑"
+      "value": "+18.95%",
+      "why": "거래대금 1,380억",
+      "source": "시장 브리핑"
      },
      {
-      "name": "케이뱅크",
-      "code": "279570",
+      "name": "앱클론",
+      "code": "174900",
       "kind": "주도주",
-      "value": "은행 -3.39%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "생물공학 +4.35%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "삼성화재우",
-      "code": "000815",
+      "name": "NC",
+      "code": "036570",
       "kind": "주도주",
-      "value": "손해보험 -3.26%",
-      "why": "금리 상승 수혜",
-      "source": "NAVER 업종"
+      "value": "게임엔터테인먼트 +4.23%",
+      "why": "할인율 민감",
+      "source": "업종 실시간"
      },
      {
-      "name": "브릴스",
+      "name": "멜콘",
       "code": null,
-      "kind": "IPO 상장",
+      "kind": "IPO 청약",
       "value": "10-01",
-      "why": "경쟁률 1,676:1 · 공모가 19,500원",
-      "source": "NAVER IPO 일정"
+      "why": "공모가 12,300원",
+      "source": "IPO 일정"
      },
      {
       "name": "에이디테크놀로지",
@@ -120547,6 +120163,14 @@
       "value": "3.4개월",
       "why": "재무 2/5 · 잔액 320억",
       "source": "VALKYRIE CB 표본"
+     },
+     {
+      "name": "에르코스",
+      "code": null,
+      "kind": "Put 임박",
+      "value": "3.6개월",
+      "why": "재무 3/5 · 잔액 135억",
+      "source": "VALKYRIE CB 표본"
      }
     ],
     "tilt": {
@@ -120563,7 +120187,7 @@
      "크레딧 ≥65",
      "코스피 위험 ≥0.45"
     ],
-    "basis": "NAVER 업종·테마(등락·폭·회전율 순위) + 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
+    "basis": "업종·테마 실시간(등락·폭·회전율 순위) + 시장 브리핑·IPO 일정 + DART CB 공시 · VALKYRIE 기준 태그",
     "note": "자동 선정 · 투자 권유 아님"
    }
   }

@@ -190,7 +190,8 @@ jobs:
         if: steps.v4_bundle.outcome != 'success'
         run: |
           echo 'v4 rebuild failed; deploying the committed snapshot bundle (no fabricated values).'
-          git checkout -- prototype/valkyrie-v4/web/data/bundle.js prototype/valkyrie-v4/data
+          git checkout -- prototype/valkyrie-v4/web/data prototype/valkyrie-v4/data
+          git clean -fdq prototype/valkyrie-v4/web/data
 
       - name: Report v4 refresh outcomes
         run: |
@@ -257,6 +258,6 @@ jobs:
             exit 0
           fi
           git commit -m 'data(v4): persist refreshed public daily series [skip ci]'
-          git stash push -q --include-untracked || true
+          git checkout -- .          # the rest of the refreshed tree was only needed for the deploy above
           git pull --rebase origin main
           git push origin HEAD:main

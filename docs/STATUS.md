@@ -19,7 +19,9 @@ prototype/valkyrie-v4/      ACTIVE — GitHub Pages root (/), local server, real
 public build at https://alpha-crew-labs.github.io/Valkyrie-Odin/ — the Pages workflow recomputes the snapshot bundle from
 public data (market tiles every 30 min in KR market hours; full refresh at the KR close, every 3 hours in the evening and
 three times a day on weekends) and falls back to the committed bundle when a step fails. The daily series stay continuous
-without API keys (FRED public CSV, public market-rate closes, OHLCV closes); the KR-close run persists them to main. The web build runs in "WEB" mode: engine snapshots,
+without API keys (FRED public CSV, public market-rate closes, OHLCV closes); the KR-close run persists them to main.
+The first load carries only the latest snapshot (older dates are lazy `data/snap_<date>.js` files) and phones get a
+vertical touch layout (`web/css/mobile.css`). The web build runs in "WEB" mode: engine snapshots,
 preset what-ifs, replay and briefing work; the Claude assistant, live polling and the owners' Streamlit apps are local only.
 
 - 17 objects / 24 relations (KOSPI added); every β carries a data basis or an explicit expert prior

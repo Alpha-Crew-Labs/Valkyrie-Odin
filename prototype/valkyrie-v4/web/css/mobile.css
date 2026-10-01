@@ -1,0 +1,109 @@
+/* VALKYRIE v4 · mobile layer. Phones (≤760px) get a vertical, touch-first version of the same system:
+   home → ask → chain (pan sideways) → decision / what-if panes. Nothing is removed from the data; only the
+   desktop-only chrome (ODIN bar, research rail, hover tooltips, legend) is hidden.
+   Loaded last so it only overrides; desktop rules stay untouched above 760px. */
+@media (max-width:760px){
+  :root{--rail-w:0px}
+  html,body{height:100%;-webkit-text-size-adjust:100%}
+  body{padding-left:0}
+  .rrail,.odin,.tipbox,.strip-note,.rlg,.ovb,.hm-hint,.mk-st,#mkNow,.ft .fc.end,.hcell.grow,#kpData,#kpTools,.tabsp,.sr-sub,.sr-nav,.sr-dots{display:none!important}
+
+  .app{height:100vh;height:100dvh;grid-template-rows:auto 40px 48px minmax(0,1fr) auto 42px;gap:4px;padding:4px 4px 6px;max-width:none}
+
+  /* header: wordmark row + KPI row */
+  .hd{flex-wrap:wrap;height:auto;padding:4px 2px 3px;row-gap:3px;overflow:visible}
+  .hd .br{padding:0 8px 2px;border-right:0;flex:1 1 100%;flex-direction:row;align-items:baseline;justify-content:space-between;gap:8px;height:auto;border-bottom:1px solid var(--bd)}
+  .lg{font-size:13px;letter-spacing:.22em} .lg-sub{margin:0;font-size:7px;letter-spacing:.14em}
+  .hcell{padding:0 8px;height:auto;gap:1px}
+  .stx{font-size:11px}
+  #kpSig .kd{font-size:10px}
+
+  /* market ticker: the scrolling tape already fits; drop the side buttons' bulk */
+  .mk-now{padding:0 8px;font-size:8px}
+
+  /* SITREP: two-line text instead of one clipped line */
+  .sr{grid-template-columns:auto minmax(0,1fr);gap:8px;padding:0 8px 0 0}
+  .sr-tag{min-width:0;padding:0 8px} .sr-tag b{font-size:8.6px;letter-spacing:.1em}
+  .sr-text{font-size:12px;font-weight:650;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.25}
+
+  /* intelligence chain: keep it legible and pan sideways instead of shrinking 17 nodes into 390px */
+  .cw{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  /* top-aligned (height:auto) so the chain sits right under the SITREP and the workspace sheet covers the empty bottom */
+  #chain{position:relative!important;display:block;width:920px!important;height:auto!important;transition:none}
+  .ovr{position:sticky;left:0;top:0;width:calc(100vw - 10px);flex-direction:row;justify-content:space-between;align-items:center;padding:6px 8px 0;pointer-events:none;z-index:3}
+  .ovr .ml2{font-size:9px;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ovr .dbtn{pointer-events:auto;min-height:30px}
+  .ban{position:fixed;width:min(92vw,420px);padding:10px 12px}
+  .ban .b1{font-size:14px;letter-spacing:.18em} .ban .b2{font-size:9px}
+
+  /* inspector: full-screen sheet */
+  .drw-r{position:fixed;inset:0;width:100%;z-index:94;border-radius:0}
+  .dh{height:40px} .dx{width:34px;height:30px;font-size:14px}
+
+  /* command bar: full-width ask box, buttons on their own row, example chips scroll sideways */
+  .cmd-row{flex-wrap:wrap;padding:5px 6px 2px;gap:6px}
+  .askbox{flex:1 1 100%;height:38px}
+  .askbox #cin{font-size:16px;min-width:0}
+  .cps.end{border-left:0;padding:0;flex:1 1 100%;justify-content:space-between;height:auto}
+  .cps.end .btn{flex:1;padding:9px 6px;font-size:10px;min-height:34px}
+  .cmd-strip{overflow-x:auto;overflow-y:hidden;padding:0 6px 6px;-webkit-overflow-scrolling:touch}
+  .cmd-strip .strip{overflow:visible;flex:0 0 auto}
+  .cmd-strip .cp{padding:6px 10px;font-size:10.5px}
+
+  /* workspace panel: taller sheet, scrollable tab row, one-column cards */
+  .mw{left:4px;right:4px;bottom:50px;height:min(64vh,560px);grid-template-rows:36px minmax(0,1fr)}
+  .tabs{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+  .tab{padding:0 11px;gap:4px;min-height:36px} .tab .tn{font-size:11px} .tab .to{display:none}
+  .pane{padding:6px}
+  .pane .grid,.grid.nodep,.grid.tmp,.grid.fa,.apl,.ai-acts,.frm,.gliq,.bv-hero,.bv-lanes,.bv-tiles,.bv-desk,.bv-acts,.bv-sec,.bv-wr,.bv-ns{grid-template-columns:minmax(0,1fr)!important;height:auto!important}
+  .grid .g4,.grid.nodep .g4{grid-column:auto}
+  .kv{font-size:11px} .note{font-size:10.5px} .sec-t{font-size:9px} .chip{font-size:9px} .tb{font-size:10.5px} .tb td.why{max-width:none}
+  .btn{min-height:32px}
+  /* what-if: preset chips and the custom shock inputs wrap instead of running off the card */
+  .stress{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+  .stress .custom{display:flex;flex-wrap:wrap;gap:5px;flex:1 1 100%;align-items:center}
+  .stress .custom label{display:flex;align-items:center;gap:3px}
+  .stress .custom input{width:58px;min-height:30px}
+  .stress .custom .btn{min-height:30px}
+
+  /* footer: short buttons so the five snapshot ticks keep their labels */
+  .ft .fc{padding:0 6px;gap:6px} .ft .fc .btn{padding:7px 8px;font-size:9px}
+  .ft .fc .btn .ct{display:none}
+  .tl{padding:0 12px;min-width:170px}
+
+  /* home: the kick, one hand */
+  .hm-bg::before{display:none}
+  .hm-c{width:min(880px,94vw);gap:12px}
+  .hm-team{font-size:8.5px;letter-spacing:.3em}
+  .hm-logo{font-size:40px;letter-spacing:.22em;padding-left:.22em}
+  .hm-tag{font-size:12.5px;padding:0 4px}
+  .hm-box{padding:5px 5px 5px 12px;border-radius:14px;gap:6px}
+  .hm-box input{font-size:16px;padding:9px 2px}
+  .hm-box button{padding:10px 12px;font-size:11px;border-radius:9px}
+  .hm-chips span{font-size:11px;padding:6px 11px}
+  .hm-chips span:nth-child(n+5){display:none}
+  .hm-calls{flex-direction:column;align-items:stretch;width:100%;gap:6px}
+  .hm-call{min-width:0;padding:7px 11px}
+  .hm-foot{font-size:10.5px;gap:8px}
+
+  /* global board and briefing overlays */
+  .gb{padding:6px}
+  .gb-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gb-b{grid-template-columns:minmax(0,1fr)!important;overflow:auto}
+  .gwl{grid-template-columns:repeat(2,minmax(0,1fr))!important} .gheat{grid-template-columns:repeat(3,minmax(0,1fr))!important} .gtools{grid-template-columns:minmax(0,1fr)}
+  .bpo{padding:6px}
+  .bv-lanes{grid-column:auto}
+}
+
+/* tablets / small laptops */
+@media (max-width:1100px) and (min-width:761px){
+  .drw-r{width:min(400px,58vw)}
+  .app{padding:6px}
+  .hcell{padding:0 10px}
+}
+
+/* touch devices of any size: no hover tooltips, larger tap targets */
+@media (hover:none){
+  .tipbox{display:none!important}
+  .nd{cursor:default}
+}

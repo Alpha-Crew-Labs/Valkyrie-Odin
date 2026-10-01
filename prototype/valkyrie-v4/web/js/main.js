@@ -465,7 +465,11 @@
   function homeWire() {
     if (!$("home")) return;
     $("homeForm").addEventListener("submit", function (e) { e.preventDefault(); homeSubmit(); });
-    $("homeSkip").addEventListener("click", function (e) { e.preventDefault(); homeShow(false); });
+    $("homeSkip").addEventListener("click", function (e) {
+      e.preventDefault(); homeShow(false);
+      // phones: the chain alone is a map to pan; open the decision sheet so the first screen already answers
+      if (window.matchMedia && matchMedia("(max-width:760px)").matches) setTab("signals", true);
+    });
     $("homeCalls").addEventListener("click", function (e) { var t = e.target.closest("[data-go]"); if (t) { homeShow(false); setTab(t.dataset.go, true); } });
     var ch = $("homeChips");
     EXAMPLES.forEach(function (x) { var c = document.createElement("span"); c.textContent = x[1]; c.onclick = function () { homeSubmit(x[1]); }; ch.appendChild(c); });
