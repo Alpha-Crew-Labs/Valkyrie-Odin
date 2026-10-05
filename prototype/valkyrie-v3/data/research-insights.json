@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-10-02T14:47:59.514Z",
+  "generatedAt": "2026-10-05T05:54:41.374Z",
   "cadence": "12H",
   "runtimeDependency": "NONE",
   "note": "Aggregated public insight snapshot only. Browser runtime never calls the source Vercel apps.",
@@ -8,22 +8,22 @@
     "ok": true,
     "source": "IPO Market Report",
     "url": "https://ipo-market-report.vercel.app/",
-    "generatedAt": "2026.10.02",
-    "period": "25.09~26.09",
-    "companies": 53,
-    "dataDate": "26.09.28",
-    "avgCurrentReturnPct": -1.4,
-    "medianCurrentReturnPct": -25.8,
-    "aboveOfferCount": 16,
-    "aboveOfferPct": 30.2,
-    "belowOfferPct": 69.8,
+    "generatedAt": "2026.10.03",
+    "period": "25.10~26.10",
+    "companies": 56,
+    "dataDate": "26.10.02",
+    "avgCurrentReturnPct": -2.2,
+    "medianCurrentReturnPct": -18.6,
+    "aboveOfferCount": 19,
+    "aboveOfferPct": 33.9,
+    "belowOfferPct": 66.1,
     "best": {
-      "name": "와이즈플래닛컴퍼니",
-      "returnPct": 286
+      "name": "알지노믹스",
+      "returnPct": 164
     },
     "worst": {
-      "name": "스트라드비젼",
-      "returnPct": -74
+      "name": "한패스",
+      "returnPct": -75
     },
     "status": "ready"
   },
@@ -31,10 +31,10 @@
     "ok": true,
     "source": "CB Zero Finder",
     "url": "https://cb-zero-finder.vercel.app/",
-    "updatedAt": "2026-10-02T09:02:41.281Z",
+    "updatedAt": "2026-10-05T00:33:59.002Z",
     "period": {
       "begin": "2026-01-01",
-      "end": "2026-10-02"
+      "end": "2026-10-05"
     },
     "totalCount": 384,
     "totalAmountEok": 90335.9,
