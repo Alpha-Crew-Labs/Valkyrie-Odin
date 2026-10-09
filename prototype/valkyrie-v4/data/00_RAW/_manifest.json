@@ -1,7 +1,7 @@
 {
-  "collectedAt": "2026-10-08T15:35:39.432998+00:00",
+  "collectedAt": "2026-10-09T15:18:46.114881+00:00",
   "start": "2023-01-01",
-  "end": "2026-10-09",
+  "end": "2026-10-10",
   "series": {
     "bok_rate": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -9,8 +9,8 @@
       "item": "0101000",
       "cycle": "D",
       "label": "한국은행 기준금리",
-      "rows": 1378,
-      "last": "2026-10-09"
+      "rows": 1379,
+      "last": "2026-10-10"
     },
     "ktb3": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -61,8 +61,8 @@
       "source": "FRED (fredgraph.csv)",
       "id": "DGS10",
       "label": "미국채 10년 (Treasury Constant Maturity)",
-      "rows": 941,
-      "last": "2026-10-06"
+      "rows": 942,
+      "last": "2026-10-07"
     },
     "us_cpi_index": {
       "source": "FRED (fredgraph.csv)",
@@ -75,8 +75,8 @@
       "source": "FRED (fredgraph.csv)",
       "id": "DFF",
       "label": "Federal Funds Effective Rate",
-      "rows": 1375,
-      "last": "2026-10-06"
+      "rows": 1376,
+      "last": "2026-10-07"
     },
     "us_core_pce": {
       "source": "FRED (fredgraph.csv)",
