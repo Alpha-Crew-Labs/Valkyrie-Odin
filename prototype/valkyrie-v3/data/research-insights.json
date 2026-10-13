@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-10-13T06:54:01.588Z",
+  "generatedAt": "2026-10-13T16:07:17.559Z",
   "cadence": "12H",
   "runtimeDependency": "NONE",
   "note": "Aggregated public insight snapshot only. Browser runtime never calls the source Vercel apps.",
@@ -31,17 +31,17 @@
     "ok": true,
     "source": "CB Zero Finder",
     "url": "https://cb-zero-finder.vercel.app/",
-    "updatedAt": "2026-10-13T00:33:59.025Z",
+    "updatedAt": "2026-10-13T09:02:41.199Z",
     "period": {
       "begin": "2026-01-01",
       "end": "2026-10-13"
     },
-    "totalCount": 397,
-    "totalAmountEok": 92295.9,
-    "zeroZeroCount": 104,
-    "zeroZeroSharePct": 26.2,
-    "averageDilutionPct": 13,
-    "highDilutionSharePct": 16.5,
+    "totalCount": 400,
+    "totalAmountEok": 96505.9,
+    "zeroZeroCount": 105,
+    "zeroZeroSharePct": 26.3,
+    "averageDilutionPct": 12.9,
+    "highDilutionSharePct": 16.4,
     "topIssue": {
       "name": "삼성에스디에스",
       "amountEok": 12200,
