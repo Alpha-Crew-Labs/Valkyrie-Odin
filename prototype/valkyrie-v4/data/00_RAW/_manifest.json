@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-10-13T15:57:47.922955+00:00",
+  "collectedAt": "2026-10-14T13:40:53.964726+00:00",
   "start": "2023-01-01",
   "end": "2026-10-14",
   "series": {
@@ -18,8 +18,8 @@
       "item": "010200000",
       "cycle": "D",
       "label": "국고채(3년)",
-      "rows": 922,
-      "last": "2026-10-13"
+      "rows": 923,
+      "last": "2026-10-14"
     },
     "ktb10": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -27,8 +27,8 @@
       "item": "010210000",
       "cycle": "D",
       "label": "국고채(10년)",
-      "rows": 922,
-      "last": "2026-10-13"
+      "rows": 923,
+      "last": "2026-10-14"
     },
     "corp_aa3": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -36,8 +36,8 @@
       "item": "010300000",
       "cycle": "D",
       "label": "회사채(3년, AA-)",
-      "rows": 922,
-      "last": "2026-10-12"
+      "rows": 923,
+      "last": "2026-10-13"
     },
     "kospi": {
       "source": "한국은행 ECOS + 공개 시세 종가 이어붙임",
@@ -45,8 +45,8 @@
       "item": "0001000",
       "cycle": "D",
       "label": "KOSPI지수",
-      "rows": 920,
-      "last": "2026-10-13"
+      "rows": 921,
+      "last": "2026-10-14"
     },
     "kosdaq": {
       "source": "한국은행 ECOS + 공개 시세 종가 이어붙임",
@@ -54,29 +54,29 @@
       "item": "0089000",
       "cycle": "D",
       "label": "KOSDAQ지수",
-      "rows": 920,
-      "last": "2026-10-13"
+      "rows": 921,
+      "last": "2026-10-14"
     },
     "ust10": {
       "source": "FRED (fredgraph.csv)",
       "id": "DGS10",
       "label": "미국채 10년 (Treasury Constant Maturity)",
-      "rows": 943,
-      "last": "2026-10-08"
+      "rows": 944,
+      "last": "2026-10-09"
     },
     "us_cpi_index": {
       "source": "FRED (fredgraph.csv)",
       "id": "CPIAUCSL",
       "label": "US CPI-U (SA)",
-      "rows": 43,
-      "last": "2026-08-01"
+      "rows": 44,
+      "last": "2026-09-01"
     },
     "fed_funds": {
       "source": "FRED (fredgraph.csv)",
       "id": "DFF",
       "label": "Federal Funds Effective Rate",
-      "rows": 1377,
-      "last": "2026-10-08"
+      "rows": 1381,
+      "last": "2026-10-12"
     },
     "us_core_pce": {
       "source": "FRED (fredgraph.csv)",
