@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-10-16T13:20:43.468Z",
+  "generatedAt": "2026-10-19T04:55:06.467Z",
   "cadence": "12H",
   "runtimeDependency": "NONE",
   "note": "Aggregated public insight snapshot only. Browser runtime never calls the source Vercel apps.",
@@ -8,22 +8,19 @@
     "ok": true,
     "source": "IPO Market Report",
     "url": "https://ipo-market-report.vercel.app/",
-    "generatedAt": "2026.10.03",
+    "generatedAt": "2026.10.17",
     "period": "25.10~26.10",
-    "companies": 56,
-    "dataDate": "26.10.02",
-    "avgCurrentReturnPct": -2.2,
-    "medianCurrentReturnPct": -18.6,
-    "aboveOfferCount": 19,
-    "aboveOfferPct": 33.9,
-    "belowOfferPct": 66.1,
-    "best": {
-      "name": "알지노믹스",
-      "returnPct": 164
-    },
+    "companies": 58,
+    "dataDate": "26.10.16",
+    "avgCurrentReturnPct": -28.8,
+    "medianCurrentReturnPct": -36.6,
+    "aboveOfferCount": 11,
+    "aboveOfferPct": 19,
+    "belowOfferPct": 81,
+    "best": null,
     "worst": {
       "name": "한패스",
-      "returnPct": -75
+      "returnPct": -79
     },
     "status": "ready"
   },
@@ -31,10 +28,10 @@
     "ok": true,
     "source": "CB Zero Finder",
     "url": "https://cb-zero-finder.vercel.app/",
-    "updatedAt": "2026-10-16T09:02:41.050Z",
+    "updatedAt": "2026-10-19T00:33:59.074Z",
     "period": {
       "begin": "2026-01-01",
-      "end": "2026-10-16"
+      "end": "2026-10-19"
     },
     "totalCount": 404,
     "totalAmountEok": 97755.9,
