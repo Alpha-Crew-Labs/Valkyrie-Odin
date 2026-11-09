@@ -1,7 +1,7 @@
 {
-  "collectedAt": "2026-10-16T13:15:11.921030+00:00",
+  "collectedAt": "2026-11-09T18:45:28.802102+00:00",
   "start": "2023-01-01",
-  "end": "2026-10-16",
+  "end": "2026-11-10",
   "series": {
     "bok_rate": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -9,8 +9,8 @@
       "item": "0101000",
       "cycle": "D",
       "label": "한국은행 기준금리",
-      "rows": 1385,
-      "last": "2026-10-16"
+      "rows": 1410,
+      "last": "2026-11-10"
     },
     "ktb3": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -18,8 +18,8 @@
       "item": "010200000",
       "cycle": "D",
       "label": "국고채(3년)",
-      "rows": 925,
-      "last": "2026-10-16"
+      "rows": 926,
+      "last": "2026-11-09"
     },
     "ktb10": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -27,8 +27,8 @@
       "item": "010210000",
       "cycle": "D",
       "label": "국고채(10년)",
-      "rows": 925,
-      "last": "2026-10-16"
+      "rows": 926,
+      "last": "2026-11-09"
     },
     "corp_aa3": {
       "source": "한국은행 ECOS + 공개 시장금리 최신값 이어붙임",
@@ -36,8 +36,8 @@
       "item": "010300000",
       "cycle": "D",
       "label": "회사채(3년, AA-)",
-      "rows": 925,
-      "last": "2026-10-15"
+      "rows": 926,
+      "last": "2026-11-06"
     },
     "kospi": {
       "source": "한국은행 ECOS + 공개 시세 종가 이어붙임",
@@ -45,8 +45,8 @@
       "item": "0001000",
       "cycle": "D",
       "label": "KOSPI지수",
-      "rows": 923,
-      "last": "2026-10-16"
+      "rows": 939,
+      "last": "2026-11-09"
     },
     "kosdaq": {
       "source": "한국은행 ECOS + 공개 시세 종가 이어붙임",
@@ -54,15 +54,15 @@
       "item": "0089000",
       "cycle": "D",
       "label": "KOSDAQ지수",
-      "rows": 923,
-      "last": "2026-10-16"
+      "rows": 939,
+      "last": "2026-11-09"
     },
     "ust10": {
       "source": "FRED (fredgraph.csv)",
       "id": "DGS10",
       "label": "미국채 10년 (Treasury Constant Maturity)",
-      "rows": 946,
-      "last": "2026-10-14"
+      "rows": 962,
+      "last": "2026-11-05"
     },
     "us_cpi_index": {
       "source": "FRED (fredgraph.csv)",
@@ -75,22 +75,22 @@
       "source": "FRED (fredgraph.csv)",
       "id": "DFF",
       "label": "Federal Funds Effective Rate",
-      "rows": 1383,
-      "last": "2026-10-14"
+      "rows": 1405,
+      "last": "2026-11-05"
     },
     "us_core_pce": {
       "source": "FRED (fredgraph.csv)",
       "id": "PCEPILFE",
       "label": "US Core PCE Price Index (SA)",
-      "rows": 44,
-      "last": "2026-08-01"
+      "rows": 45,
+      "last": "2026-09-01"
     },
     "us_gdp_real": {
       "source": "FRED (fredgraph.csv)",
       "id": "GDPC1",
       "label": "US Real GDP (SAAR, chained 2017$)",
-      "rows": 14,
-      "last": "2026-04-01"
+      "rows": 15,
+      "last": "2026-07-01"
     },
     "kr_cpi_index": {
       "source": "한국은행 ECOS",
