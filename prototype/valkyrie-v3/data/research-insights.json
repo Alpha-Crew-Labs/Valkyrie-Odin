@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-11-09T06:53:10.778Z",
+  "generatedAt": "2026-11-09T18:55:48.619Z",
   "cadence": "12H",
   "runtimeDependency": "NONE",
   "note": "Aggregated public insight snapshot only. Browser runtime never calls the source Vercel apps.",
@@ -8,22 +8,22 @@
     "ok": true,
     "source": "IPO Market Report",
     "url": "https://ipo-market-report.vercel.app/",
-    "generatedAt": "2026.11.02",
+    "generatedAt": "2026.11.09",
     "period": "25.11~26.11",
-    "companies": 64,
-    "dataDate": "26.11.02",
-    "avgCurrentReturnPct": -27.8,
-    "medianCurrentReturnPct": -38.6,
-    "aboveOfferCount": 13,
-    "aboveOfferPct": 20.3,
-    "belowOfferPct": 79.7,
+    "companies": 66,
+    "dataDate": "26.11.09",
+    "avgCurrentReturnPct": -40.6,
+    "medianCurrentReturnPct": -47.5,
+    "aboveOfferCount": 6,
+    "aboveOfferPct": 9.1,
+    "belowOfferPct": 90.9,
     "best": {
-      "name": "인텔리빅스",
-      "returnPct": 244
+      "name": "에임드바이오",
+      "returnPct": 66
     },
     "worst": {
       "name": "피스피스스튜디오",
-      "returnPct": -82
+      "returnPct": -84
     },
     "status": "ready"
   },
@@ -31,7 +31,7 @@
     "ok": true,
     "source": "CB Zero Finder",
     "url": "https://cb-zero-finder.vercel.app/",
-    "updatedAt": "2026-11-09T00:33:59.386Z",
+    "updatedAt": "2026-11-09T09:02:41.591Z",
     "period": {
       "begin": "2026-01-01",
       "end": "2026-11-09"
