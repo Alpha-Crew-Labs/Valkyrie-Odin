@@ -236,13 +236,13 @@ jobs:
           du -sh _site
 
       - name: Upload VALKYRIE site artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       # After the deploy: keep the public daily series continuous without API keys. Only the small ECOS/FRED
       # CSVs (one row per day) and their manifest are committed; the NAVER/research snapshots are rebuilt every
